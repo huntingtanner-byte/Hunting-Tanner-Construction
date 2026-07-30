@@ -19,7 +19,7 @@ export const homeFaqs: FAQ[] = [
   {
     question: "How long does a basement finish take?",
     answer:
-      "Most full basement finishes take a few months from start of construction to final walkthrough, depending on size, scope, and inspection scheduling. You'll receive an estimated timeline with your proposal, and regular updates while work is underway, including when anything shifts and why.",
+      "Most projects take anywhere from 4-8 weeks typically, depending on the size and scope, from start of construction to final walkthrough. You'll receive an estimated timeline with your proposal, and regular updates while work is underway, including when anything shifts and why.",
   },
   {
     question: "Do I need a permit to finish my basement?",
@@ -91,7 +91,7 @@ export const faqPageGroups: FAQGroup[] = [
       {
         question: "How long will my project take?",
         answer:
-          "A full basement finish typically runs a few months of construction, driven by scope, inspection scheduling, and material lead times. Your proposal includes an estimated timeline, and weekly communication keeps you current on progress and what's coming next.",
+          "Most projects run 4-8 weeks of construction typically, depending on size and scope, along with inspection scheduling and material lead times. Your proposal includes an estimated timeline, and weekly communication keeps you current on progress and what's coming next.",
       },
       {
         question: "What happens when the scope changes mid-project?",

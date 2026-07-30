@@ -229,7 +229,7 @@ export const utahCountyCities: CityPage[] = [
       {
         question: "How long would a full PG basement finish take?",
         answer:
-          "Most run a few months of construction depending on scope, inspections, and selections. Your proposal includes an estimated timeline for your specific project, and weekly updates keep you current once work begins.",
+          "Most projects take anywhere from 4-8 weeks typically, depending on the size and scope, plus inspections and selections. Your proposal includes an estimated timeline for your specific project, and weekly updates keep you current once work begins.",
       },
     ],
     ctaHeading: "Finish the basement your PG home deserves",

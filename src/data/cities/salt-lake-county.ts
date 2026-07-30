@@ -919,7 +919,7 @@ export const saltLakeCountyCities: CityPage[] = [
       {
         question: "How fast do newer-home finishes move?",
         answer:
-          "Newer bones remove most surprises, so schedules hold: typically a few months from mobilization to final walkthrough depending on scope and inspections. Your proposal carries the real estimate, and weekly updates keep it honest.",
+          "Newer bones remove most surprises, so schedules hold: most projects run 4-8 weeks typically from mobilization to final walkthrough, depending on size and scope plus inspections. Your proposal carries the real estimate, and weekly updates keep it honest.",
       },
     ],
     ctaHeading: "Finish to the neighborhood's standard",
