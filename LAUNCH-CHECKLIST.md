@@ -31,12 +31,14 @@ Work top to bottom. Target: September launch.
 ## 4. Forms
 
 - [x] `/api/contact/` endpoint deployed (src/pages/api/contact.ts)
-- [ ] **Resend account created + huntingtanner.com domain verified**
-- [ ] **RESEND_API_KEY set in Vercel** (until set, leads log to Vercel
-      function logs but do NOT email — highest-priority open item)
-- [ ] RESEND_FROM set after domain verification (e.g. leads@huntingtanner.com)
-- [ ] Test submission (compact form, homepage) → email arrives at
-      office@huntingtanner.com, redirect to /thank-you/
+- [x] **Resend account created** (registered as office@huntingtanner.com)
+- [x] **RESEND_API_KEY set in Vercel** (Production + Preview, sensitive)
+- [x] Test submission → Resend reports "Delivered" to office@huntingtanner.com
+- [ ] **huntingtanner.com domain verified in Resend** — until then mail
+      sends from onboarding@resend.dev and often lands in spam
+- [ ] RESEND_FROM set after domain verification
+      (e.g. "HTC Website <leads@huntingtanner.com>")
+- [ ] Re-test after verification: confirm mail arrives in the inbox, not spam
 - [ ] Test submission (detailed form, contact page) → all fields present in email
 - [x] Validation errors display correctly with fields preserved
 - [x] Honeypot test (fill hidden field) → silently discarded

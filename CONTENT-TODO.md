@@ -16,11 +16,15 @@ item here.
 - [ ] **Attorney review of /privacy-policy/ and /terms/** — drafts are
       plain-English placeholders; both pages carry an effective date that
       must be updated at approval.
-- [ ] **Resend account + API key** — the /api/contact/ endpoint is live and
-      forms submit, but leads only EMAIL once RESEND_API_KEY is set in
-      Vercel (until then they appear in Vercel function logs). Create the
-      account at resend.com, verify huntingtanner.com, set the key. This is
-      the most urgent open item.
+- [x] **Resend account + API key** — DONE 2026-07-30. Account registered
+      under office@huntingtanner.com; RESEND_API_KEY set in Vercel
+      (Production + Preview, sensitive). End-to-end test confirmed
+      "Delivered" in the Resend dashboard.
+- [ ] **Verify huntingtanner.com in Resend + set RESEND_FROM** — until this
+      is done, lead emails send from onboarding@resend.dev, which lands in
+      spam far more often. Add the DNS records Resend provides, then set
+      RESEND_FROM="HTC Website <leads@huntingtanner.com>" in Vercel.
+      Required before launch.
 - [ ] **Response-time commitment** — the site intentionally avoids
       promising "we respond within X hours." Decide if Hunting wants to
       commit to one publicly (contact + thank-you pages are the spots).
