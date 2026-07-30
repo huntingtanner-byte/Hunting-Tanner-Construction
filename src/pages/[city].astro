@@ -1,0 +1,174 @@
+---
+/**
+ * Data-driven city landing pages. Content lives in src/data/cities/ and is
+ * individually authored per city; this route renders it with one of three
+ * layout variants so structure varies alongside copy.
+ *
+ * The four original pages (Saratoga Springs, Lehi, Herriman, Utah County)
+ * remain standalone .astro files and are NOT generated here.
+ */
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import CTASection from "@/components/CTASection.astro";
+import FAQAccordion from "@/components/FAQAccordion.astro";
+import ProcessSteps from "@/components/ProcessSteps.astro";
+import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { allCityPages, cityPath } from "@/data/cities";
+import type { CityPage } from "@/data/cities";
+
+export function getStaticPaths() {
+  return allCityPages.map((city) => ({
+    params: { city: `${city.slug}-basement-finishing` },
+    props: { city },
+  }));
+}
+
+interface Props {
+  city: CityPage;
+}
+
+const { city } = Astro.props;
+const path = cityPath(city);
+
+const countyHub =
+  city.county === "Utah County"
+    ? { name: "Utah County", path: "/utah-county-basement-finishing/" }
+    : { name: "Salt Lake County", path: "/salt-lake-county-basement-finishing/" };
+
+const breadcrumbs = [
+  { name: "Home", path: "/" },
+  { name: countyHub.name, path: countyHub.path },
+  { name: city.name, path },
+];
+
+const schemas = [breadcrumbSchema(breadcrumbs), faqSchema(city.faqs)];
+
+const neighborLinks = city.neighbors.map((n) => ({
+  name: n.name,
+  href: n.slug ? `/${n.slug}-basement-finishing/` : undefined,
+}));
+---
+
+<BaseLayout
+  title={city.metaTitle}
+  description={city.metaDescription}
+  path={path}
+  pageType="service-area"
+  schemas={schemas}
+>
+  <PageIntro
+    eyebrow={`Service Area · ${city.county}`}
+    heading={city.h1}
+    lede={city.lede}
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="section">
+    <div class="container container--narrow">
+      {city.intro.map((p) => <p>{p}</p>)}
+
+      {(city.layout === "a" || city.layout === "c") && (
+        <>
+          <h2>{city.angle.heading}</h2>
+          {city.angle.body.map((p) => <p>{p}</p>)}
+        </>
+      )}
+
+      {city.layout === "b" && (
+        <>
+          <h2>{city.projectsHeading}</h2>
+          <ul class="city-projects">
+            {city.projects.map((item) => (
+              <li>
+                <strong>{item.title}.</strong> {item.body}
+              </li>
+            ))}
+          </ul>
+          <h2>{city.angle.heading}</h2>
+          {city.angle.body.map((p) => <p>{p}</p>)}
+        </>
+      )}
+
+      {city.layout === "c" && (
+        <>
+          <h2>{city.planning.heading}</h2>
+          {city.planning.body.map((p) => <p>{p}</p>)}
+        </>
+      )}
+    </div>
+  </section>
+
+  {city.layout === "c" && (
+    <section class="section section--alt">
+      <div class="container">
+        <span class="eyebrow">How It Works</span>
+        <h2>The six-step process, in {city.name} and everywhere</h2>
+        <p class="lede">
+          Every project follows the same organized structure.
+          <a href="/process/"> Read it in full here</a>.
+        </p>
+        <div class="steps-wrap"><ProcessSteps compact /></div>
+      </div>
+    </section>
+  )}
+
+  <section class:list={["section", { "section--alt": city.layout !== "c" }]}>
+    <div class="container container--narrow">
+      {city.layout !== "b" && (
+        <>
+          <h2>{city.projectsHeading}</h2>
+          <ul class="city-projects">
+            {city.projects.map((item) => (
+              <li>
+                <strong>{item.title}.</strong> {item.body}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+
+      {city.layout !== "c" && (
+        <>
+          <h2>{city.planning.heading}</h2>
+          {city.planning.body.map((p) => <p>{p}</p>)}
+        </>
+      )}
+
+      <h2>Nearby communities we also serve</h2>
+      <p class="neighbors">
+        {neighborLinks.map((n, i) => (
+          <span>
+            {n.href ? <a href={n.href}>{n.name}</a> : n.name}
+            {i < neighborLinks.length - 1 ? ", " : ""}
+          </span>
+        ))}
+        {" "}and the rest of our{" "}
+        <a href={countyHub.path}>{countyHub.name} service area</a>. Full
+        service details live on the
+        <a href="/basement-finishing/"> basement finishing page</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class:list={["section", { "section--alt": city.layout === "c" }]}>
+    <div class="container container--narrow">
+      <span class="eyebrow">Local Questions</span>
+      <h2>{city.faqsHeading}</h2>
+      <FAQAccordion faqs={city.faqs} />
+    </div>
+  </section>
+
+  <CTASection heading={city.ctaHeading} text={city.ctaText} />
+</BaseLayout>
+
+<style>
+  .city-projects li {
+    margin-bottom: var(--space-3);
+  }
+  .steps-wrap {
+    margin-top: var(--space-6);
+  }
+  .neighbors {
+    color: var(--color-muted);
+  }
+</style>

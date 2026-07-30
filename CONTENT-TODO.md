@@ -16,9 +16,11 @@ item here.
 - [ ] **Attorney review of /privacy-policy/ and /terms/** — drafts are
       plain-English placeholders; both pages carry an effective date that
       must be updated at approval.
-- [ ] **Form endpoint decision** — confirm Resend (or alternative) as the
-      mail provider and create the account; see
-      `src/server/contact/endpoint.example.ts`.
+- [ ] **Resend account + API key** — the /api/contact/ endpoint is live and
+      forms submit, but leads only EMAIL once RESEND_API_KEY is set in
+      Vercel (until then they appear in Vercel function logs). Create the
+      account at resend.com, verify huntingtanner.com, set the key. This is
+      the most urgent open item.
 - [ ] **Response-time commitment** — the site intentionally avoids
       promising "we respond within X hours." Decide if Hunting wants to
       commit to one publicly (contact + thank-you pages are the spots).

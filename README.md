@@ -54,8 +54,11 @@ env var (set it in Vercel project settings).
 | `<meta name="robots">` | `noindex, nofollow` everywhere | `index, follow` (except /thank-you/, /404/) |
 | robots.txt | `Disallow: /` | `Allow: /` + sitemap reference |
 | Sitemap | not generated | generated (`/sitemap-index.xml`) |
-| Lead forms | submission intercepted with a friendly notice; mock payload logged in dev | POST to `/api/contact` |
 | Analytics/pixels | never injected | injected only if IDs are set |
+
+Lead forms are controlled separately by `business.form.enabled` (currently
+`true`): they POST to the live `/api/contact/` serverless endpoint in both
+modes.
 
 **To go live:** set `PUBLIC_SITE_STATUS=live` in Vercel (or change the
 default in `business.ts`), deploy, and work through LAUNCH-CHECKLIST.md.
@@ -72,18 +75,31 @@ licensing claims. When the license is issued:
 
 Never set `licenseActive: true` without a real license number.
 
-## Contact form / going live with `/api/contact`
+## Contact form (`/api/contact/`)
 
-The form architecture is complete but intentionally not deployed:
+The form pipeline is live:
 
 - Client: `src/components/LeadForm.astro` (validation, attribution capture,
-  honeypot, staging interception)
-- Server: `src/server/contact/validate.ts` (sanitization + validation) and
-  `src/server/contact/endpoint.example.ts` (reference Vercel endpoint with
-  step-by-step activation instructions in its header comment)
+  honeypot)
+- Server: `src/pages/api/contact.ts` (Vercel serverless function) +
+  `src/server/contact/validate.ts` (sanitization + validation)
+- Leads email to `CONTACT_NOTIFICATION_EMAIL` (office@huntingtanner.com)
+  via Resend
 
-Secrets (`RESEND_API_KEY`, `TURNSTILE_SECRET_KEY`, …) belong in Vercel env
-vars — see `.env.example`. Nothing is hardcoded.
+**Required setup in Vercel** (until then, leads are logged in Vercel
+function logs but NOT emailed): create a resend.com account, verify the
+huntingtanner.com domain, and set `RESEND_API_KEY` (plus optional
+`RESEND_FROM`) in Project → Settings → Environment Variables. See
+`.env.example`. Nothing is hardcoded.
+
+## Rendering model
+
+Every page is **fully prerendered static HTML at build time** — crawlers
+and visitors receive complete HTML with all content in the initial
+response (verify with view-source). The only server-side code is the
+`/api/contact/` function. This is deliberately better than on-demand SSR
+for a marketing site: same complete-HTML benefit, faster responses, no
+render latency.
 
 ## Content editing
 

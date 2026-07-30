@@ -5,7 +5,8 @@ import CTASection from "@/components/CTASection.astro";
 import FAQAccordion from "@/components/FAQAccordion.astro";
 import ServiceAreaCard from "@/components/ServiceAreaCard.astro";
 import { breadcrumbSchema } from "@/lib/schema";
-import { featuredAreas, nearbyCommunities } from "@/data/service-areas";
+import { featuredAreas } from "@/data/service-areas";
+import { utahCountyServiceCities } from "@/data/cities";
 import type { FAQ } from "@/data/faqs";
 
 const breadcrumbs = [
@@ -95,18 +96,21 @@ const schemas = [breadcrumbSchema(breadcrumbs)];
         ))}
       </div>
 
-      <h3 class="communities-heading">More Utah County communities we serve</h3>
+      <h3 class="communities-heading">Every Utah County community we serve</h3>
       <ul class="communities-list">
-        {nearbyCommunities.map((city) => (
-          <li>{city}</li>
+        {utahCountyServiceCities.map((city) => (
+          <li>
+            <a href={`/${city.slug}-basement-finishing/`}>{city.name}</a>
+          </li>
         ))}
       </ul>
       <p class="communities-note">
-        These communities don't have dedicated pages yet, not because we
-        don't serve them, but because we'd rather write something genuinely
-        useful for each one than paste the same page with a different city
-        name. If you're in any of them, <a href="/contact/">reach out
-        directly</a>.
+        Each page above is written for its city's actual housing and
+        homeowners. We serve the county north of and including Spanish
+        Fork; south of there, we'll refer you honestly to closer options.
+        Across the county line, see our
+        <a href="/salt-lake-county-basement-finishing/">Salt Lake County
+        service area</a>.
       </p>
     </div>
   </section>
@@ -164,11 +168,21 @@ const schemas = [breadcrumbSchema(breadcrumbs)];
   }
   .communities-list li {
     margin: 0;
+  }
+  .communities-list a {
+    display: inline-block;
     background: var(--color-surface);
     border: 1px solid var(--color-line);
     border-radius: 999px;
     padding: var(--space-1) var(--space-4);
     font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+  .communities-list a:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
   }
   .communities-note {
     font-size: var(--text-sm);

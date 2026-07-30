@@ -30,14 +30,17 @@ Work top to bottom. Target: September launch.
 
 ## 4. Forms
 
-- [ ] `/api/contact` endpoint deployed (see src/server/contact/endpoint.example.ts)
-- [ ] Vercel env vars set: CONTACT_NOTIFICATION_EMAIL, RESEND_API_KEY,
-      TURNSTILE_SITE_KEY, TURNSTILE_SECRET_KEY
-- [ ] Turnstile widget enabled in LeadForm
-- [ ] Test submission (compact form, homepage) → email arrives, redirect to /thank-you/
+- [x] `/api/contact/` endpoint deployed (src/pages/api/contact.ts)
+- [ ] **Resend account created + huntingtanner.com domain verified**
+- [ ] **RESEND_API_KEY set in Vercel** (until set, leads log to Vercel
+      function logs but do NOT email — highest-priority open item)
+- [ ] RESEND_FROM set after domain verification (e.g. leads@huntingtanner.com)
+- [ ] Test submission (compact form, homepage) → email arrives at
+      office@huntingtanner.com, redirect to /thank-you/
 - [ ] Test submission (detailed form, contact page) → all fields present in email
-- [ ] Validation errors display correctly with fields preserved
-- [ ] Honeypot test (fill hidden field) → silently discarded
+- [x] Validation errors display correctly with fields preserved
+- [x] Honeypot test (fill hidden field) → silently discarded
+- [ ] Turnstile spam protection (optional hardening): set keys + enable widget
 - [ ] SPF/DKIM/DMARC configured; test email not in spam
 
 ## 5. Site status flip

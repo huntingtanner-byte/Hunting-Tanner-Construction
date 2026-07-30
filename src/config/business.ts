@@ -65,9 +65,9 @@ export const business = {
    */
   serviceAreas: {
     primary: ["Saratoga Springs", "Lehi", "Utah County"],
-    secondary: ["Herriman"],
+    secondary: ["Herriman", "Salt Lake County"],
     summary:
-      "Serving Saratoga Springs, Lehi, and communities throughout Utah County, plus Herriman.",
+      "Serving every community in northern Utah County and across the Salt Lake Valley.",
   },
 
   /** Analytics IDs — read from env; empty means the script is never injected. */
@@ -80,12 +80,14 @@ export const business = {
   },
 
   /**
-   * Form endpoint configuration. The endpoint is not deployed during staging;
-   * the LeadForm component checks siteStatus before enabling submission.
-   * See src/server/README note and docs in the project root.
+   * Form endpoint configuration. `enabled: true` makes the LeadForm POST to
+   * the serverless endpoint (src/pages/api/contact.ts), which emails leads
+   * to CONTACT_NOTIFICATION_EMAIL via Resend. Set enabled: false to fall
+   * back to the friendly "call us instead" interception.
    */
   form: {
-    endpoint: "/api/contact",
+    enabled: true,
+    endpoint: "/api/contact/",
     method: "POST" as const,
     redirectOnSuccess: "/thank-you/",
   },

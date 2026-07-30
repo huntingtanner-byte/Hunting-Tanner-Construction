@@ -1,0 +1,176 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import CTASection from "@/components/CTASection.astro";
+import FAQAccordion from "@/components/FAQAccordion.astro";
+import { breadcrumbSchema } from "@/lib/schema";
+import { saltLakeCountyServiceCities } from "@/data/cities";
+import type { FAQ } from "@/data/faqs";
+
+const breadcrumbs = [
+  { name: "Home", path: "/" },
+  { name: "Salt Lake County", path: "/salt-lake-county-basement-finishing/" },
+];
+
+const countyFaqs: FAQ[] = [
+  {
+    question: "You're a Utah County company. Why should Salt Lake Valley homeowners call you?",
+    answer:
+      "Geography, mostly. Our base in northwest Utah County sits at the valley's south gate: Herriman, Riverton, and Bluffdale are closer to us than half of our own county. Add an owner personally involved in every project and Gary's thirty years of general contracting, and the county line stops mattering pretty quickly.",
+  },
+  {
+    question: "Which parts of Salt Lake County do you serve?",
+    answer:
+      "The valley: from Salt Lake City, Millcreek, and Holladay through Murray, Midvale, Taylorsville, Kearns, Magna, and West Valley City, down through West Jordan, South Jordan, Sandy, Cottonwood Heights, Draper, Riverton, Bluffdale, and Herriman. We don't serve areas north of the SLC airport.",
+  },
+  {
+    question: "Salt Lake homes run older than Utah County's. Does that change basement work?",
+    answer:
+      "Substantially, and we plan for it. Much of the valley's housing is post-war and mid-century, which means real evaluation before finishes: ceiling heights, wiring vintage, moisture history, and what previous decades hid behind paneling. Newer south-valley neighborhoods follow the modern full-finish playbook instead. Every city page here explains what its housing era means for your project.",
+  },
+  {
+    question: "Do you handle permits with each city separately?",
+    answer:
+      "Yes. Every Salt Lake County city runs its own building department, and permit coordination is built into our project schedules wherever the address is. Inspections at framing, rough mechanical, and completion are part of the plan, not an interruption to it.",
+  },
+  {
+    question: "What does a typical Salt Lake Valley project look like?",
+    answer:
+      "The spread is wide: mid-century rambler remodels in Millcreek, ski-gear-and-guest setups near the canyons, value-focused bedroom additions in the west valley, and new-build finishes in Daybreak and Bluffdale. What's constant is the process: a walkthrough, a written scope, an itemized proposal, and organized construction with one accountable owner.",
+  },
+];
+
+const schemas = [breadcrumbSchema(breadcrumbs)];
+---
+
+<BaseLayout
+  title="Salt Lake County Basement Finishing | Hunting Tanner Construction"
+  description="Basement finishing across the Salt Lake Valley: from Salt Lake City and Millcreek to Sandy, Draper, West Jordan, and Herriman. Written scopes, qualified trades, one accountable owner."
+  path="/salt-lake-county-basement-finishing/"
+  pageType="service-area"
+  schemas={schemas}
+>
+  <PageIntro
+    eyebrow="Service Area"
+    heading="Basement Finishing Across the Salt Lake Valley"
+    lede="From century-old bungalows in Salt Lake City to brand-new walkouts in Draper, the valley's basements span every era of Utah construction, and we work in all of them."
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="section">
+    <div class="container container--narrow">
+      <h2>A south-valley neighbor, not a long-distance contractor</h2>
+      <p>
+        Hunting Tanner Construction is based in northwest Utah County, which
+        the map will tell you is a different county. The drive will tell you
+        otherwise: we reach Herriman, Riverton, Bluffdale, and Draper faster
+        than much of our home county. The Salt Lake Valley is core service
+        area for us, with the same walkthroughs, weekly site presence, and
+        owner involvement every HTC project gets.
+      </p>
+      <p>
+        What changes across the valley is the housing itself. Salt Lake
+        County holds Utah's deepest range of residential eras, and basement
+        work here is era-matched work: honest evaluation and correction in
+        the older stock, clean full finishes in the newer. Each city below
+        has its own page explaining what its neighborhoods typically hold
+        and how we approach them.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <span class="eyebrow">The Valley, City by City</span>
+      <h2>Salt Lake County service areas</h2>
+      <p class="lede">
+        Every page below is written for its city's actual housing, not
+        copy-pasted with the name swapped.
+      </p>
+      <ul class="city-grid">
+        {saltLakeCountyServiceCities.map((city) => (
+          <li>
+            <a href={`/${city.slug}-basement-finishing/`}>{city.name}</a>
+          </li>
+        ))}
+      </ul>
+      <p class="grid-note">
+        We serve the valley south of the SLC airport. North of there,
+        we'll point you to closer options.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow">
+      <h2>What valley homeowners build downstairs</h2>
+      <p>
+        The east bench remodels its mid-century ramblers. The canyon
+        corridor builds gear rooms and guest suites. The west valley adds
+        bedrooms and second bathrooms where families need them most. The
+        south end finishes its newer construction to match polished main
+        floors. Different projects, same spine: a
+        <a href="/process/">six-step process</a> with written scopes,
+        permits pulled, and changes documented before work proceeds.
+      </p>
+      <p>
+        Not sure which category your basement fits? That's what the
+        <a href="/contact/">consultation</a> is for, and it starts with a
+        conversation rather than a sales pitch.
+      </p>
+
+      <span class="eyebrow">Valley Questions</span>
+      <h2>Salt Lake County FAQs</h2>
+      <FAQAccordion faqs={countyFaqs} />
+    </div>
+  </section>
+
+  <CTASection
+    heading="Wherever you are in the valley, start here"
+    text="Tell us your city and what your basement should become. You'll get a straight answer about fit and a walkthrough if it makes sense."
+  />
+</BaseLayout>
+
+<style>
+  .city-grid {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-6);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+  @media (min-width: 640px) {
+    .city-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .city-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  .city-grid li {
+    margin: 0;
+  }
+  .city-grid a {
+    display: block;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-left: 4px solid var(--color-accent);
+    border-radius: var(--radius);
+    padding: var(--space-3) var(--space-4);
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--color-ink);
+  }
+  .city-grid a:hover {
+    color: var(--color-accent);
+    box-shadow: var(--shadow-sm);
+  }
+  .grid-note {
+    margin-top: var(--space-5);
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+</style>

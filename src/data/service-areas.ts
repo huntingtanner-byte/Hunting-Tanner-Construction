@@ -60,20 +60,7 @@ export const featuredAreas: ServiceArea[] = [
 ];
 
 /**
- * Additional Utah County communities served. Listed in copy and schema, but
- * without dedicated pages until there is genuinely distinct content for them.
+ * Additional communities referenced in copy (no dedicated pages).
+ * Full per-city page data lives in src/data/cities/.
  */
-export const nearbyCommunities: string[] = [
-  "Vineyard",
-  "Eagle Mountain",
-  "American Fork",
-  "Pleasant Grove",
-  "Lindon",
-  "Orem",
-  "Provo",
-  "Spanish Fork",
-  "Springville",
-  "Highland",
-  "Alpine",
-  "Cedar Hills",
-];
+export const nearbyCommunities: string[] = ["Cedar Fort", "Fairfield", "White City"];

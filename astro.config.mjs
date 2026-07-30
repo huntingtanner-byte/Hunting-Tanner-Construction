@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
+import vercel from "@astrojs/vercel";
 
 /**
  * Site status is duplicated here (instead of imported from src/config/business.ts)
@@ -13,7 +14,13 @@ const isLive = siteStatus === "live";
 export default defineConfig({
   site: "https://huntingtanner.com",
   trailingSlash: "always",
+  /**
+   * All pages remain fully prerendered static HTML (best for SEO and speed).
+   * The Vercel adapter exists solely so /api/contact can run as a
+   * serverless function (it opts out via `export const prerender = false`).
+   */
   output: "static",
+  adapter: vercel(),
   build: {
     format: "directory",
   },

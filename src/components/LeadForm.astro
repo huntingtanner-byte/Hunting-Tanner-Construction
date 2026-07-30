@@ -11,8 +11,8 @@
  *  - While siteStatus is "staging", submission is intercepted and disabled;
  *    a safe mock payload is logged in dev. No email is ever sent in staging.
  */
-import { business, isStaging } from "@/config/business";
-import { nearbyCommunities } from "@/data/service-areas";
+import { business } from "@/config/business";
+import { allServiceCities } from "@/data/cities";
 
 interface Props {
   variant?: "compact" | "detailed";
@@ -24,12 +24,7 @@ interface Props {
 const { variant = "compact", formId, heading } = Astro.props;
 const detailed = variant === "detailed";
 
-const cityOptions = [
-  "Saratoga Springs",
-  "Lehi",
-  "Herriman",
-  ...nearbyCommunities,
-];
+const cityOptions = allServiceCities.map((c) => c.name);
 
 const projectTypes = [
   "Full basement finish",
@@ -79,7 +74,7 @@ const id = (name: string) => `${formId}-${name}`;
   action={business.form.endpoint}
   novalidate
   data-lead-form
-  data-staging={isStaging ? "true" : "false"}
+  data-staging={business.form.enabled ? "false" : "true"}
   data-variant={variant}
 >
   {heading && <h3 class="lead-form-heading">{heading}</h3>}

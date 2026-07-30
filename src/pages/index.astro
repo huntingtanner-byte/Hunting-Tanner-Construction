@@ -13,7 +13,7 @@ import FAQAccordion from "@/components/FAQAccordion.astro";
 import CTASection from "@/components/CTASection.astro";
 import { business } from "@/config/business";
 import { coreServices } from "@/data/services";
-import { featuredAreas, nearbyCommunities } from "@/data/service-areas";
+import { featuredAreas } from "@/data/service-areas";
 import { homeFaqs } from "@/data/faqs";
 import { publishableProjects } from "@/data/projects";
 import heroImage from "@/assets/hero/basement-after.png";
@@ -235,9 +235,11 @@ import afterImg from "@/assets/hero/basement-after.png";
         ))}
       </div>
       <p class="nearby-note">
-        Also serving nearby communities including{" "}
-        {nearbyCommunities.join(", ")}. If you're close but not listed,
-        <a href="/contact/"> ask us</a>.
+        We serve every community in northern Utah County and across the
+        Salt Lake Valley, each with its own local page. Find yours on the
+        <a href="/utah-county-basement-finishing/"> Utah County</a> or
+        <a href="/salt-lake-county-basement-finishing/"> Salt Lake County</a>
+        service-area pages.
       </p>
     </div>
   </section>
