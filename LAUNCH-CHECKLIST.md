@@ -21,12 +21,14 @@ Work top to bottom. Target: September launch.
 
 ## 3. Domain & DNS
 
-- [ ] `huntingtanner.com` added to Vercel as primary domain
-- [ ] `www.huntingtanner.com` added → verify 301 to apex (vercel.json)
-- [ ] `huntingtannerconstruction.com` (+ www) added → verify 301 to apex
-- [ ] DNS records at registrar pointed per Vercel instructions
-- [ ] HTTPS certificates issued for all hostnames; http:// redirects to https://
-- [ ] Trailing-slash behavior spot-checked (URLs resolve with `/`, no chains)
+- [x] `huntingtanner.com` added to Vercel as primary domain (Cloudflare DNS,
+      CNAME at apex, proxy DNS-only) — verified serving 2026-07-30
+- [x] `www.huntingtanner.com` → 308 redirect to apex, verified
+- [x] HTTPS certificate issued; http:// redirects to https://
+- [x] Trailing-slash behavior spot-checked
+- [x] Google Workspace MX records preserved (email unaffected)
+- [ ] `huntingtannerconstruction.com` (+ www) added when acquired →
+      vercel.json already contains the 301 rules
 
 ## 4. Forms
 

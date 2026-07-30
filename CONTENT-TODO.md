@@ -80,6 +80,13 @@ three basements, Gary Tanner photo. Remaining:
       (current header/footer use a styled text wordmark derived from
       `reference-assets/`)
 
+## ✅ Infrastructure completed 2026-07-30
+
+- Domain `huntingtanner.com` live on Vercel via Cloudflare (apex CNAME,
+  DNS-only proxy); www and http redirect to the canonical apex; SSL valid
+- Contact form delivering to office@huntingtanner.com via Resend
+- Site remains `noindex` until `PUBLIC_SITE_STATUS=live`
+
 ## 🟢 Business decisions (non-blocking but soon)
 
 - [ ] **Social profiles** — create Instagram/Facebook/TikTok/YouTube as
