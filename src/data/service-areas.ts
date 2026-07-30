@@ -27,7 +27,7 @@ export const featuredAreas: ServiceArea[] = [
     href: "/saratoga-springs-basement-finishing/",
     tier: "primary",
     blurb:
-      "Newer homes with unfinished basements are everywhere in Saratoga Springs — finishing yours is often the most cost-effective way to add living space.",
+      "Newer homes with unfinished basements are everywhere in Saratoga Springs. Finishing yours is often the most cost-effective way to add living space.",
     schemaType: "City",
   },
   {
@@ -45,7 +45,7 @@ export const featuredAreas: ServiceArea[] = [
     href: "/utah-county-basement-finishing/",
     tier: "primary",
     blurb:
-      "A Utah County–based residential contractor serving homeowners at their properties across the county.",
+      "A Utah County based residential contractor serving homeowners at their properties across the county.",
     schemaType: "AdministrativeArea",
   },
   {

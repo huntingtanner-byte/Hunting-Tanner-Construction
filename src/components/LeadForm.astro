@@ -430,7 +430,7 @@ const id = (name: string) => `${formId}-${name}`;
         if (firstInvalid) {
           (firstInvalid as HTMLElement).focus();
           showStatus(
-            "A few fields need attention — see the highlighted items below.",
+            "A few fields need attention. See the highlighted items below.",
             "error",
           );
           track("form_error", { variant: form.dataset.variant ?? "" });
@@ -473,7 +473,7 @@ const id = (name: string) => `${formId}-${name}`;
             console.info("[staging] mock lead payload:", payload);
           }
           showStatus(
-            "Online requests aren't live quite yet — please call (801) 901-8349 or email office@huntingtanner.com and we'll take good care of you.",
+            "Online requests aren't live quite yet. Please call (801) 901-8349 or email office@huntingtanner.com and we'll take good care of you.",
             "info",
           );
           status?.scrollIntoView({ block: "nearest" });

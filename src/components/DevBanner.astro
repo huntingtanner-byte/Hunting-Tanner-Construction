@@ -11,7 +11,7 @@ const show = import.meta.env.DEV;
 
 {show && (
   <div class="dev-banner" role="note">
-    Local development — siteStatus: <strong>{business.siteStatus}</strong>
+    Local development / siteStatus: <strong>{business.siteStatus}</strong>
     {business.siteStatus === "staging" && " (noindex, forms disabled)"}
   </div>
 )}

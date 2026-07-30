@@ -14,7 +14,7 @@ export const coreServices: Service[] = [
     title: "Full Basement Finishing",
     href: "/basement-finishing/",
     description:
-      "Turn an unfinished basement into bedrooms, bathrooms, and living space — planned, permitted, and managed from framing to final walkthrough.",
+      "Turn an unfinished basement into bedrooms, bathrooms, and living space, planned, permitted, and managed from framing to final walkthrough.",
     includes: [
       "Space planning and layout design",
       "Framing, electrical, plumbing, and HVAC coordination",
@@ -38,7 +38,7 @@ export const coreServices: Service[] = [
     title: "Basement Bathrooms & Bedrooms",
     href: "/basement-finishing/#bathrooms-bedrooms",
     description:
-      "Add a conforming bedroom or a full bathroom downstairs — the two upgrades that add the most day-to-day function.",
+      "Add a conforming bedroom or a full bathroom downstairs: the two upgrades that add the most day-to-day function.",
     includes: [
       "Egress window planning for bedrooms",
       "Full and three-quarter bathrooms",
@@ -74,7 +74,7 @@ export const coreServices: Service[] = [
     title: "Home Offices & Gyms",
     href: "/basement-finishing/#offices-gyms",
     description:
-      "Purpose-built work and workout space — quiet, comfortable, and separated from the rest of the house.",
+      "Purpose-built work and workout space that's quiet, comfortable, and separated from the rest of the house.",
     includes: [
       "Dedicated office rooms with wiring for work",
       "Gym flooring and mirror planning",

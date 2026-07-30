@@ -1,7 +1,8 @@
 ---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import PageIntro from "@/components/PageIntro.astro";
-import ProjectCard from "@/components/ProjectCard.astro";
 import CTASection from "@/components/CTASection.astro";
 import { breadcrumbSchema } from "@/lib/schema";
 import { publishableProjects } from "@/data/projects";
@@ -12,80 +13,147 @@ const breadcrumbs = [
 ];
 
 const schemas = [breadcrumbSchema(breadcrumbs)];
-const hasProjects = publishableProjects.length > 0;
+
+const projectImages = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/projects/*.{jpg,jpeg,png,webp,avif}",
+  { eager: true },
+);
+
+const resolve = (src: string) =>
+  projectImages[`/src/assets/projects/${src}`]?.default;
 ---
 
 <BaseLayout
-  title="Projects | Hunting Tanner Construction"
-  description="Basement projects by Hunting Tanner Construction. Real project documentation — before, during, and after — is published here as projects complete."
+  title="Basement Projects | Hunting Tanner Construction"
+  description="Finished basements from the team behind Hunting Tanner Construction: full kitchens, kitchenettes, bathrooms, bedrooms, and family rooms, photographed room by room."
   path="/projects/"
   pageType="projects"
   schemas={schemas}
 >
   <PageIntro
     eyebrow="Projects"
-    heading="Our work, documented honestly"
-    lede={
-      hasProjects
-        ? "Completed basements across Utah County — documented before, during, and after."
-        : "Hunting Tanner Construction is a new company, and this gallery will only ever show real HTC projects. Here's what to expect as it fills in."
-    }
+    heading="Basements we're proud to show you"
+    lede="Three finished basements from the team behind Hunting Tanner Construction. Every future HTC project will be documented the same way: real spaces, real photos, room by room."
     breadcrumbs={breadcrumbs}
   />
 
   <section class="section">
     <div class="container">
-      {hasProjects ? (
-        <div class="grid-3">
-          {publishableProjects.map((project) => (
-            <ProjectCard project={project} />
-          ))}
-        </div>
-      ) : (
-        <>
-          <div class="grid-3">
-            <ProjectCard />
-            <ProjectCard />
-            <ProjectCard />
+      {publishableProjects.map((project, index) => (
+        <article
+          class="project-feature"
+          id={project.id}
+          class:list={{ "project-feature--first": index === 0 }}
+        >
+          <div class="project-head">
+            <h2>{project.title}</h2>
+            <p class="project-scope">
+              {project.location && <span>{project.location} · </span>}
+              {project.scope}
+            </p>
+            <p class="project-desc">{project.description}</p>
           </div>
-          <div class="projects-promise container--narrow">
-            <h2>Why this page is empty on purpose</h2>
-            <p>
-              Plenty of new contractors fill their galleries with stock
-              photos and call it a portfolio. We won't. Every project shown
-              here will be real HTC work, photographed in real Utah homes,
-              published with the homeowner's permission.
-            </p>
-            <p>
-              Each completed basement will be documented the same way: the
-              unfinished "before," key milestones during construction —
-              framing, rough-ins, drywall — and the finished result, with
-              the project's city, scope, and completion date. When
-              homeowners are willing, their words will appear too; nothing
-              on this site will ever carry an invented name or review.
-            </p>
-            <p>
-              Until then, the best way to evaluate us is the way we work:
-              read <a href="/process/">the process</a>, browse
-              <a href="/faq/">the FAQ</a>, and
-              <a href="/contact/">have a conversation</a>. You'll learn more
-              from ten minutes on the phone than from anyone's photo gallery.
-            </p>
+          <div class="project-gallery">
+            {project.gallery.map((image, i) => {
+              const img = resolve(image.src);
+              return (
+                img && (
+                  <figure class:list={["gallery-item", { wide: i === 0 }]}>
+                    <Image
+                      src={img}
+                      alt={image.alt}
+                      width={i === 0 ? 1400 : 700}
+                      height={i === 0 ? 1050 : 525}
+                      loading={index === 0 && i === 0 ? "eager" : "lazy"}
+                    />
+                  </figure>
+                )
+              );
+            })}
           </div>
-        </>
-      )}
+        </article>
+      ))}
+
+      <div class="projects-note container--narrow">
+        <h2>How we document projects</h2>
+        <p>
+          Photos tell you what a contractor actually finishes: the tile
+          lines, the trim, the lighting, the closets nobody photographs
+          unless they're proud of them. As Hunting Tanner Construction
+          projects complete, each one gets documented here the same way,
+          from unfinished concrete through the final walkthrough.
+        </p>
+        <p>
+          Want to know what a finish like this involves? Read about
+          <a href="/basement-finishing/">basement finishing</a> and
+          <a href="/process/">the six-step process</a>, or
+          <a href="/contact/">start a conversation about your space</a>.
+        </p>
+      </div>
     </div>
   </section>
 
   <CTASection
-    heading="Want your basement to be an early feature here?"
-    text="Early clients get the most owner attention a company will ever give. Let's talk about your project."
+    heading="Your basement could be the next one here"
+    text="Tell us what you'd build downstairs. We'll walk the space with you and put a real plan on paper."
   />
 </BaseLayout>
 
 <style>
-  .projects-promise {
+  .project-feature {
+    padding-block: var(--space-7);
+    border-top: 1px solid var(--color-line);
+  }
+  .project-feature--first {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .project-head {
+    max-width: var(--container-narrow);
+    margin-bottom: var(--space-6);
+  }
+  .project-scope {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: var(--space-4);
+  }
+  .project-desc {
+    color: var(--color-muted);
+  }
+
+  .project-gallery {
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 640px) {
+    .project-gallery {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .gallery-item.wide {
+      grid-column: span 2;
+    }
+  }
+  .gallery-item {
+    margin: 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--color-surface-alt);
+  }
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .projects-note {
     margin: var(--space-7) auto 0;
     max-width: var(--container-narrow);
+    border-top: 1px solid var(--color-line);
+    padding-top: var(--space-7);
   }
 </style>

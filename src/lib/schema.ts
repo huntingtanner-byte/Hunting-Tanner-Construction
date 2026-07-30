@@ -36,7 +36,11 @@ export function organizationSchema(): JsonLd {
     telephone: business.phoneSchema,
     email: business.email,
     description:
-      "Residential general contractor specializing in basement finishing and basement remodeling for homeowners in Saratoga Springs, Lehi, Herriman, and communities throughout Utah County, Utah.",
+      "Family-founded residential general contractor specializing in basement finishing and basement remodeling for homeowners in Saratoga Springs, Lehi, Herriman, and communities throughout Utah County, Utah.",
+    founder: [
+      { "@type": "Person", name: "Hunting Tanner", jobTitle: "Founder" },
+      { "@type": "Person", name: "Gary Tanner", jobTitle: "Co-Founder" },
+    ],
     areaServed: [
       ...featuredAreas.map((area) => ({
         "@type": area.schemaType,

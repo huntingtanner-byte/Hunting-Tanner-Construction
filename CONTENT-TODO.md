@@ -25,6 +25,23 @@ item here.
 
 ## 🟠 Facts to verify before adding (currently omitted on purpose)
 
+- [ ] **"Licensed GC in Utah" phrasing** — the About-page bio intentionally
+      omits "As the licensed GC in Utah, Hunting handles..." until the
+      license is active. When it is, update the Hunting bio in
+      `src/components/OwnerStory.astro` to add it.
+- [ ] **Gary bio facts** — the site states: licensed GC in California 30+
+      years, owned/operated Amaron Construction, tenant-improvement
+      specialty. Provided by Hunting; confirm details are exactly right
+      (spelling of Amaron, license history) before launch.
+- [ ] **Portfolio attribution** — /projects/ presents three finished
+      basements as work "from the team behind HTC." Confirm this framing
+      is accurate and that HTC has rights + homeowner permission to
+      publish all 14 photos. Add locations/dates to
+      `src/data/projects.ts` only when confirmed.
+- [ ] **Gary photo caption** — the About photo shows Gary with his wife;
+      alt text currently says "Gary Tanner with his wife." Confirm or
+      provide her name/preference.
+
 - [ ] **City permitting specifics** — Saratoga Springs, Lehi, Herriman,
       and county cities each have editorial notes (search
       `EDITORIAL NOTE` in `src/pages/`) marking where verified
@@ -44,15 +61,15 @@ item here.
 
 ## 🟡 Assets needed (see ASSET-GUIDE.md for full shot list)
 
-- [ ] Professional owner portrait (About page placeholder waiting)
+Received 2026-07-30: hero + before/after pair, 14 portfolio photos across
+three basements, Gary Tanner photo. Remaining:
+
+- [ ] Professional individual owner portrait of Hunting (optional now;
+      family photo is in use)
 - [ ] Owner-in-construction-environment photo
-- [ ] Hero: finished basement photo (currently labeled placeholder)
-- [ ] Before/after matched-angle basement pair (slider uses placeholders)
-- [ ] Service photos: bathroom, bedroom, wet bar, entertainment space
 - [ ] Progress photos: framing, rough electrical, plumbing, drywall, trim, flooring
 - [ ] Utah exterior/neighborhood context shot
-- [ ] Confirm continued use of the current family photo (already live on
-      home + about) or supply a preferred one
+- [ ] Wet bar / theater / gym photos (services sections currently text-only)
 - [ ] Final logo files if the wordmark should be replaced by artwork
       (current header/footer use a styled text wordmark derived from
       `reference-assets/`)

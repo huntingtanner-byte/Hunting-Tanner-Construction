@@ -1,70 +1,54 @@
 ---
 /**
- * Project card. Renders a real project when one is supplied, or an honest
- * "coming soon" placeholder card when project is undefined. Placeholder
- * cards never simulate completed work, reviews, or customer names.
+ * Project card. Shows the cover image, title, and scope for a real project
+ * from src/data/projects.ts. Links to the full gallery on /projects/.
  */
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import type { Project } from "@/data/projects";
-import placeholderImg from "@/assets/placeholders/project-card.svg";
 
 interface Props {
-  project?: Project;
+  project: Project;
 }
 
 const { project } = Astro.props;
 
-/**
- * Real project photos live in src/assets/projects/. Project data references
- * them by filename (e.g. "saratoga-media-room-after.jpg"); resolve here.
- */
+/** Resolve gallery filenames against src/assets/projects/. */
 const projectImages = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/projects/*.{jpg,jpeg,png,webp,avif}",
   { eager: true },
 );
 
-const resolveImage = (src?: string): ImageMetadata | undefined =>
-  src ? projectImages[`/src/assets/projects/${src}`]?.default : undefined;
-
-const afterImage = resolveImage(project?.afterImage?.src);
+const cover = project.gallery[0];
+const coverImage = cover
+  ? projectImages[`/src/assets/projects/${cover.src}`]?.default
+  : undefined;
 ---
 
-{project ? (
-  <article class="project-card">
-    {afterImage && project.afterImage && (
+<article class="project-card">
+  {coverImage && cover && (
+    <a
+      class="project-cover"
+      href={`/projects/#${project.id}`}
+      aria-label={`View the ${project.title} gallery`}
+      tabindex="-1"
+    >
       <Image
-        src={afterImage}
-        alt={project.afterImage.alt}
-        width={600}
-        height={450}
+        src={coverImage}
+        alt={cover.alt}
+        width={720}
+        height={540}
         loading="lazy"
       />
-    )}
-    <div class="project-body">
-      <h3>{project.title}</h3>
-      <p class="project-meta">{project.city} · {project.scope}</p>
-      <p>{project.description}</p>
-    </div>
-  </article>
-) : (
-  <article class="project-card project-card--placeholder">
-    <Image
-      src={placeholderImg}
-      alt=""
-      width={600}
-      height={450}
-      loading="lazy"
-    />
-    <div class="project-body">
-      <h3>Project photography coming soon</h3>
-      <p class="project-meta">
-        Real HTC basements will be documented here — before, during, and
-        after — as projects complete.
-      </p>
-    </div>
-  </article>
-)}
+    </a>
+  )}
+  <div class="project-body">
+    <h3><a href={`/projects/#${project.id}`}>{project.title}</a></h3>
+    <p class="project-meta">
+      {project.location && <span>{project.location} · </span>}{project.scope}
+    </p>
+  </div>
+</article>
 
 <style>
   .project-card {
@@ -72,10 +56,20 @@ const afterImage = resolveImage(project?.afterImage?.src);
     border: 1px solid var(--color-line);
     border-radius: var(--radius-lg);
     overflow: hidden;
+    transition: box-shadow 0.15s ease, border-color 0.15s ease;
   }
-  .project-card img {
+  .project-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+  }
+  .project-cover {
+    display: block;
+  }
+  .project-cover img {
     width: 100%;
     height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
   }
   .project-body {
     padding: var(--space-5);
@@ -84,12 +78,16 @@ const afterImage = resolveImage(project?.afterImage?.src);
     font-size: var(--text-lg);
     margin-bottom: var(--space-2);
   }
+  .project-body h3 a {
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+  .project-card:hover .project-body h3 a {
+    color: var(--color-accent);
+  }
   .project-meta {
     font-size: var(--text-sm);
     color: var(--color-muted);
     margin: 0;
-  }
-  .project-card--placeholder h3 {
-    color: var(--color-muted);
   }
 </style>

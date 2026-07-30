@@ -15,14 +15,15 @@ import { business } from "@/config/business";
 import { coreServices } from "@/data/services";
 import { featuredAreas, nearbyCommunities } from "@/data/service-areas";
 import { homeFaqs } from "@/data/faqs";
-import heroImage from "@/assets/placeholders/hero-basement.svg";
-import beforeImg from "@/assets/placeholders/before-unfinished.svg";
-import afterImg from "@/assets/placeholders/after-finished.svg";
+import { publishableProjects } from "@/data/projects";
+import heroImage from "@/assets/hero/basement-after.png";
+import beforeImg from "@/assets/hero/basement-before.png";
+import afterImg from "@/assets/hero/basement-after.png";
 ---
 
 <BaseLayout
   title="Basement Finishing in Utah County | Hunting Tanner Construction"
-  description="Basement finishing and remodeling for homeowners in Saratoga Springs, Lehi, Herriman, and communities throughout Utah County. Organized planning, clear communication, and a consultation process that starts with a conversation."
+  description="Basement finishing and remodeling for homeowners in Saratoga Springs, Lehi, Herriman, and communities throughout Utah County. Three generations of building experience, organized planning, and clear communication."
   path="/"
   includeOrgSchema
 >
@@ -33,7 +34,7 @@ import afterImg from "@/assets/placeholders/after-finished.svg";
         <h1>Transform Your Unfinished Basement</h1>
         <p class="lede">
           Basement finishing and remodeling for homeowners in Saratoga
-          Springs, Lehi, and communities throughout Utah County — planned
+          Springs, Lehi, and communities throughout Utah County. Planned
           carefully, communicated clearly, and managed like it matters.
         </p>
         <div class="hero-actions">
@@ -55,7 +56,7 @@ import afterImg from "@/assets/placeholders/after-finished.svg";
           </a>
         </div>
         <p class="hero-note">
-          Talk directly with the owner — not a call center.
+          Talk directly with the owner, not a call center.
         </p>
       </div>
       <div class="hero-form" id="home-lead-form">
@@ -69,9 +70,9 @@ import afterImg from "@/assets/placeholders/after-finished.svg";
     <div class="container hero-media">
       <Image
         src={heroImage}
-        alt="Placeholder for a finished basement family room photo"
+        alt="Finished basement with open kitchen, island seating, and family room"
         width={1600}
-        height={900}
+        height={1200}
         loading="eager"
         fetchpriority="high"
       />
@@ -90,7 +91,7 @@ import afterImg from "@/assets/placeholders/after-finished.svg";
           <h2>From concrete and studs to the best floor in the house</h2>
           <p>
             Most Utah County homes come with hundreds of unfinished square
-            feet already under the roof — framed, plumbed for a future
+            feet already under the roof: framed, plumbed for a future
             bathroom, and waiting. Finishing that space is usually the most
             cost-effective way to add bedrooms, a family room, or a home
             office, because the foundation, walls, and roof are already paid
@@ -101,7 +102,8 @@ import afterImg from "@/assets/placeholders/after-finished.svg";
             well-run project: a clear layout, a written scope, coordinated
             trades, passed inspections, and finish work done in the right
             order. That project management is exactly what Hunting Tanner
-            Construction is built around.
+            Construction is built around. Drag the slider to see the same
+            room, before and after.
           </p>
           <a class="btn btn--secondary" href="/basement-finishing/">
             Explore Basement Finishing
@@ -110,9 +112,8 @@ import afterImg from "@/assets/placeholders/after-finished.svg";
         <BeforeAfterSlider
           before={beforeImg}
           after={afterImg}
-          beforeAlt="Placeholder: unfinished basement with exposed framing and concrete floor"
-          afterAlt="Placeholder: finished basement living space"
-          isPlaceholder
+          beforeAlt="Unfinished basement with exposed framing, ductwork, and concrete floor"
+          afterAlt="The same basement finished with a kitchen, island, and furnished family room"
         />
       </div>
     </div>
@@ -141,16 +142,33 @@ import afterImg from "@/assets/placeholders/after-finished.svg";
       <div class="why-grid">
         <div>
           <span class="eyebrow">Why Hunting Tanner Construction</span>
-          <h2>A construction experience built on organization, not promises</h2>
+          <h2>Three generations of building. Zero tolerance for chaos.</h2>
           <p>
             Ask homeowners about their remodel horror stories and the same
             themes come up: vague bids, phone calls that go nowhere, scope
             that shifts without warning, and invoices that don't match
-            conversations. None of that is a craftsmanship problem — it's a
-            management problem.
+            conversations. None of that is a craftsmanship problem. It's a
+            management problem, and it's exactly what this company was
+            founded to fix.
           </p>
         </div>
         <ul class="why-list">
+          <li>
+            <h3>A third-generation contractor</h3>
+            <p>
+              Hunting grew up on job sites alongside his dad Gary, a general
+              contractor with over 30 years of experience and co-founder of
+              HTC. The trade network and standards come with the name.
+            </p>
+          </li>
+          <li>
+            <h3>An owner on every project</h3>
+            <p>
+              Hunting is personally involved in every single project, on
+              site and reachable. The person who plans your job is the
+              person who answers for it.
+            </p>
+          </li>
           <li>
             <h3>Written scopes, not verbal ones</h3>
             <p>
@@ -161,8 +179,8 @@ import afterImg from "@/assets/placeholders/after-finished.svg";
           <li>
             <h3>Change orders in writing</h3>
             <p>
-              When scope changes — because you added something or an
-              inspector required something — it's documented and priced
+              When scope changes, because you added something or an
+              inspector required something, it's documented and priced
               before the work proceeds.
             </p>
           </li>
@@ -171,21 +189,7 @@ import afterImg from "@/assets/placeholders/after-finished.svg";
             <p>
               You'll know what happened this week, what's next, and which
               decisions are coming. When something slips, you hear it from
-              us first — with the why.
-            </p>
-          </li>
-          <li>
-            <h3>Qualified trade partners</h3>
-            <p>
-              Electrical, plumbing, HVAC, drywall, and finish work performed
-              by qualified trades and coordinated on an organized schedule.
-            </p>
-          </li>
-          <li>
-            <h3>Personal accountability</h3>
-            <p>
-              This is an owner-run company. The person who plans your
-              project is the person who answers for it — by name.
+              us first, with the why.
             </p>
           </li>
         </ul>
@@ -209,7 +213,7 @@ import afterImg from "@/assets/placeholders/after-finished.svg";
     </div>
   </section>
 
-  {/* ============ I. Owner story ============ */}
+  {/* ============ I. Founders story ============ */}
   <section class="section">
     <div class="container">
       <OwnerStory variant="home" />
@@ -222,8 +226,8 @@ import afterImg from "@/assets/placeholders/after-finished.svg";
       <span class="eyebrow">Where We Work</span>
       <h2>Serving Utah County homeowners at their properties</h2>
       <p class="lede">
-        Hunting Tanner Construction is a Utah County–based residential
-        contractor and service-area business — we come to you.
+        Hunting Tanner Construction is a Utah County based residential
+        contractor and service-area business. We come to you.
       </p>
       <div class="grid-2 areas-grid">
         {featuredAreas.map((area) => (
@@ -232,7 +236,7 @@ import afterImg from "@/assets/placeholders/after-finished.svg";
       </div>
       <p class="nearby-note">
         Also serving nearby communities including{" "}
-        {nearbyCommunities.join(", ")} — if you're close but not listed,
+        {nearbyCommunities.join(", ")}. If you're close but not listed,
         <a href="/contact/"> ask us</a>.
       </p>
     </div>
@@ -241,22 +245,21 @@ import afterImg from "@/assets/placeholders/after-finished.svg";
   {/* ============ K. Project gallery preview ============ */}
   <section class="section">
     <div class="container">
-      <span class="eyebrow">Recent Work</span>
-      <h2>Project gallery</h2>
+      <span class="eyebrow">Our Work</span>
+      <h2>Basements we've finished</h2>
       <p class="lede">
-        Hunting Tanner Construction is a new company, and we'd rather show
-        you nothing than show you someone else's basements. Real projects
-        will be documented here — before, during, and after — as they
-        complete.
+        Kitchens, kitchenettes, bathrooms, bedrooms, and big family spaces,
+        photographed room by room. See what a finished Tanner basement
+        looks like.
       </p>
-      <div class="grid-3">
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
+      <div class="grid-3 projects-grid">
+        {publishableProjects.map((project) => (
+          <ProjectCard project={project} />
+        ))}
       </div>
       <div class="section-cta">
         <a class="btn btn--secondary" href="/projects/">
-          About Our Project Documentation
+          View the Full Galleries
         </a>
       </div>
     </div>
@@ -324,6 +327,7 @@ import afterImg from "@/assets/placeholders/after-finished.svg";
     border-radius: var(--radius-lg);
     width: 100%;
     height: auto;
+    box-shadow: var(--shadow-md);
   }
 
   .transform-grid {
@@ -342,7 +346,8 @@ import afterImg from "@/assets/placeholders/after-finished.svg";
   }
 
   .services-grid,
-  .areas-grid {
+  .areas-grid,
+  .projects-grid {
     margin-top: var(--space-6);
   }
 

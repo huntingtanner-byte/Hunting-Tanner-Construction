@@ -1,82 +1,118 @@
 ---
 /**
- * Owner story block. Uses the provided family photo; the individual owner
- * portrait is a clearly labeled placeholder until professional photography
- * is done (see ASSET-GUIDE.md).
+ * Founders story block. Home variant: condensed intro to Hunting and Gary.
+ * About variant: full bios with both photos.
  */
 import { Image } from "astro:assets";
 import familyPhoto from "@/assets/family/hunting-tanner-family.jpg";
-import ownerPlaceholder from "@/assets/placeholders/owner-portrait.svg";
+import garyPhoto from "@/assets/family/gary-tanner.jpg";
 
 interface Props {
-  /** Compact homepage version vs. fuller /about/ version */
   variant?: "home" | "about";
 }
 
 const { variant = "home" } = Astro.props;
 ---
 
-<div class="owner-story">
-  <div class="owner-media">
-    <Image
-      src={familyPhoto}
-      alt="Hunting Tanner with his wife and son"
-      width={720}
-      height={1013}
-      loading="lazy"
-      class="owner-family-photo"
-    />
-    {variant === "about" && (
-      <figure class="owner-portrait">
-        <Image
-          src={ownerPlaceholder}
-          alt="Placeholder for a professional portrait of Hunting Tanner"
-          width={400}
-          height={500}
-          loading="lazy"
-        />
-        <figcaption>Professional owner portrait coming soon</figcaption>
-      </figure>
-    )}
-  </div>
+{variant === "home" ? (
+  <div class="owner-story">
+    <div class="owner-media">
+      <Image
+        src={familyPhoto}
+        alt="Hunting Tanner with his wife and son"
+        width={720}
+        height={1013}
+        loading="lazy"
+        class="owner-photo"
+      />
+    </div>
 
-  <div class="owner-copy">
-    <span class="eyebrow">Meet the Owner</span>
-    <h2>Hunting Tanner</h2>
-    <p>
-      Hunting Tanner founded Hunting Tanner Construction to bring strong
-      organization, financial discipline, responsive communication, and a
-      homeowner-first process to residential construction. He lives in Utah
-      County with his wife and kids — the same communities this company
-      serves.
-    </p>
-    <p>
-      Hunting's background is in finance and business operations, and
-      construction runs in the family: his father is an experienced general
-      contractor whose mentorship shapes how HTC plans and manages projects.
-      Hunting pairs that foundation with qualified trade partners and
-      experienced construction advisers, so every project gets both careful
-      management and skilled hands.
-    </p>
-    {variant === "about" ? (
+    <div class="owner-copy">
+      <span class="eyebrow">Meet the Founders</span>
+      <h2>Three generations of building, one family name</h2>
       <p>
-        The reason the company exists is simple: too many homeowners describe
-        contractors who stop answering the phone, change prices midstream, or
-        leave scope to memory. HTC is built to be the opposite — written
-        scopes, documented changes, regular updates, and one owner who is
-        personally accountable for how your project goes.
+        Hunting Tanner is a third-generation contractor who grew up on job
+        sites working alongside his dad. He founded Hunting Tanner
+        Construction with his father Gary, a general contractor with over
+        30 years of experience, to give Utah County homeowners something
+        rare: a builder with deep construction roots that still answers
+        the phone.
       </p>
-    ) : (
       <p>
-        When you call, you're talking to the person accountable for your
-        project — not a call center.
+        Hunting earned his degree in Finance from BYU and runs every
+        project hands-on, from the first walkthrough to the final one. He
+        lives in Utah County with his wife and kids, in the same
+        communities this company serves.
       </p>
-    )}
-    {variant === "home" && (
       <a class="owner-link" href="/about/">Read the full story →</a>
-    )}
+    </div>
   </div>
-</div>
+) : (
+  <div class="founders">
+    <div class="founder">
+      <div class="founder-media">
+        <Image
+          src={familyPhoto}
+          alt="Hunting Tanner with his wife and son"
+          width={720}
+          height={1013}
+          loading="lazy"
+          class="owner-photo"
+        />
+      </div>
+      <div class="founder-copy">
+        <span class="eyebrow">Founder</span>
+        <h2>Hunting Tanner</h2>
+        <p>
+          Hunting is a third-generation contractor who grew up on job
+          sites working alongside his dad. He earned his degree in Finance
+          from BYU, combining hands-on building experience with strong
+          business fundamentals.
+        </p>
+        <p>
+          Hunting handles everything that keeps your project moving:
+          estimates, contracts, scheduling, inspections, client
+          communication, and financial management. He is personally
+          involved in every single project, on site making sure every
+          detail is handled and every question gets answered. When you
+          hire Hunting Tanner Construction, you get Hunting Tanner.
+        </p>
+      </div>
+    </div>
+
+    <div class="founder founder--reverse">
+      <div class="founder-media">
+        <Image
+          src={garyPhoto}
+          alt="Gary Tanner with his wife"
+          width={720}
+          height={1080}
+          loading="lazy"
+          class="owner-photo"
+        />
+      </div>
+      <div class="founder-copy">
+        <span class="eyebrow">Co-Founder</span>
+        <h2>Gary Tanner</h2>
+        <p>
+          Gary was a licensed general contractor in California for over 30
+          years, specializing in tenant improvement construction. He owned
+          and operated Amaron Construction, building out commercial spaces
+          across the state. His technical expertise spans every aspect of
+          construction, from framing and finish carpentry to electrical
+          coordination and full project management.
+        </p>
+        <p>
+          Known for his meticulous attention to detail, Gary personally
+          reviews every scope of work and maintains quality standards on
+          every job. After three decades of building strong relationships
+          with top subcontractors, he's brought that same network and
+          expertise to Utah.
+        </p>
+      </div>
+    </div>
+  </div>
+)}
 
 <style>
   .owner-story {
@@ -91,28 +127,17 @@ const { variant = "home" } = Astro.props;
     }
   }
 
-  .owner-media {
-    display: grid;
-    gap: var(--space-4);
-    max-width: 26rem;
+  .owner-media,
+  .founder-media {
+    max-width: 24rem;
     margin-inline: auto;
+    width: 100%;
   }
-  .owner-family-photo {
+  .owner-photo {
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
     height: auto;
-  }
-  .owner-portrait {
-    margin: 0;
-  }
-  .owner-portrait img {
-    border-radius: var(--radius-lg);
-  }
-  .owner-portrait figcaption {
-    font-size: var(--text-xs);
-    color: var(--color-muted);
-    margin-top: var(--space-2);
-    text-align: center;
+    width: 100%;
   }
 
   .owner-link {
@@ -121,5 +146,27 @@ const { variant = "home" } = Astro.props;
   }
   .owner-link:hover {
     text-decoration: underline;
+  }
+
+  .founders {
+    display: grid;
+    gap: var(--space-8);
+  }
+  .founder {
+    display: grid;
+    gap: var(--space-6);
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .founder {
+      grid-template-columns: 5fr 7fr;
+      gap: var(--space-8);
+    }
+    .founder--reverse .founder-media {
+      order: 2;
+    }
+    .founder--reverse .founder-copy {
+      order: 1;
+    }
   }
 </style>
