@@ -78,19 +78,67 @@ export const POST: APIRoute = async ({ request, redirect }) => {
     }
     return redirect("/thank-you/", 303);
   } catch (err) {
+    /**
+     * Delivery failed. Log the lead in full so it is recoverable from the
+     * Vercel function logs — losing a homeowner's inquiry is far worse than
+     * having their contact details in the business's own private logs — and
+     * show a human page rather than raw JSON.
+     */
     console.error("contact endpoint failure", err);
-    return new Response(
+    console.error(
+      "UNDELIVERED LEAD (recover manually):",
       JSON.stringify({
-        ok: false,
-        errors: {
-          message:
-            "Something went wrong sending your request. Please call (801) 901-8349 instead.",
-        },
+        name: `${lead.firstName} ${lead.lastName}`,
+        phone: lead.phone,
+        email: lead.email,
+        city: lead.projectCity,
+        type: lead.projectType,
+        message: lead.message,
       }),
-      { status: 500, headers: { "Content-Type": "application/json" } },
     );
+    return new Response(errorPage(), {
+      status: 500,
+      headers: { "Content-Type": "text/html; charset=utf-8" },
+    });
   }
 };
+
+/** Friendly fallback page shown if email delivery fails. */
+function errorPage(): string {
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>We couldn't send your request | Hunting Tanner Construction</title>
+<style>
+  body { margin:0; background:#faf8f4; color:#26262a;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    line-height:1.65; display:flex; align-items:center; justify-content:center;
+    min-height:100vh; padding:1.5rem; }
+  .card { max-width:34rem; background:#fff; border:1px solid #e3ddd2;
+    border-radius:16px; padding:2rem; box-shadow:0 6px 24px -8px rgb(38 38 42 / .16); }
+  h1 { font-family:Georgia,serif; font-size:1.6rem; margin:0 0 1rem; }
+  a.btn { display:inline-block; background:#8a4a22; color:#fff; text-decoration:none;
+    font-weight:600; padding:.75rem 1.5rem; border-radius:10px; margin-top:.5rem; }
+  a.plain { color:#8a4a22; }
+  p { margin:0 0 1rem; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Sorry — we couldn't send that request</h1>
+    <p>Something went wrong on our end, not yours. Your project details
+       didn't reach our inbox, so please reach us directly and we'll take
+       good care of you.</p>
+    <p><a class="btn" href="tel:+18019018349">Call (801) 901-8349</a></p>
+    <p>Or email <a class="plain" href="mailto:office@huntingtanner.com">office@huntingtanner.com</a>.</p>
+    <p><a class="plain" href="/">Back to the homepage</a></p>
+  </div>
+</body>
+</html>`;
+}
 
 export const GET: APIRoute = () =>
   new Response("Method not allowed", { status: 405 });
