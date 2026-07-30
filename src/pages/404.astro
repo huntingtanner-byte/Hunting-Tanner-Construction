@@ -1,0 +1,46 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { business } from "@/config/business";
+---
+
+<BaseLayout
+  title="Page Not Found | Hunting Tanner Construction"
+  description="That page doesn't exist — here's how to find what you were looking for on huntingtanner.com."
+  path="/404/"
+  noindex
+>
+  <section class="section">
+    <div class="container container--narrow">
+      <span class="eyebrow">404</span>
+      <h1>This page is more unfinished than your basement.</h1>
+      <p class="lede">
+        The page you're looking for doesn't exist — it may have moved, or
+        the link may have a typo. Here's where you probably want to go:
+      </p>
+      <ul class="notfound-links">
+        <li><a href="/">Homepage</a></li>
+        <li><a href="/basement-finishing/">Basement finishing</a></li>
+        <li><a href="/services/">All services</a></li>
+        <li><a href="/process/">Our process</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+        <li><a href="/contact/">Contact &amp; consultation</a></li>
+      </ul>
+      <p>
+        Or just call us:
+        <a
+          href={business.phoneHref}
+          data-event="click_to_call"
+          data-event-label="404"
+        >{business.phoneDisplay}</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound-links {
+    columns: 2;
+    max-width: 28rem;
+    margin-block: var(--space-5);
+  }
+</style>

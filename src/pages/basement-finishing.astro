@@ -1,0 +1,253 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import CTASection from "@/components/CTASection.astro";
+import FAQAccordion from "@/components/FAQAccordion.astro";
+import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
+import { featuredAreas } from "@/data/service-areas";
+import type { FAQ } from "@/data/faqs";
+
+const breadcrumbs = [
+  { name: "Home", path: "/" },
+  { name: "Basement Finishing", path: "/basement-finishing/" },
+];
+
+const pageFaqs: FAQ[] = [
+  {
+    question: "What does \"basement finishing\" actually include?",
+    answer:
+      "Everything that turns bare framing and concrete into livable rooms: layout planning, framing, electrical, plumbing, HVAC adjustments, insulation, drywall, paint, doors, trim, flooring, and fixtures — plus permit coordination and inspections along the way. Your written scope spells out exactly what's included for your project.",
+  },
+  {
+    question: "My basement only has a rough-in. Can you add a full bathroom?",
+    answer:
+      "In most cases, yes. Builders in Utah County commonly stub in under-slab drains for a future bathroom. We confirm the rough-in location and condition during the walkthrough and design the bathroom around it. If there's no rough-in, adding one is still possible — it involves cutting and re-pouring a section of the slab, which we scope and price up front.",
+  },
+  {
+    question: "Do finished basements need special ceiling heights or windows?",
+    answer:
+      "Building codes set minimum ceiling heights for habitable rooms and require egress windows for bedrooms. Most newer Utah County homes meet ceiling requirements easily; older homes sometimes need creative planning around ducts and beams. We evaluate all of this at the walkthrough so surprises get engineered out before construction.",
+  },
+  {
+    question: "Can I finish my basement in phases to spread out the cost?",
+    answer:
+      "Sometimes that's smart — for example, completing framing, electrical, drywall, and one bedroom now, and leaving a future bathroom or wet bar roughed in. We're happy to scope a phased plan honestly, including what phasing saves and what it costs in efficiency.",
+  },
+  {
+    question: "Will you match the finishes to my upstairs?",
+    answer:
+      "If you want the basement to feel continuous with the main floor, we plan selections — trim profiles, doors, flooring tones, paint — to match or complement what you have. If you'd rather the basement have its own character, that works too. Selections are organized with allowances so choices stay on budget.",
+  },
+];
+
+const schemas = [
+  breadcrumbSchema(breadcrumbs),
+  serviceSchema({
+    name: "Basement Finishing",
+    description:
+      "Complete basement finishing for Utah County homeowners: planning, permits, framing, electrical, plumbing, drywall, trim, and flooring, managed under a written scope.",
+    path: "/basement-finishing/",
+  }),
+];
+---
+
+<BaseLayout
+  title="Basement Finishing | Utah County | Hunting Tanner Construction"
+  description="Complete basement finishing for Utah County homeowners — bedrooms, bathrooms, family rooms, wet bars, offices, and gyms. Written scopes, organized trades, and clear communication from walkthrough to final inspection."
+  path="/basement-finishing/"
+  pageType="service"
+  schemas={schemas}
+>
+  <PageIntro
+    eyebrow="Primary Service"
+    heading="Basement Finishing"
+    lede="Turn the unfinished square footage under your roof into bedrooms, bathrooms, and the room your family fights over — planned on paper first, then built by qualified trades on an organized schedule."
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="section">
+    <div class="container container--narrow">
+      <h2>What a well-run basement finish looks like</h2>
+      <p>
+        A basement finish touches nearly every construction trade: framing,
+        electrical, plumbing, HVAC, insulation, drywall, paint, doors, trim,
+        and flooring — sequenced in the right order, inspected at the right
+        stages. When those pieces are coordinated well, the project feels
+        surprisingly calm. When they aren't, homeowners get the stories
+        you've heard from neighbors.
+      </p>
+      <p>
+        Hunting Tanner Construction manages basements as a planning-first
+        process. Before pricing, your project gets a written scope that
+        defines each room and each system. Before construction, you know the
+        schedule, the payment structure, and the decisions you'll need to
+        make. During construction, you get regular updates and one
+        accountable point of contact. That's the whole philosophy —
+        <a href="/process/">see the six-step process</a> for the details.
+      </p>
+
+      <h2>What's typically included</h2>
+      <ul>
+        <li>
+          <strong>Layout and space planning</strong> — bedroom placement,
+          bathroom location relative to plumbing rough-ins, family-room
+          sizing, storage that's planned instead of leftover.
+        </li>
+        <li>
+          <strong>Permits and inspections</strong> — coordinated with your
+          city's building department, scheduled into the timeline.
+        </li>
+        <li>
+          <strong>Framing and insulation</strong> — exterior wall furring,
+          interior walls, soffits around mechanical runs, sound insulation
+          where it matters (like under the main-floor living room).
+        </li>
+        <li>
+          <strong>Electrical</strong> — lighting layout, outlets, smoke and
+          CO detection, and circuits for the way the space will actually be
+          used: media equipment, an office, gym equipment, a fridge.
+        </li>
+        <li>
+          <strong>Plumbing and HVAC</strong> — bathroom completion from the
+          rough-in, wet-bar supply and drain, and heating/cooling balanced
+          for below-grade comfort.
+        </li>
+        <li>
+          <strong>Drywall, paint, doors, and trim</strong> — the finish
+          stage where the space starts looking like the rest of your home.
+        </li>
+        <li>
+          <strong>Flooring and fixtures</strong> — carpet, LVP, or tile
+          selected through organized allowances.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="bathrooms-bedrooms">
+    <div class="container container--narrow">
+      <span class="eyebrow">Popular Spaces</span>
+      <h2>Bathrooms &amp; bedrooms</h2>
+      <p>
+        A conforming bedroom and a full bathroom are the two additions that
+        change how a basement counts — for daily life and for how the home
+        functions with guests, teenagers, or family staying long-term.
+        Bedrooms need proper egress windows and smoke detection; bathrooms
+        need supply, drain, and ventilation done right. Both are core HTC
+        work, and both get planned around your home's existing rough-ins and
+        window locations.
+      </p>
+
+      <h2 id="family-rooms">Family &amp; entertainment rooms</h2>
+      <p>
+        The big open room is the heart of most basement projects: movie
+        nights, game tables, toy space, church-group hosting. Good ones are
+        designed deliberately — TV wall placement before the electrical goes
+        in, lighting zones instead of one switch, sound control in the
+        ceiling, and storage built into the plan.
+      </p>
+
+      <h2 id="wet-bars">Wet bars &amp; kitchenettes</h2>
+      <p>
+        A snack center with a sink, drink fridge, microwave shelf, and real
+        cabinetry keeps popcorn nights downstairs — and makes the space feel
+        finished in a way paint alone never does. Full kitchenettes can also
+        support long-term guests. We'll talk honestly about which level fits
+        your budget and how each affects plumbing scope.
+      </p>
+
+      <h2 id="offices-gyms">Home offices &amp; gyms</h2>
+      <p>
+        Basements make excellent offices and gyms for the same reasons:
+        quiet, separation, and stable temperatures. Offices get planned for
+        lighting quality, outlets where the desk actually goes, and a door
+        that signals "at work." Gyms get durable flooring, mirrors,
+        ventilation, and ceiling clearance checked before anything is built.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow">
+      <h2>What drives the cost</h2>
+      <p>
+        Homeowners deserve a straight answer on pricing, and the honest one
+        is that basements vary widely. The main drivers are:
+      </p>
+      <ul>
+        <li><strong>Square footage</strong> being finished</li>
+        <li><strong>Bathrooms</strong> — count, and whether a rough-in exists</li>
+        <li><strong>Wet features</strong> — bars and kitchenettes add plumbing and cabinetry</li>
+        <li><strong>Bedroom count</strong> — egress windows and closets</li>
+        <li><strong>Finish level</strong> — flooring, tile, cabinetry, and built-in choices</li>
+        <li><strong>Existing conditions</strong> — ceiling height, mechanical layout, moisture</li>
+      </ul>
+      <p>
+        Rather than quoting a misleading per-square-foot number, we walk the
+        space, write the scope, and price it line by line — so you can see
+        exactly where the investment goes and adjust the plan before
+        construction, not during it. If you share a target range early,
+        we'll design the scope around it.
+      </p>
+
+      <h2>How long it takes</h2>
+      <p>
+        Most full basement finishes run a few months of construction,
+        depending on size, the number of wet areas, inspection scheduling,
+        and selection lead times. Your proposal includes an estimated
+        timeline for your specific scope, and weekly updates keep you
+        current once work begins.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container container--narrow">
+      <span class="eyebrow">Questions</span>
+      <h2>Basement finishing FAQs</h2>
+      <FAQAccordion faqs={pageFaqs} />
+      <p class="more-links">
+        More questions answered on the <a href="/faq/">full FAQ page</a>, or
+        learn <a href="/process/">how the process works</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow">
+      <h2>Where we finish basements</h2>
+      <p>
+        Hunting Tanner Construction serves homeowners at their properties in
+        {featuredAreas
+          .filter((a) => a.schemaType === "City")
+          .map((a) => a.name)
+          .join(", ")}, and communities throughout Utah County:
+      </p>
+      <ul class="area-links">
+        {featuredAreas.map((area) => (
+          <li>
+            <a href={area.href}>
+              {area.name} basement finishing
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Get a real plan for your basement"
+    text="Start with a conversation and a walkthrough. You'll know what your space can become, what it takes, and what it costs — in writing."
+  />
+</BaseLayout>
+
+<style>
+  .more-links {
+    margin-top: var(--space-5);
+    font-size: var(--text-sm);
+  }
+  .area-links {
+    columns: 2;
+    max-width: 32rem;
+  }
+</style>

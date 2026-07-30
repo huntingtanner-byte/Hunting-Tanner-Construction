@@ -1,0 +1,81 @@
+---
+/**
+ * The six-step process. compact=true renders summaries (homepage preview);
+ * otherwise full details (/process/ page).
+ */
+import { processSteps } from "@/data/process-steps";
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<ol class="process-steps" class:list={{ compact }}>
+  {processSteps.map((step, i) => (
+    <li class="process-step">
+      <span class="step-number" aria-hidden="true">{i + 1}</span>
+      <div>
+        <h3>{step.title}</h3>
+        <p>{compact ? step.summary : step.detail}</p>
+      </div>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .process-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-5);
+    counter-reset: step;
+  }
+  .process-steps.compact {
+    gap: var(--space-5);
+  }
+  @media (min-width: 700px) {
+    .process-steps.compact {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (min-width: 1024px) {
+    .process-steps.compact {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .process-step {
+    display: flex;
+    gap: var(--space-4);
+    margin: 0;
+  }
+  .step-number {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background: var(--color-accent-soft);
+    color: var(--color-accent-hover);
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 700;
+  }
+  .process-step h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-2);
+  }
+  .process-step p {
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+    margin: 0;
+  }
+  .process-steps:not(.compact) .process-step p {
+    font-size: var(--text-base);
+  }
+</style>

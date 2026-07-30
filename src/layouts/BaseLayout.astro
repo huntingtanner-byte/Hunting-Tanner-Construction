@@ -1,0 +1,77 @@
+---
+/**
+ * Base layout: document shell, SEO head, fonts, header/footer, structured
+ * data, analytics hooks, sticky mobile CTA.
+ */
+import "@fontsource-variable/source-serif-4";
+import "@/styles/global.css";
+import SEOHead from "@/components/SEOHead.astro";
+import StructuredData from "@/components/StructuredData.astro";
+import Analytics from "@/components/Analytics.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import StickyMobileCTA from "@/components/StickyMobileCTA.astro";
+import DevBanner from "@/components/DevBanner.astro";
+import { organizationSchema } from "@/lib/schema";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Canonical path with trailing slash */
+  path: string;
+  noindex?: boolean;
+  ogImage?: string;
+  /**
+   * Body data attribute used for standardized page-view events:
+   * "service" | "service-area" | "projects" | undefined
+   */
+  pageType?: string;
+  /** Extra JSON-LD blocks (breadcrumbs, service, FAQ). Org schema is automatic. */
+  schemas?: Record<string, unknown>[];
+  /** Include the Organization/GeneralContractor schema (homepage only). */
+  includeOrgSchema?: boolean;
+}
+
+const {
+  title,
+  description,
+  path,
+  noindex = false,
+  ogImage,
+  pageType,
+  schemas = [],
+  includeOrgSchema = false,
+} = Astro.props;
+
+const allSchemas = includeOrgSchema
+  ? [organizationSchema(), ...schemas]
+  : schemas;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#4a4a4d" />
+    <SEOHead {title} {description} {path} {noindex} {ogImage} />
+    {allSchemas.length > 0 && <StructuredData schemas={allSchemas} />}
+    <Analytics />
+  </head>
+  <body data-page-type={pageType}>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <DevBanner />
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+    <StickyMobileCTA />
+    <script>
+      import "@/scripts/analytics";
+    </script>
+  </body>
+</html>

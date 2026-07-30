@@ -1,0 +1,63 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import FAQAccordion from "@/components/FAQAccordion.astro";
+import CTASection from "@/components/CTASection.astro";
+import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { faqPageGroups } from "@/data/faqs";
+
+const breadcrumbs = [
+  { name: "Home", path: "/" },
+  { name: "FAQ", path: "/faq/" },
+];
+
+const allFaqs = faqPageGroups.flatMap((group) => group.faqs);
+const schemas = [breadcrumbSchema(breadcrumbs), faqSchema(allFaqs)];
+---
+
+<BaseLayout
+  title="Basement Finishing FAQs | Hunting Tanner Construction"
+  description="Straight answers to the questions Utah County homeowners ask about basement finishing: cost, timelines, permits, payments, inspections, selections, and how projects are managed."
+  path="/faq/"
+  schemas={schemas}
+>
+  <PageIntro
+    eyebrow="FAQ"
+    heading="Questions homeowners actually ask"
+    lede="Straight answers about cost, timelines, permits, and how projects run. If your question isn't here, ask it directly — that's what the phone number is for."
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="section">
+    <div class="container container--narrow">
+      {faqPageGroups.map((group) => (
+        <div class="faq-group">
+          <h2>{group.title}</h2>
+          <FAQAccordion faqs={group.faqs} />
+        </div>
+      ))}
+      <p class="faq-footer-links">
+        Want the fuller picture? Read
+        <a href="/process/">how the process works</a> or
+        <a href="/contact/">request a consultation</a>.
+      </p>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Have a question that's specific to your basement?"
+    text="Those are the best kind. Call or send the form — you'll get a real answer, not a sales script."
+  />
+</BaseLayout>
+
+<style>
+  .faq-group {
+    margin-bottom: var(--space-7);
+  }
+  .faq-group h2 {
+    margin-bottom: var(--space-5);
+  }
+  .faq-footer-links {
+    font-size: var(--text-sm);
+  }
+</style>

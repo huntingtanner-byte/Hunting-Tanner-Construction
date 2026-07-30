@@ -1,0 +1,329 @@
+---
+/**
+ * Site header with sticky behavior, desktop nav, and an accessible mobile
+ * menu built on <details>/<summary> so it works without JavaScript.
+ */
+import { business } from "@/config/business";
+import { headerNav } from "@/config/navigation";
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header" data-header>
+  <div class="container header-inner">
+    <a href="/" class="wordmark" aria-label={`${business.publicName} — home`}>
+      <span class="wordmark-name">Hunting Tanner</span>
+      <span class="wordmark-sub">Construction</span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main">
+      <ul>
+        {headerNav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              aria-current={currentPath === item.href ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a
+        class="header-phone"
+        href={business.phoneHref}
+        data-event="click_to_call"
+        data-event-label="header"
+      >
+        {business.phoneDisplay}
+      </a>
+      <a
+        class="btn btn--primary header-cta"
+        href="/contact/"
+        data-event="cta_click"
+        data-event-label="header"
+      >
+        Request a Consultation
+      </a>
+
+      <details class="mobile-nav" data-mobile-nav>
+        <summary aria-label="Menu">
+          <span class="burger" aria-hidden="true"><span></span></span>
+          <span class="burger-label">Menu</span>
+        </summary>
+        <nav class="mobile-nav-panel" aria-label="Mobile">
+          <ul>
+            {headerNav.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  aria-current={currentPath === item.href ? "page" : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+            <li class="mobile-nav-cta">
+              <a
+                class="btn btn--primary"
+                href="/contact/"
+                data-event="cta_click"
+                data-event-label="mobile-nav"
+              >
+                Request a Consultation
+              </a>
+            </li>
+            <li class="mobile-nav-phone">
+              <a
+                href={business.phoneHref}
+                data-event="click_to_call"
+                data-event-label="mobile-nav"
+              >
+                Call {business.phoneDisplay}
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--color-bg);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .site-header[data-scrolled] {
+    border-bottom-color: var(--color-line);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    min-height: var(--header-h);
+  }
+
+  .wordmark {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: var(--color-ink-soft);
+    line-height: 1.1;
+  }
+  .wordmark-name {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .wordmark-sub {
+    font-family: var(--font-display);
+    font-size: 0.66rem;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .desktop-nav ul {
+    display: flex;
+    gap: var(--space-5);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .desktop-nav a {
+    color: var(--color-ink);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    padding: var(--space-2) 0;
+    border-bottom: 2px solid transparent;
+  }
+  .desktop-nav a:hover,
+  .desktop-nav a[aria-current="page"] {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+  .header-phone {
+    color: var(--color-ink);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: var(--text-sm);
+    white-space: nowrap;
+  }
+  .header-phone:hover {
+    color: var(--color-accent);
+  }
+  .header-cta {
+    min-height: 42px;
+    padding: 0.5rem 1.1rem;
+    font-size: var(--text-sm);
+  }
+
+  /* ---- Mobile nav (details/summary; works without JS) ---- */
+  .mobile-nav {
+    display: none;
+    position: relative;
+  }
+  .mobile-nav summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    cursor: pointer;
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    min-height: 44px;
+  }
+  .mobile-nav summary::-webkit-details-marker {
+    display: none;
+  }
+  .burger {
+    position: relative;
+    width: 18px;
+    height: 12px;
+    display: inline-block;
+  }
+  .burger span,
+  .burger::before,
+  .burger::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--color-ink);
+    border-radius: 2px;
+  }
+  .burger::before {
+    top: 0;
+  }
+  .burger span {
+    top: 5px;
+  }
+  .burger::after {
+    bottom: 0;
+  }
+  .mobile-nav[open] .burger::before {
+    top: 5px;
+    transform: rotate(45deg);
+  }
+  .mobile-nav[open] .burger span {
+    opacity: 0;
+  }
+  .mobile-nav[open] .burger::after {
+    bottom: 5px;
+    transform: rotate(-45deg);
+  }
+
+  .mobile-nav-panel {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.5rem);
+    min-width: 16rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: var(--space-4);
+  }
+  .mobile-nav-panel ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .mobile-nav-panel li {
+    margin: 0;
+  }
+  .mobile-nav-panel a:not(.btn) {
+    display: block;
+    padding: var(--space-3);
+    color: var(--color-ink);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: var(--radius);
+  }
+  .mobile-nav-panel a:not(.btn):hover,
+  .mobile-nav-panel a[aria-current="page"]:not(.btn) {
+    background: var(--color-surface-alt);
+    color: var(--color-accent);
+  }
+  .mobile-nav-cta {
+    padding: var(--space-3);
+  }
+  .mobile-nav-cta .btn {
+    width: 100%;
+  }
+  .mobile-nav-phone {
+    text-align: center;
+    border-top: 1px solid var(--color-line);
+  }
+
+  @media (max-width: 1023px) {
+    .desktop-nav,
+    .header-cta {
+      display: none;
+    }
+    .mobile-nav {
+      display: block;
+    }
+  }
+  @media (max-width: 479px) {
+    .header-phone {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // Shadow under the sticky header once the page scrolls.
+  const header = document.querySelector("[data-header]");
+  const onScroll = () => {
+    if (!header) return;
+    if (window.scrollY > 8) header.setAttribute("data-scrolled", "");
+    else header.removeAttribute("data-scrolled");
+  };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  // Mobile nav: close on link click, outside click, and Escape.
+  const nav = document.querySelector<HTMLDetailsElement>("[data-mobile-nav]");
+  if (nav) {
+    nav.addEventListener("click", (e) => {
+      const target = e.target as HTMLElement;
+      if (target.closest("a")) nav.removeAttribute("open");
+    });
+    document.addEventListener("click", (e) => {
+      if (nav.hasAttribute("open") && !nav.contains(e.target as Node)) {
+        nav.removeAttribute("open");
+      }
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && nav.hasAttribute("open")) {
+        nav.removeAttribute("open");
+        nav.querySelector("summary")?.focus();
+      }
+    });
+  }
+</script>

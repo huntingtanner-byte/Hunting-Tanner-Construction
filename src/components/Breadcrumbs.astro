@@ -1,0 +1,62 @@
+---
+/** Visible breadcrumbs. Pair with breadcrumbSchema() in the page layout. */
+import type { BreadcrumbItem } from "@/lib/schema";
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol>
+    {items.map((item, i) => (
+      <li>
+        {i < items.length - 1 ? (
+          <>
+            <a href={item.path}>{item.name}</a>
+            <span aria-hidden="true" class="sep">/</span>
+          </>
+        ) : (
+          <span aria-current="page">{item.name}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+  .breadcrumbs {
+    font-size: var(--text-xs);
+    margin-bottom: var(--space-4);
+  }
+  .breadcrumbs ol {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+  }
+  .breadcrumbs li {
+    margin: 0;
+    display: flex;
+    gap: var(--space-2);
+  }
+  .breadcrumbs a {
+    color: var(--color-muted);
+    text-decoration: none;
+  }
+  .breadcrumbs a:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+  .breadcrumbs .sep {
+    color: var(--color-line);
+  }
+  .breadcrumbs [aria-current] {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+</style>

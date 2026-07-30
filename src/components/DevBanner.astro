@@ -1,0 +1,31 @@
+---
+/**
+ * Discreet development-only banner. Rendered ONLY during local `astro dev`
+ * (import.meta.env.DEV) — never in builds, so it can't appear in production
+ * or in screenshots of the built site.
+ */
+import { business } from "@/config/business";
+
+const show = import.meta.env.DEV;
+---
+
+{show && (
+  <div class="dev-banner" role="note">
+    Local development — siteStatus: <strong>{business.siteStatus}</strong>
+    {business.siteStatus === "staging" && " (noindex, forms disabled)"}
+  </div>
+)}
+
+<style>
+  .dev-banner {
+    background: #2f2a24;
+    color: #d8cfc2;
+    font-size: 0.75rem;
+    text-align: center;
+    padding: 0.35rem 1rem;
+    letter-spacing: 0.02em;
+  }
+  .dev-banner strong {
+    color: #f0b27c;
+  }
+</style>

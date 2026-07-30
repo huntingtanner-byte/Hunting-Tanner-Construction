@@ -1,0 +1,54 @@
+---
+/**
+ * Per-page SEO head. Canonical URLs, robots directives (status-aware),
+ * Open Graph + Twitter metadata.
+ */
+import { business, isLive } from "@/config/business";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Canonical path with trailing slash, e.g. "/basement-finishing/" */
+  path: string;
+  /** Force noindex regardless of site status (e.g. /thank-you/) */
+  noindex?: boolean;
+  /** Absolute or root-relative OG image; defaults to the brand card */
+  ogImage?: string;
+}
+
+const { title, description, path, noindex = false, ogImage = "/og-default.png" } =
+  Astro.props;
+
+const canonical = `${business.domain}${path}`;
+const ogImageUrl = ogImage.startsWith("http")
+  ? ogImage
+  : `${business.domain}${ogImage}`;
+
+/** Whole site is noindex while staging; individual pages can opt out when live. */
+const robots = !isLive || noindex ? "noindex, nofollow" : "index, follow";
+
+const verification = business.analytics.googleSiteVerification;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<meta name="robots" content={robots} />
+{isLive && verification && (
+  <meta name="google-site-verification" content={verification} />
+)}
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={business.publicName} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="en_US" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageUrl} />

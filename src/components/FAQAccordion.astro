@@ -1,0 +1,97 @@
+---
+/**
+ * FAQ accordion using native <details>/<summary> — keyboard accessible and
+ * fully functional without JavaScript.
+ */
+import type { FAQ } from "@/data/faqs";
+
+interface Props {
+  faqs: FAQ[];
+}
+
+const { faqs } = Astro.props;
+---
+
+<div class="faq-accordion">
+  {faqs.map((faq) => (
+    <details class="faq-item">
+      <summary>
+        <span>{faq.question}</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </summary>
+      <div class="faq-answer">
+        <p>{faq.answer}</p>
+      </div>
+    </details>
+  ))}
+</div>
+
+<style>
+  .faq-accordion {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .faq-item {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+  }
+  .faq-item[open] {
+    border-color: var(--color-accent);
+  }
+
+  .faq-item summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    cursor: pointer;
+    padding: var(--space-4) var(--space-5);
+    font-weight: 650;
+    font-size: var(--text-base);
+    min-height: 48px;
+  }
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-item summary:hover {
+    color: var(--color-accent);
+  }
+
+  .faq-icon {
+    flex-shrink: 0;
+    position: relative;
+    width: 14px;
+    height: 14px;
+  }
+  .faq-icon::before,
+  .faq-icon::after {
+    content: "";
+    position: absolute;
+    background: var(--color-accent);
+    border-radius: 1px;
+  }
+  .faq-icon::before {
+    top: 6px;
+    left: 0;
+    width: 14px;
+    height: 2px;
+  }
+  .faq-icon::after {
+    top: 0;
+    left: 6px;
+    width: 2px;
+    height: 14px;
+    transition: transform 0.15s ease;
+  }
+  .faq-item[open] .faq-icon::after {
+    transform: scaleY(0);
+  }
+
+  .faq-answer {
+    padding: 0 var(--space-5) var(--space-5);
+    color: var(--color-muted);
+  }
+</style>

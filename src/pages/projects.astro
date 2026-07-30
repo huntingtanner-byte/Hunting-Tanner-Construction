@@ -1,0 +1,91 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import CTASection from "@/components/CTASection.astro";
+import { breadcrumbSchema } from "@/lib/schema";
+import { publishableProjects } from "@/data/projects";
+
+const breadcrumbs = [
+  { name: "Home", path: "/" },
+  { name: "Projects", path: "/projects/" },
+];
+
+const schemas = [breadcrumbSchema(breadcrumbs)];
+const hasProjects = publishableProjects.length > 0;
+---
+
+<BaseLayout
+  title="Projects | Hunting Tanner Construction"
+  description="Basement projects by Hunting Tanner Construction. Real project documentation — before, during, and after — is published here as projects complete."
+  path="/projects/"
+  pageType="projects"
+  schemas={schemas}
+>
+  <PageIntro
+    eyebrow="Projects"
+    heading="Our work, documented honestly"
+    lede={
+      hasProjects
+        ? "Completed basements across Utah County — documented before, during, and after."
+        : "Hunting Tanner Construction is a new company, and this gallery will only ever show real HTC projects. Here's what to expect as it fills in."
+    }
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="section">
+    <div class="container">
+      {hasProjects ? (
+        <div class="grid-3">
+          {publishableProjects.map((project) => (
+            <ProjectCard project={project} />
+          ))}
+        </div>
+      ) : (
+        <>
+          <div class="grid-3">
+            <ProjectCard />
+            <ProjectCard />
+            <ProjectCard />
+          </div>
+          <div class="projects-promise container--narrow">
+            <h2>Why this page is empty on purpose</h2>
+            <p>
+              Plenty of new contractors fill their galleries with stock
+              photos and call it a portfolio. We won't. Every project shown
+              here will be real HTC work, photographed in real Utah homes,
+              published with the homeowner's permission.
+            </p>
+            <p>
+              Each completed basement will be documented the same way: the
+              unfinished "before," key milestones during construction —
+              framing, rough-ins, drywall — and the finished result, with
+              the project's city, scope, and completion date. When
+              homeowners are willing, their words will appear too; nothing
+              on this site will ever carry an invented name or review.
+            </p>
+            <p>
+              Until then, the best way to evaluate us is the way we work:
+              read <a href="/process/">the process</a>, browse
+              <a href="/faq/">the FAQ</a>, and
+              <a href="/contact/">have a conversation</a>. You'll learn more
+              from ten minutes on the phone than from anyone's photo gallery.
+            </p>
+          </div>
+        </>
+      )}
+    </div>
+  </section>
+
+  <CTASection
+    heading="Want your basement to be an early feature here?"
+    text="Early clients get the most owner attention a company will ever give. Let's talk about your project."
+  />
+</BaseLayout>
+
+<style>
+  .projects-promise {
+    margin: var(--space-7) auto 0;
+    max-width: var(--container-narrow);
+  }
+</style>

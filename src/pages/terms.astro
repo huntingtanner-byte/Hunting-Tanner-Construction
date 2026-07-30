@@ -1,0 +1,97 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import { breadcrumbSchema } from "@/lib/schema";
+import { business } from "@/config/business";
+
+const breadcrumbs = [
+  { name: "Home", path: "/" },
+  { name: "Website Terms", path: "/terms/" },
+];
+
+const schemas = [breadcrumbSchema(breadcrumbs)];
+
+{/* EDITORIAL NOTE: Have these terms reviewed by an attorney before launch,
+    and update the effective date at that time. See CONTENT-TODO.md. */}
+const effectiveDate = "July 30, 2026";
+---
+
+<BaseLayout
+  title="Website Terms | Hunting Tanner Construction"
+  description="Terms of use for huntingtanner.com, the website of Hunting Tanner Construction LLC."
+  path="/terms/"
+  schemas={schemas}
+>
+  <PageIntro heading="Website Terms" breadcrumbs={breadcrumbs} />
+
+  <section class="section">
+    <div class="container container--narrow prose">
+      <p><em>Effective date: {effectiveDate}</em></p>
+
+      <p>
+        These terms govern your use of {business.domain} (the "Site"),
+        operated by {business.legalName} ("HTC," "we," "us"). By using the
+        Site, you agree to them.
+      </p>
+
+      <h2>Informational content only</h2>
+      <p>
+        The Site describes our services generally. Content on the Site —
+        including discussions of costs, timelines, building codes,
+        permits, and construction practices — is general information, not
+        professional advice, a quote, or a promise about any specific
+        project. Actual project terms are established only in a written
+        agreement between you and HTC.
+      </p>
+
+      <h2>No engagement is formed through the Site</h2>
+      <p>
+        Submitting a form or contacting us does not create a contract,
+        engagement, or obligation for either of us. It starts a
+        conversation — which is exactly what it should do.
+      </p>
+
+      <h2>Intellectual property</h2>
+      <p>
+        The Site's content, branding, and design belong to HTC or its
+        licensors. You may not copy or reuse them commercially without
+        written permission.
+      </p>
+
+      <h2>Acceptable use</h2>
+      <p>
+        Don't misuse the Site: no scraping for spam, no attempting to
+        breach its security, no submitting false or malicious content
+        through our forms.
+      </p>
+
+      <h2>Third-party links and services</h2>
+      <p>
+        The Site may link to third-party sites or use third-party services
+        (such as analytics). Those are governed by their own terms and
+        policies, which we don't control.
+      </p>
+
+      <h2>Disclaimer and limitation of liability</h2>
+      <p>
+        The Site is provided "as is." To the fullest extent permitted by
+        law, HTC disclaims warranties regarding the Site's availability or
+        accuracy and is not liable for damages arising from use of the
+        Site itself. Nothing in these terms limits rights or obligations
+        under a separate written construction agreement.
+      </p>
+
+      <h2>Changes</h2>
+      <p>
+        We may update these terms from time to time; the current version
+        will always be posted here with its effective date.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about these terms:
+        <a href={business.emailHref}>{business.email}</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

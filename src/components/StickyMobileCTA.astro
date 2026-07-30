@@ -1,0 +1,68 @@
+---
+/** Fixed bottom CTA bar on mobile: Call + Request Consultation. */
+import { business } from "@/config/business";
+---
+
+<div class="sticky-cta" data-sticky-cta>
+  <a
+    class="sticky-cta-call"
+    href={business.phoneHref}
+    data-event="click_to_call"
+    data-event-label="sticky-bar"
+  >
+    Call {business.phoneDisplay}
+  </a>
+  <a
+    class="sticky-cta-form"
+    href="/contact/"
+    data-event="cta_click"
+    data-event-label="sticky-bar"
+  >
+    Request Consultation
+  </a>
+</div>
+
+<style>
+  .sticky-cta {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    .sticky-cta {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 40;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--color-line);
+      border-top: 1px solid var(--color-line);
+      padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+    .sticky-cta a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      font-size: var(--text-sm);
+      font-weight: 700;
+      text-decoration: none;
+      padding: var(--space-3);
+      text-align: center;
+    }
+    .sticky-cta-call {
+      background: var(--color-surface);
+      color: var(--color-ink);
+    }
+    .sticky-cta-form {
+      background: var(--color-accent);
+      color: #fff;
+    }
+    /* Keep page content clear of the fixed bar */
+    :global(body) {
+      padding-bottom: 56px;
+    }
+  }
+</style>

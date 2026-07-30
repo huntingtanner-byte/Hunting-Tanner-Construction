@@ -1,0 +1,108 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import OwnerStory from "@/components/OwnerStory.astro";
+import CTASection from "@/components/CTASection.astro";
+import { breadcrumbSchema } from "@/lib/schema";
+
+const breadcrumbs = [
+  { name: "Home", path: "/" },
+  { name: "About", path: "/about/" },
+];
+
+const schemas = [breadcrumbSchema(breadcrumbs)];
+---
+
+<BaseLayout
+  title="About Hunting Tanner Construction | Utah County Contractor"
+  description="The story behind Hunting Tanner Construction: a Utah County residential contractor built on organization, financial discipline, responsive communication, and qualified trade partnerships."
+  path="/about/"
+  schemas={schemas}
+>
+  <PageIntro
+    eyebrow="About"
+    heading="Built to be the contractor people wish they'd hired"
+    lede="Hunting Tanner Construction is a Utah County residential contractor built around a simple observation: most construction problems are organization problems."
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="section">
+    <div class="container">
+      <OwnerStory variant="about" />
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container container--narrow">
+      <h2>How the company is put together</h2>
+      <p>
+        HTC pairs owner-level project management with qualified,
+        specialized trade partners — licensed electricians and plumbers,
+        HVAC professionals, drywall and finish crews. That's the same
+        structure most good general contractors use; the difference is in
+        how tightly the work is planned, scheduled, and communicated. No
+        single company self-performs every trade well, and we don't
+        pretend to. Our job is to bring the right people, in the right
+        order, to a plan that's already been thought through.
+      </p>
+      <p>
+        Behind that sits mentorship that money can't buy: Hunting's father
+        is an experienced general contractor, and his guidance shapes how
+        HTC scopes projects, prices work, and avoids the traps that catch
+        homeowners. Combined with Hunting's finance and operations
+        background, the result is a company that treats your budget with
+        the same discipline it treats the construction schedule.
+      </p>
+
+      <h2>What we believe a contractor owes you</h2>
+      <ul>
+        <li>
+          <strong>A defined scope</strong> — you should know exactly what
+          you're buying before you sign.
+        </li>
+        <li>
+          <strong>Clear expectations</strong> — schedule, payments,
+          decisions, and what happens when something changes.
+        </li>
+        <li>
+          <strong>Responsiveness</strong> — calls and texts answered,
+          questions taken seriously, concerns addressed while they're
+          small.
+        </li>
+        <li>
+          <strong>Transparent next steps</strong> — at every stage, you
+          know what's next and who's doing it.
+        </li>
+        <li>
+          <strong>Honesty about being new</strong> — HTC doesn't have
+          decades of company history, and won't invent any. What it has is
+          a process built from watching what works, and an owner staking
+          his family's name on every project.
+        </li>
+      </ul>
+
+      <h2>Where we're headed</h2>
+      <p>
+        Today, HTC specializes in
+        <a href="/basement-finishing/">basement finishing</a> and
+        <a href="/basement-remodeling/">remodeling</a> across
+        <a href="/utah-county-basement-finishing/">Utah County</a> — a
+        focus that keeps quality high while the company earns its
+        reputation one project at a time. Over time, that foundation is
+        built to grow into kitchens, larger remodels, additions, and
+        custom homes. The name on the truck is a family name; the plan is
+        to still be proud of it in thirty years.
+      </p>
+      <p>
+        Curious how a project actually runs? Read
+        <a href="/process/">the six-step process</a>, or
+        <a href="/contact/">start a conversation</a>.
+      </p>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Talk to the person whose name is on the company"
+    text="No call centers, no sales reps. Just a direct conversation about your home and whether we're the right fit for it."
+  />
+</BaseLayout>

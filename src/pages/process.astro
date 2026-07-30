@@ -1,0 +1,84 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import ProcessSteps from "@/components/ProcessSteps.astro";
+import CTASection from "@/components/CTASection.astro";
+import { breadcrumbSchema } from "@/lib/schema";
+
+const breadcrumbs = [
+  { name: "Home", path: "/" },
+  { name: "Our Process", path: "/process/" },
+];
+
+const schemas = [breadcrumbSchema(breadcrumbs)];
+---
+
+<BaseLayout
+  title="Our Process | Hunting Tanner Construction"
+  description="How a Hunting Tanner Construction project works, step by step: initial conversation, on-site walkthrough, written scope, detailed proposal, organized construction, and final walkthrough."
+  path="/process/"
+  schemas={schemas}
+>
+  <PageIntro
+    eyebrow="How We Work"
+    heading="A process you can see from the outside"
+    lede="Most construction stress comes from not knowing what happens next. Here's the entire HTC process, step by step — the same one every project follows, from a single bathroom to a full basement."
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="section">
+    <div class="container container--narrow">
+      <ProcessSteps />
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container container--narrow">
+      <h2>The commitments behind the steps</h2>
+
+      <h3>Everything important is written down</h3>
+      <p>
+        Scope, pricing, payment schedule, selections, and changes all live
+        on paper (or PDF), not in memory. If we agree to something, you'll
+        be able to point to it.
+      </p>
+
+      <h3>Change orders before changed work</h3>
+      <p>
+        When scope shifts — you add a built-in, an inspector requires
+        something, a material is unavailable — the change is documented and
+        priced, and you approve it before that work proceeds. This is the
+        single biggest protection against budget surprises.
+      </p>
+
+      <h3>Communication has a rhythm</h3>
+      <p>
+        You get scheduled updates on progress, upcoming work, and decisions
+        needed — plus direct access to Hunting between them. Silence is a
+        contractor failure mode; it's the one we're built to avoid.
+      </p>
+
+      <h3>Your home is treated like someone lives there</h3>
+      <p>
+        Floor protection on work routes, dust containment at the basement
+        entry, agreed work hours and entrances, and a site left secure each
+        day. Because someone does live there — your family, upstairs,
+        during the whole project.
+      </p>
+
+      <h3>Payments follow milestones</h3>
+      <p>
+        The payment schedule in your proposal ties payments to defined
+        project stages. You always know what a payment covers and where
+        the project stands when it's due.
+      </p>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Step one is a conversation"
+    text="Tell us about your basement and what you want it to become. The rest of the process takes it from there."
+    withForm
+    formId="process-form"
+  />
+</BaseLayout>

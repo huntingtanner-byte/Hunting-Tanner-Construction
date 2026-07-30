@@ -1,0 +1,78 @@
+---
+/** Full-width closing CTA. Optionally embeds the compact lead form. */
+import { business } from "@/config/business";
+import LeadForm from "@/components/LeadForm.astro";
+
+interface Props {
+  heading?: string;
+  text?: string;
+  /** Include the compact consultation form (vs. buttons only) */
+  withForm?: boolean;
+  formId?: string;
+}
+
+const {
+  heading = "Ready to talk about your basement?",
+  text = "Start with a straightforward conversation — what you have, what you want, and what it takes to get there. No pressure, no obligation.",
+  withForm = false,
+  formId = "cta-form",
+} = Astro.props;
+---
+
+<section class="section section--dark cta-section">
+  <div class="container">
+    <div class:list={["cta-inner", { "with-form": withForm }]}>
+      <div class="cta-copy">
+        <h2>{heading}</h2>
+        <p class="lede">{text}</p>
+        <div class="cta-actions">
+          <a
+            class="btn btn--light"
+            href={business.phoneHref}
+            data-event="click_to_call"
+            data-event-label="cta-section"
+          >
+            Call {business.phoneDisplay}
+          </a>
+          {!withForm && (
+            <a
+              class="btn btn--primary"
+              href="/contact/"
+              data-event="cta_click"
+              data-event-label="cta-section"
+            >
+              Request a Basement Consultation
+            </a>
+          )}
+        </div>
+      </div>
+      {withForm && (
+        <div class="cta-form">
+          <LeadForm formId={formId} variant="compact" />
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-inner {
+    display: grid;
+    gap: var(--space-6);
+  }
+  .cta-inner.with-form {
+    align-items: start;
+  }
+  @media (min-width: 900px) {
+    .cta-inner.with-form {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-8);
+    }
+  }
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin-top: var(--space-5);
+  }
+</style>

@@ -1,0 +1,36 @@
+---
+/** Standard inner-page intro: breadcrumbs, eyebrow, H1, lede. */
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import type { BreadcrumbItem } from "@/lib/schema";
+
+interface Props {
+  eyebrow?: string;
+  heading: string;
+  lede?: string;
+  breadcrumbs?: BreadcrumbItem[];
+}
+
+const { eyebrow, heading, lede, breadcrumbs } = Astro.props;
+---
+
+<section class="page-intro">
+  <div class="container">
+    {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
+    {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+    <h1>{heading}</h1>
+    {lede && <p class="lede">{lede}</p>}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .page-intro {
+    padding-block: var(--space-7) var(--space-6);
+    border-bottom: 1px solid var(--color-line);
+    background: linear-gradient(
+      to bottom,
+      var(--color-surface-alt),
+      var(--color-bg)
+    );
+  }
+</style>

@@ -1,0 +1,137 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import LeadForm from "@/components/LeadForm.astro";
+import { breadcrumbSchema } from "@/lib/schema";
+import { business } from "@/config/business";
+
+const breadcrumbs = [
+  { name: "Home", path: "/" },
+  { name: "Contact", path: "/contact/" },
+];
+
+const schemas = [breadcrumbSchema(breadcrumbs)];
+---
+
+<BaseLayout
+  title="Request a Basement Consultation | Hunting Tanner Construction"
+  description="Request a basement consultation with Hunting Tanner Construction. Call (801) 901-8349, email office@huntingtanner.com, or send the form — serving Saratoga Springs, Lehi, Herriman, and Utah County."
+  path="/contact/"
+  schemas={schemas}
+>
+  <PageIntro
+    eyebrow="Contact"
+    heading="Request a Basement Consultation"
+    lede="Tell us about your space and what you want it to become. You'll hear back from Hunting directly — not a call center."
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="section">
+    <div class="container contact-grid">
+      <div class="contact-info">
+        <h2>Reach us directly</h2>
+        <p class="contact-line">
+          <strong>Phone</strong>
+          <a
+            href={business.phoneHref}
+            data-event="click_to_call"
+            data-event-label="contact-page"
+          >{business.phoneDisplay}</a>
+        </p>
+        <p class="contact-line">
+          <strong>Email</strong>
+          <a
+            href={business.emailHref}
+            data-event="click_to_email"
+            data-event-label="contact-page"
+          >{business.email}</a>
+        </p>
+        <p class="contact-line">
+          <strong>Service area</strong>
+          <span>
+            Serving Saratoga Springs, Lehi, and communities throughout Utah
+            County, plus Herriman. We're a service-area business — we come
+            to your home.
+          </span>
+        </p>
+
+        <h2>What happens after you reach out</h2>
+        <ol>
+          <li>
+            <strong>We talk.</strong> A short call about your basement,
+            your goals, and rough timing.
+          </li>
+          <li>
+            <strong>We walk the space.</strong> If it's a fit, we schedule
+            an on-site walkthrough at your home.
+          </li>
+          <li>
+            <strong>You get a plan.</strong> A written scope and an
+            itemized proposal — clear enough to make a real decision with.
+          </li>
+        </ol>
+        <p class="contact-note">
+          Prefer reading first? See
+          <a href="/process/">the full process</a> or the
+          <a href="/faq/">FAQ</a>.
+        </p>
+      </div>
+
+      <div class="contact-form">
+        <LeadForm
+          formId="contact-form"
+          variant="detailed"
+          heading="Tell us about your project"
+        />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-grid {
+    display: grid;
+    gap: var(--space-7);
+    align-items: start;
+  }
+  @media (min-width: 900px) {
+    .contact-grid {
+      grid-template-columns: 5fr 7fr;
+    }
+  }
+  .contact-line {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    margin-bottom: var(--space-5);
+  }
+  .contact-line strong {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-muted);
+  }
+  .contact-line a {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--color-ink);
+  }
+  .contact-line a:hover {
+    color: var(--color-accent);
+  }
+  .contact-info h2 {
+    font-size: var(--text-2xl);
+    margin-top: var(--space-2);
+  }
+  .contact-info h2 + .contact-line {
+    margin-top: var(--space-4);
+  }
+  .contact-info ol li {
+    margin-bottom: var(--space-3);
+  }
+  .contact-note {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+</style>

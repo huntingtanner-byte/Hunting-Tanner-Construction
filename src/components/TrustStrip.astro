@@ -1,0 +1,87 @@
+---
+/**
+ * Concrete-principle trust strip. "Licensed and insured" appears only when
+ * canClaimLicensed is true — never before the license is issued.
+ */
+import { canClaimLicensed } from "@/config/business";
+
+const principles = [
+  {
+    title: "Clear project communication",
+    detail: "Direct answers, regular updates, one accountable point of contact.",
+  },
+  {
+    title: "Organized scopes & planning",
+    detail: "Written scopes and change orders — nothing lives in someone's head.",
+  },
+  {
+    title: "Qualified trade coordination",
+    detail: "Electric, plumbing, HVAC, and finish work by qualified trade partners.",
+  },
+  {
+    title: "Locally owned in Utah County",
+    detail: "A local owner who answers the phone and stands behind the work.",
+  },
+];
+
+if (canClaimLicensed) {
+  principles.push({
+    title: "Licensed & insured",
+    detail: "A licensed Utah general contractor carrying appropriate insurance.",
+  });
+}
+---
+
+<div class="trust-strip">
+  <div class="container">
+    <ul class="trust-list">
+      {principles.map((p) => (
+        <li>
+          <strong>{p.title}</strong>
+          <span>{p.detail}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>
+
+<style>
+  .trust-strip {
+    background: var(--color-dark);
+    padding-block: var(--space-6);
+  }
+  .trust-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-5);
+  }
+  @media (min-width: 640px) {
+    .trust-list {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (min-width: 1024px) {
+    .trust-list {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  .trust-list li {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding-left: var(--space-4);
+    border-left: 3px solid #d9a578;
+  }
+  .trust-list strong {
+    color: #fff;
+    font-size: var(--text-base);
+  }
+  .trust-list span {
+    color: var(--color-dark-muted);
+    font-size: var(--text-sm);
+    line-height: 1.5;
+  }
+</style>

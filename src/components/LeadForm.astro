@@ -1,0 +1,488 @@
+---
+/**
+ * Consultation lead form.
+ *  - variant="compact": homepage / CTA sections (required fields only)
+ *  - variant="detailed": contact page (adds optional qualifying fields)
+ *
+ * Architecture:
+ *  - Posts to the (future) /api/contact serverless endpoint
+ *  - Hidden attribution fields are filled client-side from sessionStorage
+ *  - Honeypot field + Turnstile placeholder for spam protection
+ *  - While siteStatus is "staging", submission is intercepted and disabled;
+ *    a safe mock payload is logged in dev. No email is ever sent in staging.
+ */
+import { business, isStaging } from "@/config/business";
+import { nearbyCommunities } from "@/data/service-areas";
+
+interface Props {
+  variant?: "compact" | "detailed";
+  /** Unique id prefix so multiple forms can exist on one page */
+  formId: string;
+  heading?: string;
+}
+
+const { variant = "compact", formId, heading } = Astro.props;
+const detailed = variant === "detailed";
+
+const cityOptions = [
+  "Saratoga Springs",
+  "Lehi",
+  "Herriman",
+  ...nearbyCommunities,
+];
+
+const projectTypes = [
+  "Full basement finish",
+  "Basement remodel (already finished)",
+  "Basement bathroom or bedroom",
+  "Wet bar / kitchenette",
+  "Other residential remodeling",
+  "Not sure yet",
+];
+
+const investmentRanges = [
+  "Not sure yet",
+  "Under $50,000",
+  "$50,000–$75,000",
+  "$75,000–$100,000",
+  "$100,000–$150,000",
+  "$150,000+",
+];
+
+const timingOptions = [
+  "As soon as possible",
+  "1–3 months",
+  "3–6 months",
+  "6+ months / still planning",
+];
+
+const referralOptions = [
+  "Google search",
+  "Google Maps / Business Profile",
+  "Instagram",
+  "TikTok",
+  "Facebook",
+  "Friend or family referral",
+  "Saw a project in my neighborhood",
+  "Other",
+];
+
+const contactMethods = ["Phone call", "Text", "Email"];
+
+const id = (name: string) => `${formId}-${name}`;
+---
+
+<form
+  class="lead-form"
+  id={formId}
+  method="POST"
+  action={business.form.endpoint}
+  novalidate
+  data-lead-form
+  data-staging={isStaging ? "true" : "false"}
+  data-variant={variant}
+>
+  {heading && <h3 class="lead-form-heading">{heading}</h3>}
+
+  <p
+    class="form-status"
+    data-form-status
+    role="status"
+    aria-live="polite"
+    hidden
+  >
+  </p>
+
+  <div class="name-row">
+    <div class="field">
+      <label for={id("first-name")}>First name</label>
+      <input
+        type="text"
+        id={id("first-name")}
+        name="firstName"
+        autocomplete="given-name"
+        required
+        maxlength="60"
+        data-error-message="Please enter your first name."
+      />
+      <p class="field-error" data-error-for={id("first-name")} hidden></p>
+    </div>
+    <div class="field">
+      <label for={id("last-name")}>Last name</label>
+      <input
+        type="text"
+        id={id("last-name")}
+        name="lastName"
+        autocomplete="family-name"
+        required
+        maxlength="60"
+        data-error-message="Please enter your last name."
+      />
+      <p class="field-error" data-error-for={id("last-name")} hidden></p>
+    </div>
+  </div>
+
+  <div class="field">
+    <label for={id("phone")}>Phone</label>
+    <input
+      type="tel"
+      id={id("phone")}
+      name="phone"
+      autocomplete="tel"
+      inputmode="tel"
+      required
+      maxlength="25"
+      data-error-message="Please enter a phone number so we can reach you."
+    />
+    <p class="field-error" data-error-for={id("phone")} hidden></p>
+  </div>
+
+  <div class="field">
+    <label for={id("email")}>Email</label>
+    <input
+      type="email"
+      id={id("email")}
+      name="email"
+      autocomplete="email"
+      inputmode="email"
+      required
+      maxlength="120"
+      data-error-message="Please enter a valid email address."
+    />
+    <p class="field-error" data-error-for={id("email")} hidden></p>
+  </div>
+
+  <div class="field">
+    <label for={id("city")}>Project city</label>
+    <input
+      type="text"
+      id={id("city")}
+      name="projectCity"
+      autocomplete="address-level2"
+      required
+      maxlength="60"
+      list={id("city-list")}
+      data-error-message="Which city is the project in?"
+    />
+    <datalist id={id("city-list")}>
+      {cityOptions.map((city) => <option value={city} />)}
+    </datalist>
+    <p class="field-error" data-error-for={id("city")} hidden></p>
+  </div>
+
+  <div class="field">
+    <label for={id("project-type")}>Project type</label>
+    <select
+      id={id("project-type")}
+      name="projectType"
+      required
+      data-error-message="Please choose the closest project type."
+    >
+      <option value="">Select one…</option>
+      {projectTypes.map((type) => <option value={type}>{type}</option>)}
+    </select>
+    <p class="field-error" data-error-for={id("project-type")} hidden></p>
+  </div>
+
+  {detailed && (
+    <>
+      <div class="field">
+        <label for={id("sqft")}>
+          Approximate finished square footage <span class="optional">(optional)</span>
+        </label>
+        <input
+          type="text"
+          id={id("sqft")}
+          name="squareFootage"
+          inputmode="numeric"
+          maxlength="12"
+        />
+      </div>
+
+      <div class="field">
+        <label for={id("timing")}>
+          Desired project timing <span class="optional">(optional)</span>
+        </label>
+        <select id={id("timing")} name="timing">
+          <option value="">Select one…</option>
+          {timingOptions.map((t) => <option value={t}>{t}</option>)}
+        </select>
+      </div>
+
+      <div class="field">
+        <label for={id("budget")}>
+          Approximate investment range <span class="optional">(optional)</span>
+        </label>
+        <select id={id("budget")} name="investmentRange">
+          <option value="">Select one…</option>
+          {investmentRanges.map((r) => <option value={r}>{r}</option>)}
+        </select>
+      </div>
+
+      <div class="field">
+        <label for={id("referral")}>
+          How did you hear about us? <span class="optional">(optional)</span>
+        </label>
+        <select id={id("referral")} name="referralSource">
+          <option value="">Select one…</option>
+          {referralOptions.map((r) => <option value={r}>{r}</option>)}
+        </select>
+      </div>
+
+      <div class="field">
+        <label for={id("contact-method")}>
+          Preferred contact method <span class="optional">(optional)</span>
+        </label>
+        <select id={id("contact-method")} name="preferredContact">
+          <option value="">Select one…</option>
+          {contactMethods.map((m) => <option value={m}>{m}</option>)}
+        </select>
+      </div>
+    </>
+  )}
+
+  <div class="field">
+    <label for={id("message")}>
+      Tell us about your basement
+    </label>
+    <textarea
+      id={id("message")}
+      name="message"
+      required
+      maxlength="3000"
+      data-error-message="A sentence or two about your project helps us prepare."
+    ></textarea>
+    <p class="field-error" data-error-for={id("message")} hidden></p>
+  </div>
+
+  {/* Honeypot — humans never see or fill this */}
+  <div class="hp-field" aria-hidden="true">
+    <label for={id("company-website")}>Company website</label>
+    <input
+      type="text"
+      id={id("company-website")}
+      name="companyWebsite"
+      tabindex="-1"
+      autocomplete="off"
+    />
+  </div>
+
+  {/* Attribution — populated client-side from session storage */}
+  <input type="hidden" name="utm_source" value="" />
+  <input type="hidden" name="utm_medium" value="" />
+  <input type="hidden" name="utm_campaign" value="" />
+  <input type="hidden" name="utm_term" value="" />
+  <input type="hidden" name="utm_content" value="" />
+  <input type="hidden" name="gclid" value="" />
+  <input type="hidden" name="fbclid" value="" />
+  <input type="hidden" name="landing_page" value="" />
+  <input type="hidden" name="referrer" value="" />
+  <input type="hidden" name="page_url" value="" />
+  <input type="hidden" name="submitted_at" value="" />
+  <input type="hidden" name="form_variant" value={variant} />
+
+  {/*
+    Cloudflare Turnstile placeholder. When going live:
+    1. Add TURNSTILE_SITE_KEY to the environment
+    2. Render the widget here (see docs/SECURITY notes in README)
+  */}
+
+  <button
+    type="submit"
+    class="btn btn--primary lead-form-submit"
+    data-event="cta_click"
+    data-event-label={`lead-form-${variant}`}
+  >
+    Request a Basement Consultation
+  </button>
+
+  <p class="form-consent">
+    By submitting this form, you agree that Hunting Tanner Construction may
+    contact you by phone, text, or email regarding your project. Message and
+    data rates may apply. We don't add you to marketing lists.
+  </p>
+</form>
+
+<style>
+  .lead-form {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    box-shadow: var(--shadow-md);
+  }
+  @media (min-width: 768px) {
+    .lead-form {
+      padding: var(--space-6);
+    }
+  }
+
+  .lead-form-heading {
+    margin-bottom: var(--space-4);
+  }
+
+  .name-row {
+    display: grid;
+    gap: 0 var(--space-4);
+  }
+  @media (min-width: 480px) {
+    .name-row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .lead-form-submit {
+    width: 100%;
+    margin-block: var(--space-2) var(--space-4);
+  }
+
+  .form-status {
+    border-radius: var(--radius);
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    margin-bottom: var(--space-4);
+  }
+  .form-status[data-tone="info"] {
+    background: var(--color-accent-soft);
+    color: var(--color-accent-hover);
+  }
+  .form-status[data-tone="error"] {
+    background: #f7e6e1;
+    color: var(--color-error);
+  }
+</style>
+
+<script>
+  import { getAttribution, track } from "@/scripts/analytics";
+
+  document
+    .querySelectorAll<HTMLFormElement>("[data-lead-form]")
+    .forEach((form) => {
+      const status = form.querySelector<HTMLElement>("[data-form-status]");
+      const isStagingForm = form.dataset.staging === "true";
+      let started = false;
+
+      const showStatus = (message: string, tone: "info" | "error") => {
+        if (!status) return;
+        status.textContent = message;
+        status.dataset.tone = tone;
+        status.hidden = false;
+      };
+
+      // form_start: first interaction with any field
+      form.addEventListener(
+        "focusin",
+        () => {
+          if (started) return;
+          started = true;
+          track("form_start", { variant: form.dataset.variant ?? "" });
+        },
+        { once: false },
+      );
+
+      const setFieldError = (
+        input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement,
+        message: string,
+      ) => {
+        const errorEl = form.querySelector<HTMLElement>(
+          `[data-error-for="${input.id}"]`,
+        );
+        if (message) {
+          input.setAttribute("aria-invalid", "true");
+          if (errorEl) {
+            errorEl.textContent = message;
+            errorEl.hidden = false;
+            input.setAttribute("aria-describedby", errorEl.id || "");
+          }
+        } else {
+          input.removeAttribute("aria-invalid");
+          if (errorEl) {
+            errorEl.textContent = "";
+            errorEl.hidden = true;
+          }
+        }
+      };
+
+      const validate = (): boolean => {
+        let firstInvalid:
+          | HTMLInputElement
+          | HTMLSelectElement
+          | HTMLTextAreaElement
+          | null = null;
+
+        form
+          .querySelectorAll<
+            HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+          >("[required]")
+          .forEach((input) => {
+            if (input.validity.valid) {
+              setFieldError(input, "");
+            } else {
+              setFieldError(
+                input,
+                input.dataset.errorMessage ?? "This field is required.",
+              );
+              firstInvalid ??= input;
+            }
+          });
+
+        if (firstInvalid) {
+          (firstInvalid as HTMLElement).focus();
+          showStatus(
+            "A few fields need attention — see the highlighted items below.",
+            "error",
+          );
+          track("form_error", { variant: form.dataset.variant ?? "" });
+          return false;
+        }
+        return true;
+      };
+
+      // Clear errors as the user fixes fields
+      form.addEventListener("input", (e) => {
+        const input = e.target as HTMLInputElement;
+        if (input.required && input.validity.valid) setFieldError(input, "");
+      });
+
+      form.addEventListener("submit", (e) => {
+        if (!validate()) {
+          e.preventDefault();
+          return;
+        }
+
+        // Fill hidden attribution fields
+        const attribution = getAttribution();
+        const setHidden = (name: string, value: string) => {
+          const field = form.querySelector<HTMLInputElement>(
+            `input[type="hidden"][name="${name}"]`,
+          );
+          if (field) field.value = value;
+        };
+        for (const [key, value] of Object.entries(attribution)) {
+          setHidden(key, value ?? "");
+        }
+        setHidden("page_url", window.location.href);
+        setHidden("submitted_at", new Date().toISOString());
+
+        if (isStagingForm) {
+          // Staging: never POST. Log a mock payload locally and tell the user.
+          e.preventDefault();
+          if (import.meta.env.DEV) {
+            const payload = Object.fromEntries(new FormData(form).entries());
+            console.info("[staging] mock lead payload:", payload);
+          }
+          showStatus(
+            "Online requests aren't live quite yet — please call (801) 901-8349 or email office@huntingtanner.com and we'll take good care of you.",
+            "info",
+          );
+          status?.scrollIntoView({ block: "nearest" });
+          return;
+        }
+
+        track("form_submit", { variant: form.dataset.variant ?? "" });
+        // Live: allow the normal POST to /api/contact, which redirects
+        // to /thank-you/ on success.
+      });
+    });
+</script>

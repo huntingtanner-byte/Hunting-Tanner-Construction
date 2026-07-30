@@ -1,0 +1,71 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import ServiceCard from "@/components/ServiceCard.astro";
+import CTASection from "@/components/CTASection.astro";
+import { breadcrumbSchema } from "@/lib/schema";
+import { coreServices, relatedServices } from "@/data/services";
+
+const breadcrumbs = [
+  { name: "Home", path: "/" },
+  { name: "Services", path: "/services/" },
+];
+
+const schemas = [breadcrumbSchema(breadcrumbs)];
+---
+
+<BaseLayout
+  title="Services | Basement Finishing & Remodeling | Hunting Tanner Construction"
+  description="Residential construction services from Hunting Tanner Construction: full basement finishing, basement remodeling, bathrooms and bedrooms, wet bars, entertainment spaces, offices, and gyms across Utah County."
+  path="/services/"
+  pageType="service"
+  schemas={schemas}
+>
+  <PageIntro
+    eyebrow="Services"
+    heading="What we build"
+    lede="Hunting Tanner Construction specializes in basements today — finishing them, remodeling them, and building the rooms inside them — with a foundation designed to grow into broader residential construction."
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-3">
+        {coreServices.map((service) => (
+          <ServiceCard service={service} showIncludes />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container container--narrow">
+      <h2>Also part of the toolkit</h2>
+      <ul>
+        {relatedServices.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+      <p>
+        Planning something residential that isn't a basement — a future
+        kitchen, a larger remodel, an addition? We're focused on basements
+        while the company builds its track record, but we're happy to hear
+        what you're planning and tell you honestly whether we're the right
+        fit or can point you in a good direction.
+        <a href="/contact/">Start the conversation</a>.
+      </p>
+
+      <h2>Serving Utah County and Herriman</h2>
+      <p>
+        All services are available across our service area:
+        <a href="/saratoga-springs-basement-finishing/">Saratoga Springs</a>,
+        <a href="/lehi-basement-finishing/">Lehi</a>,
+        <a href="/herriman-basement-finishing/">Herriman</a>, and
+        <a href="/utah-county-basement-finishing/">communities throughout
+        Utah County</a>.
+      </p>
+    </div>
+  </section>
+
+  <CTASection />
+</BaseLayout>

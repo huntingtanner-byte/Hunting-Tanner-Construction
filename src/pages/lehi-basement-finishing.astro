@@ -1,0 +1,154 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import CTASection from "@/components/CTASection.astro";
+import FAQAccordion from "@/components/FAQAccordion.astro";
+import { breadcrumbSchema } from "@/lib/schema";
+import type { FAQ } from "@/data/faqs";
+
+const breadcrumbs = [
+  { name: "Home", path: "/" },
+  { name: "Service Areas", path: "/utah-county-basement-finishing/" },
+  { name: "Lehi", path: "/lehi-basement-finishing/" },
+];
+
+const cityFaqs: FAQ[] = [
+  {
+    question: "Can you build a serious home office in my Lehi basement?",
+    answer:
+      "Yes — and it's one of the most common requests in Lehi. A basement office done right means more than a desk in a spare room: dedicated circuits and plenty of outlets where the equipment goes, lighting planned for screens and video calls, sound insulation in the ceiling, and a real door. If two people work from home, we can plan two separated spaces.",
+  },
+  {
+    question: "Our Lehi home is older — is finishing the basement still practical?",
+    answer:
+      "Often yes, with more up-front evaluation. Established Lehi neighborhoods include homes where ceiling heights, window sizes, and mechanical layouts need creative planning, and where past DIY work may need correcting. That's walkthrough material: we'll tell you honestly what your basement can support before you spend anything.",
+  },
+  {
+    question: "Can a basement work as a space for long-term guests or family?",
+    answer:
+      "A bedroom with proper egress, a bathroom, and a kitchenette makes a comfortable, largely self-contained space for in-laws, missionaries returning home, or college students. If you intend a formal rental unit, city rules govern accessory apartments — we'll discuss what applies to your property and goals at the consultation rather than promising anything here.",
+  },
+  {
+    question: "How disruptive is construction to a work-from-home household?",
+    answer:
+      "There's noise — framing, drilling, and drywall work are simply loud. What we can control is predictability: you'll know which days are loud, when crews arrive and leave, and which stages are quiet. Many Lehi homeowners schedule heavy-noise days around important meetings, and we'll flag those days in advance.",
+  },
+  {
+    question: "Who handles Lehi city permits and inspections?",
+    answer:
+      "We coordinate permitting and inspections as part of the project. Requirements are specific to Lehi's building department, and we'll walk through exactly what your project needs during the consultation.",
+  },
+];
+
+const schemas = [breadcrumbSchema(breadcrumbs)];
+---
+
+<BaseLayout
+  title="Basement Finishing in Lehi, UT | Hunting Tanner Construction"
+  description="Basement finishing and remodeling for Lehi homeowners — home offices, guest suites, family rooms, and bathrooms, from Traverse Mountain to established neighborhoods. Written scopes and organized project management."
+  path="/lehi-basement-finishing/"
+  pageType="service-area"
+  schemas={schemas}
+>
+  <PageIntro
+    eyebrow="Service Area"
+    heading="Basement Finishing in Lehi"
+    lede="Lehi runs on busy households — tech-corridor commutes, home offices, and families outgrowing their main floors. The fastest way to add the space they need is usually right below it."
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="section">
+    <div class="container container--narrow">
+      <h2>A city with two kinds of basements</h2>
+      <p>
+        Lehi's housing tells the city's story. Newer neighborhoods —
+        Traverse Mountain and the developments that grew up around the tech
+        corridor — are full of recent construction with unfinished
+        basements and builder rough-ins. Closer to historic downtown,
+        established neighborhoods hold homes from earlier decades, where a
+        basement may be partly finished, oddly finished, or finished in
+        1994 and untouched since.
+      </p>
+      <p>
+        Hunting Tanner Construction works with both. Newer homes typically
+        get a <a href="/basement-finishing/">full basement finish</a> —
+        bedrooms, bathroom, family room, office. Older homes often call for
+        <a href="/basement-remodeling/">basement remodeling</a>: opening
+        cramped layouts, fixing what previous work got wrong, and bringing
+        the space up to how your family actually lives.
+      </p>
+
+      <h2>The Lehi home office, done properly</h2>
+      <p>
+        With Silicon Slopes in the backyard, Lehi may have more
+        work-from-home households per street than anywhere in Utah. A
+        basement office is the natural answer — it's quiet, it's separate,
+        and it doesn't sacrifice a main-floor bedroom. Designed well, it
+        includes wiring planned around your equipment, lighting that looks
+        right on camera, ceiling sound insulation, and a door between you
+        and the rest of the house. It's a small share of a basement's square
+        footage that pays for itself in every workday.
+      </p>
+
+      <h2>Beyond the office</h2>
+      <ul>
+        <li>
+          <strong>Guest and family suites</strong> — a bedroom, bathroom,
+          and kitchenette for visiting family or longer stays
+        </li>
+        <li>
+          <strong>Family and media rooms</strong> — big screens, game
+          tables, and space for teams of teenagers
+        </li>
+        <li>
+          <strong>Bathrooms</strong> — finishing the builder's rough-in, or
+          adding where none exists
+        </li>
+        <li>
+          <strong>Gyms</strong> — durable flooring, mirrors, and
+          ventilation in space with stable temperatures year-round
+        </li>
+      </ul>
+
+      {/* EDITORIAL NOTE (not rendered): Verify current Lehi City building
+          department permit process and accessory-apartment rules before
+          adding specifics. See CONTENT-TODO.md. */}
+
+      <h2>Planning notes for Lehi projects</h2>
+      <p>
+        Every project starts with a walkthrough because Lehi basements vary
+        so much. In newer homes we're verifying rough-in locations, egress
+        window sizes, and mechanical placement. In older homes we're also
+        checking ceiling heights, wiring, and any legacy finish work.
+        Either way, the outcome is the same: a written scope, an itemized
+        proposal, and an organized schedule —
+        <a href="/process/">the six-step process</a> every HTC project
+        follows.
+      </p>
+
+      <h2>Also serving communities near Lehi</h2>
+      <p>
+        From Lehi we regularly serve
+        <a href="/saratoga-springs-basement-finishing/">Saratoga Springs</a>,
+        American Fork, Highland, Alpine, Cedar Hills, and
+        <a href="/utah-county-basement-finishing/">communities throughout
+        Utah County</a> — plus
+        <a href="/herriman-basement-finishing/">Herriman</a> over the
+        county line.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container container--narrow">
+      <span class="eyebrow">Local Questions</span>
+      <h2>Lehi basement FAQs</h2>
+      <FAQAccordion faqs={cityFaqs} />
+    </div>
+  </section>
+
+  <CTASection
+    heading="Add the space your Lehi home is missing"
+    text="Office, guest suite, family room — tell us what your household needs and we'll plan it around the basement you have."
+  />
+</BaseLayout>

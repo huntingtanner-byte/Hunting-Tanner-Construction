@@ -1,0 +1,95 @@
+---
+/**
+ * Project card. Renders a real project when one is supplied, or an honest
+ * "coming soon" placeholder card when project is undefined. Placeholder
+ * cards never simulate completed work, reviews, or customer names.
+ */
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import type { Project } from "@/data/projects";
+import placeholderImg from "@/assets/placeholders/project-card.svg";
+
+interface Props {
+  project?: Project;
+}
+
+const { project } = Astro.props;
+
+/**
+ * Real project photos live in src/assets/projects/. Project data references
+ * them by filename (e.g. "saratoga-media-room-after.jpg"); resolve here.
+ */
+const projectImages = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/projects/*.{jpg,jpeg,png,webp,avif}",
+  { eager: true },
+);
+
+const resolveImage = (src?: string): ImageMetadata | undefined =>
+  src ? projectImages[`/src/assets/projects/${src}`]?.default : undefined;
+
+const afterImage = resolveImage(project?.afterImage?.src);
+---
+
+{project ? (
+  <article class="project-card">
+    {afterImage && project.afterImage && (
+      <Image
+        src={afterImage}
+        alt={project.afterImage.alt}
+        width={600}
+        height={450}
+        loading="lazy"
+      />
+    )}
+    <div class="project-body">
+      <h3>{project.title}</h3>
+      <p class="project-meta">{project.city} · {project.scope}</p>
+      <p>{project.description}</p>
+    </div>
+  </article>
+) : (
+  <article class="project-card project-card--placeholder">
+    <Image
+      src={placeholderImg}
+      alt=""
+      width={600}
+      height={450}
+      loading="lazy"
+    />
+    <div class="project-body">
+      <h3>Project photography coming soon</h3>
+      <p class="project-meta">
+        Real HTC basements will be documented here — before, during, and
+        after — as projects complete.
+      </p>
+    </div>
+  </article>
+)}
+
+<style>
+  .project-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .project-card img {
+    width: 100%;
+    height: auto;
+  }
+  .project-body {
+    padding: var(--space-5);
+  }
+  .project-body h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-2);
+  }
+  .project-meta {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    margin: 0;
+  }
+  .project-card--placeholder h3 {
+    color: var(--color-muted);
+  }
+</style>

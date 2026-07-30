@@ -1,0 +1,195 @@
+---
+/**
+ * Accessible before/after comparison.
+ *  - Control is a native <input type="range"> → keyboard + touch for free
+ *  - Fixed dimensions (aspect-ratio) → zero layout shift
+ *  - No-JS fallback: both images shown stacked with labels
+ *  - Reduced motion: no transitions are used at all
+ *
+ * Placeholder images are clearly labeled and must never be presented as
+ * completed HTC work (see ASSET-GUIDE.md).
+ */
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  before: ImageMetadata;
+  after: ImageMetadata;
+  beforeAlt: string;
+  afterAlt: string;
+  /** Set true when using placeholder imagery so a caption discloses it */
+  isPlaceholder?: boolean;
+}
+
+const { before, after, beforeAlt, afterAlt, isPlaceholder = false } =
+  Astro.props;
+---
+
+<figure class="ba-figure">
+  <div class="ba-compare" data-ba-compare style="--ba-pos: 50%">
+    <div class="ba-frame ba-frame--before">
+      <Image src={before} alt={beforeAlt} width={1200} height={900} loading="lazy" />
+      <span class="ba-tag ba-tag--before">Before</span>
+    </div>
+    <div class="ba-frame ba-frame--after" data-ba-after>
+      <Image src={after} alt={afterAlt} width={1200} height={900} loading="lazy" />
+      <span class="ba-tag ba-tag--after">After</span>
+    </div>
+    <div class="ba-handle" aria-hidden="true"></div>
+    <label class="ba-control">
+      <span class="sr-only">Reveal before and after comparison</span>
+      <input
+        type="range"
+        min="0"
+        max="100"
+        value="50"
+        step="1"
+        data-ba-range
+      />
+    </label>
+  </div>
+  {isPlaceholder && (
+    <figcaption class="ba-caption">
+      Placeholder imagery for layout — project photography of real HTC work
+      is coming soon.
+    </figcaption>
+  )}
+</figure>
+
+<style>
+  .ba-figure {
+    margin: 0;
+  }
+
+  .ba-compare {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--color-surface-alt);
+  }
+
+  .ba-frame {
+    position: absolute;
+    inset: 0;
+  }
+  .ba-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* The AFTER layer is clipped by the slider position */
+  .ba-frame--after {
+    clip-path: inset(0 0 0 var(--ba-pos));
+  }
+
+  .ba-tag {
+    position: absolute;
+    top: var(--space-3);
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgb(38 38 42 / 0.78);
+    color: #fff;
+  }
+  .ba-tag--before {
+    left: var(--space-3);
+  }
+  .ba-tag--after {
+    right: var(--space-3);
+  }
+
+  .ba-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--ba-pos);
+    width: 3px;
+    margin-left: -1.5px;
+    background: #fff;
+    box-shadow: 0 0 8px rgb(0 0 0 / 0.4);
+  }
+  .ba-handle::after {
+    content: "◂ ▸";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--color-ink);
+    font-size: 0.8rem;
+    letter-spacing: -0.05em;
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Range input stretched over the figure — the actual interactive control */
+  .ba-control input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: ew-resize;
+    touch-action: none;
+  }
+  .ba-control input:focus-visible ~ .ba-handle,
+  .ba-compare:has(input:focus-visible) .ba-handle {
+    outline: 3px solid var(--color-focus);
+  }
+
+  .ba-caption {
+    font-size: var(--text-xs);
+    color: var(--color-muted);
+    margin-top: var(--space-2);
+    text-align: center;
+  }
+
+  /* ---- No-JS fallback: show both images stacked, no slider chrome ---- */
+  :global(html:not(.js)) .ba-compare {
+    aspect-ratio: auto;
+    display: grid;
+    gap: var(--space-3);
+    background: none;
+    overflow: visible;
+  }
+  :global(html:not(.js)) .ba-frame {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  :global(html:not(.js)) .ba-frame--after {
+    clip-path: none;
+  }
+  :global(html:not(.js)) .ba-handle,
+  :global(html:not(.js)) .ba-control {
+    display: none;
+  }
+</style>
+
+<script>
+  // Mark JS availability for the no-JS fallback styles
+  document.documentElement.classList.add("js");
+
+  document
+    .querySelectorAll<HTMLElement>("[data-ba-compare]")
+    .forEach((compare) => {
+      const range = compare.querySelector<HTMLInputElement>("[data-ba-range]");
+      if (!range) return;
+      const update = () => {
+        compare.style.setProperty("--ba-pos", `${range.value}%`);
+      };
+      range.addEventListener("input", update);
+      update();
+    });
+</script>

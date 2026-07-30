@@ -1,0 +1,125 @@
+---
+/**
+ * Owner story block. Uses the provided family photo; the individual owner
+ * portrait is a clearly labeled placeholder until professional photography
+ * is done (see ASSET-GUIDE.md).
+ */
+import { Image } from "astro:assets";
+import familyPhoto from "@/assets/family/hunting-tanner-family.jpg";
+import ownerPlaceholder from "@/assets/placeholders/owner-portrait.svg";
+
+interface Props {
+  /** Compact homepage version vs. fuller /about/ version */
+  variant?: "home" | "about";
+}
+
+const { variant = "home" } = Astro.props;
+---
+
+<div class="owner-story">
+  <div class="owner-media">
+    <Image
+      src={familyPhoto}
+      alt="Hunting Tanner with his wife and son"
+      width={720}
+      height={1013}
+      loading="lazy"
+      class="owner-family-photo"
+    />
+    {variant === "about" && (
+      <figure class="owner-portrait">
+        <Image
+          src={ownerPlaceholder}
+          alt="Placeholder for a professional portrait of Hunting Tanner"
+          width={400}
+          height={500}
+          loading="lazy"
+        />
+        <figcaption>Professional owner portrait coming soon</figcaption>
+      </figure>
+    )}
+  </div>
+
+  <div class="owner-copy">
+    <span class="eyebrow">Meet the Owner</span>
+    <h2>Hunting Tanner</h2>
+    <p>
+      Hunting Tanner founded Hunting Tanner Construction to bring strong
+      organization, financial discipline, responsive communication, and a
+      homeowner-first process to residential construction. He lives in Utah
+      County with his wife and kids — the same communities this company
+      serves.
+    </p>
+    <p>
+      Hunting's background is in finance and business operations, and
+      construction runs in the family: his father is an experienced general
+      contractor whose mentorship shapes how HTC plans and manages projects.
+      Hunting pairs that foundation with qualified trade partners and
+      experienced construction advisers, so every project gets both careful
+      management and skilled hands.
+    </p>
+    {variant === "about" ? (
+      <p>
+        The reason the company exists is simple: too many homeowners describe
+        contractors who stop answering the phone, change prices midstream, or
+        leave scope to memory. HTC is built to be the opposite — written
+        scopes, documented changes, regular updates, and one owner who is
+        personally accountable for how your project goes.
+      </p>
+    ) : (
+      <p>
+        When you call, you're talking to the person accountable for your
+        project — not a call center.
+      </p>
+    )}
+    {variant === "home" && (
+      <a class="owner-link" href="/about/">Read the full story →</a>
+    )}
+  </div>
+</div>
+
+<style>
+  .owner-story {
+    display: grid;
+    gap: var(--space-6);
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .owner-story {
+      grid-template-columns: 5fr 7fr;
+      gap: var(--space-8);
+    }
+  }
+
+  .owner-media {
+    display: grid;
+    gap: var(--space-4);
+    max-width: 26rem;
+    margin-inline: auto;
+  }
+  .owner-family-photo {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    height: auto;
+  }
+  .owner-portrait {
+    margin: 0;
+  }
+  .owner-portrait img {
+    border-radius: var(--radius-lg);
+  }
+  .owner-portrait figcaption {
+    font-size: var(--text-xs);
+    color: var(--color-muted);
+    margin-top: var(--space-2);
+    text-align: center;
+  }
+
+  .owner-link {
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .owner-link:hover {
+    text-decoration: underline;
+  }
+</style>

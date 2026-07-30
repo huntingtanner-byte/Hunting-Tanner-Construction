@@ -1,0 +1,396 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import LeadForm from "@/components/LeadForm.astro";
+import TrustStrip from "@/components/TrustStrip.astro";
+import BeforeAfterSlider from "@/components/BeforeAfterSlider.astro";
+import ServiceCard from "@/components/ServiceCard.astro";
+import ProcessSteps from "@/components/ProcessSteps.astro";
+import OwnerStory from "@/components/OwnerStory.astro";
+import ServiceAreaCard from "@/components/ServiceAreaCard.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import FAQAccordion from "@/components/FAQAccordion.astro";
+import CTASection from "@/components/CTASection.astro";
+import { business } from "@/config/business";
+import { coreServices } from "@/data/services";
+import { featuredAreas, nearbyCommunities } from "@/data/service-areas";
+import { homeFaqs } from "@/data/faqs";
+import heroImage from "@/assets/placeholders/hero-basement.svg";
+import beforeImg from "@/assets/placeholders/before-unfinished.svg";
+import afterImg from "@/assets/placeholders/after-finished.svg";
+---
+
+<BaseLayout
+  title="Basement Finishing in Utah County | Hunting Tanner Construction"
+  description="Basement finishing and remodeling for homeowners in Saratoga Springs, Lehi, Herriman, and communities throughout Utah County. Organized planning, clear communication, and a consultation process that starts with a conversation."
+  path="/"
+  includeOrgSchema
+>
+  {/* ============ B. Hero + D. compact lead form ============ */}
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <h1>Transform Your Unfinished Basement</h1>
+        <p class="lede">
+          Basement finishing and remodeling for homeowners in Saratoga
+          Springs, Lehi, and communities throughout Utah County — planned
+          carefully, communicated clearly, and managed like it matters.
+        </p>
+        <div class="hero-actions">
+          <a
+            class="btn btn--primary"
+            href="#home-lead-form"
+            data-event="cta_click"
+            data-event-label="hero"
+          >
+            Request a Basement Consultation
+          </a>
+          <a
+            class="btn btn--secondary"
+            href={business.phoneHref}
+            data-event="click_to_call"
+            data-event-label="hero"
+          >
+            Call {business.phoneDisplay}
+          </a>
+        </div>
+        <p class="hero-note">
+          Talk directly with the owner — not a call center.
+        </p>
+      </div>
+      <div class="hero-form" id="home-lead-form">
+        <LeadForm
+          formId="home-form"
+          variant="compact"
+          heading="Start the conversation"
+        />
+      </div>
+    </div>
+    <div class="container hero-media">
+      <Image
+        src={heroImage}
+        alt="Placeholder for a finished basement family room photo"
+        width={1600}
+        height={900}
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+  </section>
+
+  {/* ============ C. Trust strip ============ */}
+  <TrustStrip />
+
+  {/* ============ E. Transformation ============ */}
+  <section class="section">
+    <div class="container">
+      <div class="transform-grid">
+        <div>
+          <span class="eyebrow">The Transformation</span>
+          <h2>From concrete and studs to the best floor in the house</h2>
+          <p>
+            Most Utah County homes come with hundreds of unfinished square
+            feet already under the roof — framed, plumbed for a future
+            bathroom, and waiting. Finishing that space is usually the most
+            cost-effective way to add bedrooms, a family room, or a home
+            office, because the foundation, walls, and roof are already paid
+            for.
+          </p>
+          <p>
+            What stands between the concrete floor and a finished space is a
+            well-run project: a clear layout, a written scope, coordinated
+            trades, passed inspections, and finish work done in the right
+            order. That project management is exactly what Hunting Tanner
+            Construction is built around.
+          </p>
+          <a class="btn btn--secondary" href="/basement-finishing/">
+            Explore Basement Finishing
+          </a>
+        </div>
+        <BeforeAfterSlider
+          before={beforeImg}
+          after={afterImg}
+          beforeAlt="Placeholder: unfinished basement with exposed framing and concrete floor"
+          afterAlt="Placeholder: finished basement living space"
+          isPlaceholder
+        />
+      </div>
+    </div>
+  </section>
+
+  {/* ============ F. Core services ============ */}
+  <section class="section section--alt">
+    <div class="container">
+      <span class="eyebrow">What We Build</span>
+      <h2>Basement spaces designed around how you live</h2>
+      <p class="lede">
+        Every basement starts as square footage. The plan is what turns it
+        into the rooms your family actually needs.
+      </p>
+      <div class="grid-3 services-grid">
+        {coreServices.map((service) => (
+          <ServiceCard service={service} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ============ G. Why HTC ============ */}
+  <section class="section">
+    <div class="container">
+      <div class="why-grid">
+        <div>
+          <span class="eyebrow">Why Hunting Tanner Construction</span>
+          <h2>A construction experience built on organization, not promises</h2>
+          <p>
+            Ask homeowners about their remodel horror stories and the same
+            themes come up: vague bids, phone calls that go nowhere, scope
+            that shifts without warning, and invoices that don't match
+            conversations. None of that is a craftsmanship problem — it's a
+            management problem.
+          </p>
+        </div>
+        <ul class="why-list">
+          <li>
+            <h3>Written scopes, not verbal ones</h3>
+            <p>
+              Your project is defined room by room before pricing, so the
+              proposal means something and changes are visible.
+            </p>
+          </li>
+          <li>
+            <h3>Change orders in writing</h3>
+            <p>
+              When scope changes — because you added something or an
+              inspector required something — it's documented and priced
+              before the work proceeds.
+            </p>
+          </li>
+          <li>
+            <h3>Regular, honest updates</h3>
+            <p>
+              You'll know what happened this week, what's next, and which
+              decisions are coming. When something slips, you hear it from
+              us first — with the why.
+            </p>
+          </li>
+          <li>
+            <h3>Qualified trade partners</h3>
+            <p>
+              Electrical, plumbing, HVAC, drywall, and finish work performed
+              by qualified trades and coordinated on an organized schedule.
+            </p>
+          </li>
+          <li>
+            <h3>Personal accountability</h3>
+            <p>
+              This is an owner-run company. The person who plans your
+              project is the person who answers for it — by name.
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  {/* ============ H. Process preview ============ */}
+  <section class="section section--alt">
+    <div class="container">
+      <span class="eyebrow">How It Works</span>
+      <h2>Six clear steps from first call to final walkthrough</h2>
+      <div class="process-preview">
+        <ProcessSteps compact />
+      </div>
+      <div class="section-cta">
+        <a class="btn btn--secondary" href="/process/">
+          See the Full Process
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ============ I. Owner story ============ */}
+  <section class="section">
+    <div class="container">
+      <OwnerStory variant="home" />
+    </div>
+  </section>
+
+  {/* ============ J. Service areas ============ */}
+  <section class="section section--alt">
+    <div class="container">
+      <span class="eyebrow">Where We Work</span>
+      <h2>Serving Utah County homeowners at their properties</h2>
+      <p class="lede">
+        Hunting Tanner Construction is a Utah County–based residential
+        contractor and service-area business — we come to you.
+      </p>
+      <div class="grid-2 areas-grid">
+        {featuredAreas.map((area) => (
+          <ServiceAreaCard area={area} />
+        ))}
+      </div>
+      <p class="nearby-note">
+        Also serving nearby communities including{" "}
+        {nearbyCommunities.join(", ")} — if you're close but not listed,
+        <a href="/contact/"> ask us</a>.
+      </p>
+    </div>
+  </section>
+
+  {/* ============ K. Project gallery preview ============ */}
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Recent Work</span>
+      <h2>Project gallery</h2>
+      <p class="lede">
+        Hunting Tanner Construction is a new company, and we'd rather show
+        you nothing than show you someone else's basements. Real projects
+        will be documented here — before, during, and after — as they
+        complete.
+      </p>
+      <div class="grid-3">
+        <ProjectCard />
+        <ProjectCard />
+        <ProjectCard />
+      </div>
+      <div class="section-cta">
+        <a class="btn btn--secondary" href="/projects/">
+          About Our Project Documentation
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ============ L. FAQ ============ */}
+  <section class="section section--alt">
+    <div class="container container--narrow">
+      <span class="eyebrow">Questions Homeowners Ask</span>
+      <h2>Basement finishing FAQs</h2>
+      <FAQAccordion faqs={homeFaqs.slice(0, 7)} />
+      <p class="section-cta">
+        <a href="/faq/">See all frequently asked questions →</a>
+      </p>
+    </div>
+  </section>
+
+  {/* ============ M. Final CTA with form ============ */}
+  <CTASection
+    withForm
+    formId="home-footer-form"
+    heading="Your basement is already under your roof. Let's finish it."
+    text="Tell us about your space and what you want it to become. You'll get a real conversation, clear next steps, and zero pressure."
+  />
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-block: var(--space-7);
+    background: linear-gradient(
+      to bottom,
+      var(--color-surface-alt),
+      var(--color-bg)
+    );
+  }
+  .hero-grid {
+    display: grid;
+    gap: var(--space-6);
+    align-items: start;
+  }
+  @media (min-width: 1024px) {
+    .hero-grid {
+      grid-template-columns: 7fr 5fr;
+      gap: var(--space-8);
+    }
+  }
+  .hero-copy h1 {
+    margin-bottom: var(--space-4);
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin-top: var(--space-5);
+  }
+  .hero-note {
+    margin-top: var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+  .hero-media {
+    margin-top: var(--space-6);
+  }
+  .hero-media img {
+    border-radius: var(--radius-lg);
+    width: 100%;
+    height: auto;
+  }
+
+  .transform-grid {
+    display: grid;
+    gap: var(--space-6);
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .transform-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-8);
+    }
+  }
+  .transform-grid .btn {
+    margin-top: var(--space-4);
+  }
+
+  .services-grid,
+  .areas-grid {
+    margin-top: var(--space-6);
+  }
+
+  .why-grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+  @media (min-width: 900px) {
+    .why-grid {
+      grid-template-columns: 5fr 7fr;
+      gap: var(--space-8);
+    }
+  }
+  .why-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-5);
+  }
+  .why-list li {
+    margin: 0;
+    padding-left: var(--space-4);
+    border-left: 3px solid var(--color-accent);
+  }
+  .why-list h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-1);
+  }
+  .why-list p {
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+    margin: 0;
+  }
+
+  .process-preview {
+    margin-top: var(--space-6);
+  }
+
+  .section-cta {
+    margin-top: var(--space-6);
+    text-align: center;
+  }
+
+  .nearby-note {
+    margin-top: var(--space-6);
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    max-width: 52rem;
+  }
+</style>

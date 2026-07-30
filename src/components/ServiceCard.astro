@@ -1,0 +1,72 @@
+---
+import type { Service } from "@/data/services";
+
+interface Props {
+  service: Service;
+  /** Show the includes list (used on /services/) */
+  showIncludes?: boolean;
+}
+
+const { service, showIncludes = false } = Astro.props;
+---
+
+<article class="service-card">
+  <h3><a href={service.href}>{service.title}</a></h3>
+  <p>{service.description}</p>
+  {showIncludes && (
+    <ul class="service-includes">
+      {service.includes.map((item) => <li>{item}</li>)}
+    </ul>
+  )}
+  <p class="service-link" aria-hidden="true">Learn more →</p>
+</article>
+
+<style>
+  .service-card {
+    position: relative;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .service-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+  }
+  .service-card h3 {
+    margin-bottom: var(--space-3);
+  }
+  /* Stretched link: whole card is clickable, accessibly */
+  .service-card h3 a {
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+  .service-card h3 a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+  .service-card:hover h3 a {
+    color: var(--color-accent);
+  }
+  .service-card > p {
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+    flex-grow: 1;
+  }
+  .service-includes {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    margin-top: var(--space-3);
+  }
+  .service-link {
+    margin-top: var(--space-4);
+    font-weight: 700;
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+    flex-grow: 0 !important;
+  }
+</style>

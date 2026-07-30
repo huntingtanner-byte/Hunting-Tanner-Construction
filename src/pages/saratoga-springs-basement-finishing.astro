@@ -1,0 +1,198 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import CTASection from "@/components/CTASection.astro";
+import FAQAccordion from "@/components/FAQAccordion.astro";
+import ProcessSteps from "@/components/ProcessSteps.astro";
+import { breadcrumbSchema } from "@/lib/schema";
+import type { FAQ } from "@/data/faqs";
+
+const breadcrumbs = [
+  { name: "Home", path: "/" },
+  { name: "Service Areas", path: "/utah-county-basement-finishing/" },
+  {
+    name: "Saratoga Springs",
+    path: "/saratoga-springs-basement-finishing/",
+  },
+];
+
+const cityFaqs: FAQ[] = [
+  {
+    question:
+      "My Saratoga Springs home is a newer build with a builder rough-in. Is that enough to add a bathroom?",
+    answer:
+      "Usually, yes. Most production builders in Saratoga Springs stub in under-slab drains and a capped water supply for a future basement bathroom. During the walkthrough we verify where the rough-in sits and design the bathroom around it. If the rough-in location fights the layout you want, we'll show you the options and what each costs.",
+  },
+  {
+    question: "How soon after buying a new-construction home can I finish the basement?",
+    answer:
+      "There's no required waiting period, and many homeowners finish within the first couple of years. It's worth confirming how basement finishing interacts with your builder's warranty terms before starting — bring your warranty documents to the consultation and we'll plan around them.",
+  },
+  {
+    question: "Do Saratoga Springs basements have moisture problems?",
+    answer:
+      "Newer construction with modern drainage typically performs well, but every basement gets checked before we build over it — we look at grading, window wells, and any signs of past water during the walkthrough. If something needs correcting first, you'll hear it from us before you spend finish money.",
+  },
+  {
+    question: "Will finishing my basement help when my family grows?",
+    answer:
+      "That's the most common reason Saratoga Springs homeowners call. Adding conforming bedrooms (with proper egress) and a bathroom downstairs is usually far more cost-effective than moving to a bigger house in the same market — you're finishing space you already own.",
+  },
+  {
+    question: "Do you handle the permits with the city?",
+    answer:
+      "Permit coordination is built into the process. Requirements and review timelines are specific to Saratoga Springs' building department, and we'll walk you through exactly what applies to your project during the consultation.",
+  },
+];
+
+const schemas = [breadcrumbSchema(breadcrumbs)];
+---
+
+<BaseLayout
+  title="Basement Finishing in Saratoga Springs, UT | Hunting Tanner Construction"
+  description="Basement finishing for Saratoga Springs homeowners — bedrooms, bathrooms, and family rooms in the unfinished basements of newer Utah County homes. Written scopes, organized trades, local ownership."
+  path="/saratoga-springs-basement-finishing/"
+  pageType="service-area"
+  schemas={schemas}
+>
+  <PageIntro
+    eyebrow="Service Area"
+    heading="Basement Finishing in Saratoga Springs"
+    lede="Thousands of Saratoga Springs homes were built in the last fifteen years — and most of them came with an unfinished basement. If yours is still concrete and studs, this page is for you."
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="section">
+    <div class="container container--narrow">
+      <h2>Who this page is for</h2>
+      <p>
+        Saratoga Springs has grown faster than almost anywhere in Utah, and
+        its housing reflects that: newer single-family homes, many built by
+        production builders who deliver the basement framed, insulated at
+        the rim, roughed for a future bathroom — and otherwise untouched.
+        If you bought in the last decade, odds are good you're living above
+        several hundred square feet of unfinished potential.
+      </p>
+      <p>
+        Hunting Tanner Construction is a Utah County–based residential
+        contractor serving homeowners at their properties in Saratoga
+        Springs and the surrounding communities. Basement finishing in
+        newer homes like these is the core of what we do.
+      </p>
+
+      <h2>What Saratoga Springs homeowners build downstairs</h2>
+      <ul>
+        <li>
+          <strong>Bedrooms for growing families</strong> — the number one
+          request. Kids sharing rooms upstairs, grandparents visiting
+          longer, a nursery becoming a big-kid room: added bedrooms with
+          proper egress windows solve it without moving.
+        </li>
+        <li>
+          <strong>A second family room</strong> — toys downstairs, movie
+          nights downstairs, teenagers downstairs. Everyone wins.
+        </li>
+        <li>
+          <strong>A bathroom on the builder's rough-in</strong> — finishing
+          the bathroom your slab was already plumbed for.
+        </li>
+        <li>
+          <strong>Home offices</strong> — quiet, separated workspace for
+          remote and hybrid work.
+        </li>
+        <li>
+          <strong>Storage that's planned</strong> — a real storage room with
+          shelving, instead of losing a future bedroom to boxes.
+        </li>
+      </ul>
+
+      <h2>Why finishing makes sense in this market</h2>
+      <p>
+        In a market of newer homes, an unfinished basement is the cheapest
+        square footage you'll ever add: the foundation, exterior walls,
+        roof, and utilities already exist and are already paid for in your
+        mortgage. Finishing converts that sunk cost into bedrooms and living
+        area your family uses every day — and into functional space that
+        serves the home long-term.
+      </p>
+
+      {/* EDITORIAL NOTE (not rendered): Verify current Saratoga Springs
+          building department permit requirements, submittal format, and
+          typical review timelines before adding any specific permitting
+          claims to this page. See CONTENT-TODO.md. */}
+
+      <h2>Planning considerations for Saratoga Springs homes</h2>
+      <ul>
+        <li>
+          <strong>Builder rough-ins</strong> — we design bathrooms and wet
+          bars around what your builder stubbed in, and tell you plainly
+          when moving plumbing is (and isn't) worth it.
+        </li>
+        <li>
+          <strong>Egress windows</strong> — some builders install full
+          egress windows in basements; others don't. Bedroom plans start by
+          checking what your windows can support.
+        </li>
+        <li>
+          <strong>Mechanical placement</strong> — furnace and water-heater
+          locations shape the layout; soffits and mechanical rooms get
+          planned, not improvised.
+        </li>
+        <li>
+          <strong>Permits and inspections</strong> — coordinated with the
+          city as part of the project schedule; we'll cover specifics for
+          your address at the consultation.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <span class="eyebrow">How It Works</span>
+      <h2>From walkthrough to walkthrough</h2>
+      <p class="lede">
+        Every Saratoga Springs project follows the same organized process —
+        <a href="/process/">read it in full here</a>.
+      </p>
+      <div class="steps-wrap"><ProcessSteps compact /></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow">
+      <h2>Also serving communities near Saratoga Springs</h2>
+      <p>
+        From Saratoga Springs we regularly serve
+        <a href="/lehi-basement-finishing/">Lehi</a>, Eagle Mountain,
+        American Fork, Vineyard, and
+        <a href="/herriman-basement-finishing/">Herriman</a> — plus
+        <a href="/utah-county-basement-finishing/">communities throughout
+        Utah County</a>.
+      </p>
+
+      <span class="eyebrow">Local Questions</span>
+      <h2>Saratoga Springs basement FAQs</h2>
+      <FAQAccordion faqs={cityFaqs} />
+      <p class="more-links">
+        Full service details on the
+        <a href="/basement-finishing/">basement finishing page</a>.
+      </p>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Finish the basement your builder left behind"
+    text="Tell us about your Saratoga Springs home and what you want downstairs. We'll walk the space with you and put a real plan on paper."
+  />
+</BaseLayout>
+
+<style>
+  .steps-wrap {
+    margin-top: var(--space-6);
+  }
+  .more-links {
+    margin-top: var(--space-5);
+    font-size: var(--text-sm);
+  }
+</style>

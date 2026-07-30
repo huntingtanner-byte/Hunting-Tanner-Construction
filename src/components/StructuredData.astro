@@ -1,0 +1,15 @@
+---
+/**
+ * Renders one or more JSON-LD blocks. Schema objects are built in
+ * src/lib/schema.ts so all structured data stays factual and centralized.
+ */
+interface Props {
+  schemas: Record<string, unknown>[];
+}
+
+const { schemas } = Astro.props;
+---
+
+{schemas.map((schema) => (
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+))}

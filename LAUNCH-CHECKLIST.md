@@ -1,0 +1,84 @@
+# LAUNCH-CHECKLIST — before flipping PUBLIC_SITE_STATUS=live
+
+Work top to bottom. Target: September launch.
+
+## 1. Legal & licensing
+
+- [ ] Utah contractor license verified as ACTIVE at DOPL
+- [ ] `licenseNumber` + `licenseActive: true` set in `src/config/business.ts`
+- [ ] Footer shows license number correctly (build + inspect)
+- [ ] Insurance wording approved by Hunting and carrier docs on file
+- [ ] Privacy policy + terms reviewed by attorney; effective dates updated
+
+## 2. Content
+
+- [ ] All 🔴/🟠 items in CONTENT-TODO.md resolved
+- [ ] Final copy proofread on every page (read aloud, on a phone)
+- [ ] All placeholder imagery replaced or consciously accepted for v1
+- [ ] No remaining "coming soon" text that shouldn't be there
+- [ ] Prelaunch language ("preparing to serve…", staging form notice)
+      confirmed gone after status flip — search dist/ for "aren't live"
+
+## 3. Domain & DNS
+
+- [ ] `huntingtanner.com` added to Vercel as primary domain
+- [ ] `www.huntingtanner.com` added → verify 301 to apex (vercel.json)
+- [ ] `huntingtannerconstruction.com` (+ www) added → verify 301 to apex
+- [ ] DNS records at registrar pointed per Vercel instructions
+- [ ] HTTPS certificates issued for all hostnames; http:// redirects to https://
+- [ ] Trailing-slash behavior spot-checked (URLs resolve with `/`, no chains)
+
+## 4. Forms
+
+- [ ] `/api/contact` endpoint deployed (see src/server/contact/endpoint.example.ts)
+- [ ] Vercel env vars set: CONTACT_NOTIFICATION_EMAIL, RESEND_API_KEY,
+      TURNSTILE_SITE_KEY, TURNSTILE_SECRET_KEY
+- [ ] Turnstile widget enabled in LeadForm
+- [ ] Test submission (compact form, homepage) → email arrives, redirect to /thank-you/
+- [ ] Test submission (detailed form, contact page) → all fields present in email
+- [ ] Validation errors display correctly with fields preserved
+- [ ] Honeypot test (fill hidden field) → silently discarded
+- [ ] SPF/DKIM/DMARC configured; test email not in spam
+
+## 5. Site status flip
+
+- [ ] `PUBLIC_SITE_STATUS=live` set in Vercel env
+- [ ] Redeploy, then verify: `<meta name="robots" content="index, follow">`
+- [ ] robots.txt allows crawling and references sitemap
+- [ ] `/sitemap-index.xml` exists and lists all public pages (no /thank-you/)
+
+## 6. Search & schema
+
+- [ ] Google Search Console property verified (DNS or meta method —
+      set PUBLIC_GOOGLE_SITE_VERIFICATION)
+- [ ] Sitemap submitted in Search Console
+- [ ] Rich Results Test run on homepage + one service page + FAQ page
+      (see SCHEMA-TODO.md)
+- [ ] URL Inspection on homepage: indexable, canonical correct
+
+## 7. Analytics & profiles
+
+- [ ] GA4 property created; PUBLIC_GA_MEASUREMENT_ID set; pageviews arriving
+- [ ] Conversion events verified per ANALYTICS-SETUP.md
+- [ ] Google Ads / Meta Pixel IDs set (only if campaigns are planned)
+- [ ] Google Business Profile created, website set to https://huntingtanner.com,
+      URL added to `googleBusinessProfileURL` in config
+- [ ] Social profiles created and URLs added to config (footer + schema)
+
+## 8. Quality pass
+
+- [ ] Mobile testing: 320 / 375 / 430 / 768 px — nav, forms, sticky CTA, slider
+- [ ] Browser testing: Chrome, Safari (iOS!), Edge, Firefox
+- [ ] Keyboard-only pass: skip link, nav, accordion, slider, forms
+- [ ] PageSpeed Insights on / and /basement-finishing/ (PERFORMANCE-CHECKLIST.md)
+- [ ] Broken-link scan (e.g., `npx linkinator https://huntingtanner.com --recurse`)
+- [ ] 404 page renders for a bogus URL
+- [ ] Click-to-call and mailto links work on a real phone
+- [ ] Final copy review by Hunting + one outside reader
+
+## 9. Post-launch (first two weeks)
+
+- [ ] Search Console: coverage report clean, no unexpected noindex
+- [ ] Watch form deliverability daily for the first week
+- [ ] Confirm GBP shows the website link and drives the profile
+- [ ] Re-run PageSpeed after real images land

@@ -1,0 +1,65 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { business } from "@/config/business";
+---
+
+<BaseLayout
+  title="Thank You | Hunting Tanner Construction"
+  description="Your consultation request has been received. Here's what happens next."
+  path="/thank-you/"
+  noindex
+>
+  <section class="section">
+    <div class="container container--narrow thank-you">
+      <span class="eyebrow">Request Received</span>
+      <h1>Thank you — we've got it.</h1>
+      <p class="lede">
+        Your consultation request is in. Here's exactly what happens next:
+      </p>
+      <ol>
+        <li>
+          <strong>We review your project details</strong> — your city,
+          space, and goals.
+        </li>
+        <li>
+          <strong>Hunting reaches out personally</strong> — typically by
+          your preferred contact method — to talk through your basement and
+          answer questions.
+        </li>
+        <li>
+          <strong>If it's a fit, we schedule a walkthrough</strong> at your
+          home and start putting a real plan on paper.
+        </li>
+      </ol>
+      <p>
+        Need something sooner? Call
+        <a
+          href={business.phoneHref}
+          data-event="click_to_call"
+          data-event-label="thank-you"
+        >{business.phoneDisplay}</a>
+        or email
+        <a
+          href={business.emailHref}
+          data-event="click_to_email"
+          data-event-label="thank-you"
+        >{business.email}</a>.
+      </p>
+      <p>
+        While you wait, you might like reading
+        <a href="/process/">how our process works</a> or the
+        <a href="/faq/">basement FAQ</a>.
+      </p>
+      <p><a class="btn btn--secondary" href="/">Back to the homepage</a></p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .thank-you {
+    padding-block: var(--space-7);
+  }
+  .thank-you .btn {
+    margin-top: var(--space-4);
+  }
+</style>

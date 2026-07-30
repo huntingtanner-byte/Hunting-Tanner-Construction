@@ -1,0 +1,144 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import CTASection from "@/components/CTASection.astro";
+import FAQAccordion from "@/components/FAQAccordion.astro";
+import { breadcrumbSchema } from "@/lib/schema";
+import type { FAQ } from "@/data/faqs";
+
+const breadcrumbs = [
+  { name: "Home", path: "/" },
+  { name: "Service Areas", path: "/utah-county-basement-finishing/" },
+  { name: "Herriman", path: "/herriman-basement-finishing/" },
+];
+
+const cityFaqs: FAQ[] = [
+  {
+    question: "You're based in Utah County — does Herriman really work for you?",
+    answer:
+      "Yes. Herriman sits just across the county line from our northwest Utah County base, and it's an established part of our service area — not a stretch. Scheduling, walkthroughs, and site visits work the same as they do for Saratoga Springs or Lehi projects.",
+  },
+  {
+    question: "My Herriman home came with a 9-foot unfinished basement. What's possible?",
+    answer:
+      "Taller basement ceilings, common in newer Herriman construction, are a gift: room for dropped soffits without a cave effect, generous recessed lighting, full-height doors, and media walls that feel intentional. It's the kind of basement where finishing quality really shows.",
+  },
+  {
+    question: "Can you finish the bathroom my builder roughed in?",
+    answer:
+      "Almost always. Like the rest of the Salt Lake Valley's newer developments, Herriman builders typically stub under-slab plumbing for a future bathroom. We verify the rough-in at the walkthrough and plan the bathroom — and the rest of the layout — around it.",
+  },
+  {
+    question: "Who issues permits for basement work in Herriman?",
+    answer:
+      "Herriman city's building department handles permits and inspections for work inside city limits. We coordinate that process as part of the project and will walk you through what applies to your address at the consultation.",
+  },
+  {
+    question: "Do you serve neighboring southwest Salt Lake County cities too?",
+    answer:
+      "Herriman is our featured market on this side of the county line. If you're nearby — Riverton or South Jordan, for example — reach out with your address and project; we'll give you an honest answer about scheduling and fit.",
+  },
+];
+
+const schemas = [breadcrumbSchema(breadcrumbs)];
+---
+
+<BaseLayout
+  title="Basement Finishing in Herriman, UT | Hunting Tanner Construction"
+  description="Basement finishing for Herriman homeowners — finishing the unfinished basements of newer southwest Salt Lake County homes with written scopes, qualified trades, and organized management."
+  path="/herriman-basement-finishing/"
+  pageType="service-area"
+  schemas={schemas}
+>
+  <PageIntro
+    eyebrow="Service Area"
+    heading="Basement Finishing in Herriman"
+    lede="Herriman's newer neighborhoods are full of homes with big, tall, unfinished basements. We cross the county line for them gladly."
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="section">
+    <div class="container container--narrow">
+      <h2>A Utah County contractor, minutes from Herriman</h2>
+      <p>
+        Hunting Tanner Construction is based in northwest Utah County —
+        which puts Herriman closer to us than much of our own county.
+        While our primary markets are
+        <a href="/saratoga-springs-basement-finishing/">Saratoga Springs</a>
+        and <a href="/lehi-basement-finishing/">Lehi</a>, Herriman is a
+        featured part of our service area, and homeowners here get the
+        same process, the same trades, and the same owner-level attention.
+      </p>
+
+      <h2>What makes Herriman basements worth finishing</h2>
+      <p>
+        Herriman grew up recently, and its homes show the advantages of
+        modern construction: full-height basements (often nine feet),
+        under-slab plumbing rough-ins, modern drainage, and floor plans
+        that anticipated a finished lower level from day one. That head
+        start matters — more of your budget goes to the rooms themselves
+        instead of correcting old problems.
+      </p>
+      <ul>
+        <li>
+          <strong>Bedrooms and bathrooms</strong> — the additions that
+          matter most for growing households
+        </li>
+        <li>
+          <strong>Family and media rooms</strong> — taller ceilings make
+          real theater setups practical
+        </li>
+        <li>
+          <strong>Wet bars and kitchenettes</strong> — the upgrade that
+          makes the basement the gathering floor
+        </li>
+        <li>
+          <strong>Offices and gyms</strong> — quiet, separated, and
+          comfortable year-round below grade
+        </li>
+      </ul>
+
+      {/* EDITORIAL NOTE (not rendered): Verify Herriman city building
+          department permit specifics before publishing details. See
+          CONTENT-TODO.md. */}
+
+      <h2>Planning a Herriman project</h2>
+      <p>
+        Every project starts with a walkthrough at your home: verifying the
+        rough-in, checking egress window sizes for planned bedrooms,
+        mapping mechanical locations, and listening to how your household
+        wants to use the space. From there you get a written scope and an
+        itemized proposal — the same
+        <a href="/process/">six-step process</a> we run everywhere. Permits
+        and inspections through the city are coordinated as part of the
+        schedule.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container container--narrow">
+      <span class="eyebrow">Local Questions</span>
+      <h2>Herriman basement FAQs</h2>
+      <FAQAccordion faqs={cityFaqs} />
+      <p class="more-links">
+        Service details live on the
+        <a href="/basement-finishing/">basement finishing page</a>; see all
+        areas on the
+        <a href="/utah-county-basement-finishing/">Utah County page</a>.
+      </p>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Put that tall Herriman basement to work"
+    text="Tell us what you'd build downstairs. We'll walk the space, check the rough-ins, and plan it properly."
+  />
+</BaseLayout>
+
+<style>
+  .more-links {
+    margin-top: var(--space-5);
+    font-size: var(--text-sm);
+  }
+</style>
