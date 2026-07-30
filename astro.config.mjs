@@ -21,6 +21,16 @@ export default defineConfig({
    */
   output: "static",
   adapter: vercel(),
+  security: {
+    /**
+     * Astro's origin check rejects same-origin form POSTs behind Vercel's
+     * proxy (the function sees a different internal origin). The only
+     * server route is the public contact form, which has no session or
+     * auth to protect — spam control is handled by the honeypot and
+     * (at launch) Turnstile — so the origin check is safely disabled.
+     */
+    checkOrigin: false,
+  },
   build: {
     format: "directory",
   },
