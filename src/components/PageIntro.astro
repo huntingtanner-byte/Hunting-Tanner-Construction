@@ -24,13 +24,15 @@ const { eyebrow, heading, lede, breadcrumbs } = Astro.props;
 </section>
 
 <style>
+  /* Faint sea-glass wash that resolves to white, so inner pages open
+     softly without a hard band of color. */
   .page-intro {
     padding-block: var(--space-7) var(--space-6);
     border-bottom: 1px solid var(--color-line);
     background: linear-gradient(
       to bottom,
       var(--color-surface-alt),
-      var(--color-bg)
+      var(--color-bg) 90%
     );
   }
 </style>

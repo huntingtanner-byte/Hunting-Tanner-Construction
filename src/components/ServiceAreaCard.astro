@@ -24,10 +24,11 @@ const { area } = Astro.props;
   .area-card {
     position: relative;
     background: var(--color-surface);
-    border: 1px solid var(--color-line);
+    border: 1px solid var(--color-line-strong);
     border-left: 4px solid var(--color-accent);
     border-radius: var(--radius);
     padding: var(--space-5);
+    box-shadow: var(--shadow-card);
     transition: box-shadow 0.15s ease;
   }
   .area-card:hover {

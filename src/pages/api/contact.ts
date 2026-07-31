@@ -113,16 +113,16 @@ function errorPage(): string {
 <meta name="robots" content="noindex">
 <title>We couldn't send your request | Hunting Tanner Construction</title>
 <style>
-  body { margin:0; background:#f6f2e6; color:#2d3536;
+  body { margin:0; background:#ffffff; color:#1f3438;
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
     line-height:1.65; display:flex; align-items:center; justify-content:center;
     min-height:100vh; padding:1.5rem; }
-  .card { max-width:34rem; background:#fff; border:1px solid #d2d7d3;
-    border-radius:16px; padding:2rem; box-shadow:0 6px 24px -8px rgb(45 53 54 / .16); }
+  .card { max-width:34rem; background:#fff; border:1px solid #c6d6d4;
+    border-radius:16px; padding:2rem; box-shadow:0 10px 34px -14px rgb(31 52 56 / .28); }
   h1 { font-family:Georgia,serif; font-size:1.6rem; margin:0 0 1rem; }
-  a.btn { display:inline-block; background:#4c5f53; color:#fff; text-decoration:none;
+  a.btn { display:inline-block; background:#17696f; color:#fff; text-decoration:none;
     font-weight:600; padding:.75rem 1.5rem; border-radius:10px; margin-top:.5rem; }
-  a.plain { color:#4c5f53; }
+  a.plain { color:#17696f; }
   p { margin:0 0 1rem; }
 </style>
 </head>
