@@ -13,7 +13,7 @@ import FAQAccordion from "@/components/FAQAccordion.astro";
 import CTASection from "@/components/CTASection.astro";
 import { business } from "@/config/business";
 import { coreServices } from "@/data/services";
-import { featuredAreas } from "@/data/service-areas";
+import { featuredCities, featuredCounties } from "@/data/service-areas";
 import { homeFaqs } from "@/data/faqs";
 import { publishableProjects } from "@/data/projects";
 import heroImage from "@/assets/hero/basement-after.png";
@@ -224,22 +224,38 @@ import afterImg from "@/assets/hero/basement-after.png";
   <section class="section section--alt">
     <div class="container">
       <span class="eyebrow">Where We Work</span>
-      <h2>Serving Utah County homeowners at their properties</h2>
+      <h2>Serving homeowners at their properties</h2>
       <p class="lede">
         Hunting Tanner Construction is a Utah County based residential
         contractor and service-area business. We come to you.
       </p>
-      <div class="grid-2 areas-grid">
-        {featuredAreas.map((area) => (
+      <div class="grid-3 areas-grid">
+        {featuredCities.map((area) => (
           <ServiceAreaCard area={area} />
         ))}
       </div>
+
+      <div class="counties-card">
+        <div class="counties-copy">
+          <h3>Two counties, every community</h3>
+          <p>
+            Beyond our featured cities, we serve homeowners throughout
+            Utah County and across the Salt Lake Valley. Every city we
+            work in has its own local page.
+          </p>
+        </div>
+        <div class="counties-links">
+          {featuredCounties.map((county) => (
+            <a class="btn btn--secondary" href={county.href}>
+              {county.name}
+            </a>
+          ))}
+        </div>
+      </div>
+
       <p class="nearby-note">
-        We serve every community in northern Utah County and across the
-        Salt Lake Valley, each with its own local page. Find yours on the
-        <a href="/utah-county-basement-finishing/"> Utah County</a> or
-        <a href="/salt-lake-county-basement-finishing/"> Salt Lake County</a>
-        service-area pages.
+        Close by but not listed? <a href="/contact/">Ask us</a> and you'll
+        get a straight answer about scheduling and fit.
       </p>
     </div>
   </section>
@@ -394,8 +410,50 @@ import afterImg from "@/assets/hero/basement-after.png";
     text-align: center;
   }
 
+  /* Counties block: one wider card beneath the three city cards, so the
+     county-wide hubs read as a different tier rather than a fourth city. */
+  .counties-card {
+    margin-top: var(--space-5);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-left: 4px solid var(--color-accent);
+    border-radius: var(--radius);
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+  @media (min-width: 800px) {
+    .counties-card {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-6);
+      padding: var(--space-5) var(--space-6);
+    }
+  }
+  .counties-copy h3 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-2);
+  }
+  .counties-copy p {
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+    margin: 0;
+    max-width: 40rem;
+  }
+  .counties-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    flex-shrink: 0;
+  }
+  .counties-links .btn {
+    white-space: nowrap;
+  }
+
   .nearby-note {
-    margin-top: var(--space-6);
+    margin-top: var(--space-5);
     font-size: var(--text-sm);
     color: var(--color-muted);
     max-width: 52rem;

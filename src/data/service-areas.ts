@@ -1,8 +1,10 @@
 /**
- * Centralized service-area data. The four featured markets have dedicated,
- * individually authored pages. "Nearby communities" are listed on pages but
- * intentionally do NOT get their own thin pages yet — see CITY-PAGE-GUIDE.md
- * before adding more.
+ * Featured service areas shown on the homepage and in schema.
+ *
+ * Two tiers, presented differently:
+ *  - featuredCities: individual markets with hand-authored pages
+ *  - featuredCounties: the county-wide hubs, which link out to every
+ *    city page (data for those lives in src/data/cities/)
  */
 
 export interface ServiceArea {
@@ -20,7 +22,8 @@ export interface ServiceArea {
   schemaType: "City" | "AdministrativeArea";
 }
 
-export const featuredAreas: ServiceArea[] = [
+/** Individual markets, in display order. */
+export const featuredCities: ServiceArea[] = [
   {
     name: "Saratoga Springs",
     state: "Utah",
@@ -40,6 +43,19 @@ export const featuredAreas: ServiceArea[] = [
     schemaType: "City",
   },
   {
+    name: "Herriman",
+    state: "Utah",
+    href: "/herriman-basement-finishing/",
+    tier: "secondary",
+    blurb:
+      "Just over the county line, Herriman's newer neighborhoods are full of basements waiting to become finished space.",
+    schemaType: "City",
+  },
+];
+
+/** County-wide hubs linking to every city page. */
+export const featuredCounties: ServiceArea[] = [
+  {
     name: "Utah County",
     state: "Utah",
     href: "/utah-county-basement-finishing/",
@@ -49,14 +65,20 @@ export const featuredAreas: ServiceArea[] = [
     schemaType: "AdministrativeArea",
   },
   {
-    name: "Herriman",
+    name: "Salt Lake County",
     state: "Utah",
-    href: "/herriman-basement-finishing/",
+    href: "/salt-lake-county-basement-finishing/",
     tier: "secondary",
     blurb:
-      "Just over the county line, Herriman's newer neighborhoods are full of basements waiting to become finished space.",
-    schemaType: "City",
+      "From Draper and Sandy through the west valley, we serve homeowners across the Salt Lake Valley.",
+    schemaType: "AdministrativeArea",
   },
+];
+
+/** Everything, for schema areaServed and cross-page link lists. */
+export const featuredAreas: ServiceArea[] = [
+  ...featuredCities,
+  ...featuredCounties,
 ];
 
 /**

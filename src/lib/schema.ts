@@ -52,10 +52,6 @@ export function organizationSchema(): JsonLd {
           ? { containedInPlace: { "@type": "State", name: "Utah" } }
           : {}),
       })),
-      {
-        "@type": "AdministrativeArea",
-        name: "Salt Lake County, Utah",
-      },
     ],
     contactPoint: {
       "@type": "ContactPoint",

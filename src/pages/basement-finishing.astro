@@ -4,7 +4,7 @@ import PageIntro from "@/components/PageIntro.astro";
 import CTASection from "@/components/CTASection.astro";
 import FAQAccordion from "@/components/FAQAccordion.astro";
 import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
-import { featuredAreas } from "@/data/service-areas";
+import { featuredAreas, featuredCities } from "@/data/service-areas";
 import type { FAQ } from "@/data/faqs";
 
 const breadcrumbs = [
@@ -218,10 +218,8 @@ const schemas = [
       <h2>Where we finish basements</h2>
       <p>
         Hunting Tanner Construction serves homeowners at their properties in
-        {featuredAreas
-          .filter((a) => a.schemaType === "City")
-          .map((a) => a.name)
-          .join(", ")}, and communities throughout Utah County:
+        {featuredCities.map((a) => a.name).join(", ")}, and communities
+        throughout Utah County and the Salt Lake Valley:
       </p>
       <ul class="area-links">
         {featuredAreas.map((area) => (

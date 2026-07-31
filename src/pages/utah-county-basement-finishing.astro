@@ -5,7 +5,7 @@ import CTASection from "@/components/CTASection.astro";
 import FAQAccordion from "@/components/FAQAccordion.astro";
 import ServiceAreaCard from "@/components/ServiceAreaCard.astro";
 import { breadcrumbSchema } from "@/lib/schema";
-import { featuredAreas } from "@/data/service-areas";
+import { featuredCities } from "@/data/service-areas";
 import { utahCountyServiceCities } from "@/data/cities";
 import type { FAQ } from "@/data/faqs";
 
@@ -14,9 +14,8 @@ const breadcrumbs = [
   { name: "Utah County", path: "/utah-county-basement-finishing/" },
 ];
 
-const cityPages = featuredAreas.filter(
-  (a) => a.href !== "/utah-county-basement-finishing/",
-);
+/** Featured individual markets (the county hubs are excluded by design). */
+const cityPages = featuredCities;
 
 const countyFaqs: FAQ[] = [
   {
