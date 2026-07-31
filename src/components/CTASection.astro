@@ -9,6 +9,8 @@ interface Props {
   /** Include the compact consultation form (vs. buttons only) */
   withForm?: boolean;
   formId?: string;
+  /** Pre-fills the form's project city (city landing pages) */
+  defaultCity?: string;
 }
 
 const {
@@ -16,6 +18,7 @@ const {
   text = "Start with a straightforward conversation: what you have, what you want, and what it takes to get there. No pressure, no obligation.",
   withForm = false,
   formId = "cta-form",
+  defaultCity,
 } = Astro.props;
 ---
 
@@ -48,7 +51,7 @@ const {
       </div>
       {withForm && (
         <div class="cta-form">
-          <LeadForm formId={formId} variant="compact" />
+          <LeadForm formId={formId} variant="compact" defaultCity={defaultCity} />
         </div>
       )}
     </div>

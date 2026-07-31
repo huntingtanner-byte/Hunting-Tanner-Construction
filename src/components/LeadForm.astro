@@ -19,9 +19,14 @@ interface Props {
   /** Unique id prefix so multiple forms can exist on one page */
   formId: string;
   heading?: string;
+  /**
+   * Pre-fills the project city. Used on city landing pages so a visitor
+   * who arrived from a local search has one less field to complete.
+   */
+  defaultCity?: string;
 }
 
-const { variant = "compact", formId, heading } = Astro.props;
+const { variant = "compact", formId, heading, defaultCity = "" } = Astro.props;
 const detailed = variant === "detailed";
 
 const cityOptions = allServiceCities.map((c) => c.name);
@@ -157,6 +162,7 @@ const id = (name: string) => `${formId}-${name}`;
       required
       maxlength="60"
       list={id("city-list")}
+      value={defaultCity}
       data-error-message="Which city is the project in?"
     />
     <datalist id={id("city-list")}>
