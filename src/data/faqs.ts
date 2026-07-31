@@ -49,7 +49,7 @@ export const homeFaqs: FAQ[] = [
   {
     question: "Is Hunting Tanner Construction taking on new projects?",
     answer:
-      "We're currently scheduling basement consultations for homeowners in Saratoga Springs, Lehi, Herriman, and communities throughout Utah County. The best first step is a short conversation about your space. Call (801) 901-8349 or send the consultation form.",
+      "We're currently scheduling basement consultations for homeowners throughout Utah County and the Salt Lake Valley. The best first step is a short conversation about your space. Call (801) 901-8349 or send the consultation form.",
   },
 ];
 
@@ -161,7 +161,7 @@ export const faqPageGroups: FAQGroup[] = [
       {
         question: "Which areas do you serve?",
         answer:
-          "Saratoga Springs, Lehi, and communities throughout Utah County, including Eagle Mountain, American Fork, Vineyard, Pleasant Grove, Highland, Alpine, Lindon, Orem, and Provo, plus Herriman in southwest Salt Lake County.",
+          "Every community in northern Utah County, including Eagle Mountain, American Fork, Vineyard, Pleasant Grove, Highland, Alpine, Lindon, Orem, Provo, and Spanish Fork, plus the Salt Lake Valley from Salt Lake City and Millcreek south through Sandy, West Jordan, Herriman, and Draper. Each city has its own page with local detail.",
       },
       {
         question: "How do I get started?",
