@@ -6,10 +6,10 @@
 import sharp from "sharp";
 import { writeFile, mkdir } from "node:fs/promises";
 
-/** Palette: deep marine / white / eucalyptus */
+/** Coastal palette: deep marine / white / seafoam */
 const CHARCOAL = "#1f3438";
 const OFFWHITE = "#ffffff";
-const EUCALYPTUS = "#98aa9d";
+const EUCALYPTUS = "#7cc0bd";
 
 const monogramSvg = (size, radius) => `
 <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 100 100">
