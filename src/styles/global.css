@@ -1,8 +1,8 @@
 /* ============================================================
    Hunting Tanner Construction — design system
-   Coastal palette (2026-08): white page and white cards, with a
-   deep-marine ink, sea-glass tints for alternating sections, and a
-   coastal teal accent. Cards read through borders + soft elevation
+   White page and white cards, with a deep slate ink, pale sage tints for
+   alternating sections, and a deep eucalyptus-green accent (dark enough
+   to carry white lettering). Cards read through borders + soft elevation
    rather than color contrast, so white-on-white feels airy, not stark.
    Every interactive color is checked for WCAG AA contrast.
    All colors are custom properties — change them here only.
@@ -12,16 +12,16 @@
   /* ---- Color tokens ---- */
   --color-bg: #ffffff;            /* white page */
   --color-surface: #ffffff;       /* cards, forms */
-  --color-surface-alt: #f2f8f7;   /* pale sea glass — alternating sections */
+  --color-surface-alt: #f3f7f3;   /* pale sage — alternating sections */
   --color-ink: #1f3438;           /* deep marine — primary text */
   --color-ink-soft: #2f4a4e;      /* softened marine (wordmark) */
   --color-muted: #55686b;         /* secondary text — 5.7:1 on white */
-  --color-line: #dbe5e4;          /* cool hairline borders */
-  --color-line-strong: #c6d6d4;   /* card edges on white */
-  --color-accent: #17696f;        /* coastal teal — CTAs, links (5.8:1) */
-  --color-accent-hover: #0f5257;
-  --color-accent-soft: #e4f1f0;   /* pale teal tint backgrounds */
-  --color-accent-bright: #7cc0bd; /* seafoam — decorative + on-dark (6.5:1) */
+  --color-line: #dde5e0;          /* soft hairline borders */
+  --color-line-strong: #c8d4cd;   /* card edges on white */
+  --color-accent: #476b57;        /* deep eucalyptus — CTAs, links (5.99:1) */
+  --color-accent-hover: #365343;
+  --color-accent-soft: #e9efe9;   /* pale sage tint backgrounds */
+  --color-accent-bright: #98aa9d; /* eucalyptus — decorative + on-dark (5.6:1) */
   --color-dark: #1f3438;          /* deep marine — dark sections */
   --color-dark-text: #e9f1f0;
   --color-dark-muted: #a9c3c2;
@@ -69,9 +69,9 @@
   --header-h: 4.25rem;
 }
 
-/* Form input borders — cool gray with enough weight to read on white */
+/* Form input borders — soft gray-green with enough weight to read on white */
 :root {
-  --color-input-border: #b3c4c3;
+  --color-input-border: #b6c4bc;
 }
 
 /* ============ Base ============ */
