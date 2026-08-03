@@ -34,7 +34,7 @@ const { service, showIncludes = false } = Astro.props;
     transition: box-shadow 0.15s ease, border-color 0.15s ease;
   }
   .service-card:hover {
-    border-color: var(--color-accent);
+    border-color: var(--color-accent-text);
     box-shadow: var(--shadow-md);
   }
   .service-card h3 {
@@ -51,7 +51,7 @@ const { service, showIncludes = false } = Astro.props;
     inset: 0;
   }
   .service-card:hover h3 a {
-    color: var(--color-accent);
+    color: var(--color-accent-text);
   }
   .service-card > p {
     color: var(--color-muted);
@@ -67,7 +67,7 @@ const { service, showIncludes = false } = Astro.props;
     margin-top: var(--space-4);
     font-weight: 700;
     font-size: var(--text-sm);
-    color: var(--color-accent);
+    color: var(--color-accent-text);
     flex-grow: 0 !important;
   }
 </style>

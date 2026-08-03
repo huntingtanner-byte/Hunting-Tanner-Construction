@@ -39,7 +39,7 @@ const { faqs } = Astro.props;
     box-shadow: var(--shadow-card);
   }
   .faq-item[open] {
-    border-color: var(--color-accent);
+    border-color: var(--color-accent-text);
   }
 
   .faq-item summary {
@@ -58,7 +58,7 @@ const { faqs } = Astro.props;
     display: none;
   }
   .faq-item summary:hover {
-    color: var(--color-accent);
+    color: var(--color-accent-text);
   }
 
   .faq-icon {
@@ -71,7 +71,8 @@ const { faqs } = Astro.props;
   .faq-icon::after {
     content: "";
     position: absolute;
-    background: var(--color-accent);
+    /* Deeper tone: the light eucalyptus would be too faint on white */
+    background: var(--color-accent-text);
     border-radius: 1px;
   }
   .faq-icon::before {

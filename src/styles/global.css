@@ -12,16 +12,23 @@
   /* ---- Color tokens ---- */
   --color-bg: #ffffff;            /* white page */
   --color-surface: #ffffff;       /* cards, forms */
-  --color-surface-alt: #f2f8f7;   /* pale sea glass — alternating sections */
+  --color-surface-alt: #f4f7f3;   /* pale sage — alternating sections */
   --color-ink: #1f3438;           /* deep marine — primary text */
   --color-ink-soft: #2f4a4e;      /* softened marine (wordmark) */
   --color-muted: #55686b;         /* secondary text — 5.7:1 on white */
-  --color-line: #dbe5e4;          /* cool hairline borders */
-  --color-line-strong: #c6d6d4;   /* card edges on white */
-  --color-accent: #17696f;        /* coastal teal — CTAs, links (5.8:1) */
-  --color-accent-hover: #0f5257;
-  --color-accent-soft: #e4f1f0;   /* pale teal tint backgrounds */
-  --color-accent-bright: #7cc0bd; /* seafoam — decorative + on-dark (6.5:1) */
+  --color-line: #dde5e0;          /* soft hairline borders */
+  --color-line-strong: #c8d4cd;   /* card edges on white */
+  /* Eucalyptus accent family. #98AA9D is light, so it fills shapes
+     (buttons, bars, borders) and always carries DARK text on top.
+     Text sitting on white uses the deepened variants below, which the
+     light sage cannot do legibly. */
+  --color-accent: #98aa9d;        /* Eucalyptus — button + fill color */
+  --color-accent-hover: #879b8d;  /* button hover fill */
+  --color-accent-ink: #1f3438;    /* text ON eucalyptus fills (5.6:1) */
+  --color-accent-text: #4f6455;   /* deep eucalyptus — links on white (6.4:1) */
+  --color-accent-text-hover: #3c4e42;
+  --color-accent-soft: #eaefe9;   /* pale sage tint backgrounds */
+  --color-accent-bright: #98aa9d; /* Eucalyptus on dark sections (5.6:1) */
   --color-dark: #1f3438;          /* deep marine — dark sections */
   --color-dark-text: #e9f1f0;
   --color-dark-muted: #a9c3c2;
@@ -146,12 +153,12 @@ p:last-child {
 }
 
 a {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
 }
 a:hover {
-  color: var(--color-accent-hover);
+  color: var(--color-accent-text-hover);
 }
 
 img {
@@ -230,7 +237,7 @@ strong {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   margin-bottom: var(--space-3);
 }
 .section--dark .eyebrow {
@@ -301,13 +308,15 @@ strong {
     color 0.15s ease;
 }
 
+/* Eucalyptus is light, so primary buttons carry dark text (5.6:1) rather
+   than white, which would only reach 2.45:1 and fail readability. */
 .btn--primary {
   background: var(--color-accent);
-  color: #fff;
+  color: var(--color-accent-ink);
 }
 .btn--primary:hover {
   background: var(--color-accent-hover);
-  color: #fff;
+  color: var(--color-accent-ink);
 }
 
 .btn--secondary {
