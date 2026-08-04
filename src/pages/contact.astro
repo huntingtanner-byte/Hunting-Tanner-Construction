@@ -3,7 +3,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import PageIntro from "@/components/PageIntro.astro";
 import LeadForm from "@/components/LeadForm.astro";
 import { breadcrumbSchema } from "@/lib/schema";
-import { business } from "@/config/business";
+import { business, canClaimLicensed } from "@/config/business";
 
 const breadcrumbs = [
   { name: "Home", path: "/" },
@@ -54,6 +54,14 @@ const schemas = [breadcrumbSchema(breadcrumbs)];
             We come to your home.
           </span>
         </p>
+        {canClaimLicensed && (
+          <p class="contact-line">
+            <strong>Licensed &amp; insured</strong>
+            <span class="license-value">
+              Utah general contractor license #{business.licenseNumber}
+            </span>
+          </p>
+        )}
 
         <h2>What happens after you reach out</h2>
         <ol>
@@ -119,6 +127,10 @@ const schemas = [breadcrumbSchema(breadcrumbs)];
   }
   .contact-line a:hover {
     color: var(--color-accent);
+  }
+  .license-value {
+    font-weight: 650;
+    color: var(--color-ink);
   }
   .contact-info h2 {
     font-size: var(--text-2xl);

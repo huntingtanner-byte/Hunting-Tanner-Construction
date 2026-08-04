@@ -7,7 +7,7 @@
  *  - Only factual, verified values from src/config/business.ts
  *  - Everything emitted must match visible page content
  */
-import { business, activeSocialLinks } from "@/config/business";
+import { business, activeSocialLinks, canClaimLicensed } from "@/config/business";
 import { featuredAreas } from "@/data/service-areas";
 
 type JsonLd = Record<string, unknown>;
@@ -61,6 +61,21 @@ export function organizationSchema(): JsonLd {
       areaServed: "US-UT",
       availableLanguage: "English",
     },
+    /* Real, verifiable credential — only emitted once the license is active */
+    ...(canClaimLicensed
+      ? {
+          hasCredential: {
+            "@type": "EducationalOccupationalCredential",
+            credentialCategory: "license",
+            name: "Utah General Contractor License",
+            identifier: business.licenseNumber,
+            recognizedBy: {
+              "@type": "GovernmentOrganization",
+              name: "Utah Division of Professional Licensing",
+            },
+          },
+        }
+      : {}),
     ...(sameAs.length > 0 ? { sameAs } : {}),
   };
 }

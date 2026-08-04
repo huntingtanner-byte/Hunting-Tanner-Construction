@@ -4,6 +4,7 @@ import PageIntro from "@/components/PageIntro.astro";
 import OwnerStory from "@/components/OwnerStory.astro";
 import CTASection from "@/components/CTASection.astro";
 import { breadcrumbSchema } from "@/lib/schema";
+import { business } from "@/config/business";
 
 const breadcrumbs = [
   { name: "Home", path: "/" },
@@ -36,13 +37,15 @@ const schemas = [breadcrumbSchema(breadcrumbs)];
     <div class="container container--narrow">
       <h2>How the company is put together</h2>
       <p>
-        HTC pairs owner-level project management with qualified, specialized
-        trade partners: licensed electricians and plumbers, HVAC
-        professionals, drywall and finish crews. That's the same structure
-        most good general contractors use. The difference is who's running
-        it. Hunting is personally involved in every single project, and
-        Gary personally reviews every scope of work, bringing three decades
-        of subcontractor relationships and quality standards to each job.
+        Hunting Tanner Construction is a fully licensed and insured Utah
+        general contractor, license #{business.licenseNumber}. HTC pairs
+        owner-level project management with qualified, specialized trade
+        partners: licensed electricians and plumbers, HVAC professionals,
+        drywall and finish crews. That's the same structure most good
+        general contractors use. The difference is who's running it.
+        Hunting is personally involved in every single project, and Gary
+        personally reviews every scope of work, bringing three decades of
+        subcontractor relationships and quality standards to each job.
       </p>
       <p>
         Add Hunting's finance background, and the result is a company that
