@@ -8,7 +8,7 @@ import vercel from "@astrojs/vercel";
  * so the config stays dependency-free at load time. Both files use the same
  * PUBLIC_SITE_STATUS override; the hardcoded fallback must match business.ts.
  */
-const siteStatus = process.env.PUBLIC_SITE_STATUS ?? "staging";
+const siteStatus = process.env.PUBLIC_SITE_STATUS ?? "live";
 const isLive = siteStatus === "live";
 
 export default defineConfig({

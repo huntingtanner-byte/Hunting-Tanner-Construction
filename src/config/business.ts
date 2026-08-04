@@ -8,7 +8,12 @@
 
 export type SiteStatus = "staging" | "live";
 
-/** Site status. Override with PUBLIC_SITE_STATUS env var; defaults to staging. */
+/**
+ * Site status. The site launched in August 2026, so "live" is the default:
+ * pages are indexable, robots.txt allows crawling, the sitemap is generated,
+ * and the contact form submits. Override with the PUBLIC_SITE_STATUS env var
+ * only if the site ever needs to be pulled back to staging.
+ */
 const envStatus = import.meta.env.PUBLIC_SITE_STATUS as SiteStatus | undefined;
 
 export const business = {
@@ -39,8 +44,8 @@ export const business = {
    */
   insuranceClaimApproved: true,
 
-  /** "staging" keeps the whole site noindex and disables form submission. */
-  siteStatus: (envStatus ?? "staging") as SiteStatus,
+  /** "live" = indexable + crawlable. "staging" would noindex the whole site. */
+  siteStatus: (envStatus ?? "live") as SiteStatus,
 
   /**
    * Social profiles. Leave empty until profiles exist — empty entries are
