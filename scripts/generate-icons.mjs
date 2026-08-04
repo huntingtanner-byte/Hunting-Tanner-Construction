@@ -6,10 +6,10 @@
 import sharp from "sharp";
 import { writeFile, mkdir } from "node:fs/promises";
 
-/** Palette: deep slate / white / eucalyptus */
+/** Palette: deep slate / white / blue-gray stone */
 const CHARCOAL = "#1f3438";
 const OFFWHITE = "#ffffff";
-const EUCALYPTUS = "#98aa9d";
+const ACCENT = "#546a7b";
 
 const monogramSvg = (size, radius) => `
 <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 100 100">
@@ -20,7 +20,7 @@ const monogramSvg = (size, radius) => `
 const ogSvg = `
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <rect width="1200" height="630" fill="${OFFWHITE}"/>
-  <rect x="0" y="0" width="1200" height="10" fill="${EUCALYPTUS}"/>
+  <rect x="0" y="0" width="1200" height="10" fill="${ACCENT}"/>
   <text x="600" y="300" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="64" letter-spacing="6" fill="${CHARCOAL}">HUNTING TANNER</text>
   <text x="600" y="370" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="30" letter-spacing="14" fill="${CHARCOAL}">CONSTRUCTION</text>
   <text x="600" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" letter-spacing="2" fill="#56635e">Basement Finishing · Utah County, Utah</text>
