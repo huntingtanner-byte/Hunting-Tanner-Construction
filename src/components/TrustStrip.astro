@@ -5,15 +5,25 @@
  */
 import { canClaimLicensed } from "@/config/business";
 
+/**
+ * Kept to exactly four items so the strip stays balanced on the 4-column
+ * grid: once licensed, that credential leads and displaces the
+ * locally-owned line, which the footer and service-area pages already make.
+ */
 const principles = [
+  ...(canClaimLicensed
+    ? [
+        {
+          title: "Licensed & insured",
+          detail:
+            "A licensed Utah general contractor carrying appropriate insurance.",
+        },
+      ]
+    : []),
   {
     title: "Three generations of building",
     detail:
       "A third-generation contractor backed by 30+ years of family construction experience.",
-  },
-  {
-    title: "Organized scopes & planning",
-    detail: "Written scopes and change orders. Nothing lives in someone's head.",
   },
   {
     title: "An owner on every project",
@@ -21,17 +31,19 @@ const principles = [
       "Hunting is personally involved in every single job, start to finish.",
   },
   {
-    title: "Locally owned in Utah County",
-    detail: "A local owner who answers the phone and stands behind the work.",
+    title: "Organized scopes & planning",
+    detail: "Written scopes and change orders. Nothing lives in someone's head.",
   },
+  ...(canClaimLicensed
+    ? []
+    : [
+        {
+          title: "Locally owned in Utah County",
+          detail:
+            "A local owner who answers the phone and stands behind the work.",
+        },
+      ]),
 ];
-
-if (canClaimLicensed) {
-  principles.push({
-    title: "Licensed & insured",
-    detail: "A licensed Utah general contractor carrying appropriate insurance.",
-  });
-}
 ---
 
 <div class="trust-strip">

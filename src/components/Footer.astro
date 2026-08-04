@@ -38,6 +38,12 @@ const socialLabels: Record<string, string> = {
             data-event-label="footer"
           >{business.email}</a>
         </p>
+        {canClaimLicensed && (
+          <p class="footer-license">
+            <span class="license-label">Utah Contractor License</span>
+            <span class="license-number">#{business.licenseNumber}</span>
+          </p>
+        )}
         {activeSocialLinks.length > 0 && (
           <ul class="footer-social">
             {activeSocialLinks.map(({ network, url }) => (
@@ -85,12 +91,7 @@ const socialLabels: Record<string, string> = {
     </div>
 
     <div class="footer-legal">
-      <p>
-        &copy; {year} {business.legalName}. All rights reserved.
-        {canClaimLicensed && (
-          <span> Utah Contractor License #{business.licenseNumber}.</span>
-        )}
-      </p>
+      <p>&copy; {year} {business.legalName}. All rights reserved.</p>
     </div>
   </div>
 </footer>
@@ -157,6 +158,31 @@ const socialLabels: Record<string, string> = {
   }
   .footer-contact a:hover {
     color: var(--color-accent-bright);
+  }
+
+  /* License credential badge: eucalyptus edge ties it to the trust strip */
+  .footer-license {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    margin: var(--space-5) 0 0;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid rgb(255 255 255 / 0.14);
+    border-left: 3px solid var(--color-accent-bright);
+    border-radius: var(--radius);
+  }
+  .license-label {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-dark-muted);
+  }
+  .license-number {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.01em;
   }
 
   .footer-social {

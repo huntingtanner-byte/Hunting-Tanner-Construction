@@ -25,15 +25,12 @@ export const business = {
   emailHref: "mailto:office@huntingtanner.com",
 
   /**
-   * LICENSING — do not change these until the Utah contractor license is
-   * issued. While licenseActive is false the site must not claim or imply
-   * that the company is licensed. When the license is issued:
-   *   1. Set licenseNumber to the issued number (e.g. "1234567-5501")
-   *   2. Set licenseActive to true
-   * The footer and trust areas pick it up automatically.
+   * LICENSING — issued and active as of August 2026. The footer license
+   * badge and the "Licensed & insured" trust-strip item are driven by
+   * canClaimLicensed, which requires BOTH the flag and a number.
    */
-  licenseNumber: "",
-  licenseActive: false,
+  licenseNumber: "14298989-5501",
+  licenseActive: true,
 
   /**
    * Insurance wording has been approved by ownership (insuranceClaimApproved).

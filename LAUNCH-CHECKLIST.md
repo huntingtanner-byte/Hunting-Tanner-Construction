@@ -4,10 +4,11 @@ Work top to bottom. Target: September launch.
 
 ## 1. Legal & licensing
 
-- [ ] Utah contractor license verified as ACTIVE at DOPL
-- [ ] `licenseNumber` + `licenseActive: true` set in `src/config/business.ts`
-- [ ] Footer shows license number correctly (build + inspect)
-- [ ] Insurance wording approved by Hunting and carrier docs on file
+- [x] Utah contractor license issued: #14298989-5501
+- [x] `licenseNumber` + `licenseActive: true` set in `src/config/business.ts`
+- [x] Footer license badge verified on all 47 pages + 404
+- [ ] Insurance wording confirmed against actual carrier/coverage
+      (trust strip currently says "Licensed & insured")
 - [ ] Privacy policy + terms reviewed by attorney; effective dates updated
 
 ## 2. Content

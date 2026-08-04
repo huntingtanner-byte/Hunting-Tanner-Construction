@@ -6,13 +6,14 @@ item here.
 
 ## 🔴 Blocking launch
 
-- [ ] **Utah contractor license number** — site makes zero licensing claims
-      until `licenseActive: true` + number are set in
-      `src/config/business.ts`. Verify issuance at DOPL first.
-- [ ] **Insurance wording** — `insuranceClaimApproved` is true in config,
-      but "insured" language is currently held back until it can appear
-      alongside licensing. Confirm carrier/coverage and the exact phrase
-      Hunting wants (e.g., "licensed and insured").
+- [x] **Utah contractor license number** — DONE Aug 2026. License
+      #14298989-5501 set with `licenseActive: true` in
+      `src/config/business.ts`. Footer badge and the "Licensed & insured"
+      trust-strip item are now live on all pages.
+- [ ] **Insurance wording** — the trust strip now reads "Licensed &
+      insured / A licensed Utah general contractor carrying appropriate
+      insurance." Confirm carrier and coverage back this wording, or tell
+      me to soften it to licensing only.
 - [ ] **Attorney review of /privacy-policy/ and /terms/** — drafts are
       plain-English placeholders; both pages carry an effective date that
       must be updated at approval.
@@ -31,10 +32,11 @@ item here.
 
 ## 🟠 Facts to verify before adding (currently omitted on purpose)
 
-- [ ] **"Licensed GC in Utah" phrasing** — the About-page bio intentionally
-      omits "As the licensed GC in Utah, Hunting handles..." until the
-      license is active. When it is, update the Hunting bio in
-      `src/components/OwnerStory.astro` to add it.
+- [ ] **"Licensed GC in Utah" phrasing** — NOW UNBLOCKED (license active).
+      The About-page bio still omits "As the licensed GC in Utah, Hunting
+      handles estimates, contracts, scheduling, inspections..." from
+      Hunting's original copy. Say the word and I'll add it to
+      `src/components/OwnerStory.astro`.
 - [ ] **Gary bio facts** — the site states: licensed GC in California 30+
       years, owned/operated Amaron Construction, tenant-improvement
       specialty. Provided by Hunting; confirm details are exactly right
