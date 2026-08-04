@@ -1,4 +1,4 @@
-# LAUNCH-CHECKLIST — before flipping PUBLIC_SITE_STATUS=live
+# LAUNCH-CHECKLIST — the site went live in August 2026
 
 Work top to bottom. Target: September launch.
 
@@ -50,10 +50,13 @@ Work top to bottom. Target: September launch.
 
 ## 5. Site status flip
 
-- [ ] `PUBLIC_SITE_STATUS=live` set in Vercel env
-- [ ] Redeploy, then verify: `<meta name="robots" content="index, follow">`
-- [ ] robots.txt allows crawling and references sitemap
-- [ ] `/sitemap-index.xml` exists and lists all public pages (no /thank-you/)
+- [x] siteStatus defaults to `"live"` in code (business.ts + astro.config.mjs);
+      PUBLIC_SITE_STATUS remains available as an override
+- [x] Verified live: `<meta name="robots" content="index, follow">` on all
+      46 public pages
+- [x] robots.txt allows crawling and references the sitemap
+- [x] `/sitemap-index.xml` live with 46 URLs, excluding /thank-you/ and 404
+- [x] No `X-Robots-Tag` headers on any response
 
 ## 6. Search & schema
 
