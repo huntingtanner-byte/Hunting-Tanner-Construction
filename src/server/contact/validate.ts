@@ -5,8 +5,7 @@
  */
 
 export interface LeadPayload {
-  firstName: string;
-  lastName: string;
+  name: string;
   phone: string;
   email: string;
   projectCity: string;
@@ -44,8 +43,7 @@ export interface ValidationResult {
 }
 
 const MAX_LENGTHS: Partial<Record<keyof LeadPayload, number>> = {
-  firstName: 60,
-  lastName: 60,
+  name: 120,
   phone: 25,
   email: 120,
   projectCity: 60,
@@ -84,8 +82,7 @@ export function validateLead(form: FormData): ValidationResult {
     sanitize(form.get(key), MAX_LENGTHS[key] ?? 200);
 
   const lead: LeadPayload = {
-    firstName: get("firstName"),
-    lastName: get("lastName"),
+    name: get("name"),
     phone: normalizePhone(get("phone")),
     email: get("email"),
     projectCity: get("projectCity"),
@@ -110,8 +107,7 @@ export function validateLead(form: FormData): ValidationResult {
     form_variant: get("form_variant"),
   };
 
-  if (!lead.firstName) errors.firstName = "First name is required.";
-  if (!lead.lastName) errors.lastName = "Last name is required.";
+  if (!lead.name) errors.name = "Name is required.";
   if (lead.phone.replace(/\D/g, "").length < 10)
     errors.phone = "A valid phone number is required.";
   if (!EMAIL_RE.test(lead.email))

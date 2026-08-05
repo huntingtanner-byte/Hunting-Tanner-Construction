@@ -93,33 +93,18 @@ const id = (name: string) => `${formId}-${name}`;
   >
   </p>
 
-  <div class="name-row">
-    <div class="field">
-      <label for={id("first-name")}>First name</label>
-      <input
-        type="text"
-        id={id("first-name")}
-        name="firstName"
-        autocomplete="given-name"
-        required
-        maxlength="60"
-        data-error-message="Please enter your first name."
-      />
-      <p class="field-error" data-error-for={id("first-name")} hidden></p>
-    </div>
-    <div class="field">
-      <label for={id("last-name")}>Last name</label>
-      <input
-        type="text"
-        id={id("last-name")}
-        name="lastName"
-        autocomplete="family-name"
-        required
-        maxlength="60"
-        data-error-message="Please enter your last name."
-      />
-      <p class="field-error" data-error-for={id("last-name")} hidden></p>
-    </div>
+  <div class="field">
+    <label for={id("name")}>Name</label>
+    <input
+      type="text"
+      id={id("name")}
+      name="name"
+      autocomplete="name"
+      required
+      maxlength="120"
+      data-error-message="Please enter your name."
+    />
+    <p class="field-error" data-error-for={id("name")} hidden></p>
   </div>
 
   <div class="field">
@@ -320,16 +305,6 @@ const id = (name: string) => `${formId}-${name}`;
 
   .lead-form-heading {
     margin-bottom: var(--space-4);
-  }
-
-  .name-row {
-    display: grid;
-    gap: 0 var(--space-4);
-  }
-  @media (min-width: 480px) {
-    .name-row {
-      grid-template-columns: 1fr 1fr;
-    }
   }
 
   .lead-form-submit {

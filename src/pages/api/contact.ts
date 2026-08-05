@@ -88,7 +88,7 @@ export const POST: APIRoute = async ({ request, redirect }) => {
     console.error(
       "UNDELIVERED LEAD (recover manually):",
       JSON.stringify({
-        name: `${lead.firstName} ${lead.lastName}`,
+        name: lead.name,
         phone: lead.phone,
         email: lead.email,
         city: lead.projectCity,
@@ -151,7 +151,7 @@ function buildLeadEmail(lead: LeadPayload): string {
   return [
     "New basement consultation request from huntingtanner.com",
     "",
-    line("Name", `${l.firstName} ${l.lastName}`),
+    line("Name", l.name),
     line("Phone", l.phone),
     line("Email", l.email),
     line("City", l.projectCity),
