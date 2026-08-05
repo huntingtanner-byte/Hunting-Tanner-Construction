@@ -118,24 +118,30 @@ const currentPath = Astro.url.pathname;
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* Centers the wrapped lines too, so "HUNTING / TANNER" stacking stays
+       aligned with "CONSTRUCTION" beneath it at narrow widths. */
+    text-align: center;
     text-decoration: none;
     color: var(--color-ink-soft);
     line-height: 1.1;
   }
   .wordmark-name {
     font-family: var(--font-display);
-    font-size: 1.25rem;
+    /* Scales down before it is forced to wrap on small screens */
+    font-size: clamp(1.05rem, 0.9rem + 1vw, 1.25rem);
     font-weight: 600;
     letter-spacing: 0.06em;
-    /* offset the trailing letter-space so the text centers optically */
-    padding-left: 0.06em;
+    /* Letter-spacing adds a trailing space after the last letter. The
+       negative margin removes it from the box so centering is optical
+       rather than a half-space off. */
+    margin-right: -0.06em;
     text-transform: uppercase;
   }
   .wordmark-sub {
     font-family: var(--font-display);
-    font-size: 0.66rem;
+    font-size: clamp(0.58rem, 0.5rem + 0.5vw, 0.66rem);
     letter-spacing: 0.42em;
-    padding-left: 0.42em;
+    margin-right: -0.42em;
     text-transform: uppercase;
     color: var(--color-muted);
   }
@@ -293,7 +299,11 @@ const currentPath = Astro.url.pathname;
       display: block;
     }
   }
-  @media (max-width: 479px) {
+  /* Below this the wordmark, phone, and Menu button start fighting for
+     space and the wordmark is forced to wrap. The sticky bottom bar
+     already carries a tap-to-call button on mobile, so the header phone
+     is redundant here. */
+  @media (max-width: 559px) {
     .header-phone {
       display: none;
     }
