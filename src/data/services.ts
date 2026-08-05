@@ -12,7 +12,7 @@ export interface Service {
 export const coreServices: Service[] = [
   {
     title: "Full Basement Finishing",
-    href: "/basement-finishing/",
+    href: "/#basement-finishing-scope",
     description:
       "Turn an unfinished basement into bedrooms, bathrooms, and living space, planned, permitted, and managed from framing to final walkthrough.",
     includes: [
@@ -36,7 +36,7 @@ export const coreServices: Service[] = [
   },
   {
     title: "Basement Bathrooms & Bedrooms",
-    href: "/basement-finishing/#bathrooms-bedrooms",
+    href: "/#bathrooms-bedrooms",
     description:
       "Add a conforming bedroom or a full bathroom downstairs: the two upgrades that add the most day-to-day function.",
     includes: [
@@ -48,7 +48,7 @@ export const coreServices: Service[] = [
   },
   {
     title: "Wet Bars & Kitchenettes",
-    href: "/basement-finishing/#wet-bars",
+    href: "/#wet-bars",
     description:
       "A well-planned wet bar or kitchenette makes a basement feel like a destination instead of a spare room.",
     includes: [
@@ -60,7 +60,7 @@ export const coreServices: Service[] = [
   },
   {
     title: "Family & Entertainment Spaces",
-    href: "/basement-finishing/#family-rooms",
+    href: "/#family-rooms",
     description:
       "Media rooms, game areas, and big family rooms designed around how you actually want to use the space.",
     includes: [
@@ -72,7 +72,7 @@ export const coreServices: Service[] = [
   },
   {
     title: "Home Offices & Gyms",
-    href: "/basement-finishing/#offices-gyms",
+    href: "/#offices-gyms",
     description:
       "Purpose-built work and workout space that's quiet, comfortable, and separated from the rest of the house.",
     includes: [

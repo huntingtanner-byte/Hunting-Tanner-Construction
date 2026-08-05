@@ -82,7 +82,9 @@ const id = (name: string) => `${formId}-${name}`;
   data-staging={business.form.enabled ? "false" : "true"}
   data-variant={variant}
 >
-  {heading && <h3 class="lead-form-heading">{heading}</h3>}
+  {/* h2 keeps the document outline valid: on the homepage this heading
+      follows the h1 directly, so an h3 would skip a level. */}
+  {heading && <h2 class="lead-form-heading">{heading}</h2>}
 
   <p
     class="form-status"
@@ -123,14 +125,13 @@ const id = (name: string) => `${formId}-${name}`;
   </div>
 
   <div class="field">
-    <label for={id("email")}>Email</label>
+    <label for={id("email")}>Email <span class="optional">(optional)</span></label>
     <input
       type="email"
       id={id("email")}
       name="email"
       autocomplete="email"
       inputmode="email"
-      required
       maxlength="120"
       data-error-message="Please enter a valid email address."
     />
@@ -138,13 +139,12 @@ const id = (name: string) => `${formId}-${name}`;
   </div>
 
   <div class="field">
-    <label for={id("city")}>Project city</label>
+    <label for={id("city")}>Project city <span class="optional">(optional)</span></label>
     <input
       type="text"
       id={id("city")}
       name="projectCity"
       autocomplete="address-level2"
-      required
       maxlength="60"
       list={id("city-list")}
       value={defaultCity}
@@ -157,11 +157,10 @@ const id = (name: string) => `${formId}-${name}`;
   </div>
 
   <div class="field">
-    <label for={id("project-type")}>Project type</label>
+    <label for={id("project-type")}>Project type <span class="optional">(optional)</span></label>
     <select
       id={id("project-type")}
       name="projectType"
-      required
       data-error-message="Please choose the closest project type."
     >
       <option value="">Select one…</option>
@@ -234,7 +233,6 @@ const id = (name: string) => `${formId}-${name}`;
     <textarea
       id={id("message")}
       name="message"
-      required
       maxlength="3000"
       data-error-message="A sentence or two about your project helps us prepare."
     ></textarea>
@@ -304,6 +302,8 @@ const id = (name: string) => `${formId}-${name}`;
   }
 
   .lead-form-heading {
+    /* Sized as a card heading, not a section heading */
+    font-size: var(--text-xl);
     margin-bottom: var(--space-4);
   }
 

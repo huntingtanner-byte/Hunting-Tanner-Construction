@@ -61,11 +61,20 @@ export const POST: APIRoute = async ({ request, redirect }) => {
     if (apiKey) {
       const { Resend } = await import("resend");
       const resend = new Resend(apiKey);
+      // City and project type are optional now, so build a subject that
+      // still reads well when they're missing.
+      const subjectDetail = [lead.projectCity, lead.projectType]
+        .filter(Boolean)
+        .join(" · ");
       const { error } = await resend.emails.send({
         from: FROM,
         to: NOTIFY_EMAIL,
-        replyTo: lead.email,
-        subject: `New consultation request — ${lead.projectCity} (${lead.projectType})`,
+        // Reply-to only when an email was supplied; otherwise replying
+        // would go nowhere useful.
+        ...(lead.email ? { replyTo: lead.email } : {}),
+        subject: subjectDetail
+          ? `New consultation request: ${subjectDetail}`
+          : `New consultation request from ${lead.name}`,
         text: buildLeadEmail(lead),
       });
       if (error) throw new Error(`resend: ${error.message}`);

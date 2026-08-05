@@ -2,6 +2,17 @@
   "trailingSlash": true,
   "redirects": [
     {
+      "comment": "The basement finishing service page was consolidated into the homepage, which is now the primary basement finishing landing page.",
+      "source": "/basement-finishing",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/basement-finishing/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "www.huntingtanner.com" }],
       "destination": "https://huntingtanner.com/:path*",

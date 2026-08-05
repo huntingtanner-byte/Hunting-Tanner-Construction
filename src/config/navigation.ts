@@ -7,7 +7,6 @@ export interface NavItem {
 
 /** Primary header navigation */
 export const headerNav: NavItem[] = [
-  { label: "Basement Finishing", href: "/basement-finishing/" },
   { label: "Services", href: "/services/" },
   { label: "Process", href: "/process/" },
   { label: "Projects", href: "/projects/" },
@@ -17,7 +16,6 @@ export const headerNav: NavItem[] = [
 
 /** Footer: services column */
 export const footerServices: NavItem[] = [
-  { label: "Basement Finishing", href: "/basement-finishing/" },
   { label: "Basement Remodeling", href: "/basement-remodeling/" },
   { label: "All Services", href: "/services/" },
   { label: "Our Process", href: "/process/" },

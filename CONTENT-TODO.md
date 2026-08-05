@@ -30,6 +30,26 @@ item here.
       promising "we respond within X hours." Decide if Hunting wants to
       commit to one publicly (contact + thank-you pages are the spots).
 
+## 🔴 Google reviews (section built, waiting on real reviews)
+
+- [ ] **Create and verify the Google Business Profile.** It does not exist
+      yet, so there are no reviews to embed. This is the single highest-ROI
+      marketing task remaining for a local contractor.
+- [ ] **Add real reviews to `src/data/reviews.ts`.** The homepage reviews
+      section renders ONLY when that array has entries, so nothing shows
+      today. Never add sample, paraphrased, or invented reviews — same rule
+      as the projects gallery.
+- [ ] **Set `googleBusinessProfileURL` in `src/config/business.ts`** so the
+      "Read all reviews on Google" link appears and the profile is included
+      in schema `sameAs`.
+
+Automated alternatives, if manual copying becomes tedious: Google's Places
+API can pull reviews programmatically (requires an API key plus a billing
+account, and Google caps it at 5 reviews), or a third-party widget such as
+Elfsight can embed a live feed (monthly fee, and it adds render-blocking
+JavaScript that will cost Core Web Vitals points). The current static
+approach is free, fastest, and adds zero JavaScript.
+
 ## 🟠 Facts to verify before adding (currently omitted on purpose)
 
 - [ ] **"Licensed GC in Utah" phrasing** — NOW UNBLOCKED (license active).

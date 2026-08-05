@@ -1,0 +1,150 @@
+---
+/**
+ * Google Business Profile reviews section.
+ *
+ * Renders nothing at all when there are no real reviews yet, so the site
+ * never shows empty stars, sample testimonials, or a "no reviews" state.
+ * Populate src/data/reviews.ts with genuine reviews to switch it on.
+ *
+ * No third-party script is used: reviews are rendered as static HTML at
+ * build time, which keeps the section free of layout shift and adds zero
+ * JavaScript. See CONTENT-TODO.md for the API/widget alternatives.
+ */
+import { reviews, averageRating, reviewCount } from "@/data/reviews";
+import { business } from "@/config/business";
+
+const profileUrl = business.googleBusinessProfileURL;
+const hasReviews = reviews.length > 0;
+---
+
+{hasReviews && (
+  <section class="section" aria-labelledby="reviews-heading">
+    <div class="container">
+      <span class="eyebrow">Reviews</span>
+      <h2 id="reviews-heading">What Utah homeowners say</h2>
+      <p class="lede">
+        Verified reviews from our Google Business Profile.
+      </p>
+
+      <p class="reviews-summary">
+        <span class="stars" aria-hidden="true">
+          {"★".repeat(Math.round(averageRating ?? 0))}
+        </span>
+        <span class="summary-text">
+          <strong>{averageRating}</strong> average from {reviewCount}{" "}
+          {reviewCount === 1 ? "review" : "reviews"} on Google
+        </span>
+      </p>
+
+      <ul class="reviews-grid">
+        {reviews.map((review) => (
+          <li class="review-card">
+            <p class="review-stars">
+              <span aria-hidden="true">{"★".repeat(review.rating)}</span>
+              <span class="sr-only">{review.rating} out of 5 stars</span>
+            </p>
+            <blockquote>
+              <p>{review.text}</p>
+            </blockquote>
+            <p class="review-meta">
+              <strong>{review.author}</strong>
+              <span>
+                {review.city ? `${review.city} · ` : ""}{review.date}
+              </span>
+            </p>
+          </li>
+        ))}
+      </ul>
+
+      {profileUrl && (
+        <p class="reviews-cta">
+          <a
+            href={profileUrl}
+            rel="noopener"
+            data-event="social_click"
+            data-event-label="google-reviews"
+          >
+            Read all reviews on Google →
+          </a>
+        </p>
+      )}
+    </div>
+  </section>
+)}
+
+<style>
+  .reviews-summary {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-3);
+    margin-top: var(--space-5);
+  }
+  .stars,
+  .review-stars {
+    color: #e0a12a;
+    letter-spacing: 0.1em;
+    font-size: var(--text-lg);
+    margin: 0;
+  }
+  .summary-text {
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+  }
+  .summary-text strong {
+    color: var(--color-ink);
+    font-size: var(--text-base);
+  }
+
+  .reviews-grid {
+    list-style: none;
+    margin: var(--space-6) 0 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-5);
+  }
+  @media (min-width: 700px) {
+    .reviews-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .reviews-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .review-card {
+    margin: 0;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line-strong);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .review-card blockquote {
+    margin: 0;
+  }
+  .review-card blockquote p {
+    margin: 0;
+    color: var(--color-muted);
+  }
+  .review-meta {
+    margin: auto 0 0;
+    display: flex;
+    flex-direction: column;
+    font-size: var(--text-sm);
+  }
+  .review-meta span {
+    color: var(--color-muted);
+    font-size: var(--text-xs);
+  }
+
+  .reviews-cta {
+    margin-top: var(--space-6);
+    font-weight: 700;
+  }
+</style>

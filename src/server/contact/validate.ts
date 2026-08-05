@@ -107,14 +107,17 @@ export function validateLead(form: FormData): ValidationResult {
     form_variant: get("form_variant"),
   };
 
+  /**
+   * Only name and phone are required — a homeowner who gives us a way to
+   * call them back is a usable lead. Everything else is a bonus we can ask
+   * about on the phone. Email is still format-checked when supplied, so a
+   * typo doesn't silently produce an unreachable address.
+   */
   if (!lead.name) errors.name = "Name is required.";
   if (lead.phone.replace(/\D/g, "").length < 10)
     errors.phone = "A valid phone number is required.";
-  if (!EMAIL_RE.test(lead.email))
-    errors.email = "A valid email address is required.";
-  if (!lead.projectCity) errors.projectCity = "Project city is required.";
-  if (!lead.projectType) errors.projectType = "Project type is required.";
-  if (!lead.message) errors.message = "Please include a short message.";
+  if (lead.email && !EMAIL_RE.test(lead.email))
+    errors.email = "That email address doesn't look right.";
 
   const ok = Object.keys(errors).length === 0;
   return ok ? { ok, errors, lead } : { ok, errors };
@@ -122,5 +125,5 @@ export function validateLead(form: FormData): ValidationResult {
 
 /** Safe log line — no message body, no attribution, just enough to debug. */
 export function safeLogSummary(lead: LeadPayload): string {
-  return `lead received: city=${lead.projectCity} type=${lead.projectType} variant=${lead.form_variant ?? "?"}`;
+  return `lead received: city=${lead.projectCity || "-"} type=${lead.projectType || "-"} variant=${lead.form_variant || "?"}`;
 }
