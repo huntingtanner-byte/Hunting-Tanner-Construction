@@ -4,12 +4,12 @@
     {
       "source": "/basement-finishing",
       "destination": "/",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/basement-finishing/",
       "destination": "/",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/:path*",
