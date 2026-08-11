@@ -27,26 +27,27 @@ const {
     <div class:list={["cta-inner", { "with-form": withForm }]}>
       <div class="cta-copy">
         <h2>{heading}</h2>
+        <span class="rule"></span>
         <p class="lede">{text}</p>
         <div class="cta-actions">
+          {!withForm && (
+            <a
+              class="btn btn--secondary"
+              href="/contact/"
+              data-event="cta_click"
+              data-event-label="cta-section"
+            >
+              Request a Consultation
+            </a>
+          )}
           <a
-            class="btn btn--light"
+            class="btn btn--ghost-light"
             href={business.phoneHref}
             data-event="click_to_call"
             data-event-label="cta-section"
           >
             Call {business.phoneDisplay}
           </a>
-          {!withForm && (
-            <a
-              class="btn btn--primary"
-              href="/contact/"
-              data-event="cta_click"
-              data-event-label="cta-section"
-            >
-              Request a Basement Consultation
-            </a>
-          )}
         </div>
       </div>
       {withForm && (

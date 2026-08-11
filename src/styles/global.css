@@ -1,47 +1,94 @@
 /* ============================================================
    Hunting Tanner Construction — design system
-   White page and white cards, with a deep slate ink, pale stone tints for
-   alternating sections, and a blue-gray stone accent (dark enough to
-   carry white lettering). Cards read through borders + soft elevation
-   rather than color contrast, so white-on-white feels airy, not stark.
-   Every interactive color is checked for WCAG AA contrast.
+   "Coastal Luxury" direction: a warm Soft White canvas, Charcoal for
+   type and anchors, Sea Glass as a quiet accent, Pale Taupe for warmth.
+
+   Principles baked into these tokens:
+   - Soft White dominates; tinted sections are used sparingly so the site
+     doesn't read as a stack of differently-coloured bands.
+   - Surfaces match the page. Cards separate with a warm hairline, not a
+     shadow, so nothing looks like a SaaS component.
+   - Sea Glass never carries body text (1.8:1 on Soft White). It fills
+     shapes and carries Charcoal text at 6.87:1.
+   - Small architectural radii instead of app-style rounding.
    All colors are custom properties — change them here only.
    ============================================================ */
 
 :root {
-  /* ---- Color tokens ---- */
-  --color-bg: #ffffff;            /* white page */
-  --color-surface: #ffffff;       /* cards, forms */
-  --color-surface-alt: #f2f5f7;   /* pale stone — alternating sections */
-  --color-ink: #1f3438;           /* deep marine — primary text */
-  --color-ink-soft: #2f4a4e;      /* softened marine (wordmark) */
-  --color-muted: #55686b;         /* secondary text — 5.7:1 on white */
-  --color-line: #dde3e8;          /* soft hairline borders */
-  --color-line-strong: #c9d3da;   /* card edges on white */
-  --color-accent: #546a7b;        /* blue-gray stone — CTAs, links (5.64:1) */
-  --color-accent-hover: #435665;  /* darker stone for hover (7.62:1) */
-  --color-accent-soft: #e8edf1;   /* pale stone tint backgrounds */
-  --color-accent-bright: #9db1c0; /* light stone — decorative + on-dark (5.9:1) */
-  --color-dark: #1f3438;          /* deep marine — dark sections */
-  --color-dark-text: #e9f1f0;
-  --color-dark-muted: #a9c3c2;
-  --color-focus: #0f62d0;         /* focus ring — distinct from accent */
-  --color-error: #a2361f;
+  /* ---- Brand palette (source of truth) ---- */
+  --brand-soft-white: #faf8f3;
+  --brand-sea-glass: #aebfbc;
+  --brand-pale-taupe: #c7b9a9;
+  --brand-charcoal: #2c3135;
+
+  /* ---- Semantic surfaces ---- */
+  --color-background: #faf8f3;      /* Soft White — dominant canvas */
+  --color-background-soft: #f1ede6; /* 18% taupe wash — warm secondary bands */
+  --color-background-cool: #eff0ec; /* 15% sea glass wash — used rarely */
+  --color-surface: #faf8f3;         /* cards sit on the canvas, not above it */
+  --color-surface-raised: #fffefb;  /* form fields, so inputs read as inputs */
+
+  /* ---- Type ---- */
+  --color-text: #2c3135;            /* Charcoal — 12.38:1 on Soft White */
+  --color-text-muted: #5c6367;      /* 5.76:1 on Soft White, 5.24:1 on taupe */
+
+  /* ---- Accents ---- */
+  --color-accent: #aebfbc;          /* Sea Glass — fills and rules only */
+  --color-accent-hover: #9cb0ac;    /* pressed/hover fill */
+  --color-accent-ink: #2c3135;      /* text ON Sea Glass — 6.87:1 */
+  --color-accent-secondary: #c7b9a9;/* Pale Taupe — warmth, rules, details */
+
+  /* ---- Lines ---- */
+  --color-border: #e8e2d9;          /* warm hairline on Soft White */
+  --color-border-strong: #d9cfc3;   /* card and field edges */
+  --color-input-border: #cfc4b6;
+
+  /* ---- Dark sections ---- */
+  --color-dark: #2c3135;            /* Charcoal */
+  --color-on-dark: #faf8f3;         /* 12.38:1 */
+  --color-on-dark-muted: #b8bcbd;   /* 6.86:1 */
+  --color-on-dark-accent: #aebfbc;  /* Sea Glass on Charcoal — 6.87:1 */
+
+  /* ---- Buttons ---- */
+  --color-button-primary: #2c3135;
+  --color-button-primary-text: #faf8f3;
+  --color-button-secondary: #aebfbc;
+  --color-button-secondary-text: #2c3135;
+
+  /* ---- State ---- */
+  --color-focus: #2c3135;           /* charcoal ring reads as brand, not OS */
+  --color-error: #8f3520;
   --color-success: #2e6b3f;
+
+  /* ---- Legacy aliases (kept so no component breaks mid-refactor) ---- */
+  --color-bg: var(--color-background);
+  --color-surface-alt: var(--color-background-soft);
+  --color-ink: var(--color-text);
+  --color-ink-soft: var(--color-text);
+  --color-muted: var(--color-text-muted);
+  --color-line: var(--color-border);
+  --color-line-strong: var(--color-border-strong);
+  --color-accent-soft: var(--color-background-cool);
+  --color-accent-bright: var(--color-on-dark-accent);
+  --color-dark-text: var(--color-on-dark);
+  --color-dark-muted: var(--color-on-dark-muted);
 
   /* ---- Typography ---- */
   --font-display: "Source Serif 4 Variable", Georgia, "Times New Roman", serif;
   --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
 
-  --text-xs: 0.8125rem;
+  --text-xs: 0.75rem;
   --text-sm: 0.9375rem;
   --text-base: 1.0625rem;
   --text-lg: 1.1875rem;
-  --text-xl: 1.375rem;
-  --text-2xl: clamp(1.5rem, 1.2rem + 1.2vw, 1.875rem);
-  --text-3xl: clamp(1.75rem, 1.35rem + 1.8vw, 2.375rem);
-  --text-4xl: clamp(2.125rem, 1.5rem + 2.8vw, 3.25rem);
+  --text-xl: 1.3125rem;
+  --text-2xl: clamp(1.5rem, 1.15rem + 1.4vw, 2rem);
+  --text-3xl: clamp(1.75rem, 1.25rem + 2.2vw, 2.75rem);
+  --text-4xl: clamp(2.25rem, 1.5rem + 3.4vw, 4rem);
+
+  /* Letterspaced label treatment used for eyebrows, buttons, nav */
+  --tracking-label: 0.16em;
 
   /* ---- Spacing scale ---- */
   --space-1: 0.25rem;
@@ -51,27 +98,21 @@
   --space-5: 1.5rem;
   --space-6: 2rem;
   --space-7: 3rem;
-  --space-8: 4rem;
-  --space-9: 6rem;
+  --space-8: 4.5rem;
+  --space-9: 7rem;
 
   /* ---- Layout ---- */
-  --container: 72rem;
-  --container-narrow: 46rem;
-  --radius: 10px;
-  --radius-lg: 16px;
-  --shadow-sm: 0 1px 3px rgb(31 52 56 / 0.07);
-  /* Cards sit on white, so they need gentle elevation to separate */
-  --shadow-card: 0 1px 2px rgb(31 52 56 / 0.05),
-    0 8px 20px -14px rgb(31 52 56 / 0.35);
-  --shadow-md: 0 10px 34px -14px rgb(31 52 56 / 0.28);
+  --container: 76rem;
+  --container-narrow: 44rem;
+  /* Architectural, not app-like */
+  --radius: 2px;
+  --radius-lg: 3px;
+  --shadow-sm: 0 1px 2px rgb(44 49 53 / 0.06);
+  --shadow-card: none;
+  --shadow-md: 0 18px 48px -32px rgb(44 49 53 / 0.45);
 
   /* ---- Header height (used by scroll offsets & sticky CTA) ---- */
-  --header-h: 4.25rem;
-}
-
-/* Form input borders — soft blue-gray with enough weight to read on white */
-:root {
-  --color-input-border: #b3bfc9;
+  --header-h: 5rem;
 }
 
 /* ============ Base ============ */
@@ -111,31 +152,37 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* Headings sit at regular weight. A large serif at 400 reads editorial
+   and architectural; the same face at 600 reads utilitarian. */
 h1,
 h2,
 h3,
 h4 {
   font-family: var(--font-display);
-  font-weight: 600;
-  line-height: 1.15;
-  color: var(--color-ink);
+  font-weight: 400;
+  line-height: 1.14;
+  color: var(--color-text);
   margin: 0 0 var(--space-4);
   text-wrap: balance;
 }
 
 h1 {
   font-size: var(--text-4xl);
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
+  line-height: 1.06;
 }
 h2 {
   font-size: var(--text-3xl);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 h3 {
   font-size: var(--text-xl);
+  font-weight: 500;
+  letter-spacing: -0.005em;
 }
 h4 {
   font-size: var(--text-lg);
+  font-weight: 500;
 }
 
 p {
@@ -145,13 +192,18 @@ p:last-child {
   margin-bottom: 0;
 }
 
+/* Sea Glass is only 1.8:1 on Soft White, so inline links stay Charcoal and
+   are distinguished by a taupe underline that warms to Sea Glass on hover. */
 a {
-  color: var(--color-accent);
+  color: var(--color-text);
+  text-decoration-color: var(--color-accent-secondary);
   text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
+  text-underline-offset: 0.22em;
+  transition: text-decoration-color 0.15s ease;
 }
 a:hover {
-  color: var(--color-accent-hover);
+  color: var(--color-text);
+  text-decoration-color: var(--color-text);
 }
 
 img {
@@ -175,13 +227,14 @@ strong {
 
 /* Visible focus for keyboard users */
 :focus-visible {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 2px;
-  border-radius: 2px;
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: 1px;
 }
 
 ::selection {
-  background: var(--color-accent-soft);
+  background: var(--brand-sea-glass);
+  color: var(--color-text);
 }
 
 /* ============ Utilities ============ */
@@ -206,44 +259,91 @@ strong {
   }
 }
 
+/* Warm tinted band. Used sparingly — the canvas should dominate. */
 .section--alt {
-  background: var(--color-surface-alt);
+  background: var(--color-background-soft);
 }
 
 .section--dark {
   background: var(--color-dark);
-  color: var(--color-dark-text);
+  color: var(--color-on-dark);
 }
 .section--dark h2,
-.section--dark h3 {
-  color: #fff;
+.section--dark h3,
+.section--dark h4 {
+  color: var(--color-on-dark);
 }
 .section--dark p {
-  color: var(--color-dark-text);
+  color: var(--color-on-dark);
+}
+.section--dark a {
+  color: var(--color-on-dark);
+  text-decoration-color: var(--color-on-dark-accent);
+}
+.section--dark a:hover {
+  text-decoration-color: var(--color-on-dark);
 }
 
-/* Eyebrow label above headings */
+/* Small letterspaced label. Muted rather than coloured — Sea Glass is
+   unreadable at this size on Soft White. */
 .eyebrow {
   display: block;
   font-family: var(--font-body);
   font-size: var(--text-xs);
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
-  color: var(--color-accent);
-  margin-bottom: var(--space-3);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
 }
 .section--dark .eyebrow {
-  color: var(--color-accent-bright);
+  color: var(--color-on-dark-accent);
+}
+
+/* A hairline rule under a heading, borrowed from the reference layout */
+.rule {
+  display: block;
+  width: 3rem;
+  height: 1px;
+  background: var(--color-accent-secondary);
+  border: 0;
+  margin: var(--space-5) 0;
+}
+.section--dark .rule {
+  background: var(--color-on-dark-accent);
 }
 
 .lede {
   font-size: var(--text-lg);
-  color: var(--color-muted);
-  max-width: 46rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  max-width: 42rem;
 }
 .section--dark .lede {
-  color: var(--color-dark-muted);
+  color: var(--color-on-dark-muted);
+}
+
+/* Small uppercase text link with an arrow — the reference's tertiary CTA */
+.link-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-accent-secondary);
+  padding-bottom: 0.4em;
+  transition: border-color 0.15s ease;
+}
+.link-label:hover {
+  border-color: var(--color-text);
+}
+.section--dark .link-label {
+  color: var(--color-on-dark);
+  border-color: var(--color-on-dark-accent);
 }
 
 .text-muted {
@@ -269,86 +369,107 @@ strong {
   top: -100%;
   left: var(--space-4);
   z-index: 100;
-  background: var(--color-ink);
-  color: #fff;
+  background: var(--color-dark);
+  color: var(--color-on-dark);
   padding: var(--space-3) var(--space-4);
   border-radius: 0 0 var(--radius) var(--radius);
   text-decoration: none;
 }
 .skip-link:focus {
   top: 0;
-  color: #fff;
+  color: var(--color-on-dark);
 }
 
-/* ============ Buttons ============ */
+/* ============ Buttons ============
+   Uppercase, letterspaced, minimal radius. Restrained rather than glossy.
+   Primary = Charcoal, Secondary = Sea Glass, Tertiary = outlined. */
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  min-height: 48px;
-  padding: 0.75rem 1.5rem;
+  min-height: 50px;
+  padding: 0.9rem 2rem;
   border-radius: var(--radius);
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   font-family: var(--font-body);
-  font-size: var(--text-base);
+  font-size: var(--text-xs);
   font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
   line-height: 1.2;
+  text-align: center;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.15s ease, border-color 0.15s ease,
-    color 0.15s ease;
+  transition: background-color 0.18s ease, border-color 0.18s ease,
+    color 0.18s ease;
 }
 
 .btn--primary {
-  background: var(--color-accent);
-  color: #fff;
+  background: var(--color-button-primary);
+  border-color: var(--color-button-primary);
+  color: var(--color-button-primary-text);
 }
 .btn--primary:hover {
-  background: var(--color-accent-hover);
-  color: #fff;
+  background: #1e2226;
+  border-color: #1e2226;
+  color: var(--color-button-primary-text);
 }
 
 .btn--secondary {
-  background: transparent;
-  color: var(--color-ink);
-  border-color: var(--color-ink-soft);
+  background: var(--color-button-secondary);
+  border-color: var(--color-button-secondary);
+  color: var(--color-button-secondary-text);
 }
 .btn--secondary:hover {
-  background: var(--color-ink);
-  border-color: var(--color-ink);
-  color: #fff;
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: var(--color-button-secondary-text);
+}
+
+/* Tertiary — outlined on light backgrounds */
+.btn--outline {
+  background: transparent;
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+}
+.btn--outline:hover {
+  background: var(--color-text);
+  border-color: var(--color-text);
+  color: var(--color-on-dark);
 }
 
 .btn--light {
-  background: #fff;
-  color: var(--color-ink);
+  background: var(--color-background);
+  border-color: var(--color-background);
+  color: var(--color-text);
 }
 .btn--light:hover {
-  background: var(--color-surface-alt);
-  color: var(--color-ink);
+  background: var(--brand-sea-glass);
+  border-color: var(--brand-sea-glass);
+  color: var(--color-text);
 }
 
 .btn--ghost-light {
   background: transparent;
-  color: #fff;
-  border-color: rgb(255 255 255 / 0.55);
+  color: var(--color-on-dark);
+  border-color: rgb(250 248 243 / 0.5);
 }
 .btn--ghost-light:hover {
-  background: rgb(255 255 255 / 0.12);
-  color: #fff;
-  border-color: #fff;
+  background: rgb(250 248 243 / 0.1);
+  color: var(--color-on-dark);
+  border-color: var(--color-on-dark);
 }
 
-/* ============ Cards ============ */
+/* ============ Cards ============
+   Defined by a warm hairline, never a shadow. */
 
 .card {
   background: var(--color-surface);
-  border: 1px solid var(--color-line-strong);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-6);
-  box-shadow: var(--shadow-card);
 }
 
 /* ============ Forms ============ */
@@ -360,28 +481,36 @@ strong {
   margin-bottom: var(--space-4);
 }
 
+/* Labels use the same small letterspaced treatment as eyebrows, which
+   ties the form into the editorial system instead of looking like a
+   generic web form. */
 .field label {
-  font-size: var(--text-sm);
+  font-size: var(--text-xs);
   font-weight: 600;
-  color: var(--color-ink);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-1);
 }
 
 .field .optional {
   font-weight: 400;
-  color: var(--color-muted);
+  letter-spacing: 0.04em;
+  text-transform: none;
 }
 
 .field input,
 .field select,
 .field textarea {
   font: inherit;
-  color: var(--color-ink);
-  background: var(--color-surface);
+  color: var(--color-text);
+  background: var(--color-surface-raised);
   border: 1px solid var(--color-input-border);
   border-radius: var(--radius);
-  padding: 0.7rem 0.85rem;
-  min-height: 48px;
+  padding: 0.8rem 0.9rem;
+  min-height: 50px;
   width: 100%;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .field textarea {
@@ -389,11 +518,19 @@ strong {
   resize: vertical;
 }
 
+.field input:hover,
+.field select:hover,
+.field textarea:hover {
+  border-color: var(--color-border-strong);
+}
+
+/* Sea Glass focus ring — the accent doing quiet, functional work */
 .field input:focus-visible,
 .field select:focus-visible,
 .field textarea:focus-visible {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 1px;
+  outline: none;
+  border-color: var(--brand-sea-glass);
+  box-shadow: 0 0 0 3px rgb(174 191 188 / 0.45);
 }
 
 .field input[aria-invalid="true"],

@@ -29,17 +29,17 @@ const { faqs } = Astro.props;
 <style>
   .faq-accordion {
     display: grid;
-    gap: var(--space-3);
+    gap: 0;
+    border-top: 1px solid var(--color-border);
   }
 
   .faq-item {
     background: var(--color-surface);
-    border: 1px solid var(--color-line-strong);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
+    border-bottom: 1px solid var(--color-border);
+    border-radius: 0;
   }
   .faq-item[open] {
-    border-color: var(--color-accent);
+    border-bottom-color: var(--color-border-strong);
   }
 
   .faq-item summary {
@@ -49,16 +49,17 @@ const { faqs } = Astro.props;
     justify-content: space-between;
     gap: var(--space-4);
     cursor: pointer;
-    padding: var(--space-4) var(--space-5);
-    font-weight: 650;
-    font-size: var(--text-base);
+    padding: var(--space-5) 0;
+    font-weight: 500;
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
     min-height: 48px;
   }
   .faq-item summary::-webkit-details-marker {
     display: none;
   }
   .faq-item summary:hover {
-    color: var(--color-accent);
+    color: var(--color-text-muted);
   }
 
   .faq-icon {
@@ -71,7 +72,7 @@ const { faqs } = Astro.props;
   .faq-icon::after {
     content: "";
     position: absolute;
-    background: var(--color-accent);
+    background: var(--color-text);
     border-radius: 1px;
   }
   .faq-icon::before {
@@ -92,7 +93,7 @@ const { faqs } = Astro.props;
   }
 
   .faq-answer {
-    padding: 0 var(--space-5) var(--space-5);
+    padding: 0 0 var(--space-5);
     color: var(--color-muted);
   }
 </style>

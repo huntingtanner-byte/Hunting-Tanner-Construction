@@ -41,7 +41,7 @@ const currentPath = Astro.url.pathname;
         {business.phoneDisplay}
       </a>
       <a
-        class="btn btn--primary header-cta"
+        class="btn btn--outline header-cta"
         href="/contact/"
         data-event="cta_click"
         data-event-label="header"
@@ -102,8 +102,7 @@ const currentPath = Astro.url.pathname;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
   .site-header[data-scrolled] {
-    border-bottom-color: var(--color-line);
-    box-shadow: var(--shadow-sm);
+    border-bottom-color: var(--color-border);
   }
 
   .header-inner {
@@ -129,12 +128,12 @@ const currentPath = Astro.url.pathname;
     font-family: var(--font-display);
     /* Scales down before it is forced to wrap on small screens */
     font-size: clamp(1.05rem, 0.9rem + 1vw, 1.25rem);
-    font-weight: 600;
-    letter-spacing: 0.06em;
+    font-weight: 400;
+    letter-spacing: 0.14em;
     /* Letter-spacing adds a trailing space after the last letter. The
        negative margin removes it from the box so centering is optical
        rather than a half-space off. */
-    margin-right: -0.06em;
+    margin-right: -0.14em;
     text-transform: uppercase;
   }
   .wordmark-sub {
@@ -148,23 +147,25 @@ const currentPath = Astro.url.pathname;
 
   .desktop-nav ul {
     display: flex;
-    gap: var(--space-5);
+    gap: var(--space-6);
     list-style: none;
     margin: 0;
     padding: 0;
   }
   .desktop-nav a {
-    color: var(--color-ink);
+    color: var(--color-text);
     text-decoration: none;
-    font-size: var(--text-sm);
+    font-size: var(--text-xs);
     font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     padding: var(--space-2) 0;
-    border-bottom: 2px solid transparent;
+    border-bottom: 1px solid transparent;
   }
   .desktop-nav a:hover,
   .desktop-nav a[aria-current="page"] {
-    color: var(--color-accent);
-    border-bottom-color: var(--color-accent);
+    color: var(--color-text);
+    border-bottom-color: var(--color-accent-secondary);
   }
 
   .header-actions {
@@ -173,19 +174,19 @@ const currentPath = Astro.url.pathname;
     gap: var(--space-4);
   }
   .header-phone {
-    color: var(--color-ink);
+    color: var(--color-text);
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 600;
     font-size: var(--text-sm);
+    letter-spacing: 0.02em;
     white-space: nowrap;
   }
   .header-phone:hover {
-    color: var(--color-accent);
+    color: var(--color-text-muted);
   }
   .header-cta {
     min-height: 42px;
-    padding: 0.5rem 1.1rem;
-    font-size: var(--text-sm);
+    padding: 0.65rem 1.4rem;
   }
 
   /* ---- Mobile nav (details/summary; works without JS) ---- */
@@ -277,7 +278,7 @@ const currentPath = Astro.url.pathname;
   .mobile-nav-panel a:not(.btn):hover,
   .mobile-nav-panel a[aria-current="page"]:not(.btn) {
     background: var(--color-surface-alt);
-    color: var(--color-accent);
+    color: var(--color-text);
   }
   .mobile-nav-cta {
     padding: var(--space-3);

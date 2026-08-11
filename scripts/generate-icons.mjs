@@ -7,9 +7,9 @@ import sharp from "sharp";
 import { writeFile, mkdir } from "node:fs/promises";
 
 /** Palette: deep slate / white / blue-gray stone */
-const CHARCOAL = "#1f3438";
-const OFFWHITE = "#ffffff";
-const ACCENT = "#546a7b";
+const CHARCOAL = "#2c3135";
+const OFFWHITE = "#faf8f3";
+const ACCENT = "#aebfbc";
 
 const monogramSvg = (size, radius) => `
 <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 100 100">
