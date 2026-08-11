@@ -19,7 +19,7 @@ export const homeFaqs: FAQ[] = [
   {
     question: "How long does a basement finish take?",
     answer:
-      "Most projects take anywhere from 4-8 weeks typically, depending on the size and scope, from start of construction to final walkthrough. You'll receive an estimated timeline with your proposal, and regular updates while work is underway, including when anything shifts and why.",
+      "Most projects take anywhere from 6-10 weeks typically, depending on the size and scope, from start of construction to final walkthrough. You'll receive an estimated timeline with your proposal, and regular updates while work is underway, including when anything shifts and why.",
   },
   {
     question: "Do I need a permit to finish my basement?",
@@ -91,7 +91,7 @@ export const faqPageGroups: FAQGroup[] = [
       {
         question: "How long will my project take?",
         answer:
-          "Most projects run 4-8 weeks of construction typically, depending on size and scope, along with inspection scheduling and material lead times. Your proposal includes an estimated timeline, and weekly communication keeps you current on progress and what's coming next.",
+          "Most projects run 6-10 weeks of construction typically, depending on size and scope, along with inspection scheduling and material lead times. Your proposal includes an estimated timeline, and weekly communication keeps you current on progress and what's coming next.",
       },
       {
         question: "What happens when the scope changes mid-project?",
@@ -156,7 +156,7 @@ export const faqPageGroups: FAQGroup[] = [
       {
         question: "Is Hunting Tanner Construction a new company?",
         answer:
-          "The company is new. The experience behind it isn't. Hunting is a third-generation contractor who grew up on job sites, and he founded HTC alongside his dad Gary, a general contractor with over 30 years of experience and three decades of relationships with top subcontractors. Every project gets written scopes, documented changes, regular updates, and an owner who is personally involved from start to finish.",
+          "The company is new. The experience behind it isn't. Hunting is a third-generation contractor who grew up on job sites alongside his dad, Gary, a general contractor with more than 35 years of experience and decades of relationships with top subcontractors. Gary is our senior advisor and is involved in every project, so a veteran's judgment reviews the work alongside the owner running it. Every project gets written scopes, documented changes, regular updates, and an owner who is personally involved from start to finish.",
       },
       {
         question: "Which areas do you serve?",

@@ -229,7 +229,7 @@ export const utahCountyCities: CityPage[] = [
       {
         question: "How long would a full PG basement finish take?",
         answer:
-          "Most projects take anywhere from 4-8 weeks typically, depending on the size and scope, plus inspections and selections. Your proposal includes an estimated timeline for your specific project, and weekly updates keep you current once work begins.",
+          "Most projects take anywhere from 6-10 weeks typically, depending on the size and scope, plus inspections and selections. Your proposal includes an estimated timeline for your specific project, and weekly updates keep you current once work begins.",
       },
     ],
     ctaHeading: "Finish the basement your PG home deserves",
@@ -306,7 +306,7 @@ export const utahCountyCities: CityPage[] = [
       {
         question: "Who manages the project day to day?",
         answer:
-          "Hunting does, personally, on every project. You get one accountable point of contact, scheduled updates, and direct answers, backed by his co-founder and father Gary's three decades of general contracting experience.",
+          "Hunting does, personally, on every project. You get one accountable point of contact, scheduled updates, and direct answers, backed by his father Gary, our senior advisor and a general contractor with more than 35 years of experience, who is involved in every project.",
       },
     ],
     ctaHeading: "Design the lower level your lot deserves",
@@ -558,7 +558,7 @@ export const utahCountyCities: CityPage[] = [
     lede: "Highland homes are built generously, and their basements should live that way too: finished to the same standard as the floors above, not to 'basement standard.'",
     intro: [
       "Highland's larger lots and larger homes come with basements to match: high ceilings, big windows, wide-open footprints. Spaces like that deserve more than the minimum. Trim that matches the main floor, lighting designed rather than scattered, built-ins where they belong, and a layout that uses the windows instead of walling them off.",
-      "Hunting Tanner Construction runs Highland projects with the discipline larger scopes demand: written room-by-room scopes, organized selections with real allowances, coordinated trades, and an owner who's personally on the job. Meticulous scope review is a family trait; it's how Gary ran projects for thirty years.",
+      "Hunting Tanner Construction runs Highland projects with the discipline larger scopes demand: written room-by-room scopes, organized selections with real allowances, coordinated trades, and an owner who's personally on the job. Meticulous scope review is a family trait; it's how Gary ran projects for more than 35 years.",
     ],
     angle: {
       heading: "Finishing to the standard of the house",
@@ -865,7 +865,7 @@ export const utahCountyCities: CityPage[] = [
     lede: "Where the county turns pastoral: bigger parcels, custom homes under Maple Mountain, and basements with the square footage to match.",
     intro: [
       "Mapleton kept its orchards-and-acreage character while its homes grew ambitious, and the basements followed: big footprints, tall ceilings in newer builds, and on benched lots, walkout levels with real daylight. Space like that rewards a proper plan and punishes improvisation.",
-      "Hunting Tanner Construction brings Mapleton projects disciplined scoping, custom-grade selections management, and an owner personally involved from walkthrough to walkthrough, backed by a co-founder with three decades of general contracting behind him.",
+      "Hunting Tanner Construction brings Mapleton projects disciplined scoping, custom-grade selections management, and an owner personally involved from walkthrough to walkthrough, backed by an advisor with more than 35 years of general contracting behind him.",
     ],
     angle: {
       heading: "Country property, finished lower level",

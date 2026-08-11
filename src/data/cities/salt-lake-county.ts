@@ -167,7 +167,7 @@ export const saltLakeCountyCities: CityPage[] = [
     lede: "Tree-lined, established, and quietly upscale, Holladay expects quality, and its basements should meet the neighborhood's standard.",
     intro: [
       "Holladay's housing runs from gracious mid-century homes to newer custom builds, with a shared trait: owners who invest in their houses for the long term. Basement work here is rarely about maximum square feet at minimum cost. It's about extending the home's quality downward.",
-      "That's our kind of brief. Written scopes with documented finish targets, selections managed at a quality level that matches the main floor, and meticulous scope review, the discipline Gary practiced for thirty years, applied to every line.",
+      "That's our kind of brief. Written scopes with documented finish targets, selections managed at a quality level that matches the main floor, and meticulous scope review, the discipline Gary practiced for more than 35 years, applied to every line.",
     ],
     angle: {
       heading: "Quality-first, not square-footage-first",
@@ -919,7 +919,7 @@ export const saltLakeCountyCities: CityPage[] = [
       {
         question: "How fast do newer-home finishes move?",
         answer:
-          "Newer bones remove most surprises, so schedules hold: most projects run 4-8 weeks typically from mobilization to final walkthrough, depending on size and scope plus inspections. Your proposal carries the real estimate, and weekly updates keep it honest.",
+          "Newer bones remove most surprises, so schedules hold: most projects run 6-10 weeks typically from mobilization to final walkthrough, depending on size and scope plus inspections. Your proposal carries the real estimate, and weekly updates keep it honest.",
       },
     ],
     ctaHeading: "Finish to the neighborhood's standard",
@@ -1074,7 +1074,7 @@ export const saltLakeCountyCities: CityPage[] = [
       {
         question: "How involved will the owner actually be on our project?",
         answer:
-          "Personally and throughout: Hunting runs the walkthrough, writes the scope, manages the schedule, and stays your single point of contact, with Gary's three decades of GC experience reviewing every scope behind him. That's the company model, not a sales line.",
+          "Personally and throughout: Hunting runs the walkthrough, writes the scope, manages the schedule, and stays your single point of contact, with Gary, our senior advisor, bringing 35+ years of GC experience to every scope. That's the company model, not a sales line.",
       },
     ],
     ctaHeading: "Finish the level with the view",
