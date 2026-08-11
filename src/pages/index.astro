@@ -6,7 +6,6 @@ import TrustStrip from "@/components/TrustStrip.astro";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider.astro";
 import ServiceCard from "@/components/ServiceCard.astro";
 import ProcessSteps from "@/components/ProcessSteps.astro";
-import OwnerStory from "@/components/OwnerStory.astro";
 import ServiceAreaCard from "@/components/ServiceAreaCard.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
 import FAQAccordion from "@/components/FAQAccordion.astro";
@@ -18,6 +17,7 @@ import { homeFaqs } from "@/data/faqs";
 import { publishableProjects } from "@/data/projects";
 import GoogleReviews from "@/components/GoogleReviews.astro";
 import { serviceSchema } from "@/lib/schema";
+import familyPhoto from "@/assets/family/hunting-tanner-family.jpg";
 import heroImage from "@/assets/hero/basement-after.png";
 import beforeImg from "@/assets/hero/basement-before.png";
 import afterImg from "@/assets/hero/basement-after.png";
@@ -58,7 +58,7 @@ import afterImg from "@/assets/hero/basement-after.png";
         </p>
         <div class="hero-actions">
           <a
-            class="btn btn--secondary"
+            class="btn btn--primary"
             href="#home-lead-form"
             data-event="cta_click"
             data-event-label="hero"
@@ -78,10 +78,10 @@ import afterImg from "@/assets/hero/basement-after.png";
     </div>
   </section>
 
-  {/* ============ Trust strip ============ */}
+  {/* ============ Credibility ============ */}
   <TrustStrip />
 
-  {/* ============ Consultation: kept high on the page for conversion === */}
+  {/* ============ Consultation — kept high on the page for conversion === */}
   <section class="section section--alt" id="home-lead-form">
     <div class="container consult-grid">
       <div class="consult-copy">
@@ -89,10 +89,9 @@ import afterImg from "@/assets/hero/basement-after.png";
         <h2>Tell us about your basement</h2>
         <span class="rule"></span>
         <p>
-          Every project begins the same way: a short conversation about
-          your space, then a walkthrough at your home. You'll get straight
-          answers about what's realistic, what it costs, and how long it
-          takes, in writing.
+          It starts with a conversation, then a walkthrough at your home.
+          You'll get straight answers on what's realistic, what it costs,
+          and how long it takes, in writing.
         </p>
         <p class="consult-note">
           Prefer to talk now? Call
@@ -101,7 +100,7 @@ import afterImg from "@/assets/hero/basement-after.png";
             data-event="click_to_call"
             data-event-label="consult-section"
           >{business.phoneDisplay}</a>
-          and speak directly with the owner, not a call center.
+          and speak directly with the owner.
         </p>
       </div>
       <div class="consult-form">
@@ -110,7 +109,80 @@ import afterImg from "@/assets/hero/basement-after.png";
     </div>
   </section>
 
-  {/* ============ E. Transformation ============ */}
+  {/* ============ What we build ============ */}
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">What We Build</span>
+      <h2>Basement spaces designed around how you live</h2>
+      <div class="grid-3 services-grid">
+        {coreServices.map((service) => (
+          <ServiceCard service={service} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ============ Project photography ============ */}
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Our Work</span>
+      <h2>Basements we've finished</h2>
+      <p class="lede">
+        Kitchens, bathrooms, bedrooms, and big family spaces, photographed
+        room by room.
+      </p>
+      <div class="grid-3 projects-grid">
+        {publishableProjects.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+      <div class="section-cta">
+        <a class="btn btn--outline" href="/projects/">
+          View the Full Galleries
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ============ Process — the page's first strong colour moment ====== */}
+  <section class="section section--dark">
+    <div class="container">
+      <div class="process-head">
+        <span class="eyebrow">How It Works</span>
+        <h2>Six clear steps from first call to final walkthrough</h2>
+        <span class="rule"></span>
+        <p class="lede">
+          We manage the entire basement finish, from planning and permits
+          through framing, mechanicals, finishes, and the final
+          walkthrough. One accountable point of contact the whole way.
+        </p>
+      </div>
+
+      <div class="process-preview">
+        <ProcessSteps compact />
+      </div>
+
+      {/* Condensed from the old "What's Included" section; full detail
+          now lives on /services/ */}
+      <ul class="process-manage">
+        <li>Planning &amp; written scope</li>
+        <li>Permits &amp; inspections</li>
+        <li>Framing, electrical &amp; plumbing</li>
+        <li>Drywall, trim &amp; flooring</li>
+      </ul>
+
+      <div class="section-cta">
+        <a class="btn btn--secondary" href="/process/">
+          See the Full Process
+        </a>
+        <a class="btn btn--ghost-light" href="/services/#whats-included">
+          What's Included
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ============ Transformation — image break after the dark band ==== */}
   <section class="section">
     <div class="container">
       <div class="transform-grid">
@@ -118,24 +190,14 @@ import afterImg from "@/assets/hero/basement-after.png";
           <span class="eyebrow">The Transformation</span>
           <h2>From concrete and studs to the best floor in the house</h2>
           <p>
-            Most Utah County homes come with hundreds of unfinished square
-            feet already under the roof: framed, plumbed for a future
-            bathroom, and waiting. Finishing that space is usually the most
-            cost-effective way to add bedrooms, a family room, or a home
-            office, because the foundation, walls, and roof are already paid
-            for.
+            Most Utah homes come with hundreds of unfinished square feet
+            already under the roof. Finishing that space is the most
+            cost-effective way to add bedrooms, a family room, or an
+            office, because the structure is already paid for.
           </p>
-          <p>
-            What stands between the concrete floor and a finished space is a
-            well-run project: a clear layout, a written scope, coordinated
-            trades, passed inspections, and finish work done in the right
-            order. That project management is exactly what Hunting Tanner
-            Construction is built around. Drag the slider to see the same
-            room, before and after.
+          <p class="transform-note">
+            Drag the slider to see the same room, before and after.
           </p>
-          <a class="btn btn--secondary" href="#basement-finishing-scope">
-            See What's Included
-          </a>
         </div>
         <BeforeAfterSlider
           before={beforeImg}
@@ -147,252 +209,60 @@ import afterImg from "@/assets/hero/basement-after.png";
     </div>
   </section>
 
-  {/* ============ Scope: what a Utah basement finish includes ============ */}
-  <section class="section" id="basement-finishing-scope">
-    <div class="container container--narrow">
-      <span class="eyebrow">What's Included</span>
-      <h2>What a Utah basement finish includes</h2>
-      <p>
-        A basement finish touches nearly every construction trade: framing,
-        electrical, plumbing, HVAC, insulation, drywall, paint, doors, trim,
-        and flooring, sequenced in the right order and inspected at the
-        right stages. When those pieces are coordinated well, the project
-        feels surprisingly calm. When they aren't, homeowners get the
-        stories you've heard from neighbors.
-      </p>
-      <ul>
-        <li>
-          <strong>Layout and space planning</strong>: bedroom placement,
-          bathroom location relative to plumbing rough-ins, family-room
-          sizing, and storage that's planned instead of leftover.
-        </li>
-        <li>
-          <strong>Permits and inspections</strong>: coordinated with your
-          city's building department and scheduled into the timeline.
-        </li>
-        <li>
-          <strong>Framing and insulation</strong>: exterior wall furring,
-          interior walls, soffits around mechanical runs, and sound
-          insulation where it matters.
-        </li>
-        <li>
-          <strong>Electrical</strong>: lighting layout, outlets, smoke and
-          CO detection, and circuits for how the space will actually be
-          used.
-        </li>
-        <li>
-          <strong>Plumbing and HVAC</strong>: bathroom completion from the
-          rough-in, wet-bar supply and drain, and heating and cooling
-          balanced for below-grade comfort.
-        </li>
-        <li>
-          <strong>Drywall, paint, doors, and trim</strong>: the finish
-          stage where the space starts looking like the rest of your home.
-        </li>
-        <li>
-          <strong>Flooring and fixtures</strong>: carpet, LVP, or tile
-          selected through organized allowances.
-        </li>
-      </ul>
-      <p>
-        Every project runs on the same structure:
-        <a href="/process/">a six-step process</a> with a written scope, an
-        itemized proposal, and change orders documented before any changed
-        work proceeds.
-      </p>
-    </div>
-  </section>
-
-  {/* ============ F. Core services ============ */}
-  <section class="section section--alt">
-    <div class="container">
-      <span class="eyebrow">What We Build</span>
-      <h2>Basement spaces designed around how you live</h2>
-      <p class="lede">
-        Every basement starts as square footage. The plan is what turns it
-        into the rooms your family actually needs.
-      </p>
-      <div class="grid-3 services-grid">
-        {coreServices.map((service) => (
-          <ServiceCard service={service} />
-        ))}
+  {/* ============ Why HTC + founders, merged — Pale Taupe moment ====== */}
+  <section class="section section--taupe">
+    <div class="container why-grid">
+      <div class="why-media">
+        <Image
+          src={familyPhoto}
+          alt="Hunting Tanner with his wife and son"
+          width={720}
+          height={1013}
+          loading="lazy"
+          class="why-photo"
+        />
       </div>
-    </div>
-  </section>
-
-  {/* ============ Popular spaces (anchor targets for service cards) ====== */}
-  <section class="section">
-    <div class="container container--narrow">
-      <span class="eyebrow">Popular Spaces</span>
-      <h2>The rooms Utah homeowners add most</h2>
-
-      <h3 id="bathrooms-bedrooms">Basement bathrooms &amp; bedrooms</h3>
-      <p>
-        A conforming bedroom and a full bathroom are the two additions that
-        change how a basement counts, for daily life and for how the home
-        functions with guests, teenagers, or family staying long-term.
-        Bedrooms need proper egress windows and smoke detection; bathrooms
-        need supply, drain, and ventilation done right. Both get planned
-        around your home's existing rough-ins and window locations.
-      </p>
-
-      <h3 id="family-rooms">Family &amp; entertainment rooms</h3>
-      <p>
-        The big open room is the heart of most basement projects: movie
-        nights, game tables, toy space, hosting. Good ones are designed
-        deliberately, with TV wall placement decided before the electrical
-        goes in, lighting zones instead of one switch, sound control in the
-        ceiling, and storage built into the plan.
-      </p>
-
-      <h3 id="wet-bars">Wet bars &amp; kitchenettes</h3>
-      <p>
-        A snack center with a sink, drink fridge, microwave shelf, and real
-        cabinetry keeps popcorn nights downstairs, and makes the space feel
-        finished in a way paint alone never does. Full kitchenettes can also
-        support long-term guests. We'll talk honestly about which level fits
-        your budget and how each affects plumbing scope.
-      </p>
-
-      <h3 id="offices-gyms">Home offices &amp; gyms</h3>
-      <p>
-        Basements make excellent offices and gyms for the same reasons:
-        quiet, separation, and stable temperatures. Offices get planned for
-        lighting quality and outlets where the desk actually goes. Gyms get
-        durable flooring, mirrors, ventilation, and ceiling clearance
-        checked before anything is built.
-      </p>
-    </div>
-  </section>
-
-  {/* ============ Cost + timeline ============ */}
-  <section class="section">
-    <div class="container container--narrow">
-      <span class="eyebrow">Cost &amp; Timeline</span>
-      <h2>What basement finishing costs in Utah</h2>
-      <p>
-        Homeowners deserve a straight answer on pricing, and the honest one
-        is that basements vary widely. The main drivers are:
-      </p>
-      <ul>
-        <li><strong>Square footage</strong> being finished</li>
-        <li><strong>Bathrooms</strong>: count, and whether a rough-in exists</li>
-        <li><strong>Wet features</strong>: bars and kitchenettes add plumbing and cabinetry</li>
-        <li><strong>Bedroom count</strong>: egress windows and closets</li>
-        <li><strong>Finish level</strong>: flooring, tile, cabinetry, and built-in choices</li>
-        <li><strong>Existing conditions</strong>: ceiling height, mechanical layout, moisture</li>
-      </ul>
-      <p>
-        Rather than quoting a misleading per-square-foot number, we walk the
-        space, write the scope, and price it line by line, so you can see
-        exactly where the investment goes and adjust the plan before
-        construction, not during it. If you share a target range early,
-        we'll design the scope around it.
-      </p>
-
-      <h3>How long a basement finish takes</h3>
-      <p>
-        Most projects take anywhere from 4-8 weeks typically, depending on
-        size, the number of wet areas, inspection scheduling, and selection
-        lead times. Your proposal includes an estimated timeline for your
-        specific scope, and weekly updates keep you current once work
-        begins.
-      </p>
-    </div>
-  </section>
-
-  {/* ============ G. Why HTC ============ */}
-  <section class="section section--alt">
-    <div class="container">
-      <div class="why-grid">
-        <div>
-          <span class="eyebrow">Why Hunting Tanner Construction</span>
-          <h2>Three generations of building. Zero tolerance for chaos.</h2>
-          <p>
-            Ask homeowners about their remodel horror stories and the same
-            themes come up: vague bids, phone calls that go nowhere, scope
-            that shifts without warning, and invoices that don't match
-            conversations. None of that is a craftsmanship problem. It's a
-            management problem, and it's exactly what this company was
-            founded to fix.
-          </p>
-        </div>
-        <ul class="why-list">
+      <div class="why-copy">
+        <span class="eyebrow">Why Hunting Tanner Construction</span>
+        <h2>Three generations of building experience</h2>
+        <span class="rule"></span>
+        <p>
+          Hunting is a third-generation contractor who grew up on job sites
+          alongside his dad Gary, a general contractor with over 30 years of
+          experience and co-founder of HTC. He is personally involved in
+          every project, start to finish.
+        </p>
+        <ul class="why-points">
           <li>
-            <h3>A third-generation contractor</h3>
-            <p>
-              Hunting grew up on job sites alongside his dad Gary, a general
-              contractor with over 30 years of experience and co-founder of
-              HTC. The trade network and standards come with the name.
-            </p>
+            <strong>An owner on every project.</strong> The person who plans
+            your job is the person who answers for it.
           </li>
           <li>
-            <h3>An owner on every project</h3>
-            <p>
-              Hunting is personally involved in every single project, on
-              site and reachable. The person who plans your job is the
-              person who answers for it.
-            </p>
+            <strong>Written scopes, not verbal ones.</strong> Defined room
+            by room before pricing, so the proposal means something.
           </li>
           <li>
-            <h3>Written scopes, not verbal ones</h3>
-            <p>
-              Your project is defined room by room before pricing, so the
-              proposal means something and changes are visible.
-            </p>
+            <strong>Change orders in writing.</strong> Documented and priced
+            before the work proceeds. No surprise invoices.
           </li>
           <li>
-            <h3>Change orders in writing</h3>
-            <p>
-              When scope changes, because you added something or an
-              inspector required something, it's documented and priced
-              before the work proceeds.
-            </p>
-          </li>
-          <li>
-            <h3>Regular, honest updates</h3>
-            <p>
-              You'll know what happened this week, what's next, and which
-              decisions are coming. When something slips, you hear it from
-              us first, with the why.
-            </p>
+            <strong>Licensed &amp; insured.</strong> A licensed Utah general
+            contractor working with qualified trade partners.
           </li>
         </ul>
+        <a class="link-label" href="/about/">Read the full story</a>
       </div>
     </div>
   </section>
 
-  {/* ============ H. Process preview ============ */}
+  {/* ============ Service areas ============ */}
   <section class="section">
-    <div class="container">
-      <span class="eyebrow">How It Works</span>
-      <h2>Six clear steps from first call to final walkthrough</h2>
-      <div class="process-preview">
-        <ProcessSteps compact />
-      </div>
-      <div class="section-cta">
-        <a class="btn btn--secondary" href="/process/">
-          See the Full Process
-        </a>
-      </div>
-    </div>
-  </section>
-
-  {/* ============ I. Founders story ============ */}
-  <section class="section">
-    <div class="container">
-      <OwnerStory variant="home" />
-    </div>
-  </section>
-
-  {/* ============ J. Service areas ============ */}
-  <section class="section section--alt">
     <div class="container">
       <span class="eyebrow">Where We Work</span>
       <h2>Serving homeowners at their properties</h2>
       <p class="lede">
-        Hunting Tanner Construction is a Utah County based residential
-        contractor and service-area business. We come to you.
+        A Utah County based residential contractor serving Utah County and
+        the Salt Lake Valley. We come to you.
       </p>
       <div class="grid-3 areas-grid">
         {featuredCities.map((area) => (
@@ -404,46 +274,16 @@ import afterImg from "@/assets/hero/basement-after.png";
         <div class="counties-copy">
           <h3>Two counties, every community</h3>
           <p>
-            Beyond our featured cities, we serve homeowners throughout
-            Utah County and across the Salt Lake Valley. Every city we
-            work in has its own local page.
+            Every city we work in has its own local page.
           </p>
         </div>
         <div class="counties-links">
           {featuredCounties.map((county) => (
-            <a class="btn btn--secondary" href={county.href}>
+            <a class="btn btn--outline" href={county.href}>
               {county.name}
             </a>
           ))}
         </div>
-      </div>
-
-      <p class="nearby-note">
-        Close by but not listed? <a href="/contact/">Ask us</a> and you'll
-        get a straight answer about scheduling and fit.
-      </p>
-    </div>
-  </section>
-
-  {/* ============ K. Project gallery preview ============ */}
-  <section class="section">
-    <div class="container">
-      <span class="eyebrow">Our Work</span>
-      <h2>Basements we've finished</h2>
-      <p class="lede">
-        Kitchens, kitchenettes, bathrooms, bedrooms, and big family spaces,
-        photographed room by room. See what a finished Tanner basement
-        looks like.
-      </p>
-      <div class="grid-3 projects-grid">
-        {publishableProjects.map((project) => (
-          <ProjectCard project={project} />
-        ))}
-      </div>
-      <div class="section-cta">
-        <a class="btn btn--secondary" href="/projects/">
-          View the Full Galleries
-        </a>
       </div>
     </div>
   </section>
@@ -451,24 +291,25 @@ import afterImg from "@/assets/hero/basement-after.png";
   {/* ============ Google reviews (renders only when real reviews exist) === */}
   <GoogleReviews />
 
-  {/* ============ L. FAQ ============ */}
+  {/* ============ FAQ ============ */}
   <section class="section">
     <div class="container container--narrow">
       <span class="eyebrow">Questions Homeowners Ask</span>
       <h2>Basement finishing FAQs</h2>
-      <FAQAccordion faqs={homeFaqs.slice(0, 7)} />
+      <FAQAccordion faqs={homeFaqs.slice(0, 5)} />
       <p class="section-cta">
         <a href="/faq/">See all frequently asked questions →</a>
       </p>
     </div>
   </section>
 
-  {/* ============ M. Final CTA with form ============ */}
+  {/* ============ Closing CTA ============ */}
+  {/* Buttons only, not a second form: the page already carries a full
+      form high up plus the sticky mobile bar, and the reference layout
+      closes on a heading and a single CTA. */}
   <CTASection
-    withForm
-    formId="home-footer-form"
     heading="Your basement is already under your roof. Let's finish it."
-    text="Tell us about your space and what you want it to become. You'll get a real conversation, clear next steps, and zero pressure."
+    text="Tell us about your space and what you want it to become. A real conversation, clear next steps, zero pressure."
   />
 </BaseLayout>
 
@@ -603,8 +444,9 @@ import afterImg from "@/assets/hero/basement-after.png";
       gap: var(--space-8);
     }
   }
-  .transform-grid .btn {
-    margin-top: var(--space-4);
+  .transform-note {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
   }
 
   .services-grid,
@@ -613,45 +455,89 @@ import afterImg from "@/assets/hero/basement-after.png";
     margin-top: var(--space-6);
   }
 
+  /* ---- Why HTC + founders, on solid Pale Taupe ---- */
   .why-grid {
     display: grid;
     gap: var(--space-6);
+    align-items: center;
   }
   @media (min-width: 900px) {
     .why-grid {
-      grid-template-columns: 5fr 7fr;
+      grid-template-columns: 4fr 6fr;
       gap: var(--space-8);
     }
   }
-  .why-list {
+  .why-media {
+    max-width: 24rem;
+    margin-inline: auto;
+    width: 100%;
+  }
+  .why-photo {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+  }
+  .why-points {
     list-style: none;
-    margin: 0;
+    margin: var(--space-5) 0 var(--space-6);
     padding: 0;
     display: grid;
-    gap: var(--space-5);
+    gap: var(--space-4);
   }
-  .why-list li {
+  .why-points li {
     margin: 0;
     padding-left: var(--space-4);
-    border-left: 2px solid var(--brand-sea-glass);
-  }
-  .why-list h3 {
-    font-size: var(--text-lg);
-    margin-bottom: var(--space-1);
-  }
-  .why-list p {
-    color: var(--color-muted);
+    /* Charcoal rules read as detailing on taupe; Sea Glass would vanish */
+    border-left: 2px solid rgb(44 49 53 / 0.3);
     font-size: var(--text-sm);
-    margin: 0;
+    line-height: 1.55;
   }
 
+  /* ---- Process, on Charcoal ---- */
+  .process-head {
+    max-width: 46rem;
+  }
   .process-preview {
-    margin-top: var(--space-6);
+    margin-top: var(--space-7);
+  }
+  /* Compact summary of what the six steps cover end to end */
+  .process-manage {
+    list-style: none;
+    margin: var(--space-7) 0 0;
+    padding: var(--space-6) 0 0;
+    border-top: 1px solid rgb(250 248 243 / 0.16);
+    display: grid;
+    gap: var(--space-4);
+    font-size: var(--text-sm);
+    letter-spacing: 0.02em;
+  }
+  @media (min-width: 640px) {
+    .process-manage {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .process-manage {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  .process-manage li {
+    margin: 0;
+    padding-left: var(--space-4);
+    border-left: 2px solid var(--color-on-dark-accent);
+    color: var(--color-on-dark);
   }
 
   .section-cta {
-    margin-top: var(--space-6);
-    text-align: center;
+    margin-top: var(--space-7);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    justify-content: center;
+  }
+  /* On the dark process band the buttons sit under left-aligned copy */
+  .section--dark .section-cta {
+    justify-content: flex-start;
   }
 
   /* Counties block: one wider card beneath the three city cards, so the
@@ -659,7 +545,7 @@ import afterImg from "@/assets/hero/basement-after.png";
   .counties-card {
     margin-top: var(--space-5);
     background: var(--color-surface);
-    border: 1px solid var(--color-line-strong);
+    border: 1px solid var(--color-border);
     border-left: 2px solid var(--brand-sea-glass);
     border-radius: var(--radius);
     padding: var(--space-5);
@@ -696,10 +582,4 @@ import afterImg from "@/assets/hero/basement-after.png";
     white-space: nowrap;
   }
 
-  .nearby-note {
-    margin-top: var(--space-5);
-    font-size: var(--text-sm);
-    color: var(--color-muted);
-    max-width: 52rem;
-  }
 </style>

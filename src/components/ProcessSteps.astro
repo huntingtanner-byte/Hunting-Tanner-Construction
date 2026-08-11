@@ -70,10 +70,16 @@ const { compact = false } = Astro.props;
     font-size: var(--text-lg);
     margin-bottom: var(--space-2);
   }
+  /* Custom properties inherit, so a dark section can retint the steps by
+     setting --process-body / --process-heading on the section itself
+     rather than fighting scoped-style specificity. */
   .process-step p {
-    color: var(--color-muted);
+    color: var(--process-body, var(--color-text-muted));
     font-size: var(--text-sm);
     margin: 0;
+  }
+  .process-step h3 {
+    color: var(--process-heading, var(--color-text));
   }
   .process-steps:not(.compact) .process-step p {
     font-size: var(--text-base);

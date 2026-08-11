@@ -12,9 +12,9 @@ export interface Service {
 export const coreServices: Service[] = [
   {
     title: "Full Basement Finishing",
-    href: "/#basement-finishing-scope",
+    href: "/services/#whats-included",
     description:
-      "Turn an unfinished basement into bedrooms, bathrooms, and living space, planned, permitted, and managed from framing to final walkthrough.",
+      "Bedrooms, bathrooms, and living space, planned and managed from framing to final walkthrough.",
     includes: [
       "Space planning and layout design",
       "Framing, electrical, plumbing, and HVAC coordination",
@@ -26,7 +26,7 @@ export const coreServices: Service[] = [
     title: "Basement Remodeling",
     href: "/basement-remodeling/",
     description:
-      "Already finished but dated or poorly laid out? Reworking an existing basement can change how your whole home lives.",
+      "Dated or poorly laid out? Reworking an existing basement changes how the whole home lives.",
     includes: [
       "Layout changes and wall reconfiguration",
       "Updated lighting and electrical",
@@ -36,9 +36,9 @@ export const coreServices: Service[] = [
   },
   {
     title: "Basement Bathrooms & Bedrooms",
-    href: "/#bathrooms-bedrooms",
+    href: "/services/#bathrooms-bedrooms",
     description:
-      "Add a conforming bedroom or a full bathroom downstairs: the two upgrades that add the most day-to-day function.",
+      "A conforming bedroom and a full bath: the two upgrades that add the most function.",
     includes: [
       "Egress window planning for bedrooms",
       "Full and three-quarter bathrooms",
@@ -48,9 +48,9 @@ export const coreServices: Service[] = [
   },
   {
     title: "Wet Bars & Kitchenettes",
-    href: "/#wet-bars",
+    href: "/services/#wet-bars",
     description:
-      "A well-planned wet bar or kitchenette makes a basement feel like a destination instead of a spare room.",
+      "A well-planned bar makes a basement feel like a destination, not a spare room.",
     includes: [
       "Cabinetry and countertop coordination",
       "Sinks, drink fridges, and appliances",
@@ -60,9 +60,9 @@ export const coreServices: Service[] = [
   },
   {
     title: "Family & Entertainment Spaces",
-    href: "/#family-rooms",
+    href: "/services/#family-rooms",
     description:
-      "Media rooms, game areas, and big family rooms designed around how you actually want to use the space.",
+      "Media rooms, game areas, and family rooms designed around how you actually live.",
     includes: [
       "Media and theater areas",
       "Game and play spaces",
@@ -72,9 +72,9 @@ export const coreServices: Service[] = [
   },
   {
     title: "Home Offices & Gyms",
-    href: "/#offices-gyms",
+    href: "/services/#offices-gyms",
     description:
-      "Purpose-built work and workout space that's quiet, comfortable, and separated from the rest of the house.",
+      "Quiet, comfortable work and workout space, separated from the rest of the house.",
     includes: [
       "Dedicated office rooms with wiring for work",
       "Gym flooring and mirror planning",
