@@ -49,16 +49,11 @@
   --color-on-dark-muted: #b8bcbd;   /* 6.86:1 */
   --color-on-dark-accent: #aebfbc;  /* Sea Glass on Charcoal — 6.87:1 */
 
-  /* ---- Buttons ----
-     The primary CTA is a deepened Sea Glass so it can carry white text at
-     5.06:1. Pure #AEBFBC only reaches 1.8:1 against white, which is why the
-     pale tone stays on decorative fills (rules, numerals) where Charcoal
-     sits on top instead. */
-  --brand-sea-glass-deep: #54706b;
-  --color-button-primary: #54706b;
+  /* ---- Buttons ---- */
+  --color-button-primary: #2c3135;
   --color-button-primary-text: #faf8f3;
-  --color-button-dark: #2c3135;
-  --color-button-dark-text: #faf8f3;
+  --color-button-secondary: #aebfbc;
+  --color-button-secondary-text: #2c3135;
 
   /* ---- State ---- */
   --color-focus: #2c3135;           /* charcoal ring reads as brand, not OS */
@@ -275,28 +270,6 @@ strong {
   background: var(--color-background-soft);
 }
 
-/* Solid Pale Taupe band. Secondary text must not use --color-text-muted
-   here — it only reaches 3.18:1 on taupe. Hierarchy comes from size and
-   weight instead, with all copy staying Charcoal at 6.85:1. */
-.section--taupe {
-  background: var(--brand-pale-taupe);
-  color: var(--color-text);
-}
-.section--taupe .eyebrow,
-.section--taupe .lede,
-.section--taupe p,
-.section--taupe li {
-  color: var(--color-text);
-}
-.section--taupe .rule {
-  background: var(--color-text);
-  opacity: 0.35;
-}
-.section--taupe a {
-  color: var(--color-text);
-  text-decoration-color: rgb(44 49 53 / 0.45);
-}
-
 .section--dark {
   background: var(--color-dark);
   color: var(--color-on-dark);
@@ -318,6 +291,15 @@ strong {
 }
 .section--dark a:hover {
   text-decoration-color: var(--color-on-dark);
+}
+/* Buttons keep their own text colour inside dark sections. Without this,
+   the rule above wins on specificity and puts Soft White on the light
+   Sea Glass button, which is only 1.8:1. */
+.section--dark .btn--primary {
+  color: var(--color-button-primary-text);
+}
+.section--dark .btn--secondary {
+  color: var(--color-button-secondary-text);
 }
 
 /* Small letterspaced label. Muted rather than coloured — Sea Glass is
@@ -442,30 +424,27 @@ strong {
     color 0.18s ease;
 }
 
-/* Primary — deep Sea Glass with white lettering */
-.btn--primary,
-.btn--secondary {
+.btn--primary {
   background: var(--color-button-primary);
   border-color: var(--color-button-primary);
   color: var(--color-button-primary-text);
 }
-.btn--primary:hover,
-.btn--secondary:hover {
-  background: #44605b;
-  border-color: #44605b;
+.btn--primary:hover {
+  background: #1e2226;
+  border-color: #1e2226;
   color: var(--color-button-primary-text);
 }
 
-/* Alternate dark CTA */
-.btn--dark {
-  background: var(--color-button-dark);
-  border-color: var(--color-button-dark);
-  color: var(--color-button-dark-text);
+/* Light Sea Glass CTA — the signature button */
+.btn--secondary {
+  background: var(--color-button-secondary);
+  border-color: var(--color-button-secondary);
+  color: var(--color-button-secondary-text);
 }
-.btn--dark:hover {
-  background: #1e2226;
-  border-color: #1e2226;
-  color: var(--color-button-dark-text);
+.btn--secondary:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: var(--color-button-secondary-text);
 }
 
 /* Tertiary — outlined on light backgrounds */
