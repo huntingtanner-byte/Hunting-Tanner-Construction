@@ -6,7 +6,7 @@ export const saltLakeCountyCities: CityPage[] = [
     slug: "salt-lake-city",
     name: "Salt Lake City",
     county: "Salt Lake County",
-    metaTitle: "Basement Finishing in Salt Lake City, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in Salt Lake City, UT | Utah County Basement Pros",
     metaDescription:
       "Basement remodeling and finishing for Salt Lake City's older homes: bungalows, ramblers, and everything the Avenues to Sugar House keep underground.",
     h1: "Basement Finishing & Remodeling in Salt Lake City",
@@ -83,7 +83,7 @@ export const saltLakeCountyCities: CityPage[] = [
     slug: "millcreek",
     name: "Millcreek",
     county: "Salt Lake County",
-    metaTitle: "Basement Finishing in Millcreek, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in Millcreek, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing and remodeling for Millcreek's mid-century homes: east-bench ramblers with generous basements ready to double the living space.",
     h1: "Basement Finishing in Millcreek",
@@ -160,7 +160,7 @@ export const saltLakeCountyCities: CityPage[] = [
     slug: "holladay",
     name: "Holladay",
     county: "Salt Lake County",
-    metaTitle: "Basement Finishing in Holladay, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in Holladay, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing and remodeling for Holladay's established east-side homes: quality-first lower levels with guest suites, entertainment space, and finishes that fit the neighborhood.",
     h1: "Basement Finishing in Holladay",
@@ -237,7 +237,7 @@ export const saltLakeCountyCities: CityPage[] = [
     slug: "cottonwood-heights",
     name: "Cottonwood Heights",
     county: "Salt Lake County",
-    metaTitle: "Basement Finishing in Cottonwood Heights, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in Cottonwood Heights, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing for Cottonwood Heights: ski-country lower levels with gear rooms, guest space, and entertainment areas at the mouth of the canyons.",
     h1: "Basement Finishing in Cottonwood Heights",
@@ -314,7 +314,7 @@ export const saltLakeCountyCities: CityPage[] = [
     slug: "murray",
     name: "Murray",
     county: "Salt Lake County",
-    metaTitle: "Basement Finishing in Murray, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in Murray, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing and remodeling in Murray: the valley's center, with post-war cottages, ramblers, and newer infill, each basement planned to its era.",
     h1: "Basement Finishing in Murray",
@@ -391,7 +391,7 @@ export const saltLakeCountyCities: CityPage[] = [
     slug: "midvale",
     name: "Midvale",
     county: "Salt Lake County",
-    metaTitle: "Basement Finishing in Midvale, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in Midvale, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing in Midvale: value-smart projects that add bedrooms, bathrooms, and living space where the valley's square footage is still affordable.",
     h1: "Basement Finishing in Midvale",
@@ -468,7 +468,7 @@ export const saltLakeCountyCities: CityPage[] = [
     slug: "taylorsville",
     name: "Taylorsville",
     county: "Salt Lake County",
-    metaTitle: "Basement Finishing in Taylorsville, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in Taylorsville, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing for Taylorsville's 70s and 80s homes: split-levels and ramblers with lower levels ready to become real living space.",
     h1: "Basement Finishing in Taylorsville",
@@ -545,7 +545,7 @@ export const saltLakeCountyCities: CityPage[] = [
     slug: "kearns",
     name: "Kearns",
     county: "Salt Lake County",
-    metaTitle: "Basement Finishing in Kearns, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in Kearns, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing in Kearns: practical, well-built projects that add bedrooms and living space to the west valley's hardest-working homes.",
     h1: "Basement Finishing in Kearns",
@@ -622,7 +622,7 @@ export const saltLakeCountyCities: CityPage[] = [
     slug: "magna",
     name: "Magna",
     county: "Salt Lake County",
-    metaTitle: "Basement Finishing in Magna, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in Magna, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing in Magna: century-old Main Street homes and brand-new westside builds, with honest scoping for both.",
     h1: "Basement Finishing in Magna",
@@ -698,7 +698,7 @@ export const saltLakeCountyCities: CityPage[] = [
     slug: "west-valley-city",
     name: "West Valley City",
     county: "Salt Lake County",
-    metaTitle: "Basement Finishing in West Valley City, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in West Valley City, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing across West Valley City: the valley's second-largest city, with every housing era and every kind of basement, planned and built properly.",
     h1: "Basement Finishing in West Valley City",
@@ -776,7 +776,7 @@ export const saltLakeCountyCities: CityPage[] = [
     slug: "west-jordan",
     name: "West Jordan",
     county: "Salt Lake County",
-    metaTitle: "Basement Finishing in West Jordan, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in West Jordan, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing for West Jordan's family neighborhoods: 80s to 2000s two-stories and ramblers with big unfinished basements waiting to work.",
     h1: "Basement Finishing in West Jordan",
@@ -853,7 +853,7 @@ export const saltLakeCountyCities: CityPage[] = [
     slug: "south-jordan",
     name: "South Jordan",
     county: "Salt Lake County",
-    metaTitle: "Basement Finishing in South Jordan, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in South Jordan, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing in South Jordan and Daybreak: newer homes, modern rough-ins, and lower levels finished to the neighborhood's standard.",
     h1: "Basement Finishing in South Jordan",
@@ -930,7 +930,7 @@ export const saltLakeCountyCities: CityPage[] = [
     slug: "sandy",
     name: "Sandy",
     county: "Salt Lake County",
-    metaTitle: "Basement Finishing in Sandy, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in Sandy, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing and remodeling in Sandy: from 70s east-bench homes to newer builds near the mountains, planned era by era.",
     h1: "Basement Finishing in Sandy",
@@ -1008,7 +1008,7 @@ export const saltLakeCountyCities: CityPage[] = [
     slug: "draper",
     name: "Draper",
     county: "Salt Lake County",
-    metaTitle: "Basement Finishing in Draper, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in Draper, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing for Draper homes from the valley floor to Suncrest: walkouts, entertainment levels, and finishes that match newer construction.",
     h1: "Basement Finishing in Draper",
@@ -1085,7 +1085,7 @@ export const saltLakeCountyCities: CityPage[] = [
     slug: "riverton",
     name: "Riverton",
     county: "Salt Lake County",
-    metaTitle: "Basement Finishing in Riverton, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in Riverton, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing for Riverton's family neighborhoods: 90s and 2000s homes with big basements ready for bedrooms, family rooms, and real storage.",
     h1: "Basement Finishing in Riverton",
@@ -1162,7 +1162,7 @@ export const saltLakeCountyCities: CityPage[] = [
     slug: "bluffdale",
     name: "Bluffdale",
     county: "Salt Lake County",
-    metaTitle: "Basement Finishing in Bluffdale, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in Bluffdale, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing in Bluffdale: acreage properties and brand-new developments at the valley's south gate, with lower levels planned to match.",
     h1: "Basement Finishing in Bluffdale",
@@ -1240,7 +1240,7 @@ export const saltLakeCountyCities: CityPage[] = [
     slug: "south-salt-lake",
     name: "South Salt Lake",
     county: "Salt Lake County",
-    metaTitle: "Basement Finishing in South Salt Lake, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in South Salt Lake, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing in South Salt Lake: compact post-war homes where a finished basement can nearly double the living space.",
     h1: "Basement Finishing in South Salt Lake",

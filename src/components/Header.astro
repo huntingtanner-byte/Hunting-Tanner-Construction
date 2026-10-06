@@ -12,8 +12,8 @@ const currentPath = Astro.url.pathname;
 <header class="site-header" data-header>
   <div class="container header-inner">
     <a href="/" class="wordmark" aria-label={`${business.publicName} home`}>
-      <span class="wordmark-name">Hunting Tanner</span>
-      <span class="wordmark-sub">Construction</span>
+      <span class="wordmark-sub"><span>Utah County</span></span>
+      <span class="wordmark-name">Basement Pros</span>
     </a>
 
     <nav class="desktop-nav" aria-label="Main">
@@ -113,21 +113,23 @@ const currentPath = Astro.url.pathname;
     min-height: var(--header-h);
   }
 
+  /* Two-tier lockup, read top to bottom as the full name: a small
+     tracked "UTAH COUNTY" between Sea Glass hairlines, over a large
+     "BASEMENT PROS". Mirrors public/brand/logo.png (npm run icons). */
   .wordmark {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* Centers the wrapped lines too, so "HUNTING / TANNER" stacking stays
-       aligned with "CONSTRUCTION" beneath it at narrow widths. */
     text-align: center;
     text-decoration: none;
     color: var(--color-ink-soft);
     line-height: 1.1;
+    gap: 0.3rem;
   }
   .wordmark-name {
     font-family: var(--font-display);
-    /* Scales down before it is forced to wrap on small screens */
-    font-size: clamp(1.05rem, 0.9rem + 1vw, 1.25rem);
+    /* Scales down so the name holds one line at phone widths */
+    font-size: clamp(1rem, 0.86rem + 1vw, 1.25rem);
     font-weight: 400;
     letter-spacing: 0.14em;
     /* Letter-spacing adds a trailing space after the last letter. The
@@ -135,14 +137,31 @@ const currentPath = Astro.url.pathname;
        rather than a half-space off. */
     margin-right: -0.14em;
     text-transform: uppercase;
+    white-space: nowrap;
   }
   .wordmark-sub {
+    /* Stretches to the name's width so the hairlines fill the gap */
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
     font-family: var(--font-display);
-    font-size: clamp(0.58rem, 0.5rem + 0.5vw, 0.66rem);
+    font-size: clamp(0.56rem, 0.48rem + 0.5vw, 0.66rem);
     letter-spacing: 0.42em;
-    margin-right: -0.42em;
     text-transform: uppercase;
     color: var(--color-muted);
+    white-space: nowrap;
+  }
+  .wordmark-sub span {
+    /* Balances the trailing letter-space so the text sits dead center */
+    padding-left: 0.42em;
+  }
+  .wordmark-sub::before,
+  .wordmark-sub::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--brand-sea-glass);
   }
 
   .desktop-nav ul {

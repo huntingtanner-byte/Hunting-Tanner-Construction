@@ -1,7 +1,12 @@
-# Hunting Tanner Construction — huntingtanner.com
+# Utah County Basement Pros
 
-Marketing website for **Hunting Tanner Construction LLC**, a Utah County
-residential contractor specializing in basement finishing.
+Marketing website for **Utah County Basement Pros**, a DBA of
+**Hunting Tanner Construction LLC**: a Utah County residential contractor
+specializing in basement finishing. Currently served at huntingtanner.com
+(the domain will change to match the new name).
+
+Brand assets (logo.png, OG image, favicons, master wordmark SVGs) are all
+generated from one lockup definition by `npm run icons`.
 
 ## Stack
 

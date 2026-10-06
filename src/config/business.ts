@@ -1,5 +1,6 @@
 /**
- * Centralized business configuration for Hunting Tanner Construction LLC.
+ * Centralized business configuration for Utah County Basement Pros, a DBA
+ * of Hunting Tanner Construction LLC.
  *
  * This is the single source of truth for company facts, contact details,
  * site status, and third-party IDs. Update values here — never hardcode
@@ -17,8 +18,15 @@ export type SiteStatus = "staging" | "live";
 const envStatus = import.meta.env.PUBLIC_SITE_STATUS as SiteStatus | undefined;
 
 export const business = {
+  /** The registered entity. Used only where the law requires it: the DBA
+   *  disclosure, the legal pages, copyright, and schema legalName. */
   legalName: "Hunting Tanner Construction LLC",
-  publicName: "Hunting Tanner Construction",
+  /** The brand customers see everywhere else. */
+  publicName: "Utah County Basement Pros",
+  /** Short form for tight spaces (web app manifest, email sender). */
+  shortName: "Basement Pros",
+  /** The domain will change to match the new name later. Update this,
+   *  astro.config.mjs `site`, and vercel.json redirects together. */
   domain: "https://huntingtanner.com",
 
   phoneDisplay: "(801) 901-8349",

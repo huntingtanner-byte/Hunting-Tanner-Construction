@@ -2,7 +2,7 @@
  * Project/portfolio data.
  *
  * RULES:
- *  - Only publish photos HTC has the right to use, with permission on file.
+ *  - Only publish photos we have the right to use, with permission on file.
  *  - `permissionStatus` must be "granted" before a project renders publicly.
  *  - Never attach stock imagery to a project entry.
  *  - Locations and dates appear only when confirmed. Don't guess.

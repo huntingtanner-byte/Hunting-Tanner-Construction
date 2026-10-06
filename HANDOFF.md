@@ -1,8 +1,8 @@
 # HANDOFF.md
 
-**Purpose:** This file replaces the context of a very long Claude Code conversation. A fresh session should be able to read this and continue work on the Hunting Tanner Construction website without any prior conversation history.
+**Purpose:** This file replaces the context of a very long Claude Code conversation. A fresh session should be able to read this and continue work on the Utah County Basement Pros website (formerly branded Hunting Tanner Construction) without any prior conversation history.
 
-**Last updated:** August 11, 2026
+**Last updated:** October 5, 2026 (brand renamed to Utah County Basement Pros)
 **Repo:** `C:\Users\hunti\HTC Website`
 **Remote:** https://github.com/huntingtanner-byte/Hunting-Tanner-Construction.git
 **Production:** https://huntingtanner.com (live, indexable)
@@ -30,11 +30,31 @@ These came from two different points in git history. The layout is new. The colo
 
 ---
 
+## 🏷️ BRAND: "UTAH COUNTY BASEMENT PROS" (renamed October 2026)
+
+The public brand is **Utah County Basement Pros**. It is a **DBA of Hunting Tanner Construction LLC**, which remains the legal entity that holds the contractor license.
+
+| Where | Name used |
+|---|---|
+| Logo, page titles, copy, OG/site name, schema `name`, manifest, email sender | **Utah County Basement Pros** (short form: **Basement Pros**) |
+| Footer DBA line, copyright, privacy policy, terms, schema `legalName`, About page "trade name" sentence | **Hunting Tanner Construction LLC** |
+
+- All three names live in `src/config/business.ts`: `publicName`, `shortName`, `legalName`. **Never hardcode them.**
+- **Footer (small print, every page):** "Utah County Basement Pros is a DBA of Hunting Tanner Construction LLC, a licensed Utah general contractor (License #14298989-5501)." followed by "© {year} Hunting Tanner Construction LLC. All rights reserved." Keep both: the license belongs to the LLC, so the disclosure ties the brand to the licensed entity.
+- **Hunting Tanner the person is unchanged:** still the founder and owner, still in the owner story, the About page, and schema `founder`. Only the *company* name changed.
+- **Colson** (Hunting's new business partner, handshake agreement, not on the LLC) is **intentionally not on the website.** Do not add him unless Hunting asks.
+- Gary remains **Senior Advisor** (see §1). The rename did not change any of those rules.
+- **"HTC" is retired** in all visitor-facing copy. Use "we/us/our" or the full brand name. (The internal localStorage key `htc_attribution` was deliberately left alone: renaming it would drop attribution for returning visitors and nobody sees it.)
+- **The domain is still `huntingtanner.com`** and email is still `office@huntingtanner.com`. Hunting plans to move to a domain matching the new name later. When that happens, change together: `business.domain`, `business.email`, `astro.config.mjs` `site`, `vercel.json` redirects (old domain → new, 301), Vercel domains, Cloudflare DNS, Resend sender domain, and add the new property in Google Search Console with a Change of Address from the old one.
+- Copy rewritten for the rename (not just swapped): the About lede, the About "trade name" licensing sentence, "The name on the truck is a family name" (the brand is no longer the family name), the "Three generations of building, one family name" headings (now "...building experience"), and the Saratoga Springs / Utah County lines that would otherwise read "Utah County Basement Pros is based in Utah County".
+
+---
+
 ## 1. PROJECT OVERVIEW
 
 ### The company
 
-**Hunting Tanner Construction LLC** — a residential general contractor in Utah, specializing in **basement finishing**.
+**Utah County Basement Pros**, a DBA of **Hunting Tanner Construction LLC**: a residential general contractor in Utah, specializing in **basement finishing**. (See the brand section above.)
 
 - **Owner / Founder:** Hunting Tanner. Sole owner and founder. Third-generation contractor, BYU Finance degree. He is the licensed general contractor and is personally involved in every single project.
 - **Gary Tanner:** Hunting's father, and the company's **Senior Advisor**. A general contractor with **more than 35 years of experience** (formerly licensed in **California**, owned Amaron Construction, tenant-improvement work). He holds **no equity**, but he **is involved in every project** and reviews scopes of work. His experience is used as *credibility*, never as a claim of ownership.
@@ -58,7 +78,7 @@ These came from two different points in git history. The layout is new. The colo
 >
 > > "**35+ years of experience behind every job.** Hunting's father Gary, a general contractor with over 35 years in the industry, is our senior advisor and involved in every project."
 >
-> > "As senior advisor to Hunting Tanner Construction, Gary is involved in every project. He reviews scopes of work before they reach you and stays close to the details once construction begins."
+> > "As senior advisor to Utah County Basement Pros, Gary is involved in every project. He reviews scopes of work before they reach you and stays close to the details once construction begins."
 >
 > JSON-LD `founder` contains **Hunting Tanner only**. Gary is deliberately absent from the schema entirely, so no structured-data consumer can infer he is a principal.
 >
@@ -142,8 +162,9 @@ npm run check
 
 **`src/config/business.ts`** — single source of truth for all business facts. Never hardcode business data elsewhere.
 ```ts
-legalName: "Hunting Tanner Construction LLC"
-publicName: "Hunting Tanner Construction"
+legalName: "Hunting Tanner Construction LLC"   // legal entity: DBA line, legal pages, copyright, schema legalName
+publicName: "Utah County Basement Pros"        // the brand, everywhere else
+shortName: "Basement Pros"                     // manifest short_name, email sender name
 domain: "https://huntingtanner.com"
 phoneDisplay: "(801) 901-8349"   phoneHref: "tel:+18019018349"
 email: "office@huntingtanner.com"
@@ -251,7 +272,7 @@ The owner asked for a homepage that was **shorter, more varied, less content-hea
 - Removed repeated restatements of the same value props. The same three ideas (owner involvement, written scopes, family experience) had been appearing in four different places; they now appear once each, in the section where they land hardest.
 
 **Consolidated sections**
-- **"Why Hunting Tanner Construction" + the founder/company story → merged into a single section** (now homepage section 8). Previously two separate blocks that repeated each other.
+- **"Why Utah County Basement Pros" (originally "Why Hunting Tanner Construction") + the founder/company story → merged into a single section** (now homepage section 8). Previously two separate blocks that repeated each other.
 - **"What's Included" removed from the homepage entirely.** It was a long, repetitive checklist that duplicated what the Process section already communicated better.
 - **Process kept and strengthened** as the single, clearer explanation of the full basement-finishing process, first call → final walkthrough.
 
@@ -482,10 +503,20 @@ The reference direction came from four supplied images ("Coastal Luxury Palette 
 
 ### Logo direction
 
-- SVG wordmarks: `src/assets/brand/wordmark-charcoal.svg` and `wordmark-white.svg`.
-- The wordmark reads **"HUNTING TANNER"** with **"CONSTRUCTION"** centered underneath.
-- ⚠️ **Wordmark alignment at narrow widths was a specific bug the owner reported and it was fixed in commit `91149f5`.** At very narrow viewports "Hunting" and "Tanner" stack — that is fine and expected — but **"Construction" must stay correctly centered/spaced under the stacked lines.** If you touch the header, re-check this at very narrow widths.
-- Charcoal wordmark on light headers; white wordmark on dark.
+The wordmark is a two-tier centered lockup in **Source Serif 4**, the same type system as the original Hunting Tanner Construction logo, which Hunting asked to keep:
+
+```
+ ──────  U T A H   C O U N T Y  ──────     small, 0.42em tracking, muted, Sea Glass hairlines
+      B A S E M E N T   P R O S            large, 0.14em tracking, Charcoal
+```
+
+- **The small line sits on top** so the lockup reads in the correct order, "Utah County Basement Pros". The emphasis is on "Basement Pros", the memorable part.
+- The **Sea Glass hairlines** flank "UTAH COUNTY" and stretch to the width of "BASEMENT PROS". They are CSS pseudo-elements in `Header.astro` / `Footer.astro`.
+- **Header and footer wordmarks are live HTML text**, not images. Both are in `Header.astro` (`.wordmark`) and `Footer.astro` (`.footer-wordmark`).
+- The name stays **on one line down to 320px** (`white-space: nowrap` and a font-size `clamp()`), with 16px clearance to the Menu button at 320px. Re-check 320px if you touch the header.
+- **Every logo file is generated** by `npm run icons` (`scripts/generate-icons.mjs`). It outlines real Source Serif 4 glyphs from `@fontsource-variable` with `fontkitten`, so the files match the HTML exactly and don't depend on system fonts. Outputs: `public/brand/logo.png` (schema logo), `public/og-default.png` (share image), favicons (`favicon.svg`, 192, 512, apple-touch), and master SVGs `src/assets/brand/wordmark-charcoal.svg` / `wordmark-white.svg`. **To change the logo, edit `SUB_TEXT` / `NAME_TEXT` / `MONOGRAM` in that script and rerun it.** Don't hand-edit the PNGs.
+- **Favicon monogram:** Soft White serif "BP" on a Charcoal rounded square, with a Sea Glass hairline beneath.
+- Charcoal wordmark on light backgrounds; white on dark.
 
 ### Typography
 
@@ -500,7 +531,7 @@ The reference direction came from four supplied images ("Coastal Luxury Palette 
 - **No em dashes.** The owner asked for this explicitly to make the copy "less AI looking." (Phone numbers keep their hyphens.) Use commas, colons, or periods instead.
 - Plain, direct, confident. Short sentences. No hype.
 - **Never invent facts** — no fake projects, licenses, reviews, statistics, awards, addresses, or credentials. This is a standing rule.
-- Owner involvement is the recurring theme: "When you hire Hunting Tanner Construction, you get Hunting Tanner."
+- Owner involvement is the recurring theme: "When you hire Utah County Basement Pros, you get Hunting Tanner."
 
 ---
 
@@ -679,8 +710,10 @@ All images live in `src/assets/` and are processed by Astro's `<Image>` (WebP ou
 | `src/assets/projects/basement-1-1…1-4.png` | Project 1 — 4 photos |
 | `src/assets/projects/basement-2-1…2-5.png` | Project 2 — 5 photos |
 | `src/assets/projects/basement-3-1…3-5.png` | Project 3 — 5 photos |
-| `src/assets/brand/wordmark-charcoal.svg` | Header/footer on light backgrounds |
-| `src/assets/brand/wordmark-white.svg` | Header/footer on dark backgrounds |
+| `src/assets/brand/wordmark-charcoal.svg` | Master lockup, light backgrounds (generated by `npm run icons`) |
+| `src/assets/brand/wordmark-white.svg` | Master lockup, dark backgrounds (generated) |
+| `public/brand/logo.png` | Schema.org `logo` (generated) |
+| `public/og-default.png` | Default social share image (generated) |
 
 **14 real project photos across 3 real projects**, defined in `src/data/projects.ts` with `permissionStatus: "granted"`. These are the owner's actual work. Rendered on `/projects/` and in the homepage "Our Work" section via `ProjectCard.astro`.
 
@@ -704,6 +737,9 @@ Other asset dirs: `src/assets/cities/`, `src/assets/services/`, `src/assets/plac
 ### Recent commits
 
 ```
+(this)   Rename the brand to Utah County Basement Pros                  ← BRAND RENAME
+e32042a  Stop volunteering that the company is new
+f27321b  Correct Gary's role, project timeline, and years of experience
 c30f2e0  Restore the pre-refinement colour system, keep the new layout   ← COLOR CORRECTION
 32bc618  Homepage refinement: shorter, more varied, better paced          ← HOMEPAGE RESTRUCTURING
 bfaf4b9  Redesign around the Coastal Luxury palette                       ← palette baseline
@@ -746,25 +782,9 @@ git diff 32bc618 c30f2e0
 
 `git diff 32bc618 c30f2e0` shows exactly what the color correction touched — **only color declarations and class names, no copy or markup.** It is the model for how to do a surgical change on this project.
 
-### ⚠️ UNCOMMITTED CHANGES (as of this handoff)
+### Uncommitted changes
 
-The content corrections described in §5B were made **after** `c30f2e0` and are **not yet committed or deployed**. Modified files:
-
-```
-src/pages/index.astro                             (Gary paragraph; CSS comment)
-src/components/TrustStrip.astro                   (trust bullet → "35+ years of experience behind every job")
-src/components/OwnerStory.astro                   (eyebrows, Gary copy, doc comment)
-src/pages/about.astro                             (meta description, lede, body)
-src/lib/schema.ts                                 (founder array, description)
-src/data/faqs.ts                                  (Gary FAQ; 2× timeline)
-src/data/cities/utah-county.ts                    (2× co-founder; timeline; "thirty years")
-src/data/cities/salt-lake-county.ts               (timeline; 2× Gary experience)
-src/pages/services.astro                          (timeline)
-src/pages/salt-lake-county-basement-finishing.astro (Gary experience)
-HANDOFF.md                                        (new file)
-```
-
-`npm run build` passes. **These need to be committed and pushed to go live.**
+None. Per Hunting's standing instruction, every change is committed and pushed to `main` (which auto-deploys) as part of finishing the task.
 
 ---
 
@@ -799,13 +819,13 @@ HANDOFF.md                                        (new file)
 
 ### 🔴 Blocking / highest priority
 
-1. **Commit and deploy the uncommitted content corrections** (§12). The false co-founder claim about Gary and the incorrect "4-8 weeks" timeline are **still live on production** until this ships. Gary was previously presented as a company principal despite holding no equity and not being licensed in Utah, so this carries real legal/accuracy weight.
+1. **Register the DBA and update the contractor license (owner action, legal).** The site now advertises as Utah County Basement Pros. Hunting needs to confirm the assumed name (DBA) is filed with the **Utah Division of Corporations** and that **DOPL** has the DBA on file for license #14298989-5501. Utah contractor advertising is generally expected to match the licensed name and show the license number. The footer DBA line and the About page "trade name" sentence already tie the brand to the LLC and license.
 
 2. **Resend domain verification for `huntingtanner.com`.** Lead emails currently **deliver but land in SPAM**. Needs the Resend DNS records (SPF/DKIM) added in Cloudflare — while preserving the existing **Google Workspace MX records** — and then `RESEND_FROM` set in Vercel to a verified `@huntingtanner.com` sender. This is the biggest live business risk: leads are arriving but may go unseen.
 
 ### 🟡 Open items
 
-3. **Google Business Profile** — not yet created. `business.googleBusinessProfileURL` is `""`. Once created and reviews come in, populate `src/data/reviews.ts`; `GoogleReviews.astro` renders nothing while the array is empty (by design — **never add fake reviews**).
+3. **Google Business Profile** — not yet created. **Create it under "Utah County Basement Pros"** (matching the site's `publicName` and schema `name` exactly). `business.googleBusinessProfileURL` is `""`. Once created and reviews come in, populate `src/data/reviews.ts`; `GoogleReviews.astro` renders nothing while the array is empty (by design — **never add fake reviews**).
 4. **Attorney review of `/privacy-policy/` and `/terms/`.** The effective date "July 30, 2026" is a **placeholder**.
 5. **Confirm Gary's bio details**, particularly the spelling of **Amaron Construction**, and confirm the California license history is stated accurately.
 6. **Confirm insurance wording** against the actual carrier/policy. `insuranceClaimApproved: true` currently gates "licensed & insured" language.
@@ -822,7 +842,8 @@ HANDOFF.md                                        (new file)
 - Mobile homepage height ≈ 13,973px.
 - Exactly one `<h1>` per page; canonicals and JSON-LD intact.
 - Form: POST to `/api/contact/` → **303** → `/thank-you/`.
-- Wordmark at very narrow widths (see §6).
+- Wordmark at 320px: one line, no overlap with the Menu button (see §6).
+- No old brand in built HTML: `Hunting Tanner Construction` may appear **only** as `Hunting Tanner Construction LLC`, and `HTC` not at all in visible text.
 
 ### 💡 Discussed but NOT implemented
 

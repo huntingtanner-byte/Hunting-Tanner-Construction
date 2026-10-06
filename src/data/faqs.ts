@@ -29,7 +29,7 @@ export const homeFaqs: FAQ[] = [
   {
     question: "Who will actually be working in my home?",
     answer:
-      "Qualified trade partners: electricians, plumbers, HVAC, drywall, and finish crews, coordinated and scheduled by Hunting Tanner Construction. You'll know who is expected, on which days, and what they're doing. One point of contact stays accountable to you for the entire project, and that's Hunting. He's personally involved in every job.",
+      "Qualified trade partners: electricians, plumbers, HVAC, drywall, and finish crews, coordinated and scheduled by Utah County Basement Pros. You'll know who is expected, on which days, and what they're doing. One point of contact stays accountable to you for the entire project, and that's Hunting. He's personally involved in every job.",
   },
   {
     question: "What makes a basement bedroom \"legal\"?",
@@ -47,7 +47,7 @@ export const homeFaqs: FAQ[] = [
       "Payments follow a written schedule tied to project milestones, spelled out in your proposal before anything is signed. You'll never be asked to pay for work that hasn't been defined in writing, and change orders are priced and approved in writing before that work proceeds.",
   },
   {
-    question: "Is Hunting Tanner Construction taking on new projects?",
+    question: "Is Utah County Basement Pros taking on new projects?",
     answer:
       "We're currently scheduling basement consultations for homeowners throughout Utah County and the Salt Lake Valley. The best first step is a short conversation about your space. Call (801) 901-8349 or send the consultation form.",
   },
@@ -154,7 +154,7 @@ export const faqPageGroups: FAQGroup[] = [
     title: "About the Company",
     faqs: [
       {
-        question: "Is Hunting Tanner Construction a new company?",
+        question: "Is Utah County Basement Pros a new company?",
         answer:
           "The company is new. The experience behind it isn't. Hunting is a third-generation contractor who grew up on job sites alongside his dad, Gary, a general contractor with more than 35 years of experience and decades of relationships with top subcontractors. Gary is our senior advisor and is involved in every project, so a veteran's judgment reviews the work alongside the owner running it. Every project gets written scopes, documented changes, regular updates, and an owner who is personally involved from start to finish.",
       },

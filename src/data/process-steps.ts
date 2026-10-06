@@ -1,4 +1,4 @@
-/** The six-step HTC process, used on the homepage preview and /process/ page. */
+/** The six-step project process, used on the homepage preview and /process/ page. */
 
 export interface ProcessStep {
   title: string;

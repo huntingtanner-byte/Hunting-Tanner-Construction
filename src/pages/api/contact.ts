@@ -16,7 +16,7 @@
  *                                huntingtanner.com, or onboarding sender)
  *  - CONTACT_NOTIFICATION_EMAIL — defaults to office@huntingtanner.com
  *  - RESEND_FROM (optional)    — verified sender, e.g.
- *                                "HTC Website <leads@huntingtanner.com>"
+ *                                "Basement Pros Website <leads@huntingtanner.com>"
  *
  * If RESEND_API_KEY is missing, the lead is logged server-side and the
  * visitor still reaches /thank-you/ — check Vercel logs and configure the
@@ -31,7 +31,7 @@ export const prerender = false;
 const NOTIFY_EMAIL =
   import.meta.env.CONTACT_NOTIFICATION_EMAIL ?? "office@huntingtanner.com";
 const FROM =
-  import.meta.env.RESEND_FROM ?? "HTC Website <onboarding@resend.dev>";
+  import.meta.env.RESEND_FROM ?? "Basement Pros Website <onboarding@resend.dev>";
 
 export const POST: APIRoute = async ({ request, redirect }) => {
   let form: FormData;
@@ -120,7 +120,7 @@ function errorPage(): string {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>We couldn't send your request | Hunting Tanner Construction</title>
+<title>We couldn't send your request | Utah County Basement Pros</title>
 <style>
   body { margin:0; background:#faf8f3; color:#2c3135;
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
@@ -158,7 +158,7 @@ function buildLeadEmail(lead: LeadPayload): string {
   const line = (label: string, value?: string) =>
     value ? `${label}: ${value}` : "";
   return [
-    "New basement consultation request from huntingtanner.com",
+    "New basement consultation request from the Utah County Basement Pros website",
     "",
     line("Name", l.name),
     line("Phone", l.phone),

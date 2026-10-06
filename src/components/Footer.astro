@@ -17,13 +17,13 @@ const socialLabels: Record<string, string> = {
     <div class="footer-grid">
       <div class="footer-brand">
         <p class="footer-wordmark">
-          <span class="fw-name">Hunting Tanner</span>
-          <span class="fw-sub">Construction</span>
+          <span class="fw-sub"><span>Utah County</span></span>
+          <span class="fw-name">Basement Pros</span>
         </p>
         <p class="footer-tagline">
-          A Utah County based residential contractor serving homeowners at
-          their properties. Serving Saratoga Springs, Lehi, and communities
-          throughout Utah County and the Salt Lake Valley.
+          Basement finishing and remodeling for homeowners in Saratoga
+          Springs, Lehi, and communities throughout Utah County and the Salt
+          Lake Valley.
         </p>
         <p class="footer-contact">
           <a
@@ -91,6 +91,11 @@ const socialLabels: Record<string, string> = {
     </div>
 
     <div class="footer-legal">
+      <p>
+        {business.publicName} is a DBA of {business.legalName}{canClaimLicensed
+          ? `, a licensed Utah general contractor (License #${business.licenseNumber})`
+          : ""}.
+      </p>
       <p>&copy; {year} {business.legalName}. All rights reserved.</p>
     </div>
   </div>
@@ -121,10 +126,12 @@ const socialLabels: Record<string, string> = {
     }
   }
 
+  /* Same lockup as the header, reversed out on Charcoal */
   .footer-wordmark {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
+    gap: 0.35rem;
     font-family: var(--font-display);
     text-transform: uppercase;
     line-height: 1.2;
@@ -137,12 +144,28 @@ const socialLabels: Record<string, string> = {
     /* offset the trailing letter-space so the text centers optically */
     padding-left: 0.14em;
     color: var(--color-on-dark);
+    white-space: nowrap;
   }
   .fw-sub {
-    font-size: 0.72rem;
-    letter-spacing: 0.4em;
-    padding-left: 0.4em;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+    font-size: 0.7rem;
+    letter-spacing: 0.42em;
     color: var(--color-dark-muted);
+    white-space: nowrap;
+  }
+  .fw-sub span {
+    padding-left: 0.42em;
+  }
+  .fw-sub::before,
+  .fw-sub::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--color-on-dark-accent);
+    opacity: 0.6;
   }
 
   .footer-tagline {
@@ -235,5 +258,11 @@ const socialLabels: Record<string, string> = {
     border-top: 1px solid rgb(250 248 243 / 0.14);
     font-size: var(--text-xs);
     color: var(--color-dark-muted);
+  }
+  .footer-legal p {
+    margin: 0;
+  }
+  .footer-legal p + p {
+    margin-top: var(--space-2);
   }
 </style>

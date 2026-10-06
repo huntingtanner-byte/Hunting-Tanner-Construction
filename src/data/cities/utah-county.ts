@@ -6,14 +6,14 @@ export const utahCountyCities: CityPage[] = [
     slug: "eagle-mountain",
     name: "Eagle Mountain",
     county: "Utah County",
-    metaTitle: "Basement Finishing in Eagle Mountain, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in Eagle Mountain, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing for Eagle Mountain homeowners. Turn the unfinished basement in your newer home into bedrooms, a family room, and real storage, with written scopes and organized management.",
     h1: "Basement Finishing in Eagle Mountain",
     lede: "One of the fastest-growing cities in Utah, full of newer homes with untouched basements. If your downstairs is still bare studs, you're sitting on the cheapest square footage you'll ever add.",
     intro: [
       "Eagle Mountain families tend to have two things in common: kids, and a basement the builder never finished. The city's explosive growth means most homes here were built in the last fifteen years, delivered with framed basements, rough-in plumbing, and a lot of potential going unused.",
-      "Hunting Tanner Construction serves Eagle Mountain from our base in northwest Utah County, minutes away across Cedar Valley. We finish basements with written scopes, organized trade schedules, and one owner accountable for the whole job.",
+      "Utah County Basement Pros serves Eagle Mountain from our base in northwest Utah County, minutes away across Cedar Valley. We finish basements with written scopes, organized trade schedules, and one owner accountable for the whole job.",
     ],
     angle: {
       heading: "Space is why you moved here. Finish all of it.",
@@ -85,7 +85,7 @@ export const utahCountyCities: CityPage[] = [
     slug: "american-fork",
     name: "American Fork",
     county: "Utah County",
-    metaTitle: "Basement Finishing in American Fork, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in American Fork, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing and remodeling in American Fork: new builds near the tech corridor and established neighborhoods alike. Written scopes, qualified trades, one accountable owner.",
     h1: "Basement Finishing in American Fork",
@@ -163,14 +163,14 @@ export const utahCountyCities: CityPage[] = [
     slug: "pleasant-grove",
     name: "Pleasant Grove",
     county: "Utah County",
-    metaTitle: "Basement Finishing in Pleasant Grove, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in Pleasant Grove, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing and remodeling for Pleasant Grove homeowners, from established neighborhoods to newer builds near the Grove. Written scopes and organized project management.",
     h1: "Basement Finishing in Pleasant Grove",
     lede: "Utah's City of Trees has deep neighborhoods, family homes that stay in families, and a lot of basements that deserve better than storage duty.",
     intro: [
       "Pleasant Grove homes get lived in for decades, passed down, grown into. That long tenure changes the basement math: this isn't flip-house cosmetics, it's finishing space your family will use for twenty years. It's worth doing right, and worth documenting properly with permits and inspections.",
-      "We serve Pleasant Grove with the same structure every HTC project gets: an on-site walkthrough, a written room-by-room scope, an itemized proposal, and construction run by qualified trades with one owner accountable throughout.",
+      "We serve Pleasant Grove with the same structure every one of our projects gets: an on-site walkthrough, a written room-by-room scope, an itemized proposal, and construction run by qualified trades with one owner accountable throughout.",
     ],
     angle: {
       heading: "Finishing for the long haul",
@@ -240,14 +240,14 @@ export const utahCountyCities: CityPage[] = [
     slug: "lindon",
     name: "Lindon",
     county: "Utah County",
-    metaTitle: "Basement Finishing in Lindon, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in Lindon, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing for Lindon homeowners: big lots, big basements, and room to build the family space, shop storage, or guest suite your property deserves.",
     h1: "Basement Finishing in Lindon",
     lede: "A little bit country by choice, Lindon runs on big lots, big garages, and homes with serious square footage underneath.",
     intro: [
       "Lindon has kept its breathing room: acre-plus lots, animal rights on some properties, and homes built with space to spare. The basements match. We regularly see Lindon lower levels with high ceilings and footprints large enough for a family room, multiple bedrooms, a gym, and storage without crowding.",
-      "Big footprints reward planning. An unplanned 2,000-square-foot basement becomes a maze; a planned one becomes the best floor of the house. That planning discipline, written scopes, organized selections, coordinated trades, is exactly what Hunting Tanner Construction brings.",
+      "Big footprints reward planning. An unplanned 2,000-square-foot basement becomes a maze; a planned one becomes the best floor of the house. That planning discipline, written scopes, organized selections, coordinated trades, is exactly what Utah County Basement Pros brings.",
     ],
     angle: {
       heading: "Large basements are a different design problem",
@@ -317,7 +317,7 @@ export const utahCountyCities: CityPage[] = [
     slug: "orem",
     name: "Orem",
     county: "Utah County",
-    metaTitle: "Basement Finishing & Remodeling in Orem, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing & Remodeling in Orem, UT | Utah County Basement Pros",
     metaDescription:
       "Basement remodeling and finishing for Orem's established neighborhoods: opening dated layouts, correcting old work, and adding the bedrooms and bathrooms your home is missing.",
     h1: "Basement Finishing & Remodeling in Orem",
@@ -395,7 +395,7 @@ export const utahCountyCities: CityPage[] = [
     slug: "provo",
     name: "Provo",
     county: "Utah County",
-    metaTitle: "Basement Finishing & Remodeling in Provo, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing & Remodeling in Provo, UT | Utah County Basement Pros",
     metaDescription:
       "Basement remodeling and finishing in Provo: century-old character homes, mid-century ramblers, and newer builds, each handled with the care its era requires.",
     h1: "Basement Finishing & Remodeling in Provo",
@@ -473,14 +473,14 @@ export const utahCountyCities: CityPage[] = [
     slug: "vineyard",
     name: "Vineyard",
     county: "Utah County",
-    metaTitle: "Basement Finishing in Vineyard, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in Vineyard, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing for Vineyard's newest-in-the-county homes. Finish your builder-basic basement into bedrooms, family space, and a bathroom on the existing rough-in.",
     h1: "Basement Finishing in Vineyard",
     lede: "Utah County's youngest city, where nearly every basement is new, unfinished, and waiting on the same decision: when do we finish it?",
     intro: [
       "Vineyard grew from farmland to full city inside a generation, which gives it something rare: housing stock that's almost uniformly new. If you own a single-family home here, your basement almost certainly came framed, insulated at the rim, rough-plumbed for a bathroom, and unfinished, exactly how the builder left it.",
-      "That uniformity is good news for you. New basements are the cleanest projects in construction: known conditions, modern materials, no surprises hiding behind old paneling. The whole job is planning and execution, which is precisely what Hunting Tanner Construction is built around.",
+      "That uniformity is good news for you. New basements are the cleanest projects in construction: known conditions, modern materials, no surprises hiding behind old paneling. The whole job is planning and execution, which is precisely what Utah County Basement Pros is built around.",
     ],
     angle: {
       heading: "The new-build finish, done properly",
@@ -551,14 +551,14 @@ export const utahCountyCities: CityPage[] = [
     slug: "highland",
     name: "Highland",
     county: "Utah County",
-    metaTitle: "Basement Finishing in Highland, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in Highland, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing for Highland homes: larger footprints, higher expectations, and lower levels worthy of the house above them. Written scopes and meticulous management.",
     h1: "Basement Finishing in Highland",
     lede: "Highland homes are built generously, and their basements should live that way too: finished to the same standard as the floors above, not to 'basement standard.'",
     intro: [
       "Highland's larger lots and larger homes come with basements to match: high ceilings, big windows, wide-open footprints. Spaces like that deserve more than the minimum. Trim that matches the main floor, lighting designed rather than scattered, built-ins where they belong, and a layout that uses the windows instead of walling them off.",
-      "Hunting Tanner Construction runs Highland projects with the discipline larger scopes demand: written room-by-room scopes, organized selections with real allowances, coordinated trades, and an owner who's personally on the job. Meticulous scope review is a family trait; it's how Gary ran projects for more than 35 years.",
+      "Utah County Basement Pros runs Highland projects with the discipline larger scopes demand: written room-by-room scopes, organized selections with real allowances, coordinated trades, and an owner who's personally on the job. Meticulous scope review is a family trait; it's how Gary ran projects for more than 35 years.",
     ],
     angle: {
       heading: "Finishing to the standard of the house",
@@ -617,7 +617,7 @@ export const utahCountyCities: CityPage[] = [
       {
         question: "How do payments work on a larger project?",
         answer:
-          "Same structure as every HTC project, scaled: a milestone-based schedule defined in the proposal, written change orders priced before changed work proceeds, and no surprise invoices. Financial discipline is half of why this company exists.",
+          "Same structure as every project we build, scaled: a milestone-based schedule defined in the proposal, written change orders priced before changed work proceeds, and no surprise invoices. Financial discipline is half of why this company exists.",
       },
     ],
     ctaHeading: "Give the lower level the same standard as the rest",
@@ -628,7 +628,7 @@ export const utahCountyCities: CityPage[] = [
     slug: "alpine",
     name: "Alpine",
     county: "Utah County",
-    metaTitle: "Basement Finishing in Alpine, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in Alpine, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing for Alpine homes at the foot of the mountains: walkout lower levels, entertainment space, and finishes that live up to custom homes.",
     h1: "Basement Finishing in Alpine",
@@ -705,7 +705,7 @@ export const utahCountyCities: CityPage[] = [
     slug: "cedar-hills",
     name: "Cedar Hills",
     county: "Utah County",
-    metaTitle: "Basement Finishing in Cedar Hills, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in Cedar Hills, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing for Cedar Hills bench homes: daylight windows, golf-course views, and lower levels ready to become bedrooms, family space, and more.",
     h1: "Basement Finishing in Cedar Hills",
@@ -782,7 +782,7 @@ export const utahCountyCities: CityPage[] = [
     slug: "springville",
     name: "Springville",
     county: "Utah County",
-    metaTitle: "Basement Finishing in Springville, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in Springville, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing and remodeling in Springville: Art City character homes, family neighborhoods, and newer builds on the west side, each planned to its era.",
     h1: "Basement Finishing in Springville",
@@ -858,14 +858,14 @@ export const utahCountyCities: CityPage[] = [
     slug: "mapleton",
     name: "Mapleton",
     county: "Utah County",
-    metaTitle: "Basement Finishing in Mapleton, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in Mapleton, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing for Mapleton's larger homes and country lots: guest suites, entertainment space, and lower levels finished to match the property.",
     h1: "Basement Finishing in Mapleton",
     lede: "Where the county turns pastoral: bigger parcels, custom homes under Maple Mountain, and basements with the square footage to match.",
     intro: [
       "Mapleton kept its orchards-and-acreage character while its homes grew ambitious, and the basements followed: big footprints, tall ceilings in newer builds, and on benched lots, walkout levels with real daylight. Space like that rewards a proper plan and punishes improvisation.",
-      "Hunting Tanner Construction brings Mapleton projects disciplined scoping, custom-grade selections management, and an owner personally involved from walkthrough to walkthrough, backed by an advisor with more than 35 years of general contracting behind him.",
+      "Utah County Basement Pros brings Mapleton projects disciplined scoping, custom-grade selections management, and an owner personally involved from walkthrough to walkthrough, backed by an advisor with more than 35 years of general contracting behind him.",
     ],
     angle: {
       heading: "Country property, finished lower level",
@@ -934,14 +934,14 @@ export const utahCountyCities: CityPage[] = [
     slug: "spanish-fork",
     name: "Spanish Fork",
     county: "Utah County",
-    metaTitle: "Basement Finishing in Spanish Fork, UT | Hunting Tanner Construction",
+    metaTitle: "Basement Finishing in Spanish Fork, UT | Utah County Basement Pros",
     metaDescription:
       "Basement finishing in Spanish Fork: fast-growing west-side subdivisions and established in-town neighborhoods, with written scopes and organized management.",
     h1: "Basement Finishing in Spanish Fork",
     lede: "The south county's anchor city, growing fast on the west side while its established streets hold homes that have raised generations.",
     intro: [
       "Spanish Fork marks the southern edge of our service area, and it earns the trip: thousands of newer homes west of the freeway with untouched basements, plus an established core where basements finished decades ago are ready for renewal.",
-      "Both get the same HTC structure: a real walkthrough, a written scope, an itemized proposal, and construction managed by an owner who's personally involved, with qualified trades and permits handled inside the schedule.",
+      "Both get the same structure: a real walkthrough, a written scope, an itemized proposal, and construction managed by an owner who's personally involved, with qualified trades and permits handled inside the schedule.",
     ],
     angle: {
       heading: "Growth-town basements, finished right the first time",
@@ -984,7 +984,7 @@ export const utahCountyCities: CityPage[] = [
       {
         question: "We're at the south end of the valley. Are we really in your service area?",
         answer:
-          "Yes. Spanish Fork is our southern boundary and a full part of the service area: walkthroughs, weekly site presence, and the same owner involvement every HTC project gets. South of Spanish Fork we'll refer you honestly to closer options.",
+          "Yes. Spanish Fork is our southern boundary and a full part of the service area: walkthroughs, weekly site presence, and the same owner involvement every one of our projects gets. South of Spanish Fork we'll refer you honestly to closer options.",
       },
       {
         question: "Our new build came with a 'daylight' basement. What does that change?",
