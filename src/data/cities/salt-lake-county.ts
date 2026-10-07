@@ -1074,7 +1074,7 @@ export const saltLakeCountyCities: CityPage[] = [
       {
         question: "How involved will the owner actually be on our project?",
         answer:
-          "Personally and throughout: Hunting runs the walkthrough, writes the scope, manages the schedule, and stays your single point of contact, with Gary, our senior advisor, bringing 35+ years of GC experience to every scope. That's the company model, not a sales line.",
+          "Personally and throughout: Hunting runs the walkthrough, writes the scope, manages the schedule, and stays your single point of contact, with his father Gary, our senior advisor, reviewing every scope alongside him. Together that's more than 40 years of combined experience on every project. That's the company model, not a sales line.",
       },
     ],
     ctaHeading: "Finish the level with the view",

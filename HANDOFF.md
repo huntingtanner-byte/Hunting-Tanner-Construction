@@ -70,13 +70,15 @@ The public brand is **Utah County Basement Pros**. It is a **DBA of Hunting Tann
 > **NEVER** use these words for Gary: **co-founder, founder, partner, principal, owner, "our team."**
 > **NEVER** state or imply Gary is licensed in Utah. (His past **California** license may be described in past tense, as it is on `/about/`.)
 >
-> **The goal is to use Gary's 35+ years as CREDIBILITY without implying ownership.** He is genuinely involved in every project — say that. Just never attach an ownership word to it.
+> **The goal is to use the family experience as CREDIBILITY without implying ownership.** Gary is genuinely involved in every project — say that. Just never attach an ownership word to it.
+>
+> **Experience figures (supplied by Hunting, Oct 7 2026):** lead with **"40+ years of combined experience"** between Hunting and Gary, both involved in every project. Do NOT frame the credibility as only "Hunting's father has 35 years." Gary's individual **35+ years** is used only where the sentence is about Gary's own career (his About bio, "how Gary ran projects").
 >
 > Approved framings currently live on the site:
 >
-> > "Hunting owns and runs every project start to finish, with Gary serving as senior advisor and involved in each one. You get a new company's attention and a veteran's judgment."
+> > "Hunting is a third-generation contractor who grew up on job sites alongside his dad, Gary. Together they bring more than 40 years of combined construction experience, and both are involved in every project: Hunting owns and runs each one start to finish, and Gary serves as senior advisor."
 >
-> > "**35+ years of experience behind every job.** Hunting's father Gary, a general contractor with over 35 years in the industry, is our senior advisor and involved in every project."
+> > "**40+ years of combined experience.** Hunting Tanner and his father Gary, our senior advisor, are both involved in every project we build."
 >
 > > "As senior advisor to Utah County Basement Pros, Gary is involved in every project. He reviews scopes of work before they reach you and stays close to the details once construction begins."
 >
@@ -238,7 +240,7 @@ Every color decision on this project has been verified to **WCAG AA** (4.5:1 bod
 | # | Section | Background | What it does |
 |---|---|---|---|
 | 1 | **Hero** | `.hero` — Charcoal backdrop with full-bleed photo | `<h1>Utah Basement<br />Finishing Specialists</h1>`. Overlaid copy + two CTAs (Sea Glass "Request Consultation" + ghost-light "Call"). |
-| 2 | **TrustStrip** | light | 3–4 short credibility points: licensed & insured, *35+ years of experience behind every job* (Gary as senior advisor), an owner on every project, organized scopes & planning. |
+| 2 | **TrustStrip** | light | 3–4 short credibility points: licensed & insured, *40+ years of combined experience* (Hunting + Gary), an owner on every project, organized scopes & planning. |
 | 3 | **Start Here / lead form** | `.section--alt` (`#home-lead-form`) | "Tell us about your basement." **The page's only form.** Deliberately placed high for conversion. |
 | 4 | **What We Build** | canvas | Service cards — the room types. Links out to `/services/` anchors. |
 | 5 | **Our Work** | canvas | Real project photography grid + CTA to `/projects/`. |

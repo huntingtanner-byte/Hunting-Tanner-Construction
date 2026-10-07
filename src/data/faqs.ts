@@ -156,7 +156,7 @@ export const faqPageGroups: FAQGroup[] = [
       {
         question: "Is Utah County Basement Pros a new company?",
         answer:
-          "The company is new. The experience behind it isn't. Hunting is a third-generation contractor who grew up on job sites alongside his dad, Gary, a general contractor with more than 35 years of experience and decades of relationships with top subcontractors. Gary is our senior advisor and is involved in every project, so a veteran's judgment reviews the work alongside the owner running it. Every project gets written scopes, documented changes, regular updates, and an owner who is personally involved from start to finish.",
+          "The company is new. The experience behind it isn't. Hunting is a third-generation contractor who grew up on job sites alongside his dad, Gary, our senior advisor. Together they bring more than 40 years of combined construction experience and decades of relationships with top subcontractors, and both are involved in every project, so a veteran's judgment reviews the work alongside the owner running it. Every project gets written scopes, documented changes, regular updates, and an owner who is personally involved from start to finish.",
       },
       {
         question: "Which areas do you serve?",

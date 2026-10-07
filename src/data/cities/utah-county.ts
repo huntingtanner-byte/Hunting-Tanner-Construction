@@ -306,7 +306,7 @@ export const utahCountyCities: CityPage[] = [
       {
         question: "Who manages the project day to day?",
         answer:
-          "Hunting does, personally, on every project. You get one accountable point of contact, scheduled updates, and direct answers, backed by his father Gary, our senior advisor and a general contractor with more than 35 years of experience, who is involved in every project.",
+          "Hunting does, personally, on every project. You get one accountable point of contact, scheduled updates, and direct answers, backed by more than 40 years of combined experience between Hunting and his father Gary, our senior advisor, who is involved in every project as well.",
       },
     ],
     ctaHeading: "Design the lower level your lot deserves",
@@ -865,7 +865,7 @@ export const utahCountyCities: CityPage[] = [
     lede: "Where the county turns pastoral: bigger parcels, custom homes under Maple Mountain, and basements with the square footage to match.",
     intro: [
       "Mapleton kept its orchards-and-acreage character while its homes grew ambitious, and the basements followed: big footprints, tall ceilings in newer builds, and on benched lots, walkout levels with real daylight. Space like that rewards a proper plan and punishes improvisation.",
-      "Utah County Basement Pros brings Mapleton projects disciplined scoping, custom-grade selections management, and an owner personally involved from walkthrough to walkthrough, backed by an advisor with more than 35 years of general contracting behind him.",
+      "Utah County Basement Pros brings Mapleton projects disciplined scoping, custom-grade selections management, and an owner personally involved from walkthrough to walkthrough, backed by more than 40 years of combined construction experience between Hunting and his father Gary, our senior advisor.",
     ],
     angle: {
       heading: "Country property, finished lower level",
