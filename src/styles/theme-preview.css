@@ -348,3 +348,70 @@
   --color-button-secondary-hover: #4f3236;
 }
 :root[data-palette="burgundy"][data-bands="lighter"] { --color-background-soft: #f1ebe3; }
+
+/* ==========================================================================
+   FONTS TOGGLE: typography that matches the bold logo
+   Classic = current (Source Serif 4 + system sans). Both alternatives put
+   headings in Fraunces at full SOFT, the same soft serif as the bold logo,
+   and body / UI text in DM Sans, a warm low-contrast sans that pairs with it.
+   The classic logo lockup is pinned to Source Serif in Header/Footer so
+   this toggle never changes it.
+   ========================================================================== */
+:root:is([data-fonts="soft"], [data-fonts="bold"]) {
+  --font-display: "Fraunces Variable", Georgia, serif;
+  --font-body: "DM Sans Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+/* Inherited everywhere; fonts without a SOFT axis ignore it */
+:root:is([data-fonts="soft"], [data-fonts="bold"]) body {
+  font-variation-settings: "SOFT" 100, "WONK" 0;
+}
+
+/* ---- Soft serif: refined medium headings, high-contrast at display size */
+html:root[data-fonts="soft"] :is(h1, h2) {
+  font-weight: 560;
+  letter-spacing: -0.015em;
+}
+html:root[data-fonts="soft"] :is(h3, h4) {
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+
+/* ---- Bold: chunky, low-contrast headings in the spirit of the logo ---- */
+html:root[data-fonts="bold"] :is(h1, h2, h3, h4) {
+  /* Low optical size = rounder, heavier, Cooper-like */
+  font-variation-settings: "SOFT" 100, "WONK" 0, "opsz" 24;
+}
+html:root[data-fonts="bold"] h1 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+}
+html:root[data-fonts="bold"] h2 {
+  font-weight: 750;
+  letter-spacing: -0.015em;
+}
+html:root[data-fonts="bold"] :is(h3, h4) {
+  font-weight: 700;
+  letter-spacing: -0.005em;
+}
+/* Labels and buttons carry a little more weight to stand up to the heads */
+html:root[data-fonts="bold"] :is(.eyebrow, .btn) {
+  font-weight: 700;
+}
+
+/* DM Sans sets a little wider than the system font, which pushed the full
+   desktop header (nav + phone + CTA) past the edge just above 1024px.
+   Slightly tighter nav spacing keeps it on one row. */
+html:root:is([data-fonts="soft"], [data-fonts="bold"]) .desktop-nav ul {
+  gap: var(--space-5);
+}
+
+/* Other display-font text (trust-strip titles, FAQ questions, process
+   numbers) follows the heading weight of each font option. */
+html:root[data-fonts="soft"] :is(.trust-list strong, .faq-item summary, .step-number) {
+  font-weight: 600;
+}
+html:root[data-fonts="bold"] :is(.trust-list strong, .faq-item summary, .step-number) {
+  font-weight: 700;
+  font-variation-settings: "SOFT" 100, "WONK" 0, "opsz" 24;
+}

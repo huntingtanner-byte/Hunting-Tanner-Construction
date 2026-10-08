@@ -5,7 +5,7 @@
  *
  * Choices are applied as data attributes on <html> (see theme-preview.css
  * and the bold-logo rules in Header/Footer), remembered across pages, and
- * shareable via ?palette=forest&buttons=dark&bands=lighter&logo=bold.
+ * shareable via ?palette=forest&buttons=dark&bands=lighter&logo=bold&fonts=soft.
  */
 const palettes = [
   { id: "current", label: "Current", note: "Coastal (live now)", swatches: ["#2c3135", "#aebfbc", "#c7b9a9", "#f1ede6", "#faf8f3"] },
@@ -35,6 +35,15 @@ const names = Object.fromEntries(palettes.map((p) => [p.id, p.label.replace(/^\d
       <div class="tp-seg">
         <label><input type="radio" name="tp-logo" value="classic" /><span>Classic</span></label>
         <label><input type="radio" name="tp-logo" value="bold" /><span class="tp-bold-sample">Bold</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Fonts</legend>
+      <div class="tp-seg tp-seg--3">
+        <label><input type="radio" name="tp-fonts" value="classic" /><span class="tp-font tp-font--classic">Classic</span></label>
+        <label><input type="radio" name="tp-fonts" value="soft" /><span class="tp-font tp-font--soft">Soft serif</span></label>
+        <label><input type="radio" name="tp-fonts" value="bold" /><span class="tp-font tp-font--bold">Bold</span></label>
       </div>
     </fieldset>
 
@@ -91,6 +100,7 @@ const names = Object.fromEntries(palettes.map((p) => [p.id, p.label.replace(/^\d
     buttons: "light",
     bands: "standard",
     logo: "classic",
+    fonts: "classic",
   } as const;
   type Key = keyof typeof controls;
 
@@ -103,6 +113,7 @@ const names = Object.fromEntries(palettes.map((p) => [p.id, p.label.replace(/^\d
     });
     const extras = [
       value("logo") === "bold" ? "bold logo" : "",
+      value("fonts") === "soft" ? "soft serif fonts" : value("fonts") === "bold" ? "bold fonts" : "",
       `${value("buttons")} buttons`,
       value("bands") === "lighter" ? "lighter bands" : "",
     ].filter(Boolean);
@@ -283,6 +294,25 @@ const names = Object.fromEntries(palettes.map((p) => [p.id, p.label.replace(/^\d
   .tp-seg label:has(input:checked) {
     border-color: #1d1d1f;
     background: #f5f5f7;
+  }
+  .tp-seg--3 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  /* Each font option previews itself */
+  .tp-font--classic {
+    font-family: "Source Serif 4 Variable", Georgia, serif;
+    font-weight: 500;
+  }
+  .tp-font--soft,
+  .tp-font--bold {
+    font-family: "Fraunces Variable", Georgia, serif;
+    font-variation-settings: "SOFT" 100, "WONK" 0;
+  }
+  .tp-font--soft {
+    font-weight: 560;
+  }
+  .tp-font--bold {
+    font-weight: 800;
   }
   .tp-bold-sample {
     font-family: "Fraunces Variable", Georgia, serif;

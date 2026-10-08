@@ -7,6 +7,7 @@ import "@fontsource-variable/source-serif-4";
 import "@/styles/global.css";
 // THEME PREVIEW (theme-preview branch only)
 import "@fontsource-variable/fraunces/full.css";
+import "@fontsource-variable/dm-sans";
 import "@/styles/theme-preview.css";
 import ThemePreview from "@/components/ThemePreview.astro";
 import SEOHead from "@/components/SEOHead.astro";
@@ -59,7 +60,7 @@ const allSchemas = includeOrgSchema
       // THEME PREVIEW: applies the saved or linked choice before first paint
       (function () {
         var q = new URLSearchParams(location.search);
-        var d = { palette: "current", buttons: "light", bands: "standard", logo: "classic" };
+        var d = { palette: "current", buttons: "light", bands: "standard", logo: "classic", fonts: "classic" };
         Object.keys(d).forEach(function (k) {
           var v = q.get(k);
           try { if (v) localStorage.setItem("tp-" + k, v); else v = localStorage.getItem("tp-" + k); } catch (e) {}
