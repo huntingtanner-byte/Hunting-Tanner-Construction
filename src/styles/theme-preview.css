@@ -1,0 +1,122 @@
+/* ==========================================================================
+   THEME PREVIEW (theme-preview branch only — never merged to main)
+   Alternate palettes applied on top of the :root tokens in global.css.
+   Selected by <html data-palette="…" data-buttons="…">, set by
+   ThemePreview.astro. Every text pairing below was checked to 4.5:1.
+   ========================================================================== */
+
+/* ---- Option 1: Walnut & Linen ----------------------------------------- */
+:root[data-palette="walnut"] {
+  --brand-soft-white: #faf8f4;
+  --brand-sea-glass: #ab9988;   /* Warm Taupe takes the accent role */
+  --brand-pale-taupe: #e8ddd1;  /* Linen */
+  --brand-charcoal: #3b302a;    /* Dark Walnut */
+
+  --color-background: #faf8f4;
+  --color-background-soft: #e8ddd1;
+  --color-background-cool: #f1ebe3;
+  --color-surface: #faf8f4;
+  --color-surface-raised: #fffdfa;
+
+  --color-text: #3b302a;        /* 12.06:1 */
+  --color-text-muted: #6b5d53;  /* 5.97 canvas, 4.73 linen */
+
+  --color-accent: #ab9988;
+  --color-accent-hover: #bcab9a;
+  --color-accent-ink: #3b302a;  /* 4.65:1 on Warm Taupe */
+  --color-accent-secondary: #78604d; /* Tobacco: nav underline, details */
+
+  --color-border: #ebe3d9;
+  --color-border-strong: #dccfc1;
+  --color-input-border: #cbbcab;
+
+  --color-dark: #3b302a;
+  --color-on-dark: #faf8f4;
+  --color-on-dark-muted: #c4b8ac;
+  --color-on-dark-accent: #ab9988;
+
+  --color-button-primary: #3b302a;
+  --color-button-primary-text: #faf8f4;
+  --color-button-primary-hover: #2b231e;
+  --color-button-secondary: #ab9988;
+  --color-button-secondary-text: #3b302a;
+  --color-button-secondary-hover: #bcab9a;
+  --color-focus: #3b302a;
+
+  --rgb-dark: 59 48 42;
+  --rgb-light: 250 248 244;
+  --rgb-accent: 171 153 136;
+}
+:root[data-palette="walnut"][data-buttons="dark"] {
+  --color-button-secondary: #78604d;      /* Tobacco Brown */
+  --color-button-secondary-text: #faf8f4; /* 5.53:1 */
+  --color-button-secondary-hover: #66503f;
+}
+
+/* ---- Option 2: Timber & Sage ------------------------------------------- */
+:root[data-palette="sage"] {
+  --brand-soft-white: #f9f6ef;
+  /* Muted Sage #858E7A is too mid-toned to carry text either way, so fills
+     that hold text use a lighter tint of it. The true sage is used for
+     the nav underline and accent details below. */
+  --brand-sea-glass: #b3baa7;
+  --brand-pale-taupe: #e2d8c9;  /* Oat */
+  --brand-charcoal: #3c342f;    /* Deep Brown */
+
+  --color-background: #f9f6ef;
+  --color-background-soft: #e2d8c9;
+  --color-background-cool: #e9ece3;
+  --color-surface: #f9f6ef;
+  --color-surface-raised: #fffdf8;
+
+  --color-text: #3c342f;        /* 11.28:1 */
+  --color-text-muted: #665a4f;  /* 6.20 canvas, 4.74 oat */
+
+  --color-accent: #b3baa7;
+  --color-accent-hover: #a4ac97;
+  --color-accent-ink: #3c342f;  /* 6.09:1 on sage tint */
+  --color-accent-secondary: #858e7a; /* Muted Sage */
+
+  --color-border: #e8e0d3;
+  --color-border-strong: #d8ccbb;
+  --color-input-border: #c9bcaa;
+
+  --color-dark: #3c342f;
+  --color-on-dark: #f9f6ef;
+  --color-on-dark-muted: #c2b9ae;
+  --color-on-dark-accent: #b3baa7;
+
+  --color-button-primary: #3c342f;
+  --color-button-primary-text: #f9f6ef;
+  --color-button-primary-hover: #2c2622;
+  --color-button-secondary: #b3baa7;
+  --color-button-secondary-text: #3c342f;
+  --color-button-secondary-hover: #a4ac97;
+  --color-focus: #3c342f;
+
+  --rgb-dark: 60 52 47;
+  --rgb-light: 249 246 239;
+  --rgb-accent: 133 142 122;
+}
+:root[data-palette="sage"][data-buttons="dark"] {
+  --color-button-secondary: #765a48;      /* Cedar */
+  --color-button-secondary-text: #f9f6ef; /* 5.85:1 */
+  --color-button-secondary-hover: #644b3b;
+}
+
+/* ---- Current palette with dark buttons, for a fair comparison ---------- */
+:root:not([data-palette="walnut"]):not([data-palette="sage"])[data-buttons="dark"] {
+  --color-button-secondary: #2c3135;
+  --color-button-secondary-text: #faf8f3;
+  --color-button-secondary-hover: #1e2226;
+}
+
+/* ---- "Lighter bands": the warm section band at half strength ----------
+   Hunting rejected a tan section background before, so the preview shows
+   each palette's band both as specified and softened toward the canvas. */
+:root[data-palette="walnut"][data-bands="lighter"] {
+  --color-background-soft: #f1ebe3; /* Linen, halfway to Soft White */
+}
+:root[data-palette="sage"][data-bands="lighter"] {
+  --color-background-soft: #eee7dc; /* Oat, halfway to Cream */
+}

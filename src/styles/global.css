@@ -54,6 +54,12 @@
   --color-button-primary-text: #faf8f3;
   --color-button-secondary: #aebfbc;
   --color-button-secondary-text: #2c3135;
+  --color-button-primary-hover: #1e2226;
+  --color-button-secondary-hover: var(--color-accent-hover);
+  /* Channel values for translucent tints: rgb(var(--rgb-dark) / 0.5) */
+  --rgb-dark: 44 49 53;
+  --rgb-light: 250 248 243;
+  --rgb-accent: 174 191 188;
 
   /* ---- State ---- */
   --color-focus: #2c3135;           /* charcoal ring reads as brand, not OS */
@@ -107,9 +113,9 @@
   /* Architectural, not app-like */
   --radius: 2px;
   --radius-lg: 3px;
-  --shadow-sm: 0 1px 2px rgb(44 49 53 / 0.06);
+  --shadow-sm: 0 1px 2px rgb(var(--rgb-dark) / 0.06);
   --shadow-card: none;
-  --shadow-md: 0 18px 48px -32px rgb(44 49 53 / 0.45);
+  --shadow-md: 0 18px 48px -32px rgb(var(--rgb-dark) / 0.45);
 
   /* ---- Header height (used by scroll offsets & sticky CTA) ---- */
   --header-h: 5rem;
@@ -430,8 +436,8 @@ strong {
   color: var(--color-button-primary-text);
 }
 .btn--primary:hover {
-  background: #1e2226;
-  border-color: #1e2226;
+  background: var(--color-button-primary-hover);
+  border-color: var(--color-button-primary-hover);
   color: var(--color-button-primary-text);
 }
 
@@ -442,8 +448,8 @@ strong {
   color: var(--color-button-secondary-text);
 }
 .btn--secondary:hover {
-  background: var(--color-accent-hover);
-  border-color: var(--color-accent-hover);
+  background: var(--color-button-secondary-hover);
+  border-color: var(--color-button-secondary-hover);
   color: var(--color-button-secondary-text);
 }
 
@@ -473,10 +479,10 @@ strong {
 .btn--ghost-light {
   background: transparent;
   color: var(--color-on-dark);
-  border-color: rgb(250 248 243 / 0.5);
+  border-color: rgb(var(--rgb-light) / 0.5);
 }
 .btn--ghost-light:hover {
-  background: rgb(250 248 243 / 0.1);
+  background: rgb(var(--rgb-light) / 0.1);
   color: var(--color-on-dark);
   border-color: var(--color-on-dark);
 }
@@ -549,7 +555,7 @@ strong {
 .field textarea:focus-visible {
   outline: none;
   border-color: var(--brand-sea-glass);
-  box-shadow: 0 0 0 3px rgb(174 191 188 / 0.45);
+  box-shadow: 0 0 0 3px rgb(var(--rgb-accent) / 0.45);
 }
 
 .field input[aria-invalid="true"],
