@@ -847,6 +847,18 @@ None. Per Hunting's standing instruction, every change is committed and pushed t
 - Wordmark at 320px: one line, no overlap with the Menu button (see §6).
 - No old brand in built HTML: `Hunting Tanner Construction` may appear **only** as `Hunting Tanner Construction LLC`, and `HTC` not at all in visible text.
 
+### 🎨 Colour exploration in progress (October 2026)
+
+Hunting is considering a new palette for the rebrand. Branch **** (pushed, Vercel preview deployment, never to be merged) adds a floating switcher comparing:
+
+- **Current** (Coastal: Sea Glass & Charcoal, still live on main)
+- **Option 1, Walnut & Linen** (Hunting's top pick): #3B302A Dark Walnut, #78604D Tobacco, #AB9988 Warm Taupe, #E8DDD1 Linen, #FAF8F4 Soft White
+- **Option 2, Timber & Sage**: #3C342F Deep Brown, #765A48 Cedar, #858E7A Muted Sage, #E2D8C9 Oat, #F9F6EF Cream
+
+plus **Light / Dark main buttons** and **Standard / Lighter section bands** (lighter = the band colour halfway to the canvas, because Hunting has rejected tan section backgrounds before). All six combinations were checked: zero text below 4.5:1 on the homepage. Sage light buttons use a tint (#B3BAA7) because Muted Sage itself can't carry readable text.
+
+**When Hunting picks one:** on , copy only (1) the token-ization of the hard-coded colours (hero overlay, button hovers, translucent borders, focus ring; the ,  tokens) and (2) the chosen palette's values into  in global.css. Do **not** merge the branch (it contains the switcher). Also update  in BaseLayout, the colour constants in  (then ), and §5 of this file. Then delete the  branch.
+
 ### 💡 Discussed but NOT implemented
 
 - Turnstile / captcha on the contact form.
