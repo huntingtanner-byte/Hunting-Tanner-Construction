@@ -854,8 +854,17 @@ Hunting is considering a new palette for the rebrand. Branch **`theme-preview`**
 - **Current** (Coastal: Sea Glass & Charcoal, still live on main)
 - **Option 1, Walnut & Linen** (Hunting's top pick): #3B302A Dark Walnut, #78604D Tobacco, #AB9988 Warm Taupe, #E8DDD1 Linen, #FAF8F4 Soft White
 - **Option 2, Timber & Sage**: #3C342F Deep Brown, #765A48 Cedar, #858E7A Muted Sage, #E2D8C9 Oat, #F9F6EF Cream
+- **Option 3, Canyon Clay**: #3D2D27, #A26D54 Canyon Clay, #BEA493, #E7D8C6 Sandstone, #FBF8F2
+- **Option 4, Modern Mocha**: #2B2521 Espresso, #5B4639 Mocha, #989087 Greige, #DDD7CE Limestone, #F8F6F1
+- **Option 5, Forest & Stone** (another favourite): #344B40 Forest Green, #78877A Muted Sage, #AEAA99 Stone, #E7E2D8, #FAF8F3
+- **Option 6, Heritage Navy** (a favourite): #344A59 Slate Navy, #71838C Dusty Blue, #A89A89 Warm Taupe, #E5DED4, #F8F6F2
+- **Option 7, Burgundy & Sand**: #623F44 Wine, #997679 Dusty Mauve, #B5A291 Sand, #E8DFD4, #FAF7F2
 
-plus **Light / Dark main buttons** and **Standard / Lighter section bands** (lighter = the band colour halfway to the canvas, because Hunting has rejected tan section backgrounds before). All six combinations were checked: zero text below 4.5:1 on the homepage. Sage light buttons use a tint (#B3BAA7) because Muted Sage itself can't carry readable text.
+**Logo toggle (Classic / Bold).** "Bold" is Hunting's own mockup: heavy soft serif in the Cooper Black style, "UTAH COUNTY" over "BASEMENT PROS" with PROS outlined. Built with **Fraunces** (`@fontsource-variable/fraunces/full.css`, installed on the branch only) at `font-weight: 900; font-variation-settings: "SOFT" 100, "WONK" 0, "opsz" 9`; "UTAH COUNTY" tracked 0.1em; PROS = `-webkit-text-stroke` with `paint-order: stroke fill`. Logo colour = each palette's signature dark (`--color-logo`). Fits one line at 320px. If chosen: add the package on main, port the rules from the branch's Header/Footer, and update `scripts/generate-icons.mjs` to outline Fraunces (SOFT/opsz instance) for logo.png, the OG image and the favicon.
+
+Palettes with a coloured signature (forest, navy, wine) use it for logo, buttons, dark sections and footer, with near-black body text and a near-black hero overlay (`--rgb-overlay`) so photos are not tinted.
+
+plus **Light / Dark main buttons** and **Standard / Lighter section bands** (lighter = the band colour halfway to the canvas, because Hunting has rejected tan section backgrounds before). All 32 combinations (8 palettes x buttons x bands) were checked: zero text below 4.5:1 on the homepage (lowest 4.65:1). Sage light buttons use a tint (#B3BAA7) because Muted Sage itself can't carry readable text.
 
 **When Hunting picks one:** on `main`, copy only (1) the token-ization of the hard-coded colours (hero overlay, button hovers, translucent borders, focus ring; the `--rgb-*` and `--color-button-*-hover` tokens) and (2) the chosen palette's values into `:root` in global.css. Do **not** merge the branch (it contains the switcher). Also update `theme-color` in BaseLayout, the colour constants in `scripts/generate-icons.mjs` (then `npm run icons`), and §5 of this file. Then delete the `theme-preview` branch.
 
