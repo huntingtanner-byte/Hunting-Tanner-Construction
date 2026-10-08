@@ -849,7 +849,7 @@ None. Per Hunting's standing instruction, every change is committed and pushed t
 
 ### 🎨 Colour exploration in progress (October 2026)
 
-Hunting is considering a new palette for the rebrand. Branch **** (pushed, Vercel preview deployment, never to be merged) adds a floating switcher comparing:
+Hunting is considering a new palette for the rebrand. Branch **`theme-preview`** (pushed, Vercel preview deployment, never to be merged) adds a floating switcher comparing:
 
 - **Current** (Coastal: Sea Glass & Charcoal, still live on main)
 - **Option 1, Walnut & Linen** (Hunting's top pick): #3B302A Dark Walnut, #78604D Tobacco, #AB9988 Warm Taupe, #E8DDD1 Linen, #FAF8F4 Soft White
@@ -857,7 +857,7 @@ Hunting is considering a new palette for the rebrand. Branch **** (pushed, Verce
 
 plus **Light / Dark main buttons** and **Standard / Lighter section bands** (lighter = the band colour halfway to the canvas, because Hunting has rejected tan section backgrounds before). All six combinations were checked: zero text below 4.5:1 on the homepage. Sage light buttons use a tint (#B3BAA7) because Muted Sage itself can't carry readable text.
 
-**When Hunting picks one:** on , copy only (1) the token-ization of the hard-coded colours (hero overlay, button hovers, translucent borders, focus ring; the ,  tokens) and (2) the chosen palette's values into  in global.css. Do **not** merge the branch (it contains the switcher). Also update  in BaseLayout, the colour constants in  (then ), and §5 of this file. Then delete the  branch.
+**When Hunting picks one:** on `main`, copy only (1) the token-ization of the hard-coded colours (hero overlay, button hovers, translucent borders, focus ring; the `--rgb-*` and `--color-button-*-hover` tokens) and (2) the chosen palette's values into `:root` in global.css. Do **not** merge the branch (it contains the switcher). Also update `theme-color` in BaseLayout, the colour constants in `scripts/generate-icons.mjs` (then `npm run icons`), and §5 of this file. Then delete the `theme-preview` branch.
 
 ### 💡 Discussed but NOT implemented
 
