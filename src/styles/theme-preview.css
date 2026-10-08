@@ -105,7 +105,7 @@
 }
 
 /* ---- Current palette with dark buttons, for a fair comparison ---------- */
-:root:not([data-palette="walnut"]):not([data-palette="sage"])[data-buttons="dark"] {
+:root:is([data-palette="current"], :not([data-palette]))[data-buttons="dark"] {
   --color-button-secondary: #2c3135;
   --color-button-secondary-text: #faf8f3;
   --color-button-secondary-hover: #1e2226;
@@ -120,3 +120,231 @@
 :root[data-palette="sage"][data-bands="lighter"] {
   --color-background-soft: #eee7dc; /* Oat, halfway to Cream */
 }
+
+/* ==========================================================================
+   Defaults used by the preview-only tokens below
+   ========================================================================== */
+:root {
+  /* Logo colour follows each palette's signature dark */
+  --color-logo: var(--color-text);
+  /* Hero photo overlay. Defaults to the dark colour; the green, navy and
+     wine palettes use their near-black text tone so photos are not tinted. */
+  --rgb-overlay: var(--rgb-dark);
+}
+
+/* ---- Option 3: Canyon Clay --------------------------------------------- */
+:root[data-palette="canyon"] {
+  --brand-soft-white: #fbf8f2;
+  --brand-sea-glass: #bea493;   /* Dusty Taupe: fills that hold text */
+  --brand-pale-taupe: #e7d8c6;  /* Sandstone */
+  --brand-charcoal: #3d2d27;
+  --color-background: #fbf8f2;
+  --color-background-soft: #e7d8c6;
+  --color-background-cool: #f1e8dc;
+  --color-surface: #fbf8f2;
+  --color-surface-raised: #fffdf9;
+  --color-text: #3d2d27;
+  --color-text-muted: #6c5a50;
+  --color-accent: #bea493;
+  --color-accent-hover: #cbb5a6;
+  --color-accent-ink: #3d2d27;
+  --color-accent-secondary: #a26d54; /* Canyon Clay */
+  --color-border: #ece2d6;
+  --color-border-strong: #dccbb9;
+  --color-input-border: #cdb9a5;
+  --color-dark: #3d2d27;
+  --color-on-dark: #fbf8f2;
+  --color-on-dark-muted: #cdbfb3;
+  --color-on-dark-accent: #bea493;
+  --color-button-primary: #3d2d27;
+  --color-button-primary-text: #fbf8f2;
+  --color-button-primary-hover: #2d211c;
+  --color-button-secondary: #bea493;
+  --color-button-secondary-text: #3d2d27;
+  --color-button-secondary-hover: #cbb5a6;
+  --color-focus: #3d2d27;
+  --rgb-dark: 61 45 39;
+  --rgb-light: 251 248 242;
+  --rgb-accent: 190 164 147;
+}
+:root[data-palette="canyon"][data-buttons="dark"] {
+  /* Canyon Clay, a shade deeper so cream text passes (4.78:1) */
+  --color-button-secondary: #95624a;
+  --color-button-secondary-text: #fbf8f2;
+  --color-button-secondary-hover: #82543f;
+}
+:root[data-palette="canyon"][data-bands="lighter"] { --color-background-soft: #f1e8dc; }
+
+/* ---- Option 4: Modern Mocha -------------------------------------------- */
+:root[data-palette="mocha"] {
+  --brand-soft-white: #f8f6f1;
+  --brand-sea-glass: #989087;   /* Greige */
+  --brand-pale-taupe: #ddd7ce;  /* Limestone */
+  --brand-charcoal: #2b2521;
+  --color-background: #f8f6f1;
+  --color-background-soft: #ddd7ce;
+  --color-background-cool: #ebe7e0;
+  --color-surface: #f8f6f1;
+  --color-surface-raised: #fffefb;
+  --color-text: #2b2521;
+  --color-text-muted: #625a53;
+  --color-accent: #989087;
+  --color-accent-hover: #a8a198;
+  --color-accent-ink: #2b2521;
+  --color-accent-secondary: #5b4639; /* Mocha */
+  --color-border: #e6e1da;
+  --color-border-strong: #d3ccc2;
+  --color-input-border: #c2bab0;
+  --color-dark: #2b2521;
+  --color-on-dark: #f8f6f1;
+  --color-on-dark-muted: #bdb6ae;
+  --color-on-dark-accent: #a8a198;
+  --color-button-primary: #2b2521;
+  --color-button-primary-text: #f8f6f1;
+  --color-button-primary-hover: #1c1815;
+  --color-button-secondary: #989087;
+  --color-button-secondary-text: #2b2521;
+  --color-button-secondary-hover: #a8a198;
+  --color-focus: #2b2521;
+  --rgb-dark: 43 37 33;
+  --rgb-light: 248 246 241;
+  --rgb-accent: 152 144 135;
+}
+:root[data-palette="mocha"][data-buttons="dark"] {
+  --color-button-secondary: #5b4639;
+  --color-button-secondary-text: #f8f6f1;
+  --color-button-secondary-hover: #4b3a2f;
+}
+:root[data-palette="mocha"][data-bands="lighter"] { --color-background-soft: #ebe7e0; }
+
+/* ---- Option 5: Forest & Stone ------------------------------------------ */
+:root[data-palette="forest"] {
+  --brand-soft-white: #faf8f3;
+  --brand-sea-glass: #c3ccc1;   /* sage tint: fills that hold text */
+  --brand-pale-taupe: #e7e2d8;  /* Warm Gray */
+  --brand-charcoal: #344b40;    /* Forest Green */
+  --color-background: #faf8f3;
+  --color-background-soft: #e7e2d8;
+  --color-background-cool: #f1ede6;
+  --color-surface: #faf8f3;
+  --color-surface-raised: #fffefb;
+  --color-text: #253129;        /* near-black green for body copy */
+  --color-text-muted: #58625b;
+  --color-accent: #c3ccc1;
+  --color-accent-hover: #d1d8cf;
+  --color-accent-ink: #344b40;
+  --color-accent-secondary: #78877a; /* Muted Sage */
+  --color-border: #e8e4dc;
+  --color-border-strong: #d4d0c3;
+  --color-input-border: #aeaa99;     /* Stone */
+  --color-dark: #344b40;
+  --color-on-dark: #faf8f3;
+  --color-on-dark-muted: #c9c6b8;
+  --color-on-dark-accent: #c3ccc1;
+  --color-button-primary: #344b40;
+  --color-button-primary-text: #faf8f3;
+  --color-button-primary-hover: #283a31;
+  --color-button-secondary: #c3ccc1;
+  --color-button-secondary-text: #344b40;
+  --color-button-secondary-hover: #d1d8cf;
+  --color-focus: #344b40;
+  --color-logo: #344b40;
+  --rgb-dark: 52 75 64;
+  --rgb-light: 250 248 243;
+  --rgb-accent: 120 135 122;
+  --rgb-overlay: 37 49 41;
+}
+:root[data-palette="forest"][data-buttons="dark"] {
+  --color-button-secondary: #344b40;
+  --color-button-secondary-text: #faf8f3;
+  --color-button-secondary-hover: #283a31;
+}
+:root[data-palette="forest"][data-bands="lighter"] { --color-background-soft: #f1ede6; }
+
+/* ---- Option 6: Heritage Navy ------------------------------------------- */
+:root[data-palette="navy"] {
+  --brand-soft-white: #f8f6f2;
+  --brand-sea-glass: #b8c4ca;   /* dusty blue tint */
+  --brand-pale-taupe: #e5ded4;  /* Linen */
+  --brand-charcoal: #344a59;    /* Slate Navy */
+  --color-background: #f8f6f2;
+  --color-background-soft: #e5ded4;
+  --color-background-cool: #eeeae3;
+  --color-surface: #f8f6f2;
+  --color-surface-raised: #fffefb;
+  --color-text: #24313b;
+  --color-text-muted: #56606a;
+  --color-accent: #b8c4ca;
+  --color-accent-hover: #c7d1d6;
+  --color-accent-ink: #344a59;
+  --color-accent-secondary: #a89a89; /* Warm Taupe */
+  --color-border: #e7e2da;
+  --color-border-strong: #d6cec2;
+  --color-input-border: #c4b9ab;
+  --color-dark: #344a59;
+  --color-on-dark: #f8f6f2;
+  --color-on-dark-muted: #c5cbce;
+  --color-on-dark-accent: #b8c4ca;
+  --color-button-primary: #344a59;
+  --color-button-primary-text: #f8f6f2;
+  --color-button-primary-hover: #283a46;
+  --color-button-secondary: #b8c4ca;
+  --color-button-secondary-text: #344a59;
+  --color-button-secondary-hover: #c7d1d6;
+  --color-focus: #344a59;
+  --color-logo: #344a59;
+  --rgb-dark: 52 74 89;
+  --rgb-light: 248 246 242;
+  --rgb-accent: 113 131 140;
+  --rgb-overlay: 36 49 59;
+}
+:root[data-palette="navy"][data-buttons="dark"] {
+  --color-button-secondary: #344a59;
+  --color-button-secondary-text: #f8f6f2;
+  --color-button-secondary-hover: #283a46;
+}
+:root[data-palette="navy"][data-bands="lighter"] { --color-background-soft: #eeeae3; }
+
+/* ---- Option 7: Burgundy & Sand ----------------------------------------- */
+:root[data-palette="burgundy"] {
+  --brand-soft-white: #faf7f2;
+  --brand-sea-glass: #cfbdbf;   /* dusty mauve tint */
+  --brand-pale-taupe: #e8dfd4;  /* Linen */
+  --brand-charcoal: #623f44;    /* Wine */
+  --color-background: #faf7f2;
+  --color-background-soft: #e8dfd4;
+  --color-background-cool: #f1ebe3;
+  --color-surface: #faf7f2;
+  --color-surface-raised: #fffdf9;
+  --color-text: #362a2c;
+  --color-text-muted: #685a5b;
+  --color-accent: #cfbdbf;
+  --color-accent-hover: #dacbcd;
+  --color-accent-ink: #623f44;
+  --color-accent-secondary: #997679; /* Dusty Mauve */
+  --color-border: #ebe4db;
+  --color-border-strong: #d9ccbe;
+  --color-input-border: #b5a291;     /* Sand */
+  --color-dark: #623f44;
+  --color-on-dark: #faf7f2;
+  --color-on-dark-muted: #d6c9c6;
+  --color-on-dark-accent: #cfbdbf;
+  --color-button-primary: #623f44;
+  --color-button-primary-text: #faf7f2;
+  --color-button-primary-hover: #4f3236;
+  --color-button-secondary: #cfbdbf;
+  --color-button-secondary-text: #623f44;
+  --color-button-secondary-hover: #dacbcd;
+  --color-focus: #623f44;
+  --color-logo: #623f44;
+  --rgb-dark: 98 63 68;
+  --rgb-light: 250 247 242;
+  --rgb-accent: 153 118 121;
+  --rgb-overlay: 54 42 44;
+}
+:root[data-palette="burgundy"][data-buttons="dark"] {
+  --color-button-secondary: #623f44;
+  --color-button-secondary-text: #faf7f2;
+  --color-button-secondary-hover: #4f3236;
+}
+:root[data-palette="burgundy"][data-bands="lighter"] { --color-background-soft: #f1ebe3; }

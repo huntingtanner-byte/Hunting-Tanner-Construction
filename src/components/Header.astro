@@ -13,7 +13,7 @@ const currentPath = Astro.url.pathname;
   <div class="container header-inner">
     <a href="/" class="wordmark" aria-label={`${business.publicName} home`}>
       <span class="wordmark-sub"><span>Utah County</span></span>
-      <span class="wordmark-name">Basement Pros</span>
+      <span class="wordmark-name">Basement <span class="wm-pros">Pros</span></span>
     </a>
 
     <nav class="desktop-nav" aria-label="Main">
@@ -122,7 +122,7 @@ const currentPath = Astro.url.pathname;
     align-items: center;
     text-align: center;
     text-decoration: none;
-    color: var(--color-ink-soft);
+    color: var(--color-logo, var(--color-ink-soft));
     line-height: 1.1;
     gap: 0.3rem;
   }
@@ -162,6 +162,45 @@ const currentPath = Astro.url.pathname;
     flex: 1;
     height: 1px;
     background: var(--brand-sea-glass);
+  }
+
+  /* THEME PREVIEW: bold logo from Hunting's mockup. Heavy soft serif
+     (Fraunces at full SOFT, Cooper-style), "PROS" outlined. */
+  :global(:root[data-logo="bold"]) .wordmark {
+    gap: 0.12rem;
+  }
+  :global(:root[data-logo="bold"]) .wordmark-name,
+  :global(:root[data-logo="bold"]) .wordmark-sub {
+    font-family: "Fraunces Variable", "Cooper Black", Georgia, serif;
+    font-weight: 900;
+    font-variation-settings: "SOFT" 100, "WONK" 0, "opsz" 9; /* chunky, Cooper-style */
+    letter-spacing: 0.01em;
+    line-height: 1;
+  }
+  :global(:root[data-logo="bold"]) .wordmark-name {
+    font-size: clamp(1.2rem, 1.02rem + 1vw, 1.5rem);
+    margin-right: 0;
+  }
+  :global(:root[data-logo="bold"]) .wordmark-sub {
+    justify-content: center;
+    color: inherit;
+    font-size: clamp(0.82rem, 0.7rem + 0.68vw, 1.02rem);
+    /* Wider than the name, as in the mockup */
+    letter-spacing: 0.1em;
+  }
+  :global(:root[data-logo="bold"]) .wordmark-sub span {
+    padding-left: 0.1em;
+  }
+  :global(:root[data-logo="bold"]) .wordmark-sub::before,
+  :global(:root[data-logo="bold"]) .wordmark-sub::after {
+    display: none;
+  }
+  /* Stroke is painted under the fill, so only its outer half shows:
+     a clean outline with the letter interior in the header colour. */
+  :global(:root[data-logo="bold"]) .wm-pros {
+    color: var(--color-bg);
+    -webkit-text-stroke: max(2.4px, 0.09em) var(--color-logo, var(--color-ink-soft));
+    paint-order: stroke fill;
   }
 
   .desktop-nav ul {

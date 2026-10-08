@@ -18,7 +18,7 @@ const socialLabels: Record<string, string> = {
       <div class="footer-brand">
         <p class="footer-wordmark">
           <span class="fw-sub"><span>Utah County</span></span>
-          <span class="fw-name">Basement Pros</span>
+          <span class="fw-name">Basement <span class="wm-pros">Pros</span></span>
         </p>
         <p class="footer-tagline">
           Basement finishing and remodeling for homeowners in Saratoga
@@ -166,6 +166,41 @@ const socialLabels: Record<string, string> = {
     height: 1px;
     background: var(--color-on-dark-accent);
     opacity: 0.6;
+  }
+
+  /* THEME PREVIEW: bold logo, reversed out on the dark footer */
+  :global(:root[data-logo="bold"]) .footer-wordmark {
+    gap: 0.15rem;
+  }
+  :global(:root[data-logo="bold"]) .fw-name,
+  :global(:root[data-logo="bold"]) .fw-sub {
+    font-family: "Fraunces Variable", "Cooper Black", Georgia, serif;
+    font-weight: 900;
+    font-variation-settings: "SOFT" 100, "WONK" 0, "opsz" 9; /* chunky, Cooper-style */
+    letter-spacing: 0.01em;
+    padding-left: 0;
+    line-height: 1;
+    color: var(--color-on-dark);
+  }
+  :global(:root[data-logo="bold"]) .fw-name {
+    font-size: 1.6rem;
+  }
+  :global(:root[data-logo="bold"]) .fw-sub {
+    justify-content: center;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+  }
+  :global(:root[data-logo="bold"]) .fw-sub span {
+    padding-left: 0.1em;
+  }
+  :global(:root[data-logo="bold"]) .fw-sub::before,
+  :global(:root[data-logo="bold"]) .fw-sub::after {
+    display: none;
+  }
+  :global(:root[data-logo="bold"]) .wm-pros {
+    color: var(--color-dark);
+    -webkit-text-stroke: max(2.4px, 0.09em) var(--color-on-dark);
+    paint-order: stroke fill;
   }
 
   .footer-tagline {

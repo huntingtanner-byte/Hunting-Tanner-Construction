@@ -6,6 +6,7 @@
 import "@fontsource-variable/source-serif-4";
 import "@/styles/global.css";
 // THEME PREVIEW (theme-preview branch only)
+import "@fontsource-variable/fraunces/full.css";
 import "@/styles/theme-preview.css";
 import ThemePreview from "@/components/ThemePreview.astro";
 import SEOHead from "@/components/SEOHead.astro";
@@ -55,21 +56,16 @@ const allSchemas = includeOrgSchema
   <head>
     <meta charset="utf-8" />
     <script is:inline>
-    // Runs in <head> before paint so pages never flash the wrong palette.
-    (function () {
-      var q = new URLSearchParams(location.search);
-      var get = function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } };
-      var set = function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} };
-      var p = q.get("palette") || get("tp-palette") || "current";
-      var b = q.get("buttons") || get("tp-buttons") || "light";
-      var s = q.get("bands") || get("tp-bands") || "standard";
-      if (q.get("palette")) set("tp-palette", p);
-      if (q.get("buttons")) set("tp-buttons", b);
-      if (q.get("bands")) set("tp-bands", s);
-      document.documentElement.setAttribute("data-palette", p);
-      document.documentElement.setAttribute("data-buttons", b);
-      document.documentElement.setAttribute("data-bands", s);
-    })();
+      // THEME PREVIEW: applies the saved or linked choice before first paint
+      (function () {
+        var q = new URLSearchParams(location.search);
+        var d = { palette: "current", buttons: "light", bands: "standard", logo: "classic" };
+        Object.keys(d).forEach(function (k) {
+          var v = q.get(k);
+          try { if (v) localStorage.setItem("tp-" + k, v); else v = localStorage.getItem("tp-" + k); } catch (e) {}
+          document.documentElement.setAttribute("data-" + k, v || d[k]);
+        });
+      })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
