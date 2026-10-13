@@ -325,6 +325,17 @@ Hunting bought **utahcountybasementpros.com** at **Porkbun** (nameservers `*.ns.
 
 **Original post-flip plan (completed):** submit `https://utahcountybasementpros.com/sitemap-index.xml` in the new property; in the OLD huntingtanner.com property use **Settings → Change of address** → utahcountybasementpros.com. Create the Google Business Profile with the new domain as the website. Later: add utahcountybasementpros.com as a Google Workspace alias domain if he wants office@utahcountybasementpros.com, and verify the new domain in Resend for lead emails.
 
+## 4A-2. ✉️ EMAIL: office@utahcountybasementpros.com (October 13, 2026)
+
+- Google Workspace (admin = the same user): `utahcountybasementpros.com` added as a **secondary domain** (verified via the GSC TXT record), Gmail activated. The single user was **renamed** office@huntingtanner.com → **office@utahcountybasementpros.com**; Google keeps office@huntingtanner.com as an **alias** of the same inbox. huntingtanner.com stays the Workspace primary domain (Cloudflare DNS, untouched).
+- Porkbun DNS for the new domain: **MX 1 smtp.google.com** (Porkbun fwd1/fwd2 forwarding MX removed), **SPF** `v=spf1 include:_spf.google.com ~all`, **DKIM** TXT `google._domainkey` (2048-bit, authentication started in Admin → Gmail → Authenticate email), **DMARC** `_dmarc` `v=DMARC1; p=none;` (monitor only).
+- Site shows the new address everywhere (`business.email`). **Lead notifications intentionally still go to office@huntingtanner.com** (`CONTACT_NOTIFICATION_EMAIL` default in `src/pages/api/contact.ts`): Resend is unverified and only delivers to its signup address. That alias lands in the same inbox. Once a Resend sending domain is verified, switch the recipient to the new address.
+
+## 4A-3. 📍 GOOGLE BUSINESS PROFILE (as of October 13, 2026)
+
+- Existing **verified** profile "Hunting Tanner Construction" (store code 00435275759364849470), service-area business with hidden address (home office), Lehi, Orem + 13 areas, **7 reviews** (Aug–Sep 2026). Managed at business.google.com under the Workspace user (now office@utahcountybasementpros.com).
+- Hunting is getting a real office this month. Recommendation given (see conversation): **keep and edit this profile, don't create a new one**; register the DBA first; change the name as a standalone edit; update the website field now; add the office address later as a separate edit, shown only if it is staffed during listed hours with permanent signage and can receive customers (else keep hidden). Caveat: Google's written rebranding rule only covers "minor" name changes where proper nouns and services stay the same, so this rename may be reviewed as a new business.
+
 ## 4B. ⭐ CURRENT PALETTE: WALNUT & LINEN (live since October 12, 2026) — SOURCE OF TRUTH
 
 After comparing 8 palettes on the `theme-preview` branch, Hunting chose **Walnut & Linen** with the **classic logo** (Source Serif lockup) and **classic fonts** (Source Serif 4 headings + system sans). Light buttons, standard Linen bands (the preview defaults he reviewed).
