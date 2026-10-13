@@ -306,13 +306,13 @@ Nothing was deleted outright — it was **relocated**, and the homepage links to
 
 ---
 
-## 4A. 🌐 DOMAIN MOVE TO utahcountybasementpros.com (IN PROGRESS, October 2026)
+## 4A. 🌐 DOMAIN MOVE TO utahcountybasementpros.com (LIVE since October 12, 2026)
 
 Hunting bought **utahcountybasementpros.com** at **Porkbun** (nameservers `*.ns.porkbun.com`, registered 2026-10-13). It becomes the primary domain; huntingtanner.com stays owned and attached in Vercel purely to **301** to the new one (never let it expire, never serve the site on both).
 
-**Code is ready on branch `domain-switch` (commit 25067c5). Do NOT merge until DNS is live**, or every visitor gets 301'd to a dead domain. It changes `business.domain`, `astro.config.mjs` `site`, the 404 description, and `vercel.json` (301 via `statusCode`, path preserved) from huntingtanner.com, www.huntingtanner.com, huntingtannerconstruction.com (+www) and www.utahcountybasementpros.com. Email stays `office@huntingtanner.com` (Google Workspace on huntingtanner.com, Cloudflare DNS, untouched).
+**Done.** Claude did the Vercel and Porkbun steps in the app's built-in browser (Hunting signed in himself). Vercel: `utahcountybasementpros.com` → Production; `www.utahcountybasementpros.com` → **301** to the apex (the dialog's default "Redirect apex to www" checkbox was deliberately UNchecked). Porkbun DNS: the parking ALIAS on @ was edited into **A @ 216.198.79.1**, the wildcard `*` CNAME into **CNAME www → fd93a3f343219c2d.vercel-dns-017.com**; Porkbun MX / SPF / `_acme-challenge` records left as they were. The `domain-switch` commit was then cherry-picked onto main. It changes `business.domain`, `astro.config.mjs` `site`, the 404 description, and `vercel.json` (301 via `statusCode`, path preserved) from huntingtanner.com, www.huntingtanner.com, huntingtannerconstruction.com (+www) and www.utahcountybasementpros.com. Email stays `office@huntingtanner.com` (Google Workspace on huntingtanner.com, Cloudflare DNS, untouched).
 
-**Hunting's steps:**
+**Original plan (kept for reference):**
 1. Vercel → project → Settings → Domains → add `utahcountybasementpros.com`; apex connected to Production, **www redirects to apex** (NOT apex → www: that loops against vercel.json).
 2. Porkbun → DNS: delete the parking records (ALIAS/A on @ and the CNAME on * / www pointing to `uixie.porkbun.com` / `pixie.porkbun.com`), add the A record (@) and CNAME (www) Vercel shows. Leave the Porkbun MX forwarding records alone.
 3. Google Search Console → add **Domain** property `utahcountybasementpros.com`, add its TXT record at Porkbun, verify.
