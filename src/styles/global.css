@@ -1,63 +1,78 @@
 /* ============================================================
    Utah County Basement Pros: design system
-   "Coastal Luxury" direction: a warm Soft White canvas, Charcoal for
-   type and anchors, Sea Glass as a quiet accent, Pale Taupe for warmth.
+   "Walnut & Linen" palette (chosen by Hunting, October 2026): a Soft
+   White canvas, Dark Walnut for type and anchors, Warm Taupe as the
+   light accent, Tobacco for details, Linen for warm section bands.
 
    Principles baked into these tokens:
    - Soft White dominates; tinted sections are used sparingly so the site
      doesn't read as a stack of differently-coloured bands.
    - Surfaces match the page. Cards separate with a warm hairline, not a
      shadow, so nothing looks like a SaaS component.
-   - Sea Glass never carries body text (1.8:1 on Soft White). It fills
-     shapes and carries Charcoal text at 6.87:1.
+   - The light CTA is Warm Taupe with Dark Walnut text (4.65:1). Never
+     darken the light CTA to "fix" contrast; change the text instead.
    - Small architectural radii instead of app-style rounding.
    All colors are custom properties — change them here only.
    ============================================================ */
 
 :root {
   /* ---- Brand palette (source of truth) ---- */
-  --brand-soft-white: #faf8f3;
-  --brand-sea-glass: #aebfbc;
-  --brand-pale-taupe: #c7b9a9;
-  --brand-charcoal: #2c3135;
+  --brand-walnut: #3b302a;      /* Dark Walnut */
+  --brand-tobacco: #78604d;     /* Tobacco Brown */
+  --brand-warm-taupe: #ab9988;  /* Warm Taupe */
+  --brand-linen: #e8ddd1;       /* Linen */
+  --brand-soft-white: #faf8f4;  /* Soft White */
+
+  /* Role names used across components. They predate this palette (the
+     site launched on "Coastal": Sea Glass / Charcoal), so they now map to
+     the Walnut & Linen colour that plays the same role. */
+  --brand-sea-glass: var(--brand-warm-taupe); /* light accent: hairlines, step chips */
+  --brand-pale-taupe: var(--brand-linen);
+  --brand-charcoal: var(--brand-walnut);
 
   /* ---- Semantic surfaces ---- */
-  --color-background: #faf8f3;      /* Soft White — dominant canvas */
-  --color-background-soft: #f1ede6; /* 18% taupe wash — warm secondary bands */
-  --color-background-cool: #eff0ec; /* 15% sea glass wash — used rarely */
-  --color-surface: #faf8f3;         /* cards sit on the canvas, not above it */
-  --color-surface-raised: #fffefb;  /* form fields, so inputs read as inputs */
+  --color-background: #faf8f4;      /* Soft White — dominant canvas */
+  --color-background-soft: #e8ddd1; /* Linen — warm secondary bands */
+  --color-background-cool: #f1ebe3; /* Linen halfway to Soft White — used rarely */
+  --color-surface: #faf8f4;         /* cards sit on the canvas, not above it */
+  --color-surface-raised: #fffdfa;  /* form fields, so inputs read as inputs */
 
   /* ---- Type ---- */
-  --color-text: #2c3135;            /* Charcoal — 12.38:1 on Soft White */
-  --color-text-muted: #5c6367;      /* 5.76:1 on Soft White, 5.24:1 on taupe */
+  --color-text: #3b302a;            /* Dark Walnut — 12.06:1 on Soft White */
+  --color-text-muted: #6b5d53;      /* 5.97:1 on Soft White, 4.73:1 on Linen */
 
   /* ---- Accents ---- */
-  --color-accent: #aebfbc;          /* Sea Glass — fills and rules only */
-  --color-accent-hover: #9cb0ac;    /* pressed/hover fill */
-  --color-accent-ink: #2c3135;      /* text ON Sea Glass — 6.87:1 */
-  --color-accent-secondary: #c7b9a9;/* Pale Taupe — warmth, rules, details */
+  --color-accent: #ab9988;          /* Warm Taupe — fills and rules */
+  --color-accent-hover: #bcab9a;    /* hover lightens so Walnut text stays 5.74:1 */
+  --color-accent-ink: #3b302a;      /* text ON Warm Taupe — 4.65:1 */
+  --color-accent-secondary: #78604d;/* Tobacco — nav underline, details */
 
   /* ---- Lines ---- */
-  --color-border: #e8e2d9;          /* warm hairline on Soft White */
-  --color-border-strong: #d9cfc3;   /* card and field edges */
-  --color-input-border: #cfc4b6;
+  --color-border: #ebe3d9;          /* warm hairline on Soft White */
+  --color-border-strong: #dccfc1;   /* card and field edges */
+  --color-input-border: #cbbcab;
 
   /* ---- Dark sections ---- */
-  --color-dark: #2c3135;            /* Charcoal */
-  --color-on-dark: #faf8f3;         /* 12.38:1 */
-  --color-on-dark-muted: #b8bcbd;   /* 6.86:1 */
-  --color-on-dark-accent: #aebfbc;  /* Sea Glass on Charcoal — 6.87:1 */
+  --color-dark: #3b302a;            /* Dark Walnut */
+  --color-on-dark: #faf8f4;         /* 12.06:1 */
+  --color-on-dark-muted: #c4b8ac;   /* 6.58:1 */
+  --color-on-dark-accent: #ab9988;  /* Warm Taupe on Walnut — 4.65:1 */
 
   /* ---- Buttons ---- */
-  --color-button-primary: #2c3135;
-  --color-button-primary-text: #faf8f3;
-  --color-button-secondary: #aebfbc;
-  --color-button-secondary-text: #2c3135;
+  --color-button-primary: #3b302a;
+  --color-button-primary-text: #faf8f4;
+  --color-button-secondary: #ab9988;      /* light CTA: Warm Taupe */
+  --color-button-secondary-text: #3b302a; /* Dark Walnut */
+  --color-button-primary-hover: #2b231e;
+  --color-button-secondary-hover: var(--color-accent-hover);
+  /* Channel values for translucent tints: rgb(var(--rgb-dark) / 0.5) */
+  --rgb-dark: 59 48 42;
+  --rgb-light: 250 248 244;
+  --rgb-accent: 171 153 136;
 
   /* ---- State ---- */
-  --color-focus: #2c3135;           /* charcoal ring reads as brand, not OS */
-  --color-error: #8f3520;
+  --color-focus: #3b302a;           /* walnut ring reads as brand, not OS */
+  --color-error: #8f3520;           /* 7.34:1 on Soft White */
   --color-success: #2e6b3f;
 
   /* ---- Legacy aliases (kept so no component breaks mid-refactor) ---- */
@@ -107,9 +122,9 @@
   /* Architectural, not app-like */
   --radius: 2px;
   --radius-lg: 3px;
-  --shadow-sm: 0 1px 2px rgb(44 49 53 / 0.06);
+  --shadow-sm: 0 1px 2px rgb(var(--rgb-dark) / 0.06);
   --shadow-card: none;
-  --shadow-md: 0 18px 48px -32px rgb(44 49 53 / 0.45);
+  --shadow-md: 0 18px 48px -32px rgb(var(--rgb-dark) / 0.45);
 
   /* ---- Header height (used by scroll offsets & sticky CTA) ---- */
   --header-h: 5rem;
@@ -430,8 +445,8 @@ strong {
   color: var(--color-button-primary-text);
 }
 .btn--primary:hover {
-  background: #1e2226;
-  border-color: #1e2226;
+  background: var(--color-button-primary-hover);
+  border-color: var(--color-button-primary-hover);
   color: var(--color-button-primary-text);
 }
 
@@ -442,8 +457,8 @@ strong {
   color: var(--color-button-secondary-text);
 }
 .btn--secondary:hover {
-  background: var(--color-accent-hover);
-  border-color: var(--color-accent-hover);
+  background: var(--color-button-secondary-hover);
+  border-color: var(--color-button-secondary-hover);
   color: var(--color-button-secondary-text);
 }
 
@@ -473,10 +488,10 @@ strong {
 .btn--ghost-light {
   background: transparent;
   color: var(--color-on-dark);
-  border-color: rgb(250 248 243 / 0.5);
+  border-color: rgb(var(--rgb-light) / 0.5);
 }
 .btn--ghost-light:hover {
-  background: rgb(250 248 243 / 0.1);
+  background: rgb(var(--rgb-light) / 0.1);
   color: var(--color-on-dark);
   border-color: var(--color-on-dark);
 }
@@ -549,7 +564,7 @@ strong {
 .field textarea:focus-visible {
   outline: none;
   border-color: var(--brand-sea-glass);
-  box-shadow: 0 0 0 3px rgb(174 191 188 / 0.45);
+  box-shadow: 0 0 0 3px rgb(var(--rgb-accent) / 0.45);
 }
 
 .field input[aria-invalid="true"],

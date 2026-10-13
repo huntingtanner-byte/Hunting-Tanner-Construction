@@ -17,11 +17,11 @@ import { create } from "fontkitten";
 import { readFileSync } from "node:fs";
 import { writeFile, mkdir } from "node:fs/promises";
 
-/* ---- Brand ---- */
-const CHARCOAL = "#2c3135";
-const OFFWHITE = "#faf8f3";
-const SEA_GLASS = "#aebfbc";
-const MUTED = "#5c6367";
+/* ---- Brand: Walnut & Linen (keep in sync with global.css :root) ---- */
+const CHARCOAL = "#3b302a"; // Dark Walnut: ink, favicon tile
+const OFFWHITE = "#faf8f4"; // Soft White
+const SEA_GLASS = "#ab9988"; // Warm Taupe: hairlines and accent band
+const MUTED = "#6b5d53";     // muted walnut for the small line
 
 /** The lockup: small line above, large line below. Keep in sync with
  *  Header.astro / Footer.astro. Reads top to bottom as the full name. */
@@ -132,7 +132,7 @@ await writeFile(
 );
 await writeFile(
   "src/assets/brand/wordmark-white.svg",
-  lockupDoc({ nameSize: 160, ink: OFFWHITE, subInk: "#b8bcbd", rule: SEA_GLASS }, 40),
+  lockupDoc({ nameSize: 160, ink: OFFWHITE, subInk: "#c4b8ac", rule: SEA_GLASS }, 40),
 );
 
 // Schema logo: transparent, generous resolution

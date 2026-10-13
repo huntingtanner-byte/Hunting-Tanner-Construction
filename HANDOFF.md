@@ -306,6 +306,29 @@ Nothing was deleted outright — it was **relocated**, and the homepage links to
 
 ---
 
+## 4B. ⭐ CURRENT PALETTE: WALNUT & LINEN (live since October 12, 2026) — SOURCE OF TRUTH
+
+After comparing 8 palettes on the `theme-preview` branch, Hunting chose **Walnut & Linen** with the **classic logo** (Source Serif lockup) and **classic fonts** (Source Serif 4 headings + system sans). Light buttons, standard Linen bands (the preview defaults he reviewed).
+
+| Token | Value | Role |
+|---|---|---|
+| `--brand-walnut` | #3B302A | text, dark sections, primary button, footer, logo ink |
+| `--brand-tobacco` | #78604D | details: nav underline (`--color-accent-secondary`) |
+| `--brand-warm-taupe` | #AB9988 | light CTA fill, hairlines, step chips, footer headings |
+| `--brand-linen` | #E8DDD1 | warm section bands (`.section--alt`) |
+| `--brand-soft-white` | #FAF8F4 | canvas |
+| `--color-text-muted` | #6B5D53 | 5.97:1 canvas, 4.73:1 Linen |
+| light CTA (`.btn--secondary`) | #AB9988 + #3B302A text | 4.65:1; hover **lightens** to #BCAB9A (5.74:1) |
+| primary (`.btn--primary`) | #3B302A + #FAF8F4 | hover #2B231E |
+
+- Old role names (`--brand-sea-glass`, `--brand-pale-taupe`, `--brand-charcoal`) still exist as **aliases** to the Walnut colour that plays the same role, so components didn't need touching. Don't read "sea glass" in a selector as meaning the colour is Sea Glass.
+- Hard-coded colours were turned into tokens: `--color-button-primary-hover`, `--color-button-secondary-hover`, `--rgb-dark` / `--rgb-light` / `--rgb-accent` (hero overlay, translucent borders, focus ring, shadows). A palette change is now edits to `:root` in global.css only, plus `theme-color` in BaseLayout, `public/site.webmanifest`, the error page colours in `src/pages/api/contact.ts`, and the constants in `scripts/generate-icons.mjs` (then `npm run icons`).
+- All 171 homepage text elements checked: none below 4.5:1 (lowest 4.65:1, the light CTA).
+- The lessons in §5 below still apply in spirit: Hunting prefers **light, soft CTAs** over dark ones, and dislikes heavy coloured section blocks. If he ever says the Linen bands feel too tan, the "lighter bands" value tested in the preview is #F1EBE3 (already `--color-background-cool`).
+- `theme-preview` branch is **kept** (not merged) so he can compare palettes / the bold logo / fonts again later. Its Vercel preview URLs need a Vercel login.
+
+**§5 below documents the previous Coastal palette and the colour-correction history. It is no longer the live colour system, but its rules about surgical changes still hold.**
+
 ## 5. MOST RECENT COLOR CORRECTION (commit `c30f2e0`) — ⭐ MOST IMPORTANT SECTION
 
 ### What happened
