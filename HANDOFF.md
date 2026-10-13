@@ -321,7 +321,9 @@ Hunting bought **utahcountybasementpros.com** at **Porkbun** (nameservers `*.ns.
 
 **Then (Claude):** confirm `https://utahcountybasementpros.com` and `https://www.utahcountybasementpros.com` serve the site with a valid certificate (curl), merge `domain-switch` into main, push, verify the 301s (huntingtanner.com/any/path → utahcountybasementpros.com/any/path) and canonicals live.
 
-**After the flip (Hunting, in GSC):** submit `https://utahcountybasementpros.com/sitemap-index.xml` in the new property; in the OLD huntingtanner.com property use **Settings → Change of address** → utahcountybasementpros.com. Create the Google Business Profile with the new domain as the website. Later: add utahcountybasementpros.com as a Google Workspace alias domain if he wants office@utahcountybasementpros.com, and verify the new domain in Resend for lead emails.
+**Google Search Console (done October 13, 2026, account office@huntingtanner.com, which owns sc-domain:huntingtanner.com; huntingttanner@gmail.com has no properties):** added Domain property sc-domain:utahcountybasementpros.com, verified via Porkbun TXT `google-site-verification=7lz7dRNcO7vdDb5HD0Q1cVRLh7F93fl0yP0l6IQn_S4` (keep that record), submitted https://utahcountybasementpros.com/sitemap-index.xml, and filed **Change of address** huntingtanner.com → utahcountybasementpros.com (validation passed; only warning was http and https homepage sharing one target, which is expected). Keep the huntingtanner.com redirects in place for at least 180 days, ideally permanently.
+
+**Original post-flip plan (completed):** submit `https://utahcountybasementpros.com/sitemap-index.xml` in the new property; in the OLD huntingtanner.com property use **Settings → Change of address** → utahcountybasementpros.com. Create the Google Business Profile with the new domain as the website. Later: add utahcountybasementpros.com as a Google Workspace alias domain if he wants office@utahcountybasementpros.com, and verify the new domain in Resend for lead emails.
 
 ## 4B. ⭐ CURRENT PALETTE: WALNUT & LINEN (live since October 12, 2026) — SOURCE OF TRUTH
 
