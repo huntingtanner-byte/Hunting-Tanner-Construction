@@ -12,7 +12,7 @@ const siteStatus = process.env.PUBLIC_SITE_STATUS ?? "live";
 const isLive = siteStatus === "live";
 
 export default defineConfig({
-  site: "https://huntingtanner.com",
+  site: "https://utahcountybasementpros.com",
   trailingSlash: "always",
   /**
    * All pages remain fully prerendered static HTML (best for SEO and speed).
