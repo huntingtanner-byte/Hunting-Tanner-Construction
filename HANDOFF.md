@@ -331,6 +331,10 @@ Hunting bought **utahcountybasementpros.com** at **Porkbun** (nameservers `*.ns.
 - Porkbun DNS for the new domain: **MX 1 smtp.google.com** (Porkbun fwd1/fwd2 forwarding MX removed), **SPF** `v=spf1 include:_spf.google.com ~all`, **DKIM** TXT `google._domainkey` (2048-bit, authentication started in Admin → Gmail → Authenticate email), **DMARC** `_dmarc` `v=DMARC1; p=none;` (monitor only).
 - Site shows the new address everywhere (`business.email`). **Lead notifications intentionally still go to office@huntingtanner.com** (`CONTACT_NOTIFICATION_EMAIL` default in `src/pages/api/contact.ts`): Resend is unverified and only delivers to its signup address. That alias lands in the same inbox. Once a Resend sending domain is verified, switch the recipient to the new address.
 
+- **Delivery verified 2026-10-13:** a real test lead landed in the **Inbox** (not spam) of office@utahcountybasementpros.com.
+- ⚠️ **Testing the form without sending a real lead:** the honeypot field is **`companyWebsite`** (see `src/server/contact/validate.ts`), NOT `page_url`. POST with `companyWebsite=x` to get a fake 303 success with no email sent.
+- **GitHub Pages is enabled on the repo** and its "pages build and deployment" run fails on every push (Jekyll can't build Astro), emailing huntingttanner@gmail.com. Harmless (nothing is published at github.io; 404). Fix: repo Settings → Pages → Source: none. Needs Hunting's GitHub login.
+
 ## 4A-3. 📍 GOOGLE BUSINESS PROFILE (as of October 13, 2026)
 
 - Existing **verified** profile "Hunting Tanner Construction" (store code 00435275759364849470), service-area business with hidden address (home office), Lehi, Orem + 13 areas, **7 reviews** (Aug–Sep 2026). Managed at business.google.com under the Workspace user (now office@utahcountybasementpros.com).
