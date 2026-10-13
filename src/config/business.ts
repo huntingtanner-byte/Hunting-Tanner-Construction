@@ -25,9 +25,9 @@ export const business = {
   publicName: "Utah County Basement Pros",
   /** Short form for tight spaces (web app manifest, email sender). */
   shortName: "Basement Pros",
-  /** The domain will change to match the new name later. Update this,
+  /** Primary domain (moved from huntingtanner.com, October 2026). Change this,
    *  astro.config.mjs `site`, and vercel.json redirects together. */
-  domain: "https://huntingtanner.com",
+  domain: "https://utahcountybasementpros.com",
 
   phoneDisplay: "(801) 901-8349",
   phoneHref: "tel:+18019018349",
