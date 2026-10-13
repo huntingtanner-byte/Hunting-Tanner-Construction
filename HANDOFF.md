@@ -306,6 +306,21 @@ Nothing was deleted outright — it was **relocated**, and the homepage links to
 
 ---
 
+## 4A. 🌐 DOMAIN MOVE TO utahcountybasementpros.com (IN PROGRESS, October 2026)
+
+Hunting bought **utahcountybasementpros.com** at **Porkbun** (nameservers `*.ns.porkbun.com`, registered 2026-10-13). It becomes the primary domain; huntingtanner.com stays owned and attached in Vercel purely to **301** to the new one (never let it expire, never serve the site on both).
+
+**Code is ready on branch `domain-switch` (commit 25067c5). Do NOT merge until DNS is live**, or every visitor gets 301'd to a dead domain. It changes `business.domain`, `astro.config.mjs` `site`, the 404 description, and `vercel.json` (301 via `statusCode`, path preserved) from huntingtanner.com, www.huntingtanner.com, huntingtannerconstruction.com (+www) and www.utahcountybasementpros.com. Email stays `office@huntingtanner.com` (Google Workspace on huntingtanner.com, Cloudflare DNS, untouched).
+
+**Hunting's steps:**
+1. Vercel → project → Settings → Domains → add `utahcountybasementpros.com`; apex connected to Production, **www redirects to apex** (NOT apex → www: that loops against vercel.json).
+2. Porkbun → DNS: delete the parking records (ALIAS/A on @ and the CNAME on * / www pointing to `uixie.porkbun.com` / `pixie.porkbun.com`), add the A record (@) and CNAME (www) Vercel shows. Leave the Porkbun MX forwarding records alone.
+3. Google Search Console → add **Domain** property `utahcountybasementpros.com`, add its TXT record at Porkbun, verify.
+
+**Then (Claude):** confirm `https://utahcountybasementpros.com` and `https://www.utahcountybasementpros.com` serve the site with a valid certificate (curl), merge `domain-switch` into main, push, verify the 301s (huntingtanner.com/any/path → utahcountybasementpros.com/any/path) and canonicals live.
+
+**After the flip (Hunting, in GSC):** submit `https://utahcountybasementpros.com/sitemap-index.xml` in the new property; in the OLD huntingtanner.com property use **Settings → Change of address** → utahcountybasementpros.com. Create the Google Business Profile with the new domain as the website. Later: add utahcountybasementpros.com as a Google Workspace alias domain if he wants office@utahcountybasementpros.com, and verify the new domain in Resend for lead emails.
+
 ## 4B. ⭐ CURRENT PALETTE: WALNUT & LINEN (live since October 12, 2026) — SOURCE OF TRUTH
 
 After comparing 8 palettes on the `theme-preview` branch, Hunting chose **Walnut & Linen** with the **classic logo** (Source Serif lockup) and **classic fonts** (Source Serif 4 headings + system sans). Light buttons, standard Linen bands (the preview defaults he reviewed).
