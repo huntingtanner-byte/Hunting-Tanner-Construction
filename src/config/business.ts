@@ -34,8 +34,8 @@ export const business = {
   /** E.164-style value for structured data */
   phoneSchema: "+1-801-901-8349",
 
-  email: "office@huntingtanner.com",
-  emailHref: "mailto:office@huntingtanner.com",
+  email: "office@utahcountybasementpros.com",
+  emailHref: "mailto:office@utahcountybasementpros.com",
 
   /**
    * LICENSING — issued and active as of August 2026. The footer license

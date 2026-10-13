@@ -166,7 +166,7 @@ export const faqPageGroups: FAQGroup[] = [
       {
         question: "How do I get started?",
         answer:
-          "Call (801) 901-8349, email office@huntingtanner.com, or send the consultation form. You'll get a conversation about your space and clear next steps. See how the process works from first call to final walkthrough.",
+          "Call (801) 901-8349, email office@utahcountybasementpros.com, or send the consultation form. You'll get a conversation about your space and clear next steps. See how the process works from first call to final walkthrough.",
       },
     ],
   },

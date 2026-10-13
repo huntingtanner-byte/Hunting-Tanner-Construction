@@ -14,7 +14,12 @@
  * Required Vercel env vars (see .env.example / README):
  *  - RESEND_API_KEY            — from resend.com (domain verified for
  *                                huntingtanner.com, or onboarding sender)
- *  - CONTACT_NOTIFICATION_EMAIL — defaults to office@huntingtanner.com
+ *  - CONTACT_NOTIFICATION_EMAIL — defaults to office@huntingtanner.com. Keep it
+ *                                there until Resend has a verified domain: an
+ *                                unverified Resend account only delivers to its
+ *                                signup address (office@huntingtanner.com), which
+ *                                is now an alias of office@utahcountybasementpros.com,
+ *                                so leads still land in the same inbox.
  *  - RESEND_FROM (optional)    — verified sender, e.g.
  *                                "Basement Pros Website <leads@huntingtanner.com>"
  *
@@ -142,7 +147,7 @@ function errorPage(): string {
        didn't reach our inbox, so please reach us directly and we'll take
        good care of you.</p>
     <p><a class="btn" href="tel:+18019018349">Call (801) 901-8349</a></p>
-    <p>Or email <a class="plain" href="mailto:office@huntingtanner.com">office@huntingtanner.com</a>.</p>
+    <p>Or email <a class="plain" href="mailto:office@utahcountybasementpros.com">office@utahcountybasementpros.com</a>.</p>
     <p><a class="plain" href="/">Back to the homepage</a></p>
   </div>
 </body>
