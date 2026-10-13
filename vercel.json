@@ -10,36 +10,6 @@
       "source": "/basement-finishing/",
       "destination": "/",
       "statusCode": 301
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.utahcountybasementpros.com" }],
-      "destination": "https://utahcountybasementpros.com/:path*",
-      "statusCode": 301
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "huntingtanner.com" }],
-      "destination": "https://utahcountybasementpros.com/:path*",
-      "statusCode": 301
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.huntingtanner.com" }],
-      "destination": "https://utahcountybasementpros.com/:path*",
-      "statusCode": 301
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "huntingtannerconstruction.com" }],
-      "destination": "https://utahcountybasementpros.com/:path*",
-      "statusCode": 301
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.huntingtannerconstruction.com" }],
-      "destination": "https://utahcountybasementpros.com/:path*",
-      "statusCode": 301
     }
   ]
 }
