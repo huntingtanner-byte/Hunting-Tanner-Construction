@@ -306,6 +306,22 @@ Nothing was deleted outright — it was **relocated**, and the homepage links to
 
 ---
 
+## 4-0. 🎯 HOMEPAGE CONVERSION UPDATE (October 26, 2026) — supersedes §3's section order
+
+Hunting asked for: the **free consultation and the form as the focus**, the offer made explicit (**free consultation; detailed bid within 48 hours of the walkthrough**), a phone option ("talk to the owner or an experienced project manager"), the **family photo and founder story OFF the homepage** (they stay on /about/), and the page to say clearly that **basements are the niche**.
+
+**Homepage order now:** Hero (eyebrow "Basements are our specialty", H1 unchanged "Utah Basement Finishing Specialists", CTA "Get My Free Consultation", offer list: Free consultation / Detailed bid within 48 hours / Licensed & insured) → **Free consultation section with the form** (`#home-lead-form`, 3 numbered "what happens next" steps, phone card) → TrustStrip (Licensed & insured / Basement specialists / 40+ years combined / An owner on every project) → **Specialty section** "Basements are what we do, and we do them well" (4 points) + service cards → Our Work → Process → Transformation → Service areas → FAQ → Closing CTA.
+
+- The founder/"Why" section was **removed from the homepage** (Hunting's call). Do not put the family photo or founder story back on the homepage; /about/ has them.
+- **"The owner" is singular on purpose.** Hunting wrote "one of our owners", but the LLC and the site name Hunting as sole owner (Colson is a handshake partner, not on the LLC or site). Switch to plural only if ownership changes on paper.
+- **"Basements are our specialty", not "all we do":** a Google review mentions a kitchen renovation and /about/ says the company will grow into other work, so "only basements" would be untrue.
+- Free consultation + 48-hour bid now appear in: hero, form section, form submit area ("Get My Free Consultation" + promise line), header and mobile sticky CTA ("Free Consultation"), shared CTASection (all pages incl. city pages), process steps 1/2/4, contact page, thank-you page, and two new FAQs (top of homeFaqs and the FAQ page's Cost & Payments group). Assumption: the walkthrough is part of the free consultation.
+- Homepage now emits **FAQPage** JSON-LD for exactly the 5 FAQs it shows (`visibleFaqs`).
+- **Speed:** hero image is responsive (`widths` 640–2000, `sizes=100vw`; phones get 40–89KB instead of 225KB), before/after and project-card images are responsive, and the Source Serif latin woff2 is preloaded in BaseLayout (same hashed file the CSS uses).
+
+### ⚠️ AI-generated images (October 26, 2026)
+Hunting supplied five images to add ("Bright walkout basement kitchen and living area", "Spacious empty basement with natural oak flooring", "Bright L-Shaped Basement Recreation Room", "Taller basement windows with white sills", "Sunlit charcoal-carpeted basement", PNGs in the repo root, **not committed**). Their C2PA Content Credentials say **created by OpenAI/ChatGPT** (digitalSourceType trainedAlgorithmicMedia, action c2pa.created, no photo ingredient). They were **not added** pending Hunting's answer, because the site presents photos as real finished work. Two **existing** project photos carry the same marker: `src/assets/projects/basement-1-1.png` and `basement-3-1.png`. Check any new image with a C2PA/metadata scan before publishing it as project photography.
+
 ## 4A. 🌐 DOMAIN MOVE TO utahcountybasementpros.com (LIVE since October 12, 2026)
 
 Hunting bought **utahcountybasementpros.com** at **Porkbun** (nameservers `*.ns.porkbun.com`, registered 2026-10-13). It becomes the primary domain; huntingtanner.com stays owned and attached in Vercel purely to **301** to the new one (never let it expire, never serve the site on both).

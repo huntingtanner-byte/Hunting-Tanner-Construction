@@ -277,8 +277,12 @@ const id = (name: string) => `${formId}-${name}`;
     data-event="cta_click"
     data-event-label={`lead-form-${variant}`}
   >
-    Request a Basement Consultation
+    Get My Free Consultation
   </button>
+
+  <p class="form-promise">
+    Free and no obligation. Detailed bid within 48 hours of your walkthrough.
+  </p>
 
   <p class="form-consent">
     By submitting this form, you agree that Utah County Basement Pros may
@@ -288,6 +292,13 @@ const id = (name: string) => `${formId}-${name}`;
 </form>
 
 <style>
+  .form-promise {
+    margin: var(--space-3) 0 0;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text);
+    text-align: center;
+  }
   /* The form keeps its own colours even when it sits inside a dark
      section, otherwise .section--dark rules bleed soft-white text onto
      the form's own soft-white surface. */

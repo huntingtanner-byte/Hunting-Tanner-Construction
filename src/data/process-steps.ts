@@ -10,16 +10,16 @@ export interface ProcessStep {
 
 export const processSteps: ProcessStep[] = [
   {
-    title: "Initial Conversation",
+    title: "Free Consultation",
     summary:
-      "A short call to understand your space, your goals, and your rough timeline.",
+      "A free, no-obligation conversation about your space, your goals, and your rough timeline.",
     detail:
-      "It starts with a phone call or a form submission. We'll talk through what you have (square footage, what's roughed in, what you want the space to become) and whether the project is a good fit. You'll get straight answers about what's realistic, and no pressure. If it makes sense to move forward, we schedule a walkthrough.",
+      "It starts with a free phone call or a form submission. We'll talk through what you have (square footage, what's roughed in, what you want the space to become) and whether the project is a good fit. You'll get straight answers about what's realistic, and no pressure. If it makes sense to move forward, we schedule a walkthrough.",
   },
   {
     title: "On-Site Walkthrough",
     summary:
-      "We meet at your home, measure the space, and talk through options in person.",
+      "A free walkthrough at your home to measure the space and talk through options in person.",
     detail:
       "Standing in the actual basement changes the conversation. We look at ceiling heights, mechanical locations, plumbing rough-ins, window sizes, and access: the things that shape what's possible and what it will cost. You'll hear practical options, including ones that save money, and we'll take the measurements and photos needed to build a real scope.",
   },
@@ -33,9 +33,9 @@ export const processSteps: ProcessStep[] = [
   {
     title: "Detailed Proposal",
     summary:
-      "A clear, itemized proposal priced from the written scope, not a napkin estimate.",
+      "A detailed, itemized bid within 48 hours of your walkthrough, priced from a written scope.",
     detail:
-      "You receive a proposal built directly from the scope: pricing, allowances for selections, payment schedule, and an estimated timeline. We walk through it together so every line makes sense before anything is signed. If the scope changes later, changes are documented in writing with pricing before work proceeds. No surprise invoices.",
+      "Within 48 hours of your walkthrough, you receive a detailed proposal built directly from the scope: pricing, allowances for selections, payment schedule, and an estimated timeline. We walk through it together so every line makes sense before anything is signed. If the scope changes later, changes are documented in writing with pricing before work proceeds. No surprise invoices.",
   },
   {
     title: "Construction & Communication",

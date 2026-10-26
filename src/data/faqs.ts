@@ -12,6 +12,16 @@ export interface FAQ {
 /** Homepage FAQ (6–8 high-level questions) */
 export const homeFaqs: FAQ[] = [
   {
+    question: "Is the consultation really free?",
+    answer:
+      "Yes. The consultation and the on-site walkthrough are free, with no obligation. We talk through your space and goals, walk your basement in person, and give you straight answers on what's realistic. If you'd rather start by phone, call (801) 901-8349 and you'll speak with the owner or an experienced project manager.",
+  },
+  {
+    question: "How soon will I get a bid?",
+    answer:
+      "Within 48 hours of your walkthrough, you'll receive a detailed, itemized bid built from a written scope of your project: what's included room by room, allowances for selections, the payment schedule, and an estimated timeline.",
+  },
+  {
     question: "How much does it cost to finish a basement in Utah County?",
     answer:
       "It depends on square footage, the number of bathrooms and bedrooms, and the level of finish, which is why we don't quote from a phone call alone. After a walkthrough, you'll receive a written scope and an itemized proposal so you can see exactly what drives the number. If you share a budget range early, we'll plan the scope around it honestly.",
@@ -63,6 +73,16 @@ export const faqPageGroups: FAQGroup[] = [
   {
     title: "Cost & Payments",
     faqs: [
+      {
+        question: "Is the consultation really free?",
+        answer:
+          "Yes. The consultation and the on-site walkthrough are free, with no obligation. We talk through your space and goals, walk your basement in person, and give you straight answers on what's realistic. If you'd rather start by phone, call (801) 901-8349 and you'll speak with the owner or an experienced project manager.",
+      },
+      {
+        question: "How soon will I get a bid?",
+        answer:
+          "Within 48 hours of your walkthrough, you'll receive a detailed, itemized bid built from a written scope of your project: what's included room by room, allowances for selections, the payment schedule, and an estimated timeline.",
+      },
       {
         question: "What will my basement cost?",
         answer:

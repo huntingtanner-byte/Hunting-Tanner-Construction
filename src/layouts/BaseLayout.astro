@@ -4,6 +4,9 @@
  * data, analytics hooks, sticky mobile CTA.
  */
 import "@fontsource-variable/source-serif-4";
+// Preloaded below: headings (including the hero H1) use this font, so
+// fetching it early shortens the time to first meaningful paint.
+import serifLatin from "@fontsource-variable/source-serif-4/files/source-serif-4-latin-wght-normal.woff2?url";
 import "@/styles/global.css";
 import SEOHead from "@/components/SEOHead.astro";
 import StructuredData from "@/components/StructuredData.astro";
@@ -52,6 +55,7 @@ const allSchemas = includeOrgSchema
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preload" href={serifLatin} as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

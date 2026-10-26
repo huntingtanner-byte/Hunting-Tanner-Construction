@@ -10,30 +10,32 @@ import ServiceAreaCard from "@/components/ServiceAreaCard.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
 import FAQAccordion from "@/components/FAQAccordion.astro";
 import CTASection from "@/components/CTASection.astro";
-import { business } from "@/config/business";
+import { business, canClaimLicensed } from "@/config/business";
 import { coreServices } from "@/data/services";
 import { featuredCities, featuredCounties } from "@/data/service-areas";
 import { homeFaqs } from "@/data/faqs";
 import { publishableProjects } from "@/data/projects";
 import GoogleReviews from "@/components/GoogleReviews.astro";
-import { serviceSchema } from "@/lib/schema";
-import familyPhoto from "@/assets/family/hunting-tanner-family.jpg";
+import { serviceSchema, faqSchema } from "@/lib/schema";
 import heroImage from "@/assets/hero/basement-after.png";
+
+// The FAQs shown on this page (and only those) also go out as FAQPage data
+const visibleFaqs = homeFaqs.slice(0, 5);
 import beforeImg from "@/assets/hero/basement-before.png";
 import afterImg from "@/assets/hero/basement-after.png";
 ---
 
 <BaseLayout
   title="Utah Basement Finishing Company | Utah County Basement Pros"
-  description="Utah basement finishing specialists serving Utah County and the Salt Lake Valley. A licensed basement finishing contractor with three generations of building experience. Free consultation."
+  description="Utah County basement finishing specialists. Free consultation, then a detailed written bid within 48 hours of your walkthrough. Licensed Utah contractor."
   path="/"
   includeOrgSchema
   schemas={[serviceSchema({
     name: "Basement Finishing",
     description:
-      "Complete basement finishing for Utah homeowners: space planning, framing, electrical, plumbing, drywall, trim, and flooring, managed under a written scope by a licensed Utah general contractor.",
+      "Complete basement finishing for Utah homeowners: space planning, framing, electrical, plumbing, drywall, trim, and flooring, managed under a written scope by a licensed Utah general contractor. Free consultation, with a detailed written bid within 48 hours of the on-site walkthrough.",
     path: "/",
-  })]}
+  }), faqSchema(visibleFaqs)]}
 >
   {/* ============ Hero: full-bleed photography with overlaid copy ====== */}
   <section class="hero">
@@ -43,18 +45,21 @@ import afterImg from "@/assets/hero/basement-after.png";
         alt="Finished Utah basement with an open kitchen, island seating, and family room"
         width={2000}
         height={1500}
+        widths={[640, 960, 1280, 1600, 2000]}
+        sizes="100vw"
         loading="eager"
         fetchpriority="high"
       />
     </div>
     <div class="container hero-content">
       <div class="hero-copy">
-        <span class="hero-eyebrow">Utah County &amp; the Salt Lake Valley</span>
+        <span class="hero-eyebrow">Basements are our specialty</span>
         <h1>Utah Basement<br />Finishing Specialists</h1>
         <span class="rule"></span>
         <p class="hero-lede">
-          A licensed Utah basement finishing company turning unfinished
-          basements into bedrooms, bathrooms, and living space.
+          We finish and remodel basements across Utah County and the Salt
+          Lake Valley. Start with a free consultation, and get a detailed
+          bid within 48 hours of your walkthrough.
         </p>
         <div class="hero-actions">
           <a
@@ -63,7 +68,7 @@ import afterImg from "@/assets/hero/basement-after.png";
             data-event="cta_click"
             data-event-label="hero"
           >
-            Request a Consultation
+            Get My Free Consultation
           </a>
           <a
             class="btn btn--ghost-light"
@@ -74,34 +79,54 @@ import afterImg from "@/assets/hero/basement-after.png";
             Call {business.phoneDisplay}
           </a>
         </div>
+        <ul class="hero-offer" aria-label="What you get">
+          <li>Free consultation</li>
+          <li>Detailed bid within 48 hours</li>
+          {canClaimLicensed && <li>Licensed &amp; insured</li>}
+        </ul>
       </div>
     </div>
   </section>
 
-  {/* ============ Credibility ============ */}
-  <TrustStrip />
-
-  {/* ============ Consultation — kept high on the page for conversion === */}
-  <section class="section section--alt" id="home-lead-form">
+  {/* ============ Free consultation: the page's main action ============
+      Directly under the hero so the form is the first thing people reach. */}
+  <section class="section section--alt consult-section" id="home-lead-form">
     <div class="container consult-grid">
       <div class="consult-copy">
-        <span class="eyebrow">Start Here</span>
-        <h2>Tell us about your basement</h2>
+        <span class="eyebrow">Free Consultation</span>
+        <h2>Get your free basement consultation</h2>
         <span class="rule"></span>
-        <p>
-          It starts with a conversation, then a walkthrough at your home.
-          You'll get straight answers on what's realistic, what it costs,
-          and how long it takes, in writing.
+        <p class="consult-intro">
+          No cost and no obligation. Tell us about your basement, and here's
+          what happens next:
         </p>
-        <p class="consult-note">
-          Prefer to talk now? Call
+        <ol class="consult-steps">
+          <li>
+            <strong>We talk about your space.</strong> What you have, what
+            you want, and your rough timing.
+          </li>
+          <li>
+            <strong>We walk your basement.</strong> A free on-site
+            walkthrough to measure and talk through options.
+          </li>
+          <li>
+            <strong>You get a detailed bid within 48 hours.</strong> A
+            written, itemized proposal you can actually make a decision with.
+          </li>
+        </ol>
+        <div class="consult-call">
+          <p class="consult-call-label">Rather talk it through?</p>
           <a
+            class="consult-call-number"
             href={business.phoneHref}
             data-event="click_to_call"
             data-event-label="consult-section"
-          >{business.phoneDisplay}</a>
-          and speak directly with the owner.
-        </p>
+          >Call {business.phoneDisplay}</a>
+          <p class="consult-call-note">
+            You'll speak with the owner or an experienced project manager,
+            not a call center.
+          </p>
+        </div>
       </div>
       <div class="consult-form">
         <LeadForm formId="home-form" variant="compact" />
@@ -109,11 +134,45 @@ import afterImg from "@/assets/hero/basement-after.png";
     </div>
   </section>
 
-  {/* ============ What we build ============ */}
+  {/* ============ Credibility ============ */}
+  <TrustStrip />
+
+  {/* ============ Specialty: basements are the niche ============ */}
   <section class="section">
     <div class="container">
-      <span class="eyebrow">What We Build</span>
-      <h2>Basement spaces designed around how you live</h2>
+      <div class="specialty-head">
+        <span class="eyebrow">Our Specialty</span>
+        <h2>Basements are what we do, and we do them well</h2>
+        <span class="rule"></span>
+        <p class="lede">
+          We're not a general handyman service. Basement finishing and
+          remodeling is our niche, so the details that make or break a Utah
+          basement are the ones we know best.
+        </p>
+      </div>
+      <ul class="specialty-points">
+        <li>
+          <strong>Utah basement know-how</strong>
+          Egress windows and window wells, builder rough-in plumbing, low
+          ductwork, mechanical rooms, and the permits your city requires.
+        </li>
+        <li>
+          <strong>Bedrooms that count</strong>
+          Proper egress, smoke and CO detection, and ceiling heights planned
+          in from the start, so a bedroom is a real bedroom.
+        </li>
+        <li>
+          <strong>A process built for basements</strong>
+          A written room-by-room scope, an organized trade schedule, and
+          inspections built into the timeline.
+        </li>
+        <li>
+          <strong>Finished like the main floor</strong>
+          Lighting, trim, flooring, and soffits detailed so the basement
+          feels like part of the house, not an afterthought.
+        </li>
+      </ul>
+      <h3 class="services-title">Basement spaces designed around how you live</h3>
       <div class="grid-3 services-grid">
         {coreServices.map((service) => (
           <ServiceCard service={service} />
@@ -209,53 +268,9 @@ import afterImg from "@/assets/hero/basement-after.png";
     </div>
   </section>
 
-  {/* ============ Why us + founder story, merged ============ */}
-  <section class="section section--alt">
-    <div class="container why-grid">
-      <div class="why-media">
-        <Image
-          src={familyPhoto}
-          alt="Hunting Tanner with his wife and son"
-          width={720}
-          height={1013}
-          loading="lazy"
-          class="why-photo"
-        />
-      </div>
-      <div class="why-copy">
-        <span class="eyebrow">Why Utah County Basement Pros</span>
-        <h2>Three generations of building experience</h2>
-        <span class="rule"></span>
-        <p>
-          Hunting is a third-generation contractor who grew up on job sites
-          alongside his dad, Gary. Together they bring more than 40 years of
-          combined construction experience, and both are involved in every
-          project: Hunting owns and runs each one start to finish, and Gary
-          serves as senior advisor. You get an owner's attention and a
-          veteran's judgment.
-        </p>
-        <ul class="why-points">
-          <li>
-            <strong>An owner on every project.</strong> The person who plans
-            your job is the person who answers for it.
-          </li>
-          <li>
-            <strong>Written scopes, not verbal ones.</strong> Defined room
-            by room before pricing, so the proposal means something.
-          </li>
-          <li>
-            <strong>Change orders in writing.</strong> Documented and priced
-            before the work proceeds. No surprise invoices.
-          </li>
-          <li>
-            <strong>Licensed &amp; insured.</strong> A licensed Utah general
-            contractor working with qualified trade partners.
-          </li>
-        </ul>
-        <a class="link-label" href="/about/">Read the full story</a>
-      </div>
-    </div>
-  </section>
+  {/* The founder story and family photo live on /about/ only (Hunting's
+      call, October 2026): the homepage stays focused on basements and the
+      free consultation. */}
 
   {/* ============ Service areas ============ */}
   <section class="section">
@@ -298,7 +313,7 @@ import afterImg from "@/assets/hero/basement-after.png";
     <div class="container container--narrow">
       <span class="eyebrow">Questions Homeowners Ask</span>
       <h2>Basement finishing FAQs</h2>
-      <FAQAccordion faqs={homeFaqs.slice(0, 5)} />
+      <FAQAccordion faqs={visibleFaqs} />
       <p class="section-cta">
         <a href="/faq/">See all frequently asked questions →</a>
       </p>
@@ -311,7 +326,7 @@ import afterImg from "@/assets/hero/basement-after.png";
       closes on a heading and a single CTA. */}
   <CTASection
     heading="Your basement is already under your roof. Let's finish it."
-    text="Tell us about your space and what you want it to become. A real conversation, clear next steps, zero pressure."
+    text="Start with a free consultation. After a walkthrough of your space, you'll have a detailed written bid within 48 hours. No pressure, no obligation."
   />
 </BaseLayout>
 
@@ -367,7 +382,8 @@ import afterImg from "@/assets/hero/basement-after.png";
     font-weight: 600;
     letter-spacing: var(--tracking-label);
     text-transform: uppercase;
-    color: var(--color-on-dark-accent);
+    /* Carries the niche message, so it reads at full strength on the photo */
+    color: var(--color-on-dark);
     margin-bottom: var(--space-5);
   }
   .hero-copy h1 {
@@ -389,6 +405,32 @@ import afterImg from "@/assets/hero/basement-after.png";
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-4);
+  }
+  /* The offer at a glance, under the buttons */
+  .hero-offer {
+    list-style: none;
+    margin: var(--space-5) 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-on-dark);
+  }
+  .hero-offer li {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+  .hero-offer li::before {
+    content: "";
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: var(--color-on-dark-accent);
+    flex-shrink: 0;
   }
   @media (max-width: 767px) {
     .hero {
@@ -428,11 +470,81 @@ import afterImg from "@/assets/hero/basement-after.png";
       gap: var(--space-8);
     }
   }
-  .consult-copy p {
+  .consult-intro {
     color: var(--color-text-muted);
   }
-  .consult-note {
+  /* Numbered "what happens next" steps: the offer, made concrete */
+  .consult-steps {
+    list-style: none;
+    counter-reset: consult;
+    margin: var(--space-5) 0 var(--space-6);
+    padding: 0;
+    display: grid;
+    gap: var(--space-4);
+  }
+  .consult-steps li {
+    counter-increment: consult;
+    position: relative;
+    margin: 0;
+    padding-left: 3rem;
+    min-height: 2.25rem;
+    color: var(--color-text-muted);
     font-size: var(--text-sm);
+    line-height: 1.55;
+  }
+  .consult-steps li::before {
+    content: counter(consult);
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: var(--radius);
+    background: var(--brand-sea-glass);
+    color: var(--color-accent-ink);
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+  }
+  .consult-steps strong {
+    display: block;
+    color: var(--color-text);
+    font-size: var(--text-base);
+  }
+  /* Phone alternative: a real option, not a footnote */
+  .consult-call {
+    padding: var(--space-5);
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border-strong);
+    border-left: 2px solid var(--color-accent-secondary);
+    border-radius: var(--radius);
+  }
+  .consult-call p {
+    margin: 0;
+  }
+  .consult-call-label {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+  .consult-call-number {
+    display: inline-block;
+    margin-block: var(--space-2);
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    color: var(--color-text);
+    text-decoration: none;
+  }
+  .consult-call-number:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent-secondary);
+  }
+  .consult-call-note {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
   }
 
   .transform-grid {
@@ -457,42 +569,47 @@ import afterImg from "@/assets/hero/basement-after.png";
     margin-top: var(--space-6);
   }
 
-  /* ---- Why us + founder story, on the warm off-white band (section--alt).
-         Do NOT put this back on solid Pale Taupe: it was rejected. ---- */
-  .why-grid {
-    display: grid;
-    gap: var(--space-6);
-    align-items: center;
+  /* ---- Specialty: basements are the niche ---- */
+  .specialty-head {
+    max-width: 46rem;
   }
-  @media (min-width: 900px) {
-    .why-grid {
-      grid-template-columns: 4fr 6fr;
-      gap: var(--space-8);
-    }
-  }
-  .why-media {
-    max-width: 24rem;
-    margin-inline: auto;
-    width: 100%;
-  }
-  .why-photo {
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-lg);
-  }
-  .why-points {
+  .specialty-points {
     list-style: none;
-    margin: var(--space-5) 0 var(--space-6);
+    margin: var(--space-7) 0 0;
     padding: 0;
     display: grid;
-    gap: var(--space-4);
+    gap: var(--space-5);
   }
-  .why-points li {
+  @media (min-width: 700px) {
+    .specialty-points {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-6);
+    }
+  }
+  @media (min-width: 1100px) {
+    .specialty-points {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  .specialty-points li {
     margin: 0;
-    padding-left: var(--space-4);
-    border-left: 2px solid var(--brand-sea-glass);
+    padding-top: var(--space-4);
+    border-top: 2px solid var(--brand-sea-glass);
     font-size: var(--text-sm);
-    line-height: 1.55;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+  .specialty-points strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: var(--space-2);
+  }
+  .services-title {
+    margin-top: var(--space-8);
+    font-size: var(--text-xl);
   }
 
   /* ---- Process, on Charcoal ---- */

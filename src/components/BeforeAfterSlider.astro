@@ -28,11 +28,11 @@ const { before, after, beforeAlt, afterAlt, isPlaceholder = false } =
 <figure class="ba-figure">
   <div class="ba-compare" data-ba-compare style="--ba-pos: 50%">
     <div class="ba-frame ba-frame--before">
-      <Image src={before} alt={beforeAlt} width={1200} height={900} loading="lazy" />
+      <Image src={before} alt={beforeAlt} width={1200} height={900} widths={[480, 800, 1200]} sizes="(min-width: 900px) 50vw, 100vw" loading="lazy" />
       <span class="ba-tag ba-tag--before">Before</span>
     </div>
     <div class="ba-frame ba-frame--after" data-ba-after>
-      <Image src={after} alt={afterAlt} width={1200} height={900} loading="lazy" />
+      <Image src={after} alt={afterAlt} width={1200} height={900} widths={[480, 800, 1200]} sizes="(min-width: 900px) 50vw, 100vw" loading="lazy" />
       <span class="ba-tag ba-tag--after">After</span>
     </div>
     <div class="ba-handle" aria-hidden="true"></div>
