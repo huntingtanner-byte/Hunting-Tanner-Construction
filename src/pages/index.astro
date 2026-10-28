@@ -8,6 +8,7 @@ import ServiceCard from "@/components/ServiceCard.astro";
 import ProcessSteps from "@/components/ProcessSteps.astro";
 import ServiceAreaCard from "@/components/ServiceAreaCard.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
+import PhotoGallery from "@/components/PhotoGallery.astro";
 import FAQAccordion from "@/components/FAQAccordion.astro";
 import CTASection from "@/components/CTASection.astro";
 import { business, canClaimLicensed } from "@/config/business";
@@ -195,6 +196,8 @@ import afterImg from "@/assets/hero/basement-after.png";
           <ProjectCard project={project} />
         ))}
       </div>
+      <h3 class="gallery-title">More finished basements</h3>
+      <PhotoGallery />
       <div class="section-cta">
         <a class="btn btn--secondary" href="/projects/">
           View the Full Galleries
@@ -606,6 +609,10 @@ import afterImg from "@/assets/hero/basement-after.png";
     font-weight: 500;
     color: var(--color-text);
     margin-bottom: var(--space-2);
+  }
+  .gallery-title {
+    margin: var(--space-8) 0 var(--space-5);
+    font-size: var(--text-xl);
   }
   .services-title {
     margin-top: var(--space-8);

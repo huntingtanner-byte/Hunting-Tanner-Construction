@@ -1,0 +1,105 @@
+---
+/**
+ * Named finished-basement photos with captions (homepage "Our Work" and
+ * the Projects page). Tiles five photos evenly:
+ *   desktop  2 large on top, 3 below   (6-column grid: 3+3 / 2+2+2)
+ *   phone/tablet  1 full width, then pairs (2-column grid), which keeps
+ *                 the mobile homepage short
+ */
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import { galleryPhotos } from "@/data/gallery";
+
+const files = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/gallery/*.{png,jpg,jpeg,webp,avif}",
+  { eager: true },
+);
+const photos = galleryPhotos
+  .map((p) => ({ ...p, image: files[`/src/assets/gallery/${p.src}`]?.default }))
+  .filter((p) => p.image);
+
+// Rendered width per slot, so each device downloads a right-sized file
+const sizesFor = (i: number) =>
+  i === 0
+    ? "(min-width: 900px) 50vw, 100vw"
+    : i === 1
+      ? "50vw"
+      : "(min-width: 900px) 33vw, 50vw";
+---
+
+<ul class="photo-gallery">
+  {photos.map((photo, i) => (
+    <li class="photo">
+      <figure>
+        <Image
+          src={photo.image!}
+          alt={photo.alt}
+          width={1200}
+          widths={[480, 800, 1200]}
+          sizes={sizesFor(i)}
+          loading="lazy"
+        />
+        <figcaption>{photo.title}</figcaption>
+      </figure>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .photo-gallery {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5) var(--space-3);
+  }
+  .photo:first-child {
+    grid-column: span 2;
+  }
+  @media (min-width: 560px) {
+    .photo-gallery {
+      gap: var(--space-5);
+    }
+  }
+  @media (min-width: 900px) {
+    .photo-gallery {
+      grid-template-columns: repeat(6, 1fr);
+    }
+    .photo,
+    .photo:first-child {
+      grid-column: span 2;
+    }
+    .photo:nth-child(-n + 2) {
+      grid-column: span 3;
+    }
+  }
+  .photo {
+    margin: 0;
+  }
+  .photo figure {
+    margin: 0;
+  }
+  .photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+  }
+  .photo figcaption {
+    margin-top: var(--space-2);
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    line-height: 1.35;
+    color: var(--color-text);
+  }
+  @media (min-width: 560px) {
+    .photo figcaption {
+      margin-top: var(--space-3);
+      font-size: var(--text-base);
+    }
+  }
+</style>
