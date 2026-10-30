@@ -2,8 +2,9 @@
  * JSON-LD structured data builders.
  *
  * Rules enforced here (see SCHEMA-TODO.md):
- *  - No street address (service-area business; residential address never published)
- *  - No aggregateRating / review / awards / employee counts / opening hours
+ *  - Address, map pin, and hours are the staffed Lehi office exactly as the
+ *    Google Business Profile shows them; never a residential address
+ *  - No aggregateRating / review / awards / employee counts
  *  - Only factual, verified values from src/config/business.ts
  *  - Everything emitted must match visible page content
  */
@@ -19,7 +20,7 @@ const SITE = business.domain;
  * general contractor (subtype of HomeAndConstructionBusiness > LocalBusiness).
  */
 export function organizationSchema(): JsonLd {
-  const sameAs = activeSocialLinks.map((s) => s.url);
+  const sameAs: string[] = activeSocialLinks.map((s) => s.url);
   if (business.googleBusinessProfileURL) {
     sameAs.push(business.googleBusinessProfileURL);
   }
@@ -36,7 +37,29 @@ export function organizationSchema(): JsonLd {
     telephone: business.phoneSchema,
     email: business.email,
     description:
-      "Family-rooted residential general contractor specializing in basement finishing and basement remodeling for homeowners in Saratoga Springs, Lehi, Herriman, and communities throughout Utah County, Utah.",
+      "Lehi, Utah based residential general contractor specializing in basement finishing and basement remodeling for homeowners throughout Utah County and the Salt Lake Valley.",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: business.location.streetAddress,
+      addressLocality: business.location.locality,
+      addressRegion: business.location.region,
+      postalCode: business.location.postalCode,
+      addressCountry: business.location.country,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: business.location.latitude,
+      longitude: business.location.longitude,
+    },
+    ...(business.googleBusinessProfileURL
+      ? { hasMap: business.googleBusinessProfileURL }
+      : {}),
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: business.hours.days,
+      opens: business.hours.opens,
+      closes: business.hours.closes,
+    },
     founder: [
       { "@type": "Person", name: "Hunting Tanner", jobTitle: "Founder" },
     ],

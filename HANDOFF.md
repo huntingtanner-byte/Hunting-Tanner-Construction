@@ -96,7 +96,8 @@ Utah homeowners — largely in newer subdivisions with **unfinished, rough-plumb
 
 ### Geographic / service-area focus
 
-- **Primary:** northern **Utah County** — Saratoga Springs, Lehi (home base is northwest Utah County)
+- **Headquarters:** the staffed Lehi office (2701 N Thanksgiving Way). The homepage title/description anchor Lehi; city pages anchor their own city.
+- **Primary:** northern **Utah County** — Saratoga Springs, Lehi, Eagle Mountain (Hunting's core SEO targets, with Herriman). Eagle Mountain joined the featured cities (homepage cards, footer, schema) on October 30, 2026.
 - **Secondary:** **Salt Lake County** / Salt Lake Valley — Herriman, Riverton, Bluffdale, South Jordan, etc.
 - **Boundaries the owner set explicitly:** nothing **south of Spanish Fork**; nothing **north of the Salt Lake City airport**.
 - 31 individual city landing pages exist (13 Utah County + 18 Salt Lake County), each with **genuinely distinct copy** — not name-swapped templates.
@@ -355,6 +356,13 @@ Hunting bought **utahcountybasementpros.com** at **Porkbun** (nameservers `*.ns.
 
 - Existing **verified** profile "Hunting Tanner Construction" (store code 00435275759364849470), service-area business with hidden address (home office), Lehi, Orem + 13 areas, **7 reviews** (Aug–Sep 2026). Managed at business.google.com under the Workspace user (now office@utahcountybasementpros.com).
 - Hunting is getting a real office this month. Recommendation given (see conversation): **keep and edit this profile, don't create a new one**; register the DBA first; change the name as a standalone edit; update the website field now; add the office address later as a separate edit, shown only if it is staffed during listed hours with permanent signage and can receive customers (else keep hidden). Caveat: Google's written rebranding rule only covers "minor" name changes where proper nouns and services stay the same, so this rename may be reviewed as a new business.
+
+### Update, October 30, 2026: new profile + public office
+
+- Hunting created a **new** GBP **"Utah County Basement Pros"** (he chose this over editing the old one; the DBA is registered and on the DOPL license and insurance). Public listing: **2701 N Thanksgiving Way, Lehi, UT 84043**, (801) 901-8349, **Mon–Fri 8 AM – 8 PM**, primary category **Remodeler**, website utahcountybasementpros.com, 2 reviews. Maps CID **7629791764318187044** (`https://maps.google.com/?cid=7629791764318187044`), pin 40.4209358, -111.8816934.
+- Hunting confirmed the office is **staffed** and asked for the **full address to be shown** on the site. It now lives in `business.location` / `business.hours` and appears in the footer (every page, linked to the GBP), on `/contact/` (with directions + hours), and in the GeneralContractor schema (address, geo, hours, hasMap, sameAs). Keep these **identical to the GBP**; if the GBP changes, change `business.ts` the same day.
+- **The old "Hunting Tanner Construction" profile is still live** with the same phone, website huntingtanner.com (which 301s here), category General contractor, 7 reviews, closes 6 PM. Two profiles for one business sharing a phone number is the likely reason the new profile **does not show a knowledge panel for a plain search of its own name** (checked October 30: the old name shows a panel; the new name shows competitors' local pack). Recommended to Hunting: ask GBP support to **merge the old profile into the new one as a duplicate** (reviews usually come across with a merge, not guaranteed). He said not to touch reviews yet, so this is his call; don't act on it without him.
+- Category advice given: the three top basement competitors in the local pack all use **General contractor** as primary; consider General contractor primary + Remodeler secondary. Never add keywords to the GBP name.
 
 ## 4B. ⭐ CURRENT PALETTE: WALNUT & LINEN (live since October 12, 2026) — SOURCE OF TRUTH
 
@@ -637,7 +645,7 @@ A checklist to run before shipping any visual or structural change.
 16. ❌ **Calling Gary a co-founder / founder / partner / principal / owner**, or implying he is licensed in Utah, or that he holds equity. He is the **Senior Advisor**, involved in every project. See §1.
 17. ❌ **"4-8 weeks"** for project duration. It is **6-10 weeks**.
 18. ❌ **"30 years" / "three decades"** for Gary's experience. It is **35+ years**.
-19. ❌ **Any residential address** anywhere — page copy, footer, contact page, structured data, source code, or metadata. Standing rule.
+19. ❌ **Any residential address** anywhere — page copy, footer, contact page, structured data, source code, or metadata. Standing rule. (The staffed Lehi office in `business.location` is the one public address, by Hunting's instruction, October 30, 2026.)
 20. ❌ **Invented facts** of any kind.
 
 ### Process
@@ -700,7 +708,7 @@ Everything is **prerendered static HTML** — verified server-rendered, not clie
 ### Schema / JSON-LD
 
 All in `src/lib/schema.ts`, injected via `StructuredData.astro`:
-- **GeneralContractor** organization — name, legalName, url, logo, image, telephone, email, description, **`founder: [Hunting Tanner — "Founder"]` only**, `areaServed`. ⚠️ **No address** by owner instruction.
+- **GeneralContractor** organization — name, legalName, url, logo, image, telephone, email, description, **`founder: [Hunting Tanner — "Founder"]` only**, `areaServed`, on **every page**. Since October 30, 2026 also the **staffed Lehi office**: full PostalAddress, GeoCoordinates, openingHoursSpecification (Mon–Fri 08:00–20:00), `hasMap` + `sameAs` = the GBP CID link, all read from `business.location` / `business.hours` (Hunting's instruction; before that there was no address).
 - **Service** — basement finishing / remodeling
 - **BreadcrumbList** — on interior pages
 - **FAQPage** — homepage + `/faq/`
@@ -900,7 +908,7 @@ None. Per Hunting's standing instruction, every change is committed and pushed t
 
 ### 🟡 Open items
 
-3. **Google Business Profile** — not yet created. **Create it under "Utah County Basement Pros"** (matching the site's `publicName` and schema `name` exactly). `business.googleBusinessProfileURL` is `""`. Once created and reviews come in, populate `src/data/reviews.ts`; `GoogleReviews.astro` renders nothing while the array is empty (by design — **never add fake reviews**).
+3. **Google Business Profile** — created as "Utah County Basement Pros" (see §4A-3 update, October 30, 2026); `business.googleBusinessProfileURL` is the CID link. Open question for Hunting: merge the old Hunting Tanner Construction profile into it. Once created and reviews come in, populate `src/data/reviews.ts`; `GoogleReviews.astro` renders nothing while the array is empty (by design — **never add fake reviews**).
 4. **Attorney review of `/privacy-policy/` and `/terms/`.** The effective date "July 30, 2026" is a **placeholder**.
 5. **Confirm Gary's bio details**, particularly the spelling of **Amaron Construction**, and confirm the California license history is stated accurately.
 6. **Confirm insurance wording** against the actual carrier/policy. `insuranceClaimApproved: true` currently gates "licensed & insured" language.
@@ -953,7 +961,7 @@ plus **Light / Dark main buttons** and **Standard / Lighter section bands** (lig
 
 ### Standing rules (never violate)
 
-- **No residential address** anywhere — copy, footer, contact page, structured data, source, or metadata.
+- **No residential address** anywhere — copy, footer, contact page, structured data, source, or metadata. The staffed Lehi office (`business.location`) is the only public address.
 - **Never invent** projects, licenses, reviews, statistics, awards, addresses, or credentials.
 - **No hardcoded secrets**; no secrets in client code; no open email relay.
 - **No marketing scripts during staging**; no invasive tracking.

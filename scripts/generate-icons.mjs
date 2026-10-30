@@ -150,7 +150,7 @@ await sharp(
   const H = 630;
   const l = lockup({ nameSize: 76, ink: CHARCOAL, subInk: MUTED, rule: SEA_GLASS });
   const tag = outline(
-    "Basement Finishing  ·  Utah County & Salt Lake Valley",
+    "Basement Finishing Specialists  ·  Lehi, Utah",
     25,
     0.04,
     MUTED,

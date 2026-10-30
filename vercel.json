@@ -10,6 +10,11 @@
   ],
   "redirects": [
     {
+      "source": "/sitemap.xml",
+      "destination": "/sitemap-index.xml",
+      "statusCode": 301
+    },
+    {
       "source": "/basement-finishing",
       "destination": "/",
       "statusCode": 301

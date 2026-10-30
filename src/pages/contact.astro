@@ -47,11 +47,30 @@ const schemas = [breadcrumbSchema(breadcrumbs)];
           >{business.email}</a>
         </p>
         <p class="contact-line">
+          <strong>Office</strong>
+          <span class="contact-address">
+            {business.location.streetAddress}<br />
+            {business.location.locality}, {business.location.region}
+            {business.location.postalCode}
+          </span>
+          <a
+            class="contact-map"
+            href={business.googleBusinessProfileURL}
+            rel="noopener"
+            data-event="directions_click"
+            data-event-label="contact-page"
+          >Get directions on Google Maps →</a>
+        </p>
+        <p class="contact-line">
+          <strong>Office hours</strong>
+          <span>{business.hours.display}</span>
+        </p>
+        <p class="contact-line">
           <strong>Service area</strong>
           <span>
-            Serving Saratoga Springs, Lehi, and communities throughout Utah
-            County and the Salt Lake Valley. We're a service-area business.
-            We come to your home.
+            Serving Saratoga Springs, Lehi, Eagle Mountain, Herriman, and
+            communities throughout Utah County and the Salt Lake Valley. For
+            the free walkthrough, we come to your home.
           </span>
         </p>
         {canClaimLicensed && (
@@ -128,6 +147,25 @@ const schemas = [breadcrumbSchema(breadcrumbs)];
   }
   .contact-line a:hover {
     color: var(--color-text);
+  }
+  /* The email is one unbreakable word: keep it inside narrow phones */
+  .contact-line a[href^="mailto:"] {
+    overflow-wrap: anywhere;
+  }
+  @media (max-width: 479px) {
+    .contact-line a[href^="mailto:"] {
+      font-size: var(--text-base);
+    }
+  }
+  .contact-address {
+    font-weight: 650;
+    color: var(--color-ink);
+  }
+  .contact-line .contact-map {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
   }
   .license-value {
     font-weight: 650;

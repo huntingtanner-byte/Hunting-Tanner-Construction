@@ -27,8 +27,8 @@ import afterImg from "@/assets/hero/basement-after.png";
 ---
 
 <BaseLayout
-  title="Utah Basement Finishing Company | Utah County Basement Pros"
-  description="Utah County basement finishing specialists. Free consultation, then a detailed written bid within 48 hours of your walkthrough. Licensed Utah contractor."
+  title="Utah County Basement Pros | Basement Finishing in Lehi, UT"
+  description="Lehi-based basement finishing specialists serving Saratoga Springs, Eagle Mountain, Herriman, and all of Utah County. Free consultation, bid within 48 hours."
   path="/"
   includeOrgSchema
   schemas={[serviceSchema({
@@ -281,8 +281,8 @@ import afterImg from "@/assets/hero/basement-after.png";
       <span class="eyebrow">Where We Work</span>
       <h2>Serving homeowners at their properties</h2>
       <p class="lede">
-        A Utah County based residential contractor serving Utah County and
-        the Salt Lake Valley. We come to you.
+        Based in Lehi and serving homeowners throughout Utah County and the
+        Salt Lake Valley. We come to you.
       </p>
       <div class="grid-3 areas-grid">
         {featuredCities.map((area) => (
@@ -570,6 +570,12 @@ import afterImg from "@/assets/hero/basement-after.png";
   .areas-grid,
   .projects-grid {
     margin-top: var(--space-6);
+  }
+  /* Four featured cities: one row on desktop */
+  @media (min-width: 1024px) {
+    .areas-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 
   /* ---- Specialty: basements are the niche ---- */

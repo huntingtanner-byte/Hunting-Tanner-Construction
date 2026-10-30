@@ -22,8 +22,8 @@ const socialLabels: Record<string, string> = {
         </p>
         <p class="footer-tagline">
           Basement finishing and remodeling for homeowners in Saratoga
-          Springs, Lehi, and communities throughout Utah County and the Salt
-          Lake Valley.
+          Springs, Lehi, Eagle Mountain, Herriman, and communities throughout
+          Utah County and the Salt Lake Valley.
         </p>
         <p class="footer-contact">
           <a
@@ -37,6 +37,20 @@ const socialLabels: Record<string, string> = {
             data-event="click_to_email"
             data-event-label="footer"
           >{business.email}</a>
+        </p>
+        <p class="footer-address">
+          <a
+            href={business.googleBusinessProfileURL}
+            rel="noopener"
+            data-event="directions_click"
+            data-event-label="footer"
+          >
+            {business.location.streetAddress}<br />
+            {business.location.locality}, {business.location.region}
+            {business.location.postalCode}
+          </a>
+          <br />
+          {business.hours.display}
         </p>
         {canClaimLicensed && (
           <p class="footer-license">
@@ -182,6 +196,20 @@ const socialLabels: Record<string, string> = {
   }
   .footer-contact a:hover {
     color: var(--color-accent-bright);
+  }
+
+  .footer-address {
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--color-dark-muted);
+  }
+  .footer-address a {
+    color: var(--color-on-dark);
+    text-decoration: none;
+  }
+  .footer-address a:hover {
+    color: var(--color-accent-bright);
+    text-decoration: underline;
   }
 
   /* License credential badge: accent edge ties it to the trust strip */

@@ -26,6 +26,7 @@ export const footerServices: NavItem[] = [
 export const footerAreas: NavItem[] = [
   { label: "Saratoga Springs", href: "/saratoga-springs-basement-finishing/" },
   { label: "Lehi", href: "/lehi-basement-finishing/" },
+  { label: "Eagle Mountain", href: "/eagle-mountain-basement-finishing/" },
   { label: "Herriman", href: "/herriman-basement-finishing/" },
   { label: "Utah County (all cities)", href: "/utah-county-basement-finishing/" },
   { label: "Salt Lake County (all cities)", href: "/salt-lake-county-basement-finishing/" },

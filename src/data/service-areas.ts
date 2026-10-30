@@ -43,6 +43,15 @@ export const featuredCities: ServiceArea[] = [
     schemaType: "City",
   },
   {
+    name: "Eagle Mountain",
+    state: "Utah",
+    href: "/eagle-mountain-basement-finishing/",
+    tier: "primary",
+    blurb:
+      "One of the fastest-growing cities in Utah, full of newer homes with untouched basements ready to become bedrooms and family space.",
+    schemaType: "City",
+  },
+  {
     name: "Herriman",
     state: "Utah",
     href: "/herriman-basement-finishing/",
@@ -61,7 +70,7 @@ export const featuredCounties: ServiceArea[] = [
     href: "/utah-county-basement-finishing/",
     tier: "primary",
     blurb:
-      "A Utah County based residential contractor serving homeowners at their properties across the county.",
+      "Based in Lehi and serving homeowners at their properties across the county.",
     schemaType: "AdministrativeArea",
   },
   {

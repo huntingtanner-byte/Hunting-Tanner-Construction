@@ -66,15 +66,41 @@ export const business = {
     youtube: "",
   },
 
-  /** Google Business Profile share URL. Empty until the profile is live. */
-  googleBusinessProfileURL: "",
+  /**
+   * The staffed office shown on the Google Business Profile (Hunting
+   * confirmed it is staffed and should be public, October 30, 2026).
+   * Keep name, address, and phone identical to the GBP everywhere.
+   * Never put a residential address here.
+   */
+  location: {
+    streetAddress: "2701 N Thanksgiving Way",
+    locality: "Lehi",
+    region: "UT",
+    regionName: "Utah",
+    postalCode: "84043",
+    country: "US",
+    /** The GBP map pin */
+    latitude: 40.4209358,
+    longitude: -111.8816934,
+  },
+
+  /** Office hours, matching the GBP. Change both together. */
+  hours: {
+    days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "08:00",
+    closes: "20:00",
+    display: "Mon–Fri, 8 AM – 8 PM",
+  },
+
+  /** Google Business Profile, by its permanent Maps listing ID (CID). */
+  googleBusinessProfileURL: "https://maps.google.com/?cid=7629791764318187044",
 
   /**
    * Service-area summary used in copy and schema. The detailed per-city data
    * model lives in src/data/service-areas.ts.
    */
   serviceAreas: {
-    primary: ["Saratoga Springs", "Lehi", "Utah County"],
+    primary: ["Saratoga Springs", "Lehi", "Eagle Mountain", "Utah County"],
     secondary: ["Herriman", "Salt Lake County"],
     summary:
       "Serving every community in northern Utah County and across the Salt Lake Valley.",

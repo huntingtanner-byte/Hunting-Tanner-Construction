@@ -31,7 +31,7 @@ interface Props {
   pageType?: string;
   /** Extra JSON-LD blocks (breadcrumbs, service, FAQ). Org schema is automatic. */
   schemas?: Record<string, unknown>[];
-  /** Include the Organization/GeneralContractor schema (homepage only). */
+  /** Include the Organization/GeneralContractor schema (default: every page). */
   includeOrgSchema?: boolean;
 }
 
@@ -43,7 +43,7 @@ const {
   ogImage,
   pageType,
   schemas = [],
-  includeOrgSchema = false,
+  includeOrgSchema = true,
 } = Astro.props;
 
 const allSchemas = includeOrgSchema
