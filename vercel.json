@@ -10,6 +10,26 @@
   ],
   "redirects": [
     {
+      "source": "/review",
+      "destination": "https://search.google.com/local/writereview?placeid=ChIJXydLI2B_TYcRJO5ibi934mk",
+      "statusCode": 302
+    },
+    {
+      "source": "/review/",
+      "destination": "https://search.google.com/local/writereview?placeid=ChIJXydLI2B_TYcRJO5ibi934mk",
+      "statusCode": 302
+    },
+    {
+      "source": "/reviews",
+      "destination": "https://search.google.com/local/writereview?placeid=ChIJXydLI2B_TYcRJO5ibi934mk",
+      "statusCode": 302
+    },
+    {
+      "source": "/reviews/",
+      "destination": "https://search.google.com/local/writereview?placeid=ChIJXydLI2B_TYcRJO5ibi934mk",
+      "statusCode": 302
+    },
+    {
       "source": "/sitemap.xml",
       "destination": "/sitemap-index.xml",
       "statusCode": 301
