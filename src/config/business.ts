@@ -110,9 +110,12 @@ export const business = {
       "Serving every community in northern Utah County and across the Salt Lake Valley.",
   },
 
-  /** Analytics IDs — read from env; empty means the script is never injected. */
+  /** Analytics IDs — read from env; empty means the script is never injected.
+   *  GA4 (November 2, 2026): property "utahcountybasementpros.com" under
+   *  office@utahcountybasementpros.com. A measurement ID is public by design
+   *  (it ships in every page), so it lives here as the default. */
   analytics: {
-    gaMeasurementId: import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? "",
+    gaMeasurementId: import.meta.env.PUBLIC_GA_MEASUREMENT_ID || "G-1H7YJBHBFX",
     googleAdsId: import.meta.env.PUBLIC_GOOGLE_ADS_ID ?? "",
     metaPixelId: import.meta.env.PUBLIC_META_PIXEL_ID ?? "",
     googleSiteVerification:
