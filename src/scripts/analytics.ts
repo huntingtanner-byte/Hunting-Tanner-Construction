@@ -72,7 +72,7 @@ export function track(
   if (typeof window.gtag === "function") {
     window.gtag("event", eventName, params);
   }
-  if (typeof window.fbq === "function" && eventName === "form_submit") {
+  if (typeof window.fbq === "function" && eventName === "generate_lead") {
     window.fbq("track", "Lead");
   }
   if (import.meta.env.DEV) {

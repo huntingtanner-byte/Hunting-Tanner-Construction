@@ -573,7 +573,7 @@ const id = (name: string) => `${formId}-${name}`;
           return;
         }
 
-        track("form_submit", { variant: form.dataset.variant ?? "" });
+        track("generate_lead", { variant: form.dataset.variant ?? "" });
         // Live: allow the normal POST to /api/contact, which redirects
         // to /thank-you/ on success.
       });

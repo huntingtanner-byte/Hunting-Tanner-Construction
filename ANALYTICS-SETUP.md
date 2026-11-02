@@ -27,7 +27,7 @@ and/or the Pixel; `src/scripts/analytics.ts` forwards events.
 | `click_to_email` | Any mailto: link |
 | `social_click` | Footer social links (when profiles exist) |
 | `form_start` | First focus into a lead form |
-| `form_submit` | Valid submission (live mode) — also fires Meta `Lead` |
+| `generate_lead` | Valid submission (live mode) — also fires Meta `Lead`. Named this way (GA4's recommended lead event) because GA4's automatic form tracking sends its own `form_submit` for every submit, which would double-count leads |
 | `form_error` | Validation failure on submit |
 | `service_page_view` | Service pages (via `data-page-type`) |
 | `service_area_page_view` | City/county pages |
@@ -45,8 +45,8 @@ emails show which campaign produced them. No cookies are set by our code.
 1. **GA4 Realtime**: open the site with `?utm_source=test`, click a phone
    link → see `click_to_call` in Realtime events.
 2. **DebugView**: add `?debug_mode=1` (or GA Debugger extension) and walk
-   a form: `form_start` → `form_submit`.
-3. **Google Ads**: mark the `form_submit` GA4 event as a conversion (or
+   a form: `form_start` → `generate_lead`.
+3. **Google Ads**: mark the `generate_lead` GA4 event as a key event (or
    create an Ads conversion action and add its snippet — keep it in
    Analytics.astro, nowhere else).
 4. **Meta**: use Meta Pixel Helper extension; verify `PageView` + `Lead`.
