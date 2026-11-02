@@ -95,82 +95,92 @@ const id = (name: string) => `${formId}-${name}`;
   >
   </p>
 
-  <div class="field">
-    <label for={id("name")}>Name</label>
-    <input
-      type="text"
-      id={id("name")}
-      name="name"
-      autocomplete="name"
-      required
-      maxlength="120"
-      data-error-message="Please enter your name."
-    />
-    <p class="field-error" data-error-for={id("name")} hidden></p>
+  {/* Paired rows keep the whole form on one phone screen (Hunting,
+      November 2026): only name and phone are required. */}
+  <div class="field-row">
+    <div class="field">
+      <label for={id("name")}>Name</label>
+      <input
+        type="text"
+        id={id("name")}
+        name="name"
+        autocomplete="name"
+        required
+        maxlength="120"
+        data-error-message="Please enter your name."
+      />
+      <p class="field-error" data-error-for={id("name")} hidden></p>
+    </div>
+
+    <div class="field">
+      <label for={id("phone")}>Phone</label>
+      <input
+        type="tel"
+        id={id("phone")}
+        name="phone"
+        autocomplete="tel"
+        inputmode="tel"
+        required
+        maxlength="25"
+        data-error-message="Please enter a phone number so we can reach you."
+      />
+      <p class="field-error" data-error-for={id("phone")} hidden></p>
+    </div>
   </div>
 
-  <div class="field">
-    <label for={id("phone")}>Phone</label>
-    <input
-      type="tel"
-      id={id("phone")}
-      name="phone"
-      autocomplete="tel"
-      inputmode="tel"
-      required
-      maxlength="25"
-      data-error-message="Please enter a phone number so we can reach you."
-    />
-    <p class="field-error" data-error-for={id("phone")} hidden></p>
+  <div class="field-row">
+    <div class="field">
+      <label for={id("email")}>Email <span class="optional">(optional)</span></label>
+      <input
+        type="email"
+        id={id("email")}
+        name="email"
+        autocomplete="email"
+        inputmode="email"
+        maxlength="120"
+        data-error-message="Please enter a valid email address."
+      />
+      <p class="field-error" data-error-for={id("email")} hidden></p>
+    </div>
+
+    <div class="field">
+      <label for={id("city")}>City <span class="optional">(optional)</span></label>
+      <input
+        type="text"
+        id={id("city")}
+        name="projectCity"
+        autocomplete="address-level2"
+        maxlength="60"
+        list={id("city-list")}
+        value={defaultCity}
+        data-error-message="Which city is the project in?"
+      />
+      <datalist id={id("city-list")}>
+        {cityOptions.map((city) => <option value={city} />)}
+      </datalist>
+      <p class="field-error" data-error-for={id("city")} hidden></p>
+    </div>
   </div>
 
-  <div class="field">
-    <label for={id("email")}>Email <span class="optional">(optional)</span></label>
-    <input
-      type="email"
-      id={id("email")}
-      name="email"
-      autocomplete="email"
-      inputmode="email"
-      maxlength="120"
-      data-error-message="Please enter a valid email address."
-    />
-    <p class="field-error" data-error-for={id("email")} hidden></p>
-  </div>
-
-  <div class="field">
-    <label for={id("city")}>Project city <span class="optional">(optional)</span></label>
-    <input
-      type="text"
-      id={id("city")}
-      name="projectCity"
-      autocomplete="address-level2"
-      maxlength="60"
-      list={id("city-list")}
-      value={defaultCity}
-      data-error-message="Which city is the project in?"
-    />
-    <datalist id={id("city-list")}>
-      {cityOptions.map((city) => <option value={city} />)}
-    </datalist>
-    <p class="field-error" data-error-for={id("city")} hidden></p>
-  </div>
-
-  <div class="field">
-    <label for={id("project-type")}>Project type <span class="optional">(optional)</span></label>
-    <select
-      id={id("project-type")}
-      name="projectType"
-      data-error-message="Please choose the closest project type."
-    >
-      <option value="">Select one…</option>
-      {projectTypes.map((type) => <option value={type}>{type}</option>)}
-    </select>
-    <p class="field-error" data-error-for={id("project-type")} hidden></p>
-  </div>
-
+  {/* Contact page only: the qualifying questions stay available but
+      folded away, so the form still starts short. */}
   {detailed && (
-    <>
+    <details class="form-more">
+      <summary>Add project details <span class="optional">(optional)</span></summary>
+
+      <div class="field">
+        <label for={id("project-type")}>Project type <span class="optional">(optional)</span></label>
+        <select
+          id={id("project-type")}
+          name="projectType"
+          data-error-message="Please choose the closest project type."
+        >
+          <option value="">Select one…</option>
+          {projectTypes.map((type) => <option value={type}>{type}</option>)}
+        </select>
+        <p class="field-error" data-error-for={id("project-type")} hidden></p>
+      </div>
+
       <div class="field">
         <label for={id("sqft")}>
           Approximate finished square footage <span class="optional">(optional)</span>
@@ -223,7 +233,7 @@ const id = (name: string) => `${formId}-${name}`;
           {contactMethods.map((m) => <option value={m}>{m}</option>)}
         </select>
       </div>
-    </>
+    </details>
   )}
 
   <div class="field">
@@ -233,6 +243,7 @@ const id = (name: string) => `${formId}-${name}`;
     <textarea
       id={id("message")}
       name="message"
+      rows="3"
       maxlength="3000"
       data-error-message="A sentence or two about your project helps us prepare."
     ></textarea>
@@ -293,7 +304,7 @@ const id = (name: string) => `${formId}-${name}`;
 
 <style>
   .form-promise {
-    margin: var(--space-3) 0 0;
+    margin: var(--space-2) 0 0;
     font-size: var(--text-sm);
     font-weight: 600;
     color: var(--color-text);
@@ -311,12 +322,15 @@ const id = (name: string) => `${formId}-${name}`;
   .lead-form label {
     color: var(--color-text-muted);
   }
+  .lead-form .form-consent {
+    margin: var(--space-2) 0 0;
+  }
 
   .lead-form {
     background: var(--color-surface);
     border: 1px solid var(--color-border-strong);
     border-radius: var(--radius-lg);
-    padding: var(--space-6);
+    padding: var(--space-4);
   }
   @media (min-width: 768px) {
     .lead-form {
@@ -324,15 +338,95 @@ const id = (name: string) => `${formId}-${name}`;
     }
   }
 
+  /* Two fields per row, so the whole form fits one phone screen */
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 var(--space-3);
+  }
+  .field-row .field {
+    min-width: 0;
+  }
+  @media (max-width: 339px) {
+    .field-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Tighter than the site-wide field styles. Inputs stay 46px tall
+     (comfortable tap targets) and inherit the 17px body size, which keeps
+     iOS from zooming in when a field is tapped. */
+  .lead-form .field {
+    gap: 0.2rem;
+    margin-bottom: var(--space-3);
+  }
+  .lead-form .field label {
+    margin-bottom: 0;
+  }
+  .lead-form .field-error {
+    font-size: 0.8125rem;
+    line-height: 1.35;
+  }
+  .lead-form .field input,
+  .lead-form .field select {
+    min-height: 46px;
+    padding: 0.6rem 0.75rem;
+  }
+  .lead-form .field textarea {
+    min-height: 5.5rem;
+    padding: 0.6rem 0.75rem;
+  }
+
+  /* Contact page: optional qualifying questions, folded away */
+  .form-more {
+    margin-bottom: var(--space-3);
+    border-block: 1px solid var(--color-border);
+  }
+  .form-more summary {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 46px;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text);
+    cursor: pointer;
+    list-style: none;
+  }
+  .form-more summary::-webkit-details-marker {
+    display: none;
+  }
+  .form-more summary::before {
+    content: "+";
+    display: grid;
+    place-items: center;
+    width: 1.4rem;
+    height: 1.4rem;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius);
+    font-weight: 400;
+    line-height: 1;
+  }
+  .form-more[open] summary::before {
+    content: "\2212";
+  }
+  .form-more[open] summary {
+    margin-bottom: var(--space-3);
+  }
+  .form-more .optional {
+    font-weight: 400;
+    color: var(--color-text-muted);
+  }
+
   .lead-form-heading {
     /* Sized as a card heading, not a section heading */
     font-size: var(--text-2xl);
-    margin-bottom: var(--space-5);
+    margin-bottom: var(--space-4);
   }
 
   .lead-form-submit {
     width: 100%;
-    margin-block: var(--space-2) var(--space-4);
+    margin-block: var(--space-1) 0;
   }
 
   .form-status {

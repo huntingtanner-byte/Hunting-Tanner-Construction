@@ -22,12 +22,22 @@ const schemas = [breadcrumbSchema(breadcrumbs)];
   <PageIntro
     eyebrow="Contact"
     heading="Get Your Free Basement Consultation"
-    lede="The consultation and walkthrough are free, with no obligation, and you'll have a detailed bid within 48 hours of your walkthrough. Prefer to talk? Call and you'll speak with the owner or an experienced project manager."
+    lede="Free, with no obligation, and you'll have a detailed bid within 48 hours of your walkthrough."
     breadcrumbs={breadcrumbs}
   />
 
-  <section class="section">
+  <section class="section contact-section">
     <div class="container contact-grid">
+      {/* Form first in the source so phones reach it right away; on
+          desktop it sits in the right-hand column. */}
+      <div class="contact-form">
+        <LeadForm
+          formId="contact-form"
+          variant="detailed"
+          heading="Tell us about your project"
+        />
+      </div>
+
       <div class="contact-info">
         <h2>Reach us directly</h2>
         <p class="contact-line">
@@ -104,14 +114,6 @@ const schemas = [breadcrumbSchema(breadcrumbs)];
           <a href="/faq/">FAQ</a>.
         </p>
       </div>
-
-      <div class="contact-form">
-        <LeadForm
-          formId="contact-form"
-          variant="detailed"
-          heading="Tell us about your project"
-        />
-      </div>
     </div>
   </section>
 </BaseLayout>
@@ -125,6 +127,22 @@ const schemas = [breadcrumbSchema(breadcrumbs)];
   @media (min-width: 900px) {
     .contact-grid {
       grid-template-columns: 5fr 7fr;
+    }
+    .contact-info {
+      grid-column: 1;
+      grid-row: 1;
+    }
+    .contact-form {
+      grid-column: 2;
+      grid-row: 1;
+    }
+  }
+  @media (max-width: 767px) {
+    .contact-section {
+      padding-top: var(--space-5);
+    }
+    .contact-grid {
+      gap: var(--space-6);
     }
   }
   .contact-line {

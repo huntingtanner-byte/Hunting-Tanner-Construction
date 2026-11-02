@@ -14,7 +14,8 @@ import { business } from "@/config/business";
   </a>
   <a
     class="sticky-cta-form"
-    href="/contact/"
+    href="/contact/#contact-form"
+    data-consult-link
     data-event="cta_click"
     data-event-label="sticky-bar"
   >
@@ -40,6 +41,12 @@ import { business } from "@/config/business";
       background: var(--color-line);
       border-top: 1px solid var(--color-line);
       padding-bottom: env(safe-area-inset-bottom, 0);
+      transition: transform 0.2s ease;
+    }
+    /* Slides away while a form is on screen or being typed in, so it
+       never covers fields, the keyboard, or the submit button */
+    .sticky-cta[data-hidden] {
+      transform: translateY(110%);
     }
     .sticky-cta a {
       display: flex;
@@ -66,3 +73,38 @@ import { business } from "@/config/business";
     }
   }
 </style>
+
+<script>
+  const bar = document.querySelector<HTMLElement>("[data-sticky-cta]");
+  const forms = document.querySelectorAll<HTMLFormElement>("[data-lead-form]");
+  if (bar && forms.length > 0 && "IntersectionObserver" in window) {
+    const onScreen = new Set<Element>();
+    let typing = false;
+    const update = () => {
+      const hide = typing || onScreen.size > 0;
+      bar.toggleAttribute("data-hidden", hide);
+      bar.inert = hide;
+    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) onScreen.add(entry.target);
+          else onScreen.delete(entry.target);
+        }
+        update();
+      },
+      { threshold: 0.4 },
+    );
+    forms.forEach((form) => {
+      observer.observe(form);
+      form.addEventListener("focusin", () => {
+        typing = true;
+        update();
+      });
+      form.addEventListener("focusout", () => {
+        typing = false;
+        update();
+      });
+    });
+  }
+</script>

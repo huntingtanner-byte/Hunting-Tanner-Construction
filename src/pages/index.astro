@@ -65,7 +65,7 @@ import afterImg from "@/assets/hero/basement-after.png";
         <div class="hero-actions">
           <a
             class="btn btn--secondary"
-            href="#home-lead-form"
+            href="#home-form"
             data-event="cta_click"
             data-event-label="hero"
           >
@@ -90,17 +90,26 @@ import afterImg from "@/assets/hero/basement-after.png";
   </section>
 
   {/* ============ Free consultation: the page's main action ============
-      Directly under the hero so the form is the first thing people reach. */}
+      Directly under the hero so the form is the first thing people reach.
+      Source order is heading, form, then the details, so on phones the
+      form comes straight after the heading; on desktop the heading and
+      details share the left column with the form on the right. */}
   <section class="section section--alt consult-section" id="home-lead-form">
     <div class="container consult-grid">
-      <div class="consult-copy">
+      <div class="consult-head">
         <span class="eyebrow">Free Consultation</span>
         <h2>Get your free basement consultation</h2>
         <span class="rule"></span>
         <p class="consult-intro">
-          No cost and no obligation. Tell us about your basement, and here's
-          what happens next:
+          No cost and no obligation. Send this and we'll reach out to set up
+          a time to talk.
         </p>
+      </div>
+      <div class="consult-form">
+        <LeadForm formId="home-form" variant="compact" />
+      </div>
+      <div class="consult-more">
+        <h3 class="consult-next">What happens next</h3>
         <ol class="consult-steps">
           <li>
             <strong>We talk about your space.</strong> What you have, what
@@ -128,9 +137,6 @@ import afterImg from "@/assets/hero/basement-after.png";
             not a call center.
           </p>
         </div>
-      </div>
-      <div class="consult-form">
-        <LeadForm formId="home-form" variant="compact" />
       </div>
     </div>
   </section>
@@ -436,9 +442,31 @@ import afterImg from "@/assets/hero/basement-after.png";
     flex-shrink: 0;
   }
   @media (max-width: 767px) {
+    /* Phones: a short hero so the form starts on the first screen. The
+       lede and the call button drop out here: the offer bullets say the
+       same thing, and Call lives in the sticky bar. */
     .hero {
-      min-height: 32rem;
+      min-height: 0;
       align-items: flex-end;
+    }
+    .hero-eyebrow {
+      margin-bottom: var(--space-3);
+    }
+    .hero-copy h1 {
+      font-size: 2rem;
+    }
+    .hero-copy .rule,
+    .hero-lede,
+    .hero-actions .btn--ghost-light {
+      display: none;
+    }
+    .hero-actions {
+      margin-top: var(--space-4);
+    }
+    .hero-offer {
+      margin-top: var(--space-3);
+      gap: var(--space-1) var(--space-4);
+      font-size: 0.8125rem;
     }
     /* Bottom-weighted scrim on small screens: the copy sits over the lower
        third, where the photograph is quietest. */
@@ -451,36 +479,76 @@ import afterImg from "@/assets/hero/basement-after.png";
       );
     }
     .hero-content {
-      padding-block: var(--space-8) var(--space-7);
-    }
-    .hero-lede {
-      font-size: var(--text-base);
+      padding-block: var(--space-7) var(--space-5);
     }
     .hero-actions .btn {
-      flex: 1 1 auto;
+      flex: 1 1 100%;
     }
   }
 
   /* ---- Consultation band ---- */
   .consult-grid {
     display: grid;
+    grid-template-areas:
+      "head"
+      "form"
+      "more";
     gap: var(--space-6);
     align-items: start;
+  }
+  .consult-head {
+    grid-area: head;
+  }
+  .consult-form {
+    grid-area: form;
+  }
+  .consult-more {
+    grid-area: more;
   }
   @media (min-width: 900px) {
     .consult-grid {
       grid-template-columns: 1fr 1fr;
-      gap: var(--space-8);
+      grid-template-rows: auto 1fr;
+      grid-template-areas:
+        "head form"
+        "more form";
+      gap: 0 var(--space-8);
+    }
+    .consult-more {
+      padding-top: var(--space-5);
+    }
+  }
+  /* Phones: heading, then straight into the form */
+  @media (max-width: 767px) {
+    .consult-section {
+      padding-top: var(--space-5);
+    }
+    .consult-grid {
+      gap: var(--space-4);
+    }
+    /* The form says "free, no obligation" right under its button */
+    .consult-head .eyebrow,
+    .consult-head .rule,
+    .consult-head .consult-intro {
+      display: none;
+    }
+    .consult-head h2 {
+      font-size: var(--text-xl);
+      margin-bottom: 0;
     }
   }
   .consult-intro {
     color: var(--color-text-muted);
   }
+  .consult-next {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-4);
+  }
   /* Numbered "what happens next" steps: the offer, made concrete */
   .consult-steps {
     list-style: none;
     counter-reset: consult;
-    margin: var(--space-5) 0 var(--space-6);
+    margin: 0 0 var(--space-6);
     padding: 0;
     display: grid;
     gap: var(--space-4);

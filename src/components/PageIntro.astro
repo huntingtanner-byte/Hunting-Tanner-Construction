@@ -35,4 +35,13 @@ const { eyebrow, heading, lede, breadcrumbs } = Astro.props;
       var(--color-background) 92%
     );
   }
+  /* Phones: a compact intro, so the page's content starts sooner */
+  @media (max-width: 767px) {
+    .page-intro {
+      padding-block: var(--space-6) var(--space-5);
+    }
+    .page-intro h1 {
+      font-size: 2rem;
+    }
+  }
 </style>

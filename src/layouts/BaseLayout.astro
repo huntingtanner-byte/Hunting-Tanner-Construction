@@ -76,6 +76,15 @@ const allSchemas = includeOrgSchema
     <StickyMobileCTA />
     <script>
       import "@/scripts/analytics";
+
+      // "Free Consultation" buttons jump straight to this page's form when
+      // it has one; otherwise they keep their link to the contact form.
+      const pageForm = document.querySelector<HTMLFormElement>("[data-lead-form]");
+      if (pageForm?.id) {
+        document
+          .querySelectorAll<HTMLAnchorElement>("a[data-consult-link]")
+          .forEach((link) => link.setAttribute("href", `#${pageForm.id}`));
+      }
     </script>
   </body>
 </html>
