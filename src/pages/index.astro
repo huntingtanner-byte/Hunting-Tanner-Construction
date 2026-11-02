@@ -132,6 +132,12 @@ import afterImg from "@/assets/hero/basement-after.png";
             data-event="click_to_call"
             data-event-label="consult-section"
           >Call {business.phoneDisplay}</a>
+          <a
+            class="consult-call-text"
+            href={business.smsHref}
+            data-event="click_to_text"
+            data-event-label="consult-section"
+          >Or send us a text →</a>
           <p class="consult-call-note">
             You'll speak with the owner or an experienced project manager,
             not a call center.
@@ -612,6 +618,13 @@ import afterImg from "@/assets/hero/basement-after.png";
   .consult-call-number:hover {
     text-decoration: underline;
     text-decoration-color: var(--color-accent-secondary);
+  }
+  .consult-call-text {
+    display: block;
+    margin-bottom: var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text);
   }
   .consult-call-note {
     font-size: var(--text-sm);

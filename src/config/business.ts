@@ -31,6 +31,10 @@ export const business = {
 
   phoneDisplay: "(801) 901-8349",
   phoneHref: "tel:+18019018349",
+  /** Text the same (Google Voice) number, with a starter message filled in.
+   *  "?&body=" is the form both iOS and Android Messages accept. */
+  smsHref:
+    "sms:+18019018349?&body=Hi!%20I%27m%20interested%20in%20a%20free%20basement%20consultation.",
   /** E.164-style value for structured data */
   phoneSchema: "+1-801-901-8349",
 

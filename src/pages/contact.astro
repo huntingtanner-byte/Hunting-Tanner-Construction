@@ -49,6 +49,14 @@ const schemas = [breadcrumbSchema(breadcrumbs)];
           >{business.phoneDisplay}</a>
         </p>
         <p class="contact-line">
+          <strong>Text</strong>
+          <a
+            href={business.smsHref}
+            data-event="click_to_text"
+            data-event-label="contact-page"
+          >{business.phoneDisplay}</a>
+        </p>
+        <p class="contact-line">
           <strong>Email</strong>
           <a
             href={business.emailHref}

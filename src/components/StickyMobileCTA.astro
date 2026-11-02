@@ -1,5 +1,5 @@
 ---
-/** Fixed bottom CTA bar on mobile: Call + Free Consultation. */
+/** Fixed bottom CTA bar on mobile: Call + Text + Free Consultation. */
 import { business } from "@/config/business";
 ---
 
@@ -7,10 +7,20 @@ import { business } from "@/config/business";
   <a
     class="sticky-cta-call"
     href={business.phoneHref}
+    aria-label={`Call ${business.phoneDisplay}`}
     data-event="click_to_call"
     data-event-label="sticky-bar"
   >
-    Call {business.phoneDisplay}
+    Call
+  </a>
+  <a
+    class="sticky-cta-text"
+    href={business.smsHref}
+    aria-label={`Text ${business.phoneDisplay}`}
+    data-event="click_to_text"
+    data-event-label="sticky-bar"
+  >
+    Text
   </a>
   <a
     class="sticky-cta-form"
@@ -36,7 +46,7 @@ import { business } from "@/config/business";
       right: 0;
       z-index: 40;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1.8fr;
       gap: 1px;
       background: var(--color-line);
       border-top: 1px solid var(--color-line);
@@ -59,7 +69,8 @@ import { business } from "@/config/business";
       padding: var(--space-3);
       text-align: center;
     }
-    .sticky-cta-call {
+    .sticky-cta-call,
+    .sticky-cta-text {
       background: var(--color-background);
       color: var(--color-text);
     }
