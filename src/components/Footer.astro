@@ -49,8 +49,9 @@ const socialLabels: Record<string, string> = {
             {business.location.locality}, {business.location.region}
             {business.location.postalCode}
           </a>
-          <br />
-          {business.hours.display}
+          {business.hours.schedule.map((h) => (
+            <Fragment><br />{h.display}</Fragment>
+          ))}
         </p>
         {canClaimLicensed && (
           <p class="footer-license">

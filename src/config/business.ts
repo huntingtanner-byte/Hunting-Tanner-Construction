@@ -75,10 +75,12 @@ export const business = {
    * confirmed it is staffed and should be public, October 30, 2026).
    * Keep name, address, and phone identical to the GBP everywhere.
    * Never put a residential address here.
-   * November 8, 2026: Hunting doesn't want walk-in visits. Show this only
-   * as the business address (footer, contact page, schema) to match the
-   * GBP. Never add copy that invites office visits, meetings, or
-   * directions. If the GBP address is ever hidden, remove the street
+   * November 8, 2026: Hunting doesn't want walk-in visits. Show this as
+   * the business address (footer, contact page, schema) to match the GBP,
+   * and never add copy that invites office visits or meetings ("stop by",
+   * "meet us at the office"). The "Get directions on Google Maps" link on
+   * /contact/ and the footer's GBP link stay (Hunting wants what's best
+   * for ranking). If the GBP address is ever hidden, remove the street
    * address from the site the same day.
    */
   location: {
@@ -93,12 +95,29 @@ export const business = {
     longitude: -111.8816934,
   },
 
-  /** Office hours, matching the GBP. Change both together. */
+  /**
+   * Business hours, matching the GBP. Change both together. One entry per
+   * group of days with the same hours: the footer and /contact/ show one
+   * line each, and the schema emits one OpeningHoursSpecification each.
+   * Saturday added November 8, 2026 (Hunting).
+   */
   hours: {
-    days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-    opens: "08:00",
-    closes: "20:00",
-    display: "Mon–Fri, 8 AM – 8 PM",
+    schedule: [
+      {
+        days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "08:00",
+        closes: "20:00",
+        display: "Mon–Fri, 8 AM – 8 PM",
+      },
+      {
+        days: ["Saturday"],
+        opens: "09:00",
+        closes: "16:00",
+        display: "Sat, 9 AM – 4 PM",
+      },
+    ],
+    /** Single-line version for plain text (llms.txt) */
+    display: "Mon–Fri, 8 AM – 8 PM; Sat, 9 AM – 4 PM",
   },
 
   /** Google Business Profile, by its permanent Maps listing ID (CID). */

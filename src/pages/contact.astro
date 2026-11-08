@@ -77,11 +77,15 @@ const schemas = [breadcrumbSchema(breadcrumbs)];
             rel="noopener"
             data-event="directions_click"
             data-event-label="contact-page"
-          >View on Google Maps →</a>
+          >Get directions on Google Maps →</a>
         </p>
         <p class="contact-line">
           <strong>Hours</strong>
-          <span>{business.hours.display}</span>
+          <span>
+            {business.hours.schedule.map((h, i) => (
+              <Fragment>{i > 0 && <br />}{h.display}</Fragment>
+            ))}
+          </span>
         </p>
         <p class="contact-line">
           <strong>Service area</strong>

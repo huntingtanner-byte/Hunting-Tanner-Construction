@@ -54,12 +54,12 @@ export function organizationSchema(): JsonLd {
     ...(business.googleBusinessProfileURL
       ? { hasMap: business.googleBusinessProfileURL }
       : {}),
-    openingHoursSpecification: {
+    openingHoursSpecification: business.hours.schedule.map((h) => ({
       "@type": "OpeningHoursSpecification",
-      dayOfWeek: business.hours.days,
-      opens: business.hours.opens,
-      closes: business.hours.closes,
-    },
+      dayOfWeek: h.days,
+      opens: h.opens,
+      closes: h.closes,
+    })),
     founder: [
       { "@type": "Person", name: "Hunting Tanner", jobTitle: "Founder" },
     ],
