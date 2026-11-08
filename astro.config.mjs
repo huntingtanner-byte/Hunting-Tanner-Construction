@@ -16,11 +16,16 @@ export default defineConfig({
   trailingSlash: "always",
   /**
    * All pages remain fully prerendered static HTML (best for SEO and speed).
-   * The Vercel adapter exists solely so /api/contact can run as a
-   * serverless function (it opts out via `export const prerender = false`).
+   * The Vercel adapter exists solely so /api/contact (and /api/upload, its
+   * photo-upload helper) can run as serverless functions; they opt out via
+   * `export const prerender = false`.
    */
   output: "static",
-  adapter: vercel(),
+  adapter: vercel({
+    // Room for a lead with 25 MB of photos/plans to be downloaded from Blob
+    // storage and emailed through Resend
+    maxDuration: 60,
+  }),
   security: {
     /**
      * Astro's origin check rejects same-origin form POSTs behind Vercel's

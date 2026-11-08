@@ -7,6 +7,8 @@
  * Architecture:
  *  - Posts to the (future) /api/contact serverless endpoint
  *  - Hidden attribution fields are filled client-side from sessionStorage
+ *  - Optional photos / plan set upload straight to private Blob storage
+ *    and ride along on the lead email (src/lib/uploads.ts)
  *  - Honeypot field + Turnstile placeholder for spam protection
  *  - While siteStatus is "staging", submission is intercepted and disabled;
  *    a safe mock payload is logged in dev. No email is ever sent in staging.
@@ -250,6 +252,37 @@ const id = (name: string) => `${formId}-${name}`;
     <p class="field-error" data-error-for={id("message")} hidden></p>
   </div>
 
+  {/* Optional photos or a plan set (November 2026). Each file uploads as
+      soon as it's picked and arrives attached to the lead email; see
+      src/lib/uploads.ts. Live forms only: staging never uploads. */}
+  {business.form.enabled && (
+    <div class="field file-field" data-file-field>
+      <button
+        type="button"
+        class="file-pick"
+        data-file-button
+        aria-describedby={id("files-error")}
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" />
+        </svg>
+        Add photos or plans <span class="optional">(optional)</span>
+      </button>
+      <input
+        type="file"
+        id={id("files")}
+        multiple
+        accept="image/*,application/pdf,.pdf"
+        hidden
+        data-file-input
+      />
+      <ul class="file-list" data-file-list hidden></ul>
+      <p class="field-error" id={id("files-error")} data-file-error hidden></p>
+      <span class="sr-only" aria-live="polite" data-file-live></span>
+      <input type="hidden" name="attachments" value="" />
+    </div>
+  )}
+
   {/* Honeypot — humans never see or fill this */}
   <div class="hp-field" aria-hidden="true">
     <label for={id("company-website")}>Company website</label>
@@ -418,6 +451,101 @@ const id = (name: string) => `${formId}-${name}`;
     color: var(--color-text-muted);
   }
 
+  /* Optional photos / plan set */
+  .file-pick {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    width: 100%;
+    min-height: 46px;
+    padding: 0.6rem 0.75rem;
+    font: inherit;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text);
+    background: var(--color-surface-raised);
+    border: 1px dashed var(--color-input-border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .file-pick:hover {
+    border-color: var(--color-text-muted);
+  }
+  .file-pick:focus-visible {
+    outline: none;
+    border-color: var(--brand-sea-glass);
+    box-shadow: 0 0 0 3px rgb(var(--rgb-accent) / 0.45);
+  }
+  .file-pick svg {
+    width: 1.05rem;
+    height: 1.05rem;
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .file-pick .optional {
+    font-weight: 400;
+    color: var(--color-text-muted);
+  }
+  .file-list {
+    display: grid;
+    gap: var(--space-1);
+    margin: var(--space-1) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  /* Rows are built in the browser, so they need :global() */
+  .file-list :global(.file-item) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 44px;
+    grid-template-areas: "name remove" "meta remove";
+    align-items: center;
+    column-gap: var(--space-2);
+    padding: 0.3rem 0 0.3rem var(--space-3);
+    font-size: var(--text-sm);
+    line-height: 1.35;
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius);
+  }
+  .file-list :global(.file-name) {
+    grid-area: name;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .file-list :global(.file-meta) {
+    grid-area: meta;
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+  .file-list :global(.file-item[data-state="error"] .file-meta) {
+    color: var(--color-error);
+  }
+  .file-list :global(.file-remove) {
+    grid-area: remove;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    font: inherit;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--color-text-muted);
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+  .file-list :global(.file-remove:hover) {
+    color: var(--color-text);
+  }
+
   .lead-form-heading {
     /* Sized as a card heading, not a section heading */
     font-size: var(--text-2xl);
@@ -448,12 +576,19 @@ const id = (name: string) => `${formId}-${name}`;
 
 <script>
   import { getAttribution, track } from "@/scripts/analytics";
+  import { setupLeadUploads } from "@/scripts/lead-uploads";
 
   document
     .querySelectorAll<HTMLFormElement>("[data-lead-form]")
     .forEach((form) => {
       const status = form.querySelector<HTMLElement>("[data-form-status]");
       const isStagingForm = form.dataset.staging === "true";
+      const fileField = form.querySelector<HTMLElement>("[data-file-field]");
+      const uploads =
+        fileField && !isStagingForm ? setupLeadUploads(fileField) : null;
+      const submitButton = form.querySelector<HTMLButtonElement>(
+        'button[type="submit"]',
+      );
       let started = false;
 
       const showStatus = (message: string, tone: "info" | "error") => {
@@ -544,6 +679,27 @@ const id = (name: string) => `${formId}-${name}`;
           return;
         }
 
+        // Files still uploading: hold the submit and send it the moment
+        // they finish (any that failed are simply left off)
+        if (uploads?.busy()) {
+          e.preventDefault();
+          const label = submitButton?.textContent ?? "";
+          if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = "Finishing your upload…";
+          }
+          showStatus("Finishing your upload. One moment…", "info");
+          void uploads.settled().then(() => {
+            if (submitButton) {
+              submitButton.disabled = false;
+              submitButton.textContent = label;
+            }
+            if (typeof form.requestSubmit === "function") form.requestSubmit();
+            else submitButton?.click();
+          });
+          return;
+        }
+
         // Fill hidden attribution fields
         const attribution = getAttribution();
         const setHidden = (name: string, value: string) => {
@@ -557,6 +713,7 @@ const id = (name: string) => `${formId}-${name}`;
         }
         setHidden("page_url", window.location.href);
         setHidden("submitted_at", new Date().toISOString());
+        setHidden("attachments", uploads?.serialize() ?? "");
 
         if (isStagingForm) {
           // Staging: never POST. Log a mock payload locally and tell the user.

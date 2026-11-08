@@ -340,6 +340,17 @@ What changed (mobile-first, desktop layout kept):
 - **Text option:** `business.smsHref` = `sms:+18019018349?&body=…` (starter message). Sticky mobile bar is **Call | Text | Free Consultation**; Text also on /contact/ and the homepage call card.
 - **GBP website link tagging:** the profile is owned by Hunting's **personal Gmail and stays that way** (his decision); office@ should be added as a **Manager** (not owner) to receive notifications. **Done November 2, 2026:** GBP website URL is now `https://utahcountybasementpros.com/?utm_source=google&utm_medium=organic&utm_campaign=gbp` (edited as huntingttanner@gmail.com; the homepage canonical stays the clean URL), so lead emails ("Attribution" block) and GA show which leads came from the profile.
 
+### 📎 Photo / plan uploads on the lead forms (November 7, 2026)
+Hunting asked for an optional way for homeowners to send photos or a builder's plan set with the form, and to actually receive them.
+- **Every lead form** (homepage, CTA sections, contact page) has an **"Add photos or plans (optional)"** button under the message box. On iPhone it offers Take Photo / Photo Library / Choose File. Photos (JPG, PNG, WebP, HEIC) and PDFs only, **up to 10 files and 25 MB total** (keeps the email under Resend's 40 MB cap, which counts Base64).
+- **Flow:** the browser gets a 15-minute token from `/api/upload` (`handleUpload`) and sends each file **straight to the private Vercel Blob store `lead-uploads`** (store_ubhb6u8dm15v3DBa, iad1). That skips Vercel's 4.5 MB function limit. JPEGs over 1.5 MB are re-encoded in the browser at 2560px first. Uploads start as soon as files are picked; if the visitor taps submit early, the button reads "Finishing your upload…" and the form sends itself when they're done (failed files are just left off).
+- **Delivery:** `/api/contact` downloads the files and **attaches them to the lead email** (subject ends "(N files attached)", body lists names and sizes), then **deletes them from the store**. Uploads that are never sent are deleted after 7 days (that cleanup runs on the next lead that has files). If Resend rejects the email with attachments, the lead is sent again **without** them and the email says they're "still saved in Vercel → Storage → lead-uploads". The store is private: a stored file's URL returns 403 without the token.
+- **Files:** `src/lib/uploads.ts` (limits, shared by browser and server), `src/pages/api/upload.ts`, `src/server/contact/attachments.ts`, `src/scripts/lead-uploads.ts` (browser; the Blob SDK chunk, ~32 KB gzipped, only loads once a file is picked), `LeadForm.astro`, `src/pages/api/contact.ts`. Adapter `maxDuration: 60` in `astro.config.mjs`.
+- **Env:** `BLOB_READ_WRITE_TOKEN`, added to all environments by Vercel when the store was created and connected (`vercel blob create-store lead-uploads --access private --yes`).
+- **Hobby-plan Blob limits:** 1 GB storage, 2,000 uploads (advanced operations) a month. Past that, Vercel pauses Blob for 30 days: uploads show "Couldn't upload" but the form still sends the lead. Deleting after sending keeps storage near zero.
+- **Privacy policy** has a paragraph on uploads; its effective date moved to **November 7, 2026** (still pending attorney review, §14).
+- **Local testing:** this folder is now `vercel link`ed (`.vercel/project.json`) and `.env.local` holds `BLOB_READ_WRITE_TOKEN` + `VERCEL_OIDC_TOKEN` (both gitignored). The Vercel CLI appends `.vercel` and `.env*` to `.gitignore` on link / env pull: revert that (`.env*` would hide `.env.example`). To keep GA off on localhost, temporarily add `PUBLIC_SITE_STATUS=staging` to `.env.local` (the form still works) and remove it after. `RESEND_API_KEY` isn't pulled for development, so local leads aren't emailed.
+
 ### ⚠️ AI-generated images (October 26, 2026)
 Hunting supplied five images to add ("Bright walkout basement kitchen and living area", "Spacious empty basement with natural oak flooring", "Bright L-Shaped Basement Recreation Room", "Taller basement windows with white sills", "Sunlit charcoal-carpeted basement", PNGs in the repo root, **not committed**). Their C2PA Content Credentials say **created by OpenAI/ChatGPT** (digitalSourceType trainedAlgorithmicMedia, action c2pa.created, no photo ingredient). On October 27, 2026 Hunting asked again to add them, so they were added **on his instruction**, presented as photos of his own finished basements (most likely touched up in ChatGPT). They live in `src/assets/gallery/`, are defined in `src/data/gallery.ts` (titles describe only what is visible, no locations), and render via `PhotoGallery.astro` on the homepage ("More finished basements" under Our Work) and /projects/ (`#more-basements`). If Hunting says any are fully AI-generated rather than his jobs, relabel or remove them. The /projects/ lede no longer says "real photos". Two **existing** project photos carry the same marker: `src/assets/projects/basement-1-1.png` and `basement-3-1.png`. Check any new image with a C2PA/metadata scan before publishing it as project photography.
 
@@ -939,7 +950,7 @@ None. Per Hunting's standing instruction, every change is committed and pushed t
 ### 🟡 Open items
 
 3. **Google Business Profile** — created as "Utah County Basement Pros" (see §4A-3 update, October 30, 2026); `business.googleBusinessProfileURL` is the CID link. Open question for Hunting: merge the old Hunting Tanner Construction profile into it. Once created and reviews come in, populate `src/data/reviews.ts`; `GoogleReviews.astro` renders nothing while the array is empty (by design — **never add fake reviews**).
-4. **Attorney review of `/privacy-policy/` and `/terms/`.** The effective date "July 30, 2026" is a **placeholder**.
+4. **Attorney review of `/privacy-policy/` and `/terms/`.** The effective dates are **placeholders** (privacy policy moved to November 7, 2026 when the photo-upload paragraph was added; terms still July 30, 2026).
 5. **Confirm Gary's bio details**, particularly the spelling of **Amaron Construction**, and confirm the California license history is stated accurately.
 6. **Confirm insurance wording** against the actual carrier/policy. `insuranceClaimApproved: true` currently gates "licensed & insured" language.
 7. **Social media URLs** — all empty in `business.ts`. Footer/schema links appear only when populated.
@@ -955,6 +966,7 @@ None. Per Hunting's standing instruction, every change is committed and pushed t
 - Mobile homepage height ≈ 13,973px.
 - Exactly one `<h1>` per page; canonicals and JSON-LD intact.
 - Form: POST to `/api/contact/` → **303** → `/thank-you/`.
+- Form with a photo attached: the lead email arrives with the file attached, and the `lead-uploads` Blob store is empty afterwards.
 - Wordmark at 320px: one line, no overlap with the Menu button (see §6).
 - No old brand in built HTML: `Hunting Tanner Construction` may appear **only** as `Hunting Tanner Construction LLC`, and `HTC` not at all in visible text.
 

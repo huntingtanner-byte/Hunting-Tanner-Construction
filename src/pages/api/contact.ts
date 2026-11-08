@@ -8,7 +8,9 @@
  *  - POST only (GET and friends get 405)
  *  - Honeypot hits pretend success and send nothing
  *  - Server-side validation + sanitization via src/server/contact/validate
- *  - Notification email to CONTACT_NOTIFICATION_EMAIL through Resend
+ *  - Notification email to CONTACT_NOTIFICATION_EMAIL through Resend, with
+ *    any photos or plans the visitor uploaded attached (they come from the
+ *    private Blob store, then get deleted from it; src/lib/uploads.ts)
  *  - 303 redirect to /thank-you/ on success
  *
  * Required Vercel env vars (see .env.example / README):
@@ -22,6 +24,8 @@
  *                                so leads still land in the same inbox.
  *  - RESEND_FROM (optional)    — verified sender, e.g.
  *                                "Basement Pros Website <leads@huntingtanner.com>"
+ *  - BLOB_READ_WRITE_TOKEN     — added by Vercel when the "lead-uploads" Blob
+ *                                store was connected; reads the attachments
  *
  * If RESEND_API_KEY is missing, the lead is logged server-side and the
  * visitor still reaches /thank-you/ — check Vercel logs and configure the
@@ -30,6 +34,15 @@
  */
 import type { APIRoute } from "astro";
 import { validateLead, safeLogSummary, type LeadPayload } from "@/server/contact/validate";
+import {
+  STILL_SAVED,
+  cleanUpUploads,
+  fetchAttachments,
+  parseAttachmentRefs,
+  type FetchedAttachment,
+  type MissedAttachment,
+} from "@/server/contact/attachments";
+import { formatBytes } from "@/lib/uploads";
 
 export const prerender = false;
 
@@ -61,29 +74,81 @@ export const POST: APIRoute = async ({ request, redirect }) => {
 
   const lead = result.lead;
   const apiKey = import.meta.env.RESEND_API_KEY;
+  const blobToken = import.meta.env.BLOB_READ_WRITE_TOKEN;
+  // Photos or plans uploaded with the form (pathnames in the Blob store)
+  const uploads = parseAttachmentRefs(form.get("attachments"));
 
   try {
     if (apiKey) {
       const { Resend } = await import("resend");
       const resend = new Resend(apiKey);
+      const { attached, missed } =
+        uploads.length > 0
+          ? await fetchAttachments(uploads, blobToken)
+          : { attached: [], missed: [] };
       // City and project type are optional now, so build a subject that
       // still reads well when they're missing.
       const subjectDetail = [lead.projectCity, lead.projectType]
         .filter(Boolean)
         .join(" · ");
-      const { error } = await resend.emails.send({
-        from: FROM,
-        to: NOTIFY_EMAIL,
-        // Reply-to only when an email was supplied; otherwise replying
-        // would go nowhere useful.
-        ...(lead.email ? { replyTo: lead.email } : {}),
-        subject: subjectDetail
-          ? `New consultation request: ${subjectDetail}`
-          : `New consultation request from ${lead.name}`,
-        text: buildLeadEmail(lead),
-      });
+      const subject = subjectDetail
+        ? `New consultation request: ${subjectDetail}`
+        : `New consultation request from ${lead.name}`;
+
+      const send = async (
+        files: FetchedAttachment[],
+        notAttached: MissedAttachment[],
+      ): Promise<{ error: { message: string } | null }> => {
+        try {
+          const { error } = await resend.emails.send({
+            from: FROM,
+            to: NOTIFY_EMAIL,
+            // Reply-to only when an email was supplied; otherwise replying
+            // would go nowhere useful.
+            ...(lead.email ? { replyTo: lead.email } : {}),
+            subject:
+              files.length > 0
+                ? `${subject} (${files.length} ${files.length === 1 ? "file" : "files"} attached)`
+                : subject,
+            text: buildLeadEmail(lead, files, notAttached),
+            ...(files.length > 0
+              ? {
+                  attachments: files.map((file) => ({
+                    filename: file.filename,
+                    content: file.content,
+                    contentType: file.contentType,
+                  })),
+                }
+              : {}),
+          });
+          return { error };
+        } catch (err) {
+          return { error: { message: err instanceof Error ? err.message : String(err) } };
+        }
+      };
+
+      let sentFiles = attached;
+      let { error } = await send(attached, missed);
+      if (error && attached.length > 0) {
+        // The files are the likeliest cause. Never lose the lead over them:
+        // send it again without attachments and say where they are.
+        console.error(`resend rejected the email with attachments: ${error.message}`);
+        sentFiles = [];
+        ({ error } = await send([], [
+          ...missed,
+          ...attached.map((file) => ({
+            name: file.filename,
+            reason: `the email with files attached was rejected, ${STILL_SAVED}`,
+          })),
+        ]));
+      }
       if (error) throw new Error(`resend: ${error.message}`);
-      console.info(safeLogSummary(lead));
+      console.info(
+        safeLogSummary(lead) + (sentFiles.length > 0 ? ` files=${sentFiles.length}` : ""),
+      );
+      if (uploads.length > 0) {
+        await cleanUpUploads(sentFiles.map((file) => file.pathname), blobToken);
+      }
     } else {
       // Config gap: never strand the homeowner, but make the gap loud in logs
       console.error(
@@ -108,6 +173,7 @@ export const POST: APIRoute = async ({ request, redirect }) => {
         city: lead.projectCity,
         type: lead.projectType,
         message: lead.message,
+        files: uploads.map((upload) => upload.pathname),
       }),
     );
     return new Response(errorPage(), {
@@ -158,7 +224,11 @@ export const GET: APIRoute = () =>
   new Response("Method not allowed", { status: 405 });
 
 /** Plain-text notification email body. */
-function buildLeadEmail(lead: LeadPayload): string {
+function buildLeadEmail(
+  lead: LeadPayload,
+  files: FetchedAttachment[],
+  notAttached: MissedAttachment[],
+): string {
   const l = lead as unknown as Record<string, string | undefined>;
   const line = (label: string, value?: string) =>
     value ? `${label}: ${value}` : "";
@@ -178,6 +248,18 @@ function buildLeadEmail(lead: LeadPayload): string {
     "",
     "Message:",
     l.message ?? "",
+    ...(files.length > 0
+      ? [
+          `--- Photos and plans (${files.length} attached) ---`,
+          ...files.map((file) => `${file.filename} (${formatBytes(file.size)})`),
+        ]
+      : []),
+    ...(notAttached.length > 0
+      ? [
+          "--- Files NOT attached ---",
+          ...notAttached.map((file) => `${file.name}: ${file.reason}`),
+        ]
+      : []),
     "",
     "--- Attribution ---",
     line("Source", l.utm_source),
