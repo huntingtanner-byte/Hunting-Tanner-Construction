@@ -3,8 +3,12 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import PageIntro from "@/components/PageIntro.astro";
 import CTASection from "@/components/CTASection.astro";
 import FAQAccordion from "@/components/FAQAccordion.astro";
-import { breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema, cityServiceSchema, faqSchema } from "@/lib/schema";
+import { business } from "@/config/business";
 import type { FAQ } from "@/data/faqs";
+
+const description =
+  "Lehi-based basement finishing and remodeling: home offices, guest suites, family rooms, and bathrooms. Free consultation, detailed bid within 48 hours.";
 
 const breadcrumbs = [
   { name: "Home", path: "/" },
@@ -36,16 +40,25 @@ const cityFaqs: FAQ[] = [
   {
     question: "Who handles Lehi city permits and inspections?",
     answer:
-      "We coordinate permitting and inspections as part of the project. Requirements are specific to Lehi's building department, and we'll walk through exactly what your project needs during the consultation.",
+      "We do. Permits and inspections are coordinated as part of every project and built into the schedule, with inspections typically after framing, after rough electrical and plumbing, and at completion. Requirements are specific to Lehi's building department, and we'll walk through exactly what your project needs during the consultation.",
   },
 ];
 
-const schemas = [breadcrumbSchema(breadcrumbs)];
+const schemas = [
+  breadcrumbSchema(breadcrumbs),
+  cityServiceSchema({
+    name: "Lehi",
+    county: "Utah County",
+    description,
+    path: "/lehi-basement-finishing/",
+  }),
+  faqSchema(cityFaqs),
+];
 ---
 
 <BaseLayout
   title="Basement Finishing in Lehi, UT | Utah County Basement Pros"
-  description="Basement finishing and remodeling for Lehi homeowners: home offices, guest suites, family rooms, and bathrooms, from Traverse Mountain to established neighborhoods. Written scopes and organized project management."
+  description={description}
   path="/lehi-basement-finishing/"
   pageType="service-area"
   schemas={schemas}
@@ -126,15 +139,34 @@ const schemas = [breadcrumbSchema(breadcrumbs)];
         projects follows.
       </p>
 
+      <h2>Our Lehi office</h2>
+      <p>
+        Our office is in Lehi, at {business.location.streetAddress},
+        open {business.hours.display}. Your free consultation includes a
+        walkthrough at your home, and you're welcome to meet with us at the
+        office as well.
+        <a
+          href={business.googleBusinessProfileURL}
+          rel="noopener"
+          data-event="directions_click"
+          data-event-label="lehi-page"
+        >Get directions</a>.
+      </p>
+
       <h2>Also serving communities near Lehi</h2>
       <p>
         From Lehi we regularly serve
         <a href="/saratoga-springs-basement-finishing/">Saratoga Springs</a>,
-        American Fork, Highland, Alpine, Cedar Hills, and
+        <a href="/eagle-mountain-basement-finishing/">Eagle Mountain</a>,
+        <a href="/american-fork-basement-finishing/">American Fork</a>,
+        <a href="/highland-basement-finishing/">Highland</a>,
+        <a href="/alpine-basement-finishing/">Alpine</a>,
+        <a href="/cedar-hills-basement-finishing/">Cedar Hills</a>, and
         <a href="/utah-county-basement-finishing/">communities throughout
         Utah County</a>, plus
         <a href="/herriman-basement-finishing/">Herriman</a> over the
-        county line.
+        county line. See finished basements on our
+        <a href="/projects/">projects</a> page.
       </p>
     </div>
   </section>

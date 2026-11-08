@@ -17,7 +17,7 @@ import { featuredCities, featuredCounties } from "@/data/service-areas";
 import { homeFaqs } from "@/data/faqs";
 import { publishableProjects } from "@/data/projects";
 import GoogleReviews from "@/components/GoogleReviews.astro";
-import { serviceSchema, faqSchema } from "@/lib/schema";
+import { serviceSchema, faqSchema, websiteSchema } from "@/lib/schema";
 import heroImage from "@/assets/hero/basement-after.png";
 
 // The FAQs shown on this page (and only those) also go out as FAQPage data
@@ -31,7 +31,7 @@ import afterImg from "@/assets/hero/basement-after.png";
   description="Lehi-based basement finishing specialists serving Saratoga Springs, Eagle Mountain, Herriman, and all of Utah County. Free consultation, bid within 48 hours."
   path="/"
   includeOrgSchema
-  schemas={[serviceSchema({
+  schemas={[websiteSchema(), serviceSchema({
     name: "Basement Finishing",
     description:
       "Complete basement finishing for Utah homeowners: space planning, framing, electrical, plumbing, drywall, trim, and flooring, managed under a written scope by a licensed Utah general contractor. Free consultation, with a detailed written bid within 48 hours of the on-site walkthrough.",

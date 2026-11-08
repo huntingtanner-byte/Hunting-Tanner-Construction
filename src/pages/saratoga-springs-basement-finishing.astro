@@ -4,8 +4,11 @@ import PageIntro from "@/components/PageIntro.astro";
 import CTASection from "@/components/CTASection.astro";
 import FAQAccordion from "@/components/FAQAccordion.astro";
 import ProcessSteps from "@/components/ProcessSteps.astro";
-import { breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema, cityServiceSchema, faqSchema } from "@/lib/schema";
 import type { FAQ } from "@/data/faqs";
+
+const description =
+  "Basement finishing in Saratoga Springs: bedrooms, bathrooms, and family rooms in newer homes. Free consultation and a detailed bid within 48 hours.";
 
 const breadcrumbs = [
   { name: "Home", path: "/" },
@@ -41,16 +44,25 @@ const cityFaqs: FAQ[] = [
   {
     question: "Do you handle the permits with the city?",
     answer:
-      "Permit coordination is built into the process. Requirements and review timelines are specific to Saratoga Springs' building department, and we'll walk you through exactly what applies to your project during the consultation.",
+      "Yes. Permits and inspections are coordinated as part of every project and built into the schedule, with inspections typically after framing, after rough electrical and plumbing, and at completion. Requirements and review timelines are specific to Saratoga Springs' building department, and we'll walk you through exactly what applies to your project during the consultation.",
   },
 ];
 
-const schemas = [breadcrumbSchema(breadcrumbs)];
+const schemas = [
+  breadcrumbSchema(breadcrumbs),
+  cityServiceSchema({
+    name: "Saratoga Springs",
+    county: "Utah County",
+    description,
+    path: "/saratoga-springs-basement-finishing/",
+  }),
+  faqSchema(cityFaqs),
+];
 ---
 
 <BaseLayout
   title="Basement Finishing in Saratoga Springs, UT | Utah County Basement Pros"
-  description="Basement finishing for Saratoga Springs homeowners: bedrooms, bathrooms, and family rooms in the unfinished basements of newer Utah County homes. Written scopes, organized trades, local ownership."
+  description={description}
   path="/saratoga-springs-basement-finishing/"
   pageType="service-area"
   schemas={schemas}
@@ -74,10 +86,11 @@ const schemas = [breadcrumbSchema(breadcrumbs)];
         several hundred square feet of unfinished potential.
       </p>
       <p>
-        Utah County Basement Pros is a residential contractor based here in Utah
-        County, serving homeowners at their properties in Saratoga Springs
-        and the surrounding communities. Basement finishing in
-        newer homes like these is the core of what we do.
+        Utah County Basement Pros is a residential contractor based next
+        door in <a href="/lehi-basement-finishing/">Lehi</a>, serving
+        homeowners at their properties in Saratoga Springs and the
+        surrounding communities. Basement finishing in newer homes like
+        these is the core of what we do.
       </p>
 
       <h2>What Saratoga Springs homeowners build downstairs</h2>
@@ -164,8 +177,10 @@ const schemas = [breadcrumbSchema(breadcrumbs)];
       <h2>Also serving communities near Saratoga Springs</h2>
       <p>
         From Saratoga Springs we regularly serve
-        <a href="/lehi-basement-finishing/">Lehi</a>, Eagle Mountain,
-        American Fork, Vineyard, and
+        <a href="/lehi-basement-finishing/">Lehi</a>,
+        <a href="/eagle-mountain-basement-finishing/">Eagle Mountain</a>,
+        <a href="/american-fork-basement-finishing/">American Fork</a>,
+        <a href="/vineyard-basement-finishing/">Vineyard</a>, and
         <a href="/herriman-basement-finishing/">Herriman</a>, plus
         <a href="/utah-county-basement-finishing/">communities throughout
         Utah County</a>.
@@ -175,8 +190,9 @@ const schemas = [breadcrumbSchema(breadcrumbs)];
       <h2>Saratoga Springs basement FAQs</h2>
       <FAQAccordion faqs={cityFaqs} />
       <p class="more-links">
-        Full service details on the
-        <a href="/">Utah basement finishing</a>.
+        Full service details are on our
+        <a href="/">Utah basement finishing</a> page, and finished
+        basements are on our <a href="/projects/">projects</a> page.
       </p>
     </div>
   </section>

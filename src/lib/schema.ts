@@ -63,6 +63,17 @@ export function organizationSchema(): JsonLd {
     founder: [
       { "@type": "Person", name: "Hunting Tanner", jobTitle: "Founder" },
     ],
+    /* The work the site describes, so search and AI tools can match the
+       business to basement questions. Keep in step with /services/. */
+    knowsAbout: [
+      "Basement finishing",
+      "Basement remodeling",
+      "Basement bedrooms and egress windows",
+      "Basement bathrooms",
+      "Wet bars and kitchenettes",
+      "Basement family and media rooms",
+      "Basement home offices and gyms",
+    ],
     areaServed: [
       ...featuredAreas.map((area) => ({
         "@type": area.schemaType,
@@ -102,6 +113,23 @@ export function organizationSchema(): JsonLd {
   };
 }
 
+/**
+ * WebSite node for the homepage: tells Google which name to show for the
+ * site in results (instead of the domain or the old brand).
+ */
+export function websiteSchema(): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${SITE}/#website`,
+    name: business.publicName,
+    alternateName: business.shortName,
+    url: `${SITE}/`,
+    inLanguage: "en-US",
+    publisher: { "@id": `${SITE}/#organization` },
+  };
+}
+
 export interface BreadcrumbItem {
   name: string;
   /** Path beginning with "/", e.g. "/basement-finishing/" */
@@ -121,28 +149,59 @@ export function breadcrumbSchema(items: BreadcrumbItem[]): JsonLd {
   };
 }
 
-/** Service schema for service pages — provider references the organization node. */
+/**
+ * Service schema for service pages — provider references the organization
+ * node. City pages pass `city` so the service is tied to that one city.
+ */
 export function serviceSchema(opts: {
   name: string;
   description: string;
   path: string;
+  /** Defaults to `name` */
+  serviceType?: string;
+  city?: { name: string; county: string };
 }): JsonLd {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
     name: opts.name,
-    serviceType: opts.name,
+    serviceType: opts.serviceType ?? opts.name,
     description: opts.description,
     url: `${SITE}${opts.path}`,
     provider: { "@id": `${SITE}/#organization` },
-    areaServed: featuredAreas.map((area) => ({
-      "@type": area.schemaType,
-      name:
-        area.schemaType === "AdministrativeArea"
-          ? `${area.name}, ${area.state}`
-          : area.name,
-    })),
+    areaServed: opts.city
+      ? {
+          "@type": "City",
+          name: opts.city.name,
+          containedInPlace: {
+            "@type": "AdministrativeArea",
+            name: `${opts.city.county}, Utah`,
+          },
+        }
+      : featuredAreas.map((area) => ({
+          "@type": area.schemaType,
+          name:
+            area.schemaType === "AdministrativeArea"
+              ? `${area.name}, ${area.state}`
+              : area.name,
+        })),
   };
+}
+
+/** The Service node every city page emits, built from its own copy. */
+export function cityServiceSchema(city: {
+  name: string;
+  county: string;
+  description: string;
+  path: string;
+}): JsonLd {
+  return serviceSchema({
+    name: `Basement finishing in ${city.name}, UT`,
+    serviceType: "Basement finishing",
+    description: city.description,
+    path: city.path,
+    city: { name: city.name, county: city.county },
+  });
 }
 
 /** FAQPage schema — only for FAQs rendered verbatim on the same page. */

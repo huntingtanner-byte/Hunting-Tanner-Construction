@@ -3,8 +3,11 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import PageIntro from "@/components/PageIntro.astro";
 import CTASection from "@/components/CTASection.astro";
 import FAQAccordion from "@/components/FAQAccordion.astro";
-import { breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema, cityServiceSchema, faqSchema } from "@/lib/schema";
 import type { FAQ } from "@/data/faqs";
+
+const description =
+  "Basement finishing for Herriman homeowners: finishing the unfinished basements of newer southwest Salt Lake County homes with written scopes, qualified trades, and organized management.";
 
 const breadcrumbs = [
   { name: "Home", path: "/" },
@@ -16,7 +19,7 @@ const cityFaqs: FAQ[] = [
   {
     question: "You're based in Utah County. Does Herriman really work for you?",
     answer:
-      "Yes. Herriman sits just across the county line from our northwest Utah County base, and it's an established part of our service area, not a stretch. Scheduling, walkthroughs, and site visits work the same as they do for Saratoga Springs or Lehi projects.",
+      "Yes. Herriman sits just across the county line from our Lehi office, and it's an established part of our service area, not a stretch. Scheduling, walkthroughs, and site visits work the same as they do for Saratoga Springs or Lehi projects.",
   },
   {
     question: "My Herriman home came with a 9-foot unfinished basement. What's possible?",
@@ -40,12 +43,21 @@ const cityFaqs: FAQ[] = [
   },
 ];
 
-const schemas = [breadcrumbSchema(breadcrumbs)];
+const schemas = [
+  breadcrumbSchema(breadcrumbs),
+  cityServiceSchema({
+    name: "Herriman",
+    county: "Salt Lake County",
+    description,
+    path: "/herriman-basement-finishing/",
+  }),
+  faqSchema(cityFaqs),
+];
 ---
 
 <BaseLayout
   title="Basement Finishing in Herriman, UT | Utah County Basement Pros"
-  description="Basement finishing for Herriman homeowners: finishing the unfinished basements of newer southwest Salt Lake County homes with written scopes, qualified trades, and organized management."
+  description={description}
   path="/herriman-basement-finishing/"
   pageType="service-area"
   schemas={schemas}

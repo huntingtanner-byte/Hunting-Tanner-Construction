@@ -12,7 +12,7 @@ import PageIntro from "@/components/PageIntro.astro";
 import CTASection from "@/components/CTASection.astro";
 import FAQAccordion from "@/components/FAQAccordion.astro";
 import ProcessSteps from "@/components/ProcessSteps.astro";
-import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { breadcrumbSchema, cityServiceSchema, faqSchema } from "@/lib/schema";
 import { allCityPages, cityPath } from "@/data/cities";
 import type { CityPage } from "@/data/cities";
 
@@ -41,7 +41,16 @@ const breadcrumbs = [
   { name: city.name, path },
 ];
 
-const schemas = [breadcrumbSchema(breadcrumbs), faqSchema(city.faqs)];
+const schemas = [
+  breadcrumbSchema(breadcrumbs),
+  cityServiceSchema({
+    name: city.name,
+    county: city.county,
+    description: city.metaDescription,
+    path,
+  }),
+  faqSchema(city.faqs),
+];
 
 const neighborLinks = city.neighbors.map((n) => ({
   name: n.name,
@@ -136,16 +145,16 @@ const neighborLinks = city.neighbors.map((n) => ({
 
       <h2>Nearby communities we also serve</h2>
       <p class="neighbors">
+        {/* One line on purpose: a line break here renders as a space
+            before each comma ("Lehi , American Fork") */}
         {neighborLinks.map((n, i) => (
-          <span>
-            {n.href ? <a href={n.href}>{n.name}</a> : n.name}
-            {i < neighborLinks.length - 1 ? ", " : ""}
-          </span>
+          <span>{n.href ? <a href={n.href}>{n.name}</a> : n.name}{i < neighborLinks.length - 1 ? ", " : ""}</span>
         ))}
         {" "}and the rest of our{" "}
         <a href={countyHub.path}>{countyHub.name} service area</a>. Full
-        service details live on the
-        <a href="/"> Utah basement finishing</a>.
+        service details are on our
+        <a href="/">Utah basement finishing</a> page, and finished
+        basements are on our <a href="/projects/">projects</a> page.
       </p>
     </div>
   </section>

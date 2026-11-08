@@ -3,6 +3,7 @@
  * must stay accurate and free of unverified claims. Editorial notes about
  * items needing confirmation live in CONTENT-TODO.md, not in this copy.
  */
+import { business, canClaimLicensed } from "@/config/business";
 
 export interface FAQ {
   question: string;
@@ -34,7 +35,7 @@ export const homeFaqs: FAQ[] = [
   {
     question: "Do I need a permit to finish my basement?",
     answer:
-      "In nearly all Utah cities, yes. Finishing a basement involves framing, electrical, and often plumbing work that requires permits and inspections. Handling permits correctly protects your home's value and safety. Permit coordination is part of how projects are planned, and we'll walk you through what applies to your city during the consultation.",
+      "In nearly all Utah cities, yes. Finishing a basement involves framing, electrical, and often plumbing work that requires permits and inspections. Handling permits correctly protects your home's value and safety. We coordinate the permits and inspections as part of your project, and we'll walk you through what applies to your city during the consultation.",
   },
   {
     question: "Who will actually be working in my home?",
@@ -136,7 +137,7 @@ export const faqPageGroups: FAQGroup[] = [
       {
         question: "Who handles permits?",
         answer:
-          "Permit coordination is planned into the project from the start. Requirements vary by city. Saratoga Springs, Lehi, Herriman, and each Utah County city run their own building departments, and we'll walk you through what applies to your address during the consultation.",
+          "We do. Permits and inspections are coordinated as part of every project and planned into the schedule from the start. Requirements vary by city. Saratoga Springs, Lehi, Herriman, and each Utah County city run their own building departments, and we'll walk you through what applies to your address during the consultation.",
       },
       {
         question: "What are egress requirements for basement bedrooms?",
@@ -178,10 +179,22 @@ export const faqPageGroups: FAQGroup[] = [
         answer:
           "The company is new. The experience behind it isn't. Hunting is a third-generation contractor who grew up on job sites alongside his dad, Gary, our senior advisor. Together they bring more than 40 years of combined construction experience and decades of relationships with top subcontractors, and both are involved in every project, so a veteran's judgment reviews the work alongside the owner running it. Every project gets written scopes, documented changes, regular updates, and an owner who is personally involved from start to finish.",
       },
+      ...(canClaimLicensed
+        ? [
+            {
+              question: "Are you licensed and insured?",
+              answer: `Yes. ${business.publicName} is a DBA of ${business.legalName}, a licensed Utah general contractor (license #${business.licenseNumber}), and we're insured. You can look up the license with the Utah Division of Professional Licensing (DOPL).`,
+            },
+          ]
+        : []),
+      {
+        question: "Where is your office?",
+        answer: `Our office is at ${business.location.streetAddress}, ${business.location.locality}, ${business.location.region} ${business.location.postalCode}, open ${business.hours.display}. Your free consultation includes a walkthrough at your home, and you're welcome to meet with us at the office as well.`,
+      },
       {
         question: "Which areas do you serve?",
         answer:
-          "Every community in northern Utah County, including Eagle Mountain, American Fork, Vineyard, Pleasant Grove, Highland, Alpine, Lindon, Orem, Provo, and Spanish Fork, plus the Salt Lake Valley from Salt Lake City and Millcreek south through Sandy, West Jordan, Herriman, and Draper. Each city has its own page with local detail.",
+          "Lehi, Saratoga Springs, Eagle Mountain, and every community in northern Utah County, including American Fork, Vineyard, Pleasant Grove, Highland, Alpine, Lindon, Orem, Provo, and Spanish Fork, plus the Salt Lake Valley from Salt Lake City and Millcreek south through Sandy, West Jordan, Herriman, and Draper. Each city has its own page with local detail.",
       },
       {
         question: "How do I get started?",
