@@ -188,10 +188,6 @@ export const faqPageGroups: FAQGroup[] = [
           ]
         : []),
       {
-        question: "Where is your office?",
-        answer: `Our office is at ${business.location.streetAddress}, ${business.location.locality}, ${business.location.region} ${business.location.postalCode}, open ${business.hours.display}. Your free consultation includes a walkthrough at your home, and you're welcome to meet with us at the office as well.`,
-      },
-      {
         question: "Which areas do you serve?",
         answer:
           "Lehi, Saratoga Springs, Eagle Mountain, and every community in northern Utah County, including American Fork, Vineyard, Pleasant Grove, Highland, Alpine, Lindon, Orem, Provo, and Spanish Fork, plus the Salt Lake Valley from Salt Lake City and Millcreek south through Sandy, West Jordan, Herriman, and Draper. Each city has its own page with local detail.",

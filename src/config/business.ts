@@ -75,6 +75,11 @@ export const business = {
    * confirmed it is staffed and should be public, October 30, 2026).
    * Keep name, address, and phone identical to the GBP everywhere.
    * Never put a residential address here.
+   * November 8, 2026: Hunting doesn't want walk-in visits. Show this only
+   * as the business address (footer, contact page, schema) to match the
+   * GBP. Never add copy that invites office visits, meetings, or
+   * directions. If the GBP address is ever hidden, remove the street
+   * address from the site the same day.
    */
   location: {
     streetAddress: "2701 N Thanksgiving Way",

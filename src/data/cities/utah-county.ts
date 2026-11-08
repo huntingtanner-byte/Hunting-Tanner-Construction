@@ -13,7 +13,7 @@ export const utahCountyCities: CityPage[] = [
     lede: "One of the fastest-growing cities in Utah, full of newer homes with untouched basements. If your downstairs is still bare studs, you're sitting on the cheapest square footage you'll ever add.",
     intro: [
       "Eagle Mountain families tend to have two things in common: kids, and a basement the builder never finished. The city's explosive growth means most homes here were built in the last fifteen years, delivered with framed basements, rough-in plumbing, and a lot of potential going unused.",
-      "Utah County Basement Pros serves Eagle Mountain from our office in Lehi, a short drive away. We finish basements with written scopes, organized trade schedules, and one owner accountable for the whole job.",
+      "Utah County Basement Pros serves Eagle Mountain from Lehi, a short drive away. We finish basements with written scopes, organized trade schedules, and one owner accountable for the whole job.",
     ],
     angle: {
       heading: "Space is why you moved here. Finish all of it.",
