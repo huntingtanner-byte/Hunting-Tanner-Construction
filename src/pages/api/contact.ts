@@ -8,22 +8,30 @@
  *  - POST only (GET and friends get 405)
  *  - Honeypot hits pretend success and send nothing
  *  - Server-side validation + sanitization via src/server/contact/validate
- *  - Notification email to CONTACT_NOTIFICATION_EMAIL through Resend, with
- *    any photos or plans the visitor uploaded attached (they come from the
- *    private Blob store, then get deleted from it; src/lib/uploads.ts)
+ *  - Notification email to the office through Resend, with any photos or
+ *    plans the visitor uploaded attached (they come from the private Blob
+ *    store, then get deleted from it; src/lib/uploads.ts)
+ *  - If the lead gave an email address: a fixed plain-text confirmation to
+ *    that address (src/server/contact/confirmation.ts). It goes out only
+ *    after the office notification has, and if it fails the lead is still
+ *    delivered and the visitor still reaches /thank-you/.
  *  - 303 redirect to /thank-you/ on success
  *
- * Required Vercel env vars (see .env.example / README):
- *  - RESEND_API_KEY            — from resend.com (domain verified for
- *                                huntingtanner.com, or onboarding sender)
- *  - CONTACT_NOTIFICATION_EMAIL — defaults to office@huntingtanner.com. Keep it
- *                                there until Resend has a verified domain: an
- *                                unverified Resend account only delivers to its
- *                                signup address (office@huntingtanner.com), which
- *                                is now an alias of office@utahcountybasementpros.com,
- *                                so leads still land in the same inbox.
- *  - RESEND_FROM (optional)    — verified sender, e.g.
- *                                "Basement Pros Website <leads@huntingtanner.com>"
+ * Vercel env vars (see .env.example / README):
+ *  - RESEND_API_KEY            — from resend.com
+ *  - RESEND_FROM               — the notification's sender, on the domain
+ *                                verified in Resend:
+ *                                "Basement Pros Website <leads@utahcountybasementpros.com>".
+ *                                It is also how this file knows a domain is
+ *                                verified. Without it the only sender is
+ *                                Resend's onboarding address, which delivers
+ *                                to the Resend signup address and nowhere
+ *                                else, so notifications fall back to that
+ *                                address (office@huntingtanner.com, an alias
+ *                                of the same inbox) and no confirmation is
+ *                                sent.
+ *  - CONTACT_NOTIFICATION_EMAIL (optional) — where notifications go instead
+ *                                of business.email
  *  - BLOB_READ_WRITE_TOKEN     — added by Vercel when the "lead-uploads" Blob
  *                                store was connected; reads the attachments
  *
@@ -33,6 +41,8 @@
  * homeowner on an error page.
  */
 import type { APIRoute } from "astro";
+import type { Resend } from "resend";
+import { business } from "@/config/business";
 import { validateLead, safeLogSummary, type LeadPayload } from "@/server/contact/validate";
 import {
   STILL_SAVED,
@@ -42,14 +52,25 @@ import {
   type FetchedAttachment,
   type MissedAttachment,
 } from "@/server/contact/attachments";
+import {
+  CONFIRMATION_SUBJECT,
+  buildConfirmationText,
+} from "@/server/contact/confirmation";
 import { formatBytes } from "@/lib/uploads";
 
 export const prerender = false;
 
-const NOTIFY_EMAIL =
-  import.meta.env.CONTACT_NOTIFICATION_EMAIL ?? "office@huntingtanner.com";
-const FROM =
-  import.meta.env.RESEND_FROM ?? "Basement Pros Website <onboarding@resend.dev>";
+/** Set once the sending domain is verified in Resend (see the header). */
+const VERIFIED_FROM: string | undefined =
+  import.meta.env.RESEND_FROM || undefined;
+const FROM = VERIFIED_FROM ?? "Basement Pros Website <onboarding@resend.dev>";
+const NOTIFY_EMAIL: string =
+  import.meta.env.CONTACT_NOTIFICATION_EMAIL ||
+  (VERIFIED_FROM ? business.email : "office@huntingtanner.com");
+/** The confirmation comes from the business address, so a reply reaches the office. */
+const CONFIRMATION_FROM = `${business.publicName} <${business.email}>`;
+/** How long the confirmation may take before the visitor moves on without it. */
+const CONFIRMATION_TIMEOUT_MS = 10_000;
 
 export const POST: APIRoute = async ({ request, redirect }) => {
   let form: FormData;
@@ -146,6 +167,8 @@ export const POST: APIRoute = async ({ request, redirect }) => {
       console.info(
         safeLogSummary(lead) + (sentFiles.length > 0 ? ` files=${sentFiles.length}` : ""),
       );
+      // The office has the lead. Now tell the lead we got it.
+      if (lead.email) await sendConfirmation(resend, lead);
       if (uploads.length > 0) {
         await cleanUpUploads(sentFiles.map((file) => file.pathname), blobToken);
       }
@@ -182,6 +205,49 @@ export const POST: APIRoute = async ({ request, redirect }) => {
     });
   }
 };
+
+/**
+ * Emails the lead the fixed confirmation. Best effort by design: it never
+ * throws and gives up after CONFIRMATION_TIMEOUT_MS, so a problem here
+ * can't turn a delivered lead into an error page.
+ */
+async function sendConfirmation(resend: Resend, lead: LeadPayload): Promise<void> {
+  if (!VERIFIED_FROM) {
+    console.warn("RESEND_FROM not set: no confirmation email sent to the lead");
+    return;
+  }
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  try {
+    const { error } = await Promise.race([
+      resend.emails.send({
+        from: CONFIRMATION_FROM,
+        to: lead.email,
+        replyTo: business.email,
+        subject: CONFIRMATION_SUBJECT,
+        text: buildConfirmationText({
+          name: lead.name,
+          brand: business.publicName,
+          now: new Date(),
+        }),
+      }),
+      new Promise<never>((_, reject) => {
+        timer = setTimeout(
+          () => reject(new Error(`no answer from Resend after ${CONFIRMATION_TIMEOUT_MS / 1000}s`)),
+          CONFIRMATION_TIMEOUT_MS,
+        );
+      }),
+    ]);
+    if (error) throw new Error(error.message);
+    console.info("confirmation email sent to the lead");
+  } catch (err) {
+    console.error(
+      "confirmation email NOT sent (the lead itself was delivered):",
+      err instanceof Error ? err.message : err,
+    );
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
 /** Friendly fallback page shown if email delivery fails. */
 function errorPage(): string {
