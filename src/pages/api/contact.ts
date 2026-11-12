@@ -30,8 +30,11 @@
  *                                address (office@huntingtanner.com, an alias
  *                                of the same inbox) and no confirmation is
  *                                sent.
- *  - CONTACT_NOTIFICATION_EMAIL (optional) — where notifications go instead
- *                                of business.email
+ *  - CONTACT_NOTIFICATION_EMAIL (optional) — more addresses for the
+ *                                notification, separated by commas. The
+ *                                office (business.email) always gets it,
+ *                                listed or not. Only used once RESEND_FROM
+ *                                is set.
  *  - BLOB_READ_WRITE_TOKEN     — added by Vercel when the "lead-uploads" Blob
  *                                store was connected; reads the attachments
  *
@@ -43,7 +46,12 @@
 import type { APIRoute } from "astro";
 import type { Resend } from "resend";
 import { business } from "@/config/business";
-import { validateLead, safeLogSummary, type LeadPayload } from "@/server/contact/validate";
+import {
+  EMAIL_RE,
+  validateLead,
+  safeLogSummary,
+  type LeadPayload,
+} from "@/server/contact/validate";
 import {
   STILL_SAVED,
   cleanUpUploads,
@@ -64,9 +72,36 @@ export const prerender = false;
 const VERIFIED_FROM: string | undefined =
   import.meta.env.RESEND_FROM || undefined;
 const FROM = VERIFIED_FROM ?? "Basement Pros Website <onboarding@resend.dev>";
-const NOTIFY_EMAIL: string =
-  import.meta.env.CONTACT_NOTIFICATION_EMAIL ||
-  (VERIFIED_FROM ? business.email : "office@huntingtanner.com");
+const NOTIFY_EMAILS = notificationRecipients(
+  import.meta.env.CONTACT_NOTIFICATION_EMAIL,
+);
+
+/**
+ * Who gets the lead notification: always the office (business.email), plus
+ * any addresses in CONTACT_NOTIFICATION_EMAIL, separated by commas. That
+ * list lives in Vercel so personal addresses stay out of the repo, and it
+ * can only add people: a mistake in it never takes the office off a lead.
+ * An entry that isn't an email address is skipped, because Resend would
+ * refuse the whole lead over it.
+ */
+function notificationRecipients(listed: unknown): string[] {
+  // No verified sender: Resend delivers to its signup address and nowhere else
+  if (!VERIFIED_FROM) return ["office@huntingtanner.com"];
+  const recipients: string[] = [business.email];
+  for (const entry of (typeof listed === "string" ? listed : "").split(/[,;]/)) {
+    const address = entry.trim();
+    if (!address) continue;
+    if (!EMAIL_RE.test(address)) {
+      console.error(
+        "CONTACT_NOTIFICATION_EMAIL has an entry that is not an email address. It was skipped.",
+      );
+    } else if (!recipients.some((seen) => seen.toLowerCase() === address.toLowerCase())) {
+      recipients.push(address);
+    }
+  }
+  return recipients;
+}
+
 /** The confirmation comes from the business address, so a reply reaches the office. */
 const CONFIRMATION_FROM = `${business.publicName} <${business.email}>`;
 /** How long the confirmation may take before the visitor moves on without it. */
@@ -123,7 +158,7 @@ export const POST: APIRoute = async ({ request, redirect }) => {
         try {
           const { error } = await resend.emails.send({
             from: FROM,
-            to: NOTIFY_EMAIL,
+            to: NOTIFY_EMAILS,
             // Reply-to only when an email was supplied; otherwise replying
             // would go nowhere useful.
             ...(lead.email ? { replyTo: lead.email } : {}),

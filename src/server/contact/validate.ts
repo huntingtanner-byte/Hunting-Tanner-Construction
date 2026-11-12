@@ -52,7 +52,7 @@ const MAX_LENGTHS: Partial<Record<keyof LeadPayload, number>> = {
   squareFootage: 12,
 };
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 /** Strip control characters and trim; never interpolate into HTML unescaped. */
 function sanitize(value: unknown, maxLength = 200): string {
