@@ -330,8 +330,10 @@ const id = (name: string) => `${formId}-${name}`;
 
   <p class="form-consent">
     By submitting this form, you agree that Utah County Basement Pros may
-    contact you by phone, text, or email regarding your project. Message and
-    data rates may apply. We don't add you to marketing lists.
+    contact you by phone, text, or email regarding your project. Message
+    frequency varies. Message and data rates may apply. Reply STOP to opt
+    out or HELP for help. We don't add you to marketing lists. See our
+    <a href="/privacy-policy/">Privacy Policy</a>.
   </p>
 </form>
 
@@ -357,6 +359,13 @@ const id = (name: string) => `${formId}-${name}`;
   }
   .lead-form .form-consent {
     margin: var(--space-2) 0 0;
+  }
+  /* Phone carriers check for opt-out words and a privacy link beside any
+     form that collects a phone number before they approve business
+     texting (November 2026). Keep both in this paragraph. */
+  .lead-form .form-consent a {
+    color: inherit;
+    text-decoration: underline;
   }
 
   .lead-form {
