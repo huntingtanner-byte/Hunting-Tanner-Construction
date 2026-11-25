@@ -36,6 +36,7 @@ export const footerAreas: NavItem[] = [
 export const footerCompany: NavItem[] = [
   { label: "About", href: "/about/" },
   { label: "FAQ", href: "/faq/" },
+  { label: "Guides", href: "/guides/" },
   { label: "Contact", href: "/contact/" },
   { label: "Privacy Policy", href: "/privacy-policy/" },
   { label: "Website Terms", href: "/terms/" },

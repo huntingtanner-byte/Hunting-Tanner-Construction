@@ -1,0 +1,96 @@
+---
+/**
+ * Guides index. Lists every homeowner guide on the site. When a guide page
+ * is added, add it to `guides` below and to the "Permit guides" section of
+ * src/pages/llms.txt.ts.
+ */
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import CTASection from "@/components/CTASection.astro";
+import { breadcrumbSchema } from "@/lib/schema";
+
+const description =
+  "Plain-language guides to finishing a basement in Utah County: the statewide permit rule and city permit guides, each checked against official sources.";
+
+const breadcrumbs = [
+  { name: "Home", path: "/" },
+  { name: "Guides", path: "/guides/" },
+];
+
+const guides = [
+  {
+    href: "/utah-basement-finishing-permit/",
+    title: "Do you need a permit to finish a basement in Utah?",
+    text: "The statewide rule, what is exempt, who can pull the permit, how inspections go, and what happens when work is done without one.",
+  },
+  {
+    href: "/lehi-basement-finishing-permit/",
+    title: "Lehi basement finishing permit guide",
+    text: "The city portal, what to submit, how Lehi calculates the fee, inspections, and the rules for a basement apartment.",
+  },
+  {
+    href: "/saratoga-springs-basement-finishing-permit/",
+    title: "Saratoga Springs basement permit guide",
+    text: "What the basement plan must show, the city's own code checklist, fees, inspections, and where a basement apartment is allowed.",
+  },
+];
+
+const schemas = [breadcrumbSchema(breadcrumbs)];
+---
+
+<BaseLayout
+  title="Basement Finishing Guides | Utah County Basement Pros"
+  description={description}
+  path="/guides/"
+  schemas={schemas}
+>
+  <PageIntro
+    eyebrow="Guides"
+    heading="Basement Finishing Guides for Utah County Homeowners"
+    lede="Straight answers about permits and planning. Every fact is linked to its source: the city, the Utah Code, or the building code Utah has adopted."
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="section">
+    <div class="container container--narrow prose">
+      <h2>Permits</h2>
+      <ul class="guide-list">
+        {
+          guides.map((g) => (
+            <li>
+              <a href={g.href}>{g.title}</a>
+              <span>{g.text}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CTASection />
+</BaseLayout>
+
+<style>
+  .guide-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .guide-list li {
+    margin: 0;
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .guide-list a {
+    display: block;
+    font-weight: 600;
+  }
+
+  .guide-list span {
+    display: block;
+    margin-top: var(--space-1);
+    color: var(--color-text-muted);
+  }
+</style>

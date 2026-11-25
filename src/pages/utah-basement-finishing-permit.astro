@@ -1,0 +1,569 @@
+---
+/**
+ * Statewide guide: do you need a permit to finish a basement in Utah?
+ *
+ * Same sourcing rule as the two city permit guides. Every fact comes from
+ * the Utah Code, the residential code Utah has adopted, a state licensing
+ * page, or a city page, and is linked where it is used and again in the
+ * Sources list. Do not add fees, penalties, timelines, or rules that are not
+ * in one of those sources. After re-checking the sources, update
+ * `lastChecked` below and the guides note in HANDOFF.md.
+ *
+ * Utah Code 58-55-301 and 58-55-305 are renumbered on January 1, 2027, so
+ * the page links to the chapter, not to those two section pages.
+ */
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import CTASection from "@/components/CTASection.astro";
+import FAQAccordion from "@/components/FAQAccordion.astro";
+import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import type { FAQ } from "@/data/faqs";
+
+const lastChecked = { iso: "2026-11-25", display: "November 25, 2026" };
+
+const description =
+  "Yes, finishing a basement in Utah needs a building permit. What the statewide code requires, what is exempt, who can pull the permit, and what happens without one.";
+
+const breadcrumbs = [
+  { name: "Home", path: "/" },
+  { name: "Guides", path: "/guides/" },
+  { name: "Utah Basement Permits", path: "/utah-basement-finishing-permit/" },
+];
+
+/** Official sources. */
+const src = {
+  utahAdopted: "https://le.utah.gov/xcode/Title15A/Chapter2/15A-2-S103.html",
+  utahAmendments: "https://le.utah.gov/xcode/Title15A/Chapter3/15A-3-S202.html",
+  licensingAct: "https://le.utah.gov/xcode/Title58/Chapter55/58-55.html",
+  licenseLookup: "https://secure.utah.gov/llv/search/index.html",
+  dopl: "https://commerce.utah.gov/dopl/contracting/",
+  ircCh1:
+    "https://codes.iccsafe.org/content/IRC2021P3/chapter-1-scope-and-administration",
+  ircCh3:
+    "https://codes.iccsafe.org/content/IRC2021P3/chapter-3-building-planning",
+  lehiBuilding: "https://www.lehi-ut.gov/departments/building-and-inspections/",
+  lehiChecklist:
+    "https://www.lehi-ut.gov/media/0trlcj3t/residential-basement-finish.pdf",
+  lehiSearch: "https://portal.iworq.net/LEHI/permits/602",
+  ssBasement:
+    "https://www.saratogasprings-ut.gov/225/Obtaining-a-Basement-Permit",
+  ssForms: "https://www.saratogasprings-ut.gov/209/Applications-Forms",
+};
+
+const permitFaqs: FAQ[] = [
+  {
+    question: "Do you need a permit to finish a basement in Utah?",
+    answer:
+      "Yes. Utah applies one residential code statewide, the 2021 International Residential Code with Utah's amendments. It requires a permit before a building is altered or before electrical, gas, mechanical, or plumbing systems are installed or changed. Finishing a basement involves framing and wiring at a minimum, so it needs a permit from your city's building department.",
+  },
+  {
+    question: "Do I need a permit to finish only part of my basement?",
+    answer:
+      "The size of the project does not decide it. The type of work does. One framed room with new outlets and lights needs a permit, because it alters the building and adds electrical work. Paint, wallpaper, tile, carpet, cabinets, and countertops in a space that is already finished are exempt.",
+  },
+  {
+    question: "Do I need a permit to add a bathroom in my basement?",
+    answer:
+      "Yes. A bathroom adds plumbing, electrical work, and an exhaust fan, and the code requires a permit to install or alter each of those systems. The rough plumbing and wiring are inspected before the walls are closed.",
+  },
+  {
+    question: "Can I pull the basement permit myself as the homeowner?",
+    answer:
+      "The code lets the owner or the owner's authorized agent apply. Saratoga Springs, for example, asks for an Owner Builder Certification when the homeowner will be doing the work. Utah's contractor licensing law exempts a sole owner building on their own property for their own noncommercial use, within limits written into the statute. Anyone you pay to do the work generally needs a Utah license.",
+  },
+  {
+    question: "How long is a basement finishing permit good for?",
+    answer:
+      "Under the code Utah has adopted, a permit becomes invalid if work does not start within 180 days of the date it was issued, or if more than 180 days pass between inspections. The building official can grant written extensions of up to 180 days each when asked in writing with a good reason.",
+  },
+  {
+    question: "What happens if I finish my basement without a permit?",
+    answer:
+      "The code makes it unlawful to alter a building in violation of its rules. A building official can issue a written stop work order, serve a notice of violation that orders the problem corrected, and charge a fee for work started before a permit was issued, on top of the normal permit fees. Each city sets the amount of that fee.",
+  },
+];
+
+const schemas = [breadcrumbSchema(breadcrumbs), faqSchema(permitFaqs)];
+---
+
+<BaseLayout
+  title="Do You Need a Permit to Finish a Basement in Utah? | Utah County Basement Pros"
+  description={description}
+  path="/utah-basement-finishing-permit/"
+  schemas={schemas}
+>
+  <PageIntro
+    eyebrow="Permit Guide"
+    heading="Do You Need a Permit to Finish a Basement in Utah?"
+    lede="Yes. Any basement finish that adds walls, wiring, plumbing, or ductwork needs a building permit from your city. Here is what the statewide rule says, what is exempt, who can pull the permit, and what happens when the work is done without one."
+    breadcrumbs={breadcrumbs}
+  >
+    <p class="checked">
+      Last checked against state and city sources:
+      <time datetime={lastChecked.iso}>{lastChecked.display}</time>
+    </p>
+  </PageIntro>
+
+  <section class="section">
+    <div class="container container--narrow prose guide">
+      <nav class="jump" aria-label="On this page">
+        <ul>
+          <li><a href="#rule">The rule</a></li>
+          <li><a href="#exempt">What is exempt</a></li>
+          <li><a href="#who">Who pulls it</a></li>
+          <li><a href="#steps">How it goes</a></li>
+          <li><a href="#without">Without a permit</a></li>
+          <li><a href="#cities">City guides</a></li>
+          <li><a href="#sources">Sources</a></li>
+        </ul>
+      </nav>
+
+      <div class="glance">
+        <span class="eyebrow">At a glance</span>
+        <ul>
+          <li>
+            <strong>Permit needed:</strong> yes, for any finish that adds
+            walls, wiring, plumbing, ductwork, or gas piping.
+          </li>
+          <li>
+            <strong>Who issues it:</strong> your city's building department.
+          </li>
+          <li>
+            <strong>The code:</strong> one statewide residential code, the
+            2021 International Residential Code with Utah's amendments.
+          </li>
+          <li>
+            <strong>Exempt:</strong> paint, wallpaper, tile, carpet, cabinets,
+            and countertops.
+          </li>
+          <li>
+            <strong>Who can apply:</strong> the owner or the owner's
+            authorized agent, which is usually the contractor.
+          </li>
+          <li>
+            <strong>Shelf life:</strong> a permit lapses if work does not
+            start within 180 days, or stalls for 180 days between
+            inspections.
+          </li>
+        </ul>
+      </div>
+
+      <h2 id="rule">The rule, and where it comes from</h2>
+      <p>
+        Utah does not leave the building code up to each city. The
+        Legislature adopts one set of construction codes for the whole state
+        in
+        <a href={src.utahAdopted} rel="noopener">Utah Code 15A-2-103</a>. For
+        houses, that is the 2021 edition of the International Residential
+        Code, together with the changes Utah makes to it in
+        <a href={src.utahAmendments} rel="noopener">Utah Code 15A-3-202</a>.
+        Your city's building department is the office that enforces it.
+      </p>
+      <p>
+        The permit rule is in
+        <a href={src.ircCh1} rel="noopener">Section R105.1</a>
+        of that code. An owner, or the owner's authorized agent, has to get a
+        permit before doing any of these:
+      </p>
+      <ul>
+        <li>constructing, enlarging, or altering a building</li>
+        <li>
+          installing, altering, or replacing an electrical, gas, mechanical,
+          or plumbing system
+        </li>
+      </ul>
+      <p>
+        A basement finish does several of those at once. Framing walls alters
+        the building. Outlets, switches, and lights are electrical work. Most
+        finishes extend the ductwork, and many add a bathroom or a wet bar.
+        Any one of them is enough to need a permit.
+      </p>
+      <p>
+        The cities we work in most treat it the same way. Lehi publishes a
+        <a href={src.lehiChecklist} rel="noopener">checklist for residential
+        basement finish permits</a>, and Saratoga Springs has a page called
+        <a href={src.ssBasement} rel="noopener">Obtaining a Basement Permit</a>.
+      </p>
+
+      <h2 id="exempt">What does not need a permit</h2>
+      <p>
+        <a href={src.ircCh1} rel="noopener">Section R105.2</a>
+        lists the work that is exempt. The items that come up in a basement
+        are:
+      </p>
+      <ul>
+        <li>
+          painting, papering, tiling, carpeting, cabinets, countertops, and
+          similar finish work
+        </li>
+        <li>minor electrical repairs, such as replacing lamps</li>
+        <li>stopping leaks and clearing stoppages in plumbing</li>
+      </ul>
+      <p>
+        So new carpet or fresh paint in a basement that is already finished
+        does not need a permit. Two cautions:
+      </p>
+      <ul>
+        <li>
+          <strong>Size does not decide it.</strong> One small framed room with
+          new outlets needs a permit. A whole floor of new carpet does not.
+        </li>
+        <li>
+          <strong>Exempt work still has to meet the code.</strong> The same
+          section says an exemption is not permission to do work that breaks
+          the code or a local ordinance.
+        </li>
+      </ul>
+
+      <h2 id="who">Who pulls the permit</h2>
+      <p>
+        The code names two people who can apply: the owner, or the owner's
+        authorized agent (<a href={src.ircCh1} rel="noopener">R105.1</a>).
+        When you hire a contractor, the contractor normally applies as your
+        agent. Ask who is pulling the permit before you sign anything, and
+        ask to see it once it is issued. The code requires the permit, or a
+        copy, to stay on the site until the job is done
+        (<a href={src.ircCh1} rel="noopener">R105.7</a>).
+      </p>
+      <h3>If you hire the work out</h3>
+      <p>
+        Utah requires a license to work as a contractor
+        (<a href={src.licensingAct} rel="noopener">Utah Construction Trades
+        Licensing Act</a>, section 58-55-301). You can check any contractor's
+        license yourself, for free, in the state's
+        <a href={src.licenseLookup} rel="noopener">Licensee Lookup and
+        Verification System</a>, which is run by the
+        <a href={src.dopl} rel="noopener">Division of Professional
+        Licensing</a>. Search the company name and confirm the license is
+        active.
+      </p>
+      <h3>If you do the work yourself</h3>
+      <p>
+        Homeowners can apply for a permit on their own house. Some cities ask
+        for an extra form. Saratoga Springs, for example, says to file its
+        <a href={src.ssForms} rel="noopener">Owner Builder Certification</a>
+        when the homeowner will be doing the work, as its
+        <a href={src.ssBasement} rel="noopener">basement permit page</a>
+        explains.
+      </p>
+      <p>
+        The same licensing act has a list of exemptions (section 58-55-305).
+        One covers a sole owner building on their own property for their own
+        noncommercial, nonpublic use. Another covers people who help under
+        the owner's direction without pay beyond token compensation, such as
+        a meal. Both come with limits written into the statute, so read the
+        section or ask the licensing division before relying on it. The
+        permit and every inspection still apply either way.
+      </p>
+
+      <h2 id="steps">How it goes, start to finish</h2>
+      <ol>
+        <li>
+          <strong>Draw the plan.</strong> Cities review a floor plan of the
+          finished basement. Lehi and Saratoga Springs each publish what the
+          drawing has to show. Our
+          <a href="/lehi-basement-finishing-permit/#submit">Lehi guide</a>
+          and
+          <a href="/saratoga-springs-basement-finishing-permit/#plan">Saratoga
+          Springs guide</a>
+          list it item by item.
+        </li>
+        <li>
+          <strong>Apply to the city.</strong> Both of those cities take
+          applications online. The city reviews the plan and tells you the
+          fee.
+        </li>
+        <li>
+          <strong>Rough-in inspection.</strong> Plumbing, mechanical, gas,
+          and electrical work is inspected before it is covered and before
+          fixtures are set (<a href={src.ircCh1} rel="noopener">R109.1.2</a>).
+        </li>
+        <li>
+          <strong>Framing inspection.</strong> It comes after the rough-in
+          inspections are approved and the firestopping is in place
+          (<a href={src.ircCh1} rel="noopener">R109.1.4</a>).
+        </li>
+        <li>
+          <strong>Insulation.</strong> Utah's amendments give the building
+          official authority to inspect the insulation
+          (<a href={src.utahAmendments} rel="noopener">15A-3-202</a>).
+        </li>
+        <li>
+          <strong>Final inspection.</strong> It happens after the permitted
+          work is complete and before the space is used
+          (<a href={src.ircCh1} rel="noopener">R109.1.6</a>).
+        </li>
+      </ol>
+      <p>
+        One rule runs through all of it: work may not go past the point of
+        each inspection until that inspection is approved, and anything that
+        fails has to be corrected before it is covered
+        (<a href={src.ircCh1} rel="noopener">R109.4</a>). That is why the
+        drywall waits.
+      </p>
+      <p>
+        A permit also has a clock. It becomes invalid if work does not start
+        within 180 days of the day it was issued, or if more than 180 days
+        pass between inspections. The building official can extend it in
+        writing, up to 180 days at a time
+        (<a href={src.ircCh1} rel="noopener">R105.5</a>).
+      </p>
+
+      <h3>What the inspector is looking for in a basement</h3>
+      <p>
+        These come from
+        <a href={src.ircCh3} rel="noopener">Chapter 3 of the code</a>
+        and
+        <a href={src.utahAmendments} rel="noopener">Utah's amendments</a>:
+      </p>
+      <ul>
+        <li>
+          <strong>A way out of every bedroom.</strong> Each basement bedroom
+          needs an emergency escape opening of at least 5.7 square feet (5
+          square feet for an opening at ground level), at least 24 inches
+          high and 20 inches wide, with its bottom edge no more than 44
+          inches above the floor.
+        </li>
+        <li>
+          <strong>Smoke and carbon monoxide alarms.</strong> Work that needs
+          a permit brings the alarms up to the standard for a new home. Utah
+          adds a carbon monoxide alarm on each level.
+        </li>
+        <li>
+          <strong>Ceiling height.</strong> At least 7 feet in living space
+          and hallways. Beams and ducts may drop to 6 feet 4 inches.
+        </li>
+        <li>
+          <strong>Bathrooms.</strong> A bathroom without a window that opens
+          needs an exhaust fan that vents outdoors.
+        </li>
+      </ul>
+      <p>
+        The two city guides go through each of these with the exact section
+        numbers.
+      </p>
+
+      <h2 id="without">If the work is done without a permit</h2>
+      <p>
+        This is what the adopted code itself says. All of it is in
+        <a href={src.ircCh1} rel="noopener">Chapter 1</a>.
+      </p>
+      <ul>
+        <li>
+          <strong>It is unlawful.</strong> Altering a building in violation
+          of the code is an unlawful act (R113.1).
+        </li>
+        <li>
+          <strong>There is an added fee.</strong> Anyone who starts work that
+          needs a permit before getting one owes a fee on top of the normal
+          permit fees. Each city sets the amount (R108.6).
+        </li>
+        <li>
+          <strong>The city can stop the job.</strong> A building official can
+          issue a written stop work order, and the work has to stop at once.
+          Continuing after that brings fines set by the city (R114).
+        </li>
+        <li>
+          <strong>The city can order it corrected.</strong> A notice of
+          violation directs the owner to stop the violation and fix it
+          (R113.2).
+        </li>
+      </ul>
+      <p>
+        There is a practical problem too. Inspections are built around seeing
+        the wiring, plumbing, and framing before they are covered (R109.1.2,
+        R109.4). Once the drywall is up, that work is hidden, and the city
+        decides what it needs to see.
+      </p>
+      <p>
+        You will read online that unpermitted work causes trouble with
+        insurance claims or a sale. That depends on your policy and your
+        buyer. No state or city source we checked speaks to it, so we will
+        not guess.
+      </p>
+      <h3>If a past owner finished the basement</h3>
+      <p>
+        Start with the record. Lehi, for example, links an
+        <a href={src.lehiSearch} rel="noopener">online lookup</a>
+        from its
+        <a href={src.lehiBuilding} rel="noopener">Building and Inspections
+        page</a>
+        that finds a permit and its inspections by site address. If nothing
+        is on file, call your city's building department
+        and ask how it handles existing work. Each city decides that for
+        itself, and it is better to ask before you remodel or sell.
+      </p>
+
+      <h2 id="cities">City by city</h2>
+      <p>
+        The rule is statewide. The portal, the paperwork, and the fees are
+        local. We have written a full guide for each of these cities:
+      </p>
+      <ul>
+        <li>
+          <a href="/lehi-basement-finishing-permit/">Lehi basement finishing
+          permit guide</a>: the city checklist, how the fee is calculated,
+          and inspections that are scheduled by phone.
+        </li>
+        <li>
+          <a href="/saratoga-springs-basement-finishing-permit/">Saratoga
+          Springs basement permit guide</a>: what the basement plan must
+          show, the city's own code checklist, and the rules for a basement
+          apartment.
+        </li>
+      </ul>
+      <p>
+        Planning to rent the basement out? A basement apartment has its own
+        city rules on top of the building permit. Both guides cover them.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container container--narrow">
+      <span class="eyebrow">Quick Answers</span>
+      <h2>Utah basement permit FAQs</h2>
+      <FAQAccordion faqs={permitFaqs} />
+      <p class="more-links">
+        More about the work itself:
+        <a href="/process/">our six-step process</a>,
+        <a href="/services/">what a basement finish includes</a>, and
+        <a href="/faq/">general FAQs</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow prose">
+      <h2 id="sources">Sources</h2>
+      <p>
+        Everything on this page comes from the sources below, read on
+        {lastChecked.display}.
+      </p>
+      <ol class="sources">
+        <li>
+          <a href={src.utahAdopted} rel="noopener">Utah Code 15A-2-103</a>:
+          the construction codes Utah has adopted, including the 2021
+          International Residential Code.
+        </li>
+        <li>
+          <a href={src.utahAmendments} rel="noopener">Utah Code 15A-3-202</a>:
+          Utah's amendments to chapters 1 through 5 of that code.
+        </li>
+        <li>
+          <a href={src.ircCh1} rel="noopener">2021 International Residential
+          Code, Chapter 1</a>: permits (R105), fees (R108), inspections
+          (R109), violations (R113), and stop work orders (R114).
+        </li>
+        <li>
+          <a href={src.ircCh3} rel="noopener">2021 International Residential
+          Code, Chapter 3</a>: bathrooms (R303), ceiling height (R305),
+          emergency escape openings (R310), smoke alarms (R314), and carbon
+          monoxide alarms (R315).
+        </li>
+        <li>
+          <a href={src.licensingAct} rel="noopener">Utah Code Title 58,
+          Chapter 55</a>: the Utah Construction Trades Licensing Act. License
+          required is section 58-55-301 and the exemptions are section
+          58-55-305. Both sections are due to be renumbered on January 1,
+          2027.
+        </li>
+        <li>
+          <a href={src.licenseLookup} rel="noopener">Licensee Lookup and
+          Verification System</a>
+          and the
+          <a href={src.dopl} rel="noopener">Division of Professional
+          Licensing contracting page</a>.
+        </li>
+        <li>
+          <a href={src.lehiBuilding} rel="noopener">Lehi City, Building and
+          Inspections</a>, its
+          <a href={src.lehiChecklist} rel="noopener">Residential Basement
+          Finish checklist</a>, and its
+          <a href={src.lehiSearch} rel="noopener">inspection status
+          lookup</a>.
+        </li>
+        <li>
+          <a href={src.ssBasement} rel="noopener">City of Saratoga Springs,
+          Obtaining a Basement Permit</a>
+          and
+          <a href={src.ssForms} rel="noopener">Applications and Forms</a>.
+        </li>
+      </ol>
+      <p class="fine">
+        This guide is general information, not legal advice, and it does not
+        replace your city's building department. Codes and city rules
+        change. Confirm the current requirements with your city before you
+        build.
+      </p>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Want the permit handled for you?"
+    text="Permits and inspections are coordinated as part of every basement we finish. Tell us about your basement and we'll walk the space with you."
+    withForm
+    formId="utah-permit-form"
+  />
+</BaseLayout>
+
+<style>
+  .checked {
+    margin: var(--space-4) 0 0;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .jump {
+    margin-bottom: var(--space-5);
+    font-size: var(--text-sm);
+  }
+
+  .jump ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-5);
+    margin: 0;
+    padding: 0;
+  }
+
+  .jump li {
+    margin: 0;
+  }
+
+  .jump a {
+    display: inline-block;
+    padding: 0.55rem 0;
+  }
+
+  .glance {
+    margin: var(--space-5) 0;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+  }
+
+  .glance ul:last-child,
+  .glance ul:last-child li:last-child {
+    margin-bottom: 0;
+  }
+
+  .more-links {
+    margin-top: var(--space-5);
+    font-size: var(--text-sm);
+  }
+
+  .sources {
+    font-size: var(--text-sm);
+  }
+
+  .sources li {
+    margin-bottom: var(--space-3);
+  }
+
+  .fine {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+</style>
