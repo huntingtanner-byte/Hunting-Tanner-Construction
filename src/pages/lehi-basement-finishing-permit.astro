@@ -1,0 +1,740 @@
+---
+/**
+ * Lehi basement finishing permit guide.
+ *
+ * Every fact here comes from a Lehi City page or document, the Utah Code, or
+ * the residential code Utah has adopted, and is linked where it is used and
+ * again in the Sources list. Do not add fees, timelines, or rules that are
+ * not in one of those sources: where Lehi publishes nothing, the page says
+ * so. After re-checking the sources, update `lastChecked` below and the
+ * permit-guide note in HANDOFF.md.
+ */
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import CTASection from "@/components/CTASection.astro";
+import FAQAccordion from "@/components/FAQAccordion.astro";
+import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import type { FAQ } from "@/data/faqs";
+
+const lastChecked = { iso: "2026-11-25", display: "November 25, 2026" };
+
+const description =
+  "How a basement finishing permit works in Lehi, Utah: who needs one, how to apply, what to submit, how the fee is calculated, inspections, and key code rules.";
+
+const breadcrumbs = [
+  { name: "Home", path: "/" },
+  { name: "Service Areas", path: "/utah-county-basement-finishing/" },
+  { name: "Lehi", path: "/lehi-basement-finishing/" },
+  { name: "Permit Guide", path: "/lehi-basement-finishing-permit/" },
+];
+
+/** Official sources. PDF links change when the city re-uploads a file, so
+ *  each one is also reachable from the city page named beside it. */
+const src = {
+  building: "https://www.lehi-ut.gov/departments/building-and-inspections/",
+  checklist:
+    "https://www.lehi-ut.gov/media/0trlcj3t/residential-basement-finish.pdf",
+  portal: "https://lehibuilding.portal.iworq.net/portalhome/lehibuilding",
+  application: "https://www.lehi-ut.gov/media/f4pb3tc3/permit-application.pdf",
+  gasDiagram:
+    "https://www.lehi-ut.gov/media/zb2dlin3/gas-pipe-diagram-example.pdf",
+  inspectionStatus: "https://portal.iworq.net/LEHI/permits/602",
+  finance: "https://www.lehi-ut.gov/departments/finance/",
+  feeSchedule:
+    "https://www.lehi-ut.gov/media/ggnjvx0d/2027-fee-schedule-approved-with-new-power-rates.pdf",
+  letter: "https://www.lehi-ut.gov/media/hq2f4xhi/4-way-not-ready.pdf",
+  planningApps:
+    "https://www.lehi-ut.gov/departments/planning-zoning/planning-applications/",
+  aduFaq:
+    "https://www.lehi-ut.gov/media/1jmjx1gy/accessory-dwelling-units-faqs-062226.pdf",
+  aduApplication:
+    "https://www.lehi-ut.gov/media/l5yfknwj/adu-internal-accessory-dwelling-unit.pdf",
+  utahAdopted: "https://le.utah.gov/xcode/Title15A/Chapter2/15A-2-S103.html",
+  utahAmendments: "https://le.utah.gov/xcode/Title15A/Chapter3/15A-3-S202.html",
+  ircCh1:
+    "https://codes.iccsafe.org/content/IRC2021P3/chapter-1-scope-and-administration",
+  ircCh3:
+    "https://codes.iccsafe.org/content/IRC2021P3/chapter-3-building-planning",
+};
+
+/** The city's phone line. Tagged so a tap is not counted as a call to us. */
+const cityPhone = { display: "385-201-1035", href: "tel:+13852011035" };
+
+const permitFaqs: FAQ[] = [
+  {
+    question: "Do I need a permit to finish my basement in Lehi?",
+    answer:
+      "Yes. Utah's statewide construction code adopts the 2021 International Residential Code, which requires a permit to alter a building or to install or change electrical, gas, mechanical, or plumbing systems. Finishing a basement does all of that. Lehi's Building and Inspections Department issues the permit and publishes a checklist for residential basement finishes. Cosmetic work alone, such as paint, carpet, tile, cabinets, and countertops, is exempt.",
+  },
+  {
+    question: "How much does a basement finishing permit cost in Lehi?",
+    answer:
+      "Lehi does not publish a flat fee. Its FY 2027 fee schedule bases the permit fee on the project's valuation, then adds a plan review fee of 40% of the permit fee and a state charge of 1%. The schedule's valuation calculator lists $76.86 per square foot for a finished basement and $38.43 for an unfinished one, but it does not say which figure applies to finishing an existing basement. The Building Department calculates the exact fee when you apply.",
+  },
+  {
+    question: "How long does it take to get a basement permit in Lehi?",
+    answer:
+      "Lehi does not publish a review time for basement finish permits, so we won't guess at one here. For the current turnaround, ask the city's Building and Inspections Department at 385-201-1035.",
+  },
+  {
+    question: "How do I schedule a basement inspection in Lehi?",
+    answer:
+      "By phone. Lehi schedules inspections through its Building Inspection Office at 385-201-1035 and asks for 24 hours' notice. The city says inspections are not scheduled by voicemail, email, or online. If an inspector arrives and the project is clearly not ready, the city charges a $100 reinspection fee.",
+  },
+  {
+    question: "What size window does a basement bedroom need in Lehi?",
+    answer:
+      "Lehi enforces the 2021 International Residential Code with Utah's amendments. Each basement bedroom needs an emergency escape and rescue opening of at least 5.7 square feet, at least 24 inches high and 20 inches wide, with the bottom of the opening no more than 44 inches above the floor. A window well must be at least 9 square feet and 36 inches in each direction, with a permanent ladder or steps if it is deeper than 44 inches.",
+  },
+  {
+    question: "Can I rent out my basement as an apartment in Lehi?",
+    answer:
+      "Lehi allows one accessory dwelling unit in an owner-occupied single-family home on a lot of at least 6,000 square feet, subject to zoning. It needs a building permit, a $25 application to the Planning Division, one off-street parking stall, a lighted walkway to its entrance, and a recorded Declaration of Owner Occupancy. It can't be used as a short-term rental of less than 30 days.",
+  },
+];
+
+const schemas = [breadcrumbSchema(breadcrumbs), faqSchema(permitFaqs)];
+---
+
+<BaseLayout
+  title="Lehi Basement Finishing Permit Guide | Utah County Basement Pros"
+  description={description}
+  path="/lehi-basement-finishing-permit/"
+  schemas={schemas}
+>
+  <PageIntro
+    eyebrow="Permit Guide"
+    heading="Basement Finishing Permits in Lehi, Utah"
+    lede="Finishing a basement in Lehi takes a building permit from the city. Here is how it works, start to finish, with every fact linked to its source: Lehi City, the Utah Code, or the building code Utah has adopted."
+    breadcrumbs={breadcrumbs}
+  >
+    <p class="checked">
+      Last checked against city and state sources:
+      <time datetime={lastChecked.iso}>{lastChecked.display}</time>
+    </p>
+  </PageIntro>
+
+  <section class="section">
+    <div class="container container--narrow prose guide">
+      <nav class="jump" aria-label="On this page">
+        <ul>
+          <li><a href="#who">Who needs one</a></li>
+          <li><a href="#apply">How to apply</a></li>
+          <li><a href="#submit">What to submit</a></li>
+          <li><a href="#fee">What it costs</a></li>
+          <li><a href="#inspections">Inspections</a></li>
+          <li><a href="#code">Code basics</a></li>
+          <li><a href="#adu">Basement apartments</a></li>
+          <li><a href="#sources">Sources</a></li>
+        </ul>
+      </nav>
+
+      <div class="glance">
+        <span class="eyebrow">At a glance</span>
+        <ul>
+          <li>
+            <strong>Permit:</strong> required. Lehi's Building and
+            Inspections Department issues it.
+          </li>
+          <li>
+            <strong>Where to apply:</strong> online, through the city's
+            Building Permit Submittal Portal.
+          </li>
+          <li>
+            <strong>What to send:</strong> a floor plan, electrical,
+            plumbing, and mechanical details, and the permit application.
+          </li>
+          <li>
+            <strong>Fee:</strong> based on the project's valuation, plus a
+            plan review fee and a 1% state charge. There is no flat fee.
+          </li>
+          <li>
+            <strong>Inspections:</strong> booked by phone, with 24 hours'
+            notice.
+          </li>
+          <li>
+            <strong>Review time:</strong> Lehi does not publish one.
+          </li>
+        </ul>
+      </div>
+
+      <h2 id="who">Who needs a permit</h2>
+      <p>
+        Anyone finishing or remodeling a basement in Lehi. Utah's statewide
+        construction code
+        (<a href={src.utahAdopted} rel="noopener">Utah Code 15A-2-103</a>)
+        adopts the 2021 International Residential Code, and that code
+        requires a permit before you build or alter a building or install
+        or change electrical, gas, mechanical, or plumbing systems
+        (<a href={src.ircCh1} rel="noopener">IRC R105.1</a>). Framing
+        rooms, wiring them, adding a bathroom, and extending ductwork all
+        count.
+      </p>
+      <p>
+        The same code exempts cosmetic work. Painting, wallpaper, tile,
+        carpet, cabinets, countertops, and similar finish work do not need
+        a permit on their own
+        (<a href={src.ircCh1} rel="noopener">IRC R105.2</a>).
+      </p>
+      <p>
+        In Lehi, the
+        <a href={src.building} rel="noopener">Building and Inspections
+        Department</a>
+        handles and issues all building permits, and it publishes a
+        checklist just for a residential basement finish. If we finish your
+        basement, we coordinate the permit and inspections as part of
+        <a href="/process/">the project</a>. The steps below are what the
+        city publishes for anyone applying.
+      </p>
+
+      <h2 id="apply">How to apply</h2>
+      <ol>
+        <li>
+          <strong>Start at the portal.</strong> Lehi says all permit
+          applications must be submitted through its
+          <a href={src.portal} rel="noopener">Building Permit Submittal
+          Portal</a>.
+        </li>
+        <li>
+          <strong>Fill out the application.</strong> The portal gives
+          three steps: begin the application, fill out all applicable
+          fields, then upload the required documents and submit.
+        </li>
+        <li>
+          <strong>Know what the form asks.</strong> The city's
+          <a href={src.application} rel="noopener">building permit
+          application</a>
+          has a checkbox for a basement permit. It asks for the job
+          address, subdivision, and lot, the general contractor or owner,
+          and the electrical, plumbing, and mechanical contractors with
+          their license numbers. It has signature lines for the owner and
+          the contractor.
+        </li>
+        <li>
+          <strong>Track it.</strong> The portal has a permit search, and
+          the city links an
+          <a href={src.inspectionStatus} rel="noopener">inspection status
+          lookup</a>
+          that works with the permit number, the site address, or the
+          subdivision and lot number.
+        </li>
+      </ol>
+      <p>
+        The city lists the Building and Inspections phone line as
+        <a
+          href={cityPhone.href}
+          data-event="city_contact_click"
+          data-event-label="lehi-building-phone"
+        >{cityPhone.display}</a>, with phone hours of Monday through
+        Thursday, 7:30 a.m. to 5 p.m., and Friday, 8 a.m. to 3:30 p.m.
+      </p>
+
+      <h2 id="submit">What Lehi asks you to submit</h2>
+      <p>
+        Lehi's
+        <a href={src.checklist} rel="noopener">Residential Basement Finish
+        checklist</a>
+        is one page. It lists:
+      </p>
+      <ul>
+        <li>
+          A complete set of plans, with:
+          <ul>
+            <li>
+              a floor plan showing dimensions and window locations and
+              sizes
+            </li>
+            <li>electrical, plumbing, and mechanical details</li>
+          </ul>
+        </li>
+        <li>An engineering packet, if necessary</li>
+        <li>A gas piping diagram, if necessary</li>
+        <li>
+          The completed building permit application, with the contractor's
+          license number and signature
+        </li>
+      </ul>
+      <p>
+        The checklist still mentions folded plans and a gas diagram on
+        paper, but its first line says every application goes through the
+        online portal. The portal page links a
+        <a href={src.gasDiagram} rel="noopener">gas pipe diagram
+        example</a>.
+      </p>
+      <p>
+        That is the whole list. Lehi does not publish a sample basement
+        plan. The window sizes matter because every basement bedroom needs
+        an egress window that meets the minimums under
+        <a href="#code">code basics</a> below.
+      </p>
+
+      <h2 id="fee">What the permit costs</h2>
+      <p>
+        Lehi does not charge a flat fee for a basement finish. Its
+        <a href={src.feeSchedule} rel="noopener">FY 2027 fee schedule</a>,
+        the one in effect when we checked, builds the fee in four steps:
+      </p>
+      <ol>
+        <li>
+          <strong>Valuation.</strong> The city assigns the project a dollar
+          value. The schedule's valuation calculator lists $76.86 per
+          square foot for a finished basement and $38.43 per square foot
+          for an unfinished or semi-finished basement.
+        </li>
+        <li>
+          <strong>Permit fee.</strong> A sliding table turns the valuation
+          into a fee. A valuation of $25,000 carries a $391.75 fee, plus
+          $10.10 for each additional $1,000 up to $50,000. A valuation of
+          $50,000 carries $643.75, plus $7 for each additional $1,000 up
+          to $100,000.
+        </li>
+        <li>
+          <strong>Plan review.</strong> 40% of the permit fee for
+          residential work.
+        </li>
+        <li>
+          <strong>State charge.</strong> 1% of the permit fee.
+        </li>
+      </ol>
+      <p>
+        <strong>Example of the math:</strong> a project the city values at
+        $60,000 would have a permit fee of $713.75, a plan review fee of
+        $285.50, and a state charge of $7.14. That adds up to $1,006.39.
+      </p>
+      <p>
+        What the schedule does not say is which per-square-foot figure
+        Lehi applies when you finish a basement that is already there: the
+        finished figure, or the difference between finished and
+        unfinished. So the schedule alone can't tell you the exact fee for
+        your square footage. The Building Department calculates it when
+        you apply.
+      </p>
+      <p>
+        Two related fees are published: a $100 reinspection fee, and a $25
+        application fee if the basement will be an
+        <a href="#adu">accessory dwelling unit</a>. The schedule is linked
+        from the city's
+        <a href={src.finance} rel="noopener">Finance page</a>, where a new
+        one is posted each fiscal year.
+      </p>
+
+      <h2 id="inspections">Inspections</h2>
+      <p>
+        A permit comes with inspections at set points. Under the
+        residential code Utah has adopted
+        (<a href={src.ircCh1} rel="noopener">IRC R109</a>, as amended by
+        <a href={src.utahAmendments} rel="noopener">Utah Code
+        15A-3-202</a>), the order for a basement finish is:
+      </p>
+      <ol>
+        <li>
+          <strong>Rough-in.</strong> Plumbing, mechanical, gas, and
+          electrical work is inspected before anything is covered and
+          before fixtures are set.
+        </li>
+        <li>
+          <strong>Framing.</strong> Inspected after the framing and
+          firestopping are in place and the rough-ins have passed.
+        </li>
+        <li>
+          <strong>Insulation.</strong> Utah's amendments give the building
+          official authority to inspect how the insulation is installed.
+        </li>
+        <li>
+          <strong>Final.</strong> After the work is complete and before
+          the space is used.
+        </li>
+      </ol>
+      <p>
+        Work can't move past each stage until that inspection is approved.
+        Lehi does not post its own basement inspection list online. A
+        <a href={src.letter} rel="noopener">2022 letter from the city's
+        Building Official</a>
+        says a list of the minimum items to have ready is sent out with
+        every permit, so that list is the one to follow.
+      </p>
+      <h3>How scheduling works in Lehi</h3>
+      <ul>
+        <li>
+          Call the Building Inspection Office at
+          <a
+            href={cityPhone.href}
+            data-event="city_contact_click"
+            data-event-label="lehi-inspection-phone"
+          >{cityPhone.display}</a>. The city says inspections are not
+          scheduled by voicemail, email, or online.
+        </li>
+        <li>Give 24 hours' notice for any type of inspection.</li>
+        <li>
+          Call only when the work is ready. Lehi charges a $100
+          reinspection fee when an inspector arrives and the project is
+          clearly not ready.
+        </li>
+        <li>
+          To cancel, the Building Official's letter says to call by 3:00
+          p.m. the day before. A same-day cancellation is treated as not
+          ready.
+        </li>
+        <li>
+          Keep the permit's Yellow Card and the approved plans on site for
+          every inspection.
+        </li>
+      </ul>
+      <p>
+        One more rule from the code: a permit expires if work does not
+        start within 180 days of issue, or if more than 180 days pass
+        between inspections. The building official can extend it in
+        writing (<a href={src.ircCh1} rel="noopener">IRC R105.5</a>).
+      </p>
+
+      <h2 id="code">Code basics for Lehi basements</h2>
+      <p>
+        Lehi does not publish its own summary of basement code
+        requirements, so these come from the code the city enforces: the
+        <a href={src.ircCh3} rel="noopener">2021 International Residential
+        Code, Chapter 3</a>, with
+        <a href={src.utahAmendments} rel="noopener">Utah's amendments</a>.
+        They are the rules that shape most basement layouts.
+      </p>
+
+      <h3>Bedroom egress windows (IRC R310)</h3>
+      <ul>
+        <li>
+          Every basement bedroom needs its own emergency escape and rescue
+          opening. That includes a bedroom added to a basement that is
+          already finished. The code has an exception for homes with a
+          fire sprinkler system.
+        </li>
+        <li>
+          The standard minimums: a clear opening of at least 5.7 square
+          feet, at least 24 inches high and 20 inches wide, with its
+          bottom edge no more than 44 inches above the floor.
+        </li>
+        <li>It must open from inside without keys or tools.</li>
+        <li>
+          A window well must be at least 9 square feet, and at least 36
+          inches both out from the wall and across. A well deeper than 44
+          inches needs a permanent ladder or steps.
+        </li>
+        <li>
+          Utah adds a protection for older homes. An existing bedroom
+          whose window met the code when the bedroom was finished does not
+          have to be enlarged if that would compromise the structure or
+          could not meet other rules, such as setbacks or window well
+          requirements.
+        </li>
+      </ul>
+
+      <h3>Smoke and carbon monoxide alarms (IRC R314 and R315)</h3>
+      <ul>
+        <li>
+          A permitted basement finish brings alarm requirements to the
+          whole home, not only the basement.
+        </li>
+        <li>
+          Smoke alarms go in each bedroom, outside each sleeping area, and
+          on every story, including the basement.
+        </li>
+        <li>
+          Carbon monoxide alarms go on each level and outside each
+          sleeping area in homes with a fuel-burning appliance or an
+          attached garage.
+        </li>
+        <li>
+          Alarms must be interconnected, so that when one sounds they all
+          do. Listed wireless alarms satisfy that.
+        </li>
+      </ul>
+
+      <h3>Ceiling height and room size (IRC R304 and R305)</h3>
+      <ul>
+        <li>
+          Living space and hallways need a ceiling at least 7 feet high.
+        </li>
+        <li>Bathrooms and laundry rooms need 6 feet 8 inches.</li>
+        <li>
+          Beams, ducts, and similar obstructions in a basement can hang as
+          low as 6 feet 4 inches.
+        </li>
+        <li>
+          A bedroom or other habitable room needs at least 70 square feet
+          and at least 7 feet in each direction.
+        </li>
+      </ul>
+
+      <h3>Bathrooms (IRC R303 and R305)</h3>
+      <ul>
+        <li>
+          A bathroom needs either a window of at least 3 square feet, half
+          of which opens, or a light and an exhaust fan that vents
+          directly outdoors.
+        </li>
+        <li>
+          A shower needs 6 feet 8 inches of ceiling height over a 30 by 30
+          inch area at the showerhead.
+        </li>
+      </ul>
+      <p>
+        This is not the whole code. Lehi's
+        <a href={src.building} rel="noopener">note to general
+        contractors</a>
+        says approved plans do not list every requirement, and the work
+        still has to meet all of them.
+      </p>
+
+      <h2 id="adu">Basement apartments (ADUs) in Lehi</h2>
+      <p>
+        A basement with its own entrance, a physical separation from the
+        main home, and its own cooking, eating, bathroom, and sleeping
+        space is an accessory dwelling unit under Lehi's rules. It does
+        not matter who lives there: the city's
+        <a href={src.aduFaq} rel="noopener">ADU FAQ</a>
+        says the tenants do not need to be related to the homeowner,
+        because an ADU is about how the home is built. Lehi allows one,
+        with conditions:
+      </p>
+      <ul>
+        <li>
+          <strong>Owner occupied.</strong> The homeowner must live in the
+          home as long as the ADU is occupied, and a Declaration of Owner
+          Occupancy is recorded with Utah County.
+        </li>
+        <li>
+          <strong>Lot and zoning.</strong> A single-family home on a lot
+          of at least 6,000 square feet. Not allowed in townhomes,
+          duplexes, or other multi-family housing. One ADU per lot. The
+          city tells owners to verify zoning with the Planning Division,
+          and its
+          <a href={src.planningApps} rel="noopener">Planning Applications
+          page</a>
+          links a map of restricted areas.
+        </li>
+        <li>
+          <strong>Parking.</strong> One off-street stall for the ADU, at
+          least 9 by 20 feet, separate from and not in tandem with the
+          home's required parking.
+        </li>
+        <li>
+          <strong>Entrance.</strong> A lighted, hard-surface walkway from
+          the parking area to the ADU entrance.
+        </li>
+        <li>
+          <strong>Appearance.</strong> The home has to keep looking like a
+          single-family house.
+        </li>
+        <li>
+          <strong>Permit and application.</strong> A building permit, plus
+          a $25
+          <a href={src.aduApplication} rel="noopener">internal ADU
+          application</a>
+          to the Planning Division with a floor plan and a site plan. The
+          application says staff review takes 5 business days or less once
+          it is complete and the requirements are met.
+        </li>
+        <li>
+          <strong>No short-term rentals.</strong> An ADU can't be rented
+          for terms of less than 30 days.
+        </li>
+        <li>
+          <strong>Size.</strong> No size limit for an internal ADU.
+        </li>
+      </ul>
+      <p>
+        <a href={src.utahAmendments} rel="noopener">Utah's amendments</a>
+        also name accessory dwelling units in the egress and alarm rules
+        above. And they exempt an ADU from the code's fire separation
+        between dwelling units when shared walls have at least 1/2-inch
+        drywall on each side and the floor above has it on the underside.
+      </p>
+
+      <div class="glance glance--end">
+        <span class="eyebrow">What Lehi does not publish</span>
+        <ul>
+          <li>A review or approval time for basement permits.</li>
+          <li>
+            Its basement inspection list. The city sends one with the
+            permit.
+          </li>
+          <li>
+            Which valuation figure it applies to finishing an existing
+            basement, and so the exact fee.
+          </li>
+          <li>A city summary of basement code requirements.</li>
+        </ul>
+        <p>
+          For those, the Building and Inspections Department is the
+          source. Building in Saratoga Springs instead? See the
+          <a href="/saratoga-springs-basement-finishing-permit/">Saratoga
+          Springs permit guide</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container container--narrow">
+      <span class="eyebrow">Quick Answers</span>
+      <h2>Lehi basement permit FAQs</h2>
+      <FAQAccordion faqs={permitFaqs} />
+      <p class="more-links">
+        More about the work itself:
+        <a href="/lehi-basement-finishing/">basement finishing in Lehi</a>,
+        <a href="/services/#bathrooms-bedrooms">basement bedrooms and
+        bathrooms</a>, and <a href="/faq/">general FAQs</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 id="sources">Sources</h2>
+      <p>
+        Checked on
+        <time datetime={lastChecked.iso}>{lastChecked.display}</time>.
+        Cities replace documents, so if a PDF link breaks, the city page
+        named beside it has the current copy.
+      </p>
+      <ol class="sources">
+        <li>
+          Lehi City,
+          <a href={src.building} rel="noopener">Building and
+          Inspections</a>: who issues permits, the portal requirement,
+          inspection scheduling, phone hours.
+        </li>
+        <li>
+          Lehi City,
+          <a href={src.checklist} rel="noopener">Residential Basement
+          Finish checklist</a>
+          (PDF, linked from Building and Inspections).
+        </li>
+        <li>
+          Lehi City,
+          <a href={src.portal} rel="noopener">Building Permit Submittal
+          Portal</a>: application steps, permit search, forms.
+        </li>
+        <li>
+          Lehi City,
+          <a href={src.application} rel="noopener">Building Permit
+          Application</a>
+          (PDF, linked from the portal).
+        </li>
+        <li>
+          Lehi City,
+          <a href={src.feeSchedule} rel="noopener">FY 2027 Fee
+          Schedule</a>
+          (PDF, linked from the
+          <a href={src.finance} rel="noopener">Finance page</a>): Building
+          Inspections and Planning and Zoning sections.
+        </li>
+        <li>
+          Lehi City,
+          <a href={src.letter} rel="noopener">Letter from the Building
+          Official</a>, September 26, 2022 (PDF, linked from Building and
+          Inspections).
+        </li>
+        <li>
+          Lehi City,
+          <a href={src.planningApps} rel="noopener">Planning
+          Applications</a>: the
+          <a href={src.aduFaq} rel="noopener">Accessory Dwelling Units
+          FAQ</a>
+          and the
+          <a href={src.aduApplication} rel="noopener">internal ADU
+          application</a>
+          (PDFs).
+        </li>
+        <li>
+          State of Utah,
+          <a href={src.utahAdopted} rel="noopener">Utah Code
+          15A-2-103</a>: the construction codes adopted statewide.
+        </li>
+        <li>
+          State of Utah,
+          <a href={src.utahAmendments} rel="noopener">Utah Code
+          15A-3-202</a>: Utah's amendments to the residential code.
+        </li>
+        <li>
+          International Code Council, 2021 International Residential Code,
+          <a href={src.ircCh1} rel="noopener">Chapter 1</a>
+          (permits, inspections) and
+          <a href={src.ircCh3} rel="noopener">Chapter 3</a>
+          (egress, alarms, ceiling height, room size, bathrooms).
+        </li>
+      </ol>
+      <p class="fine">
+        This guide is a plain-language summary for homeowners. It is not
+        legal advice and does not replace the city's plan review. Fees and
+        procedures change. If anything here differs from what Lehi City
+        tells you, go with the city.
+      </p>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Rather have the permit handled for you?"
+    text="Permits and inspections are coordinated as part of every basement we finish. Tell us about your Lehi basement and we'll walk the space with you."
+    withForm
+    formId="lehi-permit-form"
+    defaultCity="Lehi"
+  />
+</BaseLayout>
+
+<style>
+  .checked {
+    margin: var(--space-4) 0 0;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  /* Jump links: padded so each one is a comfortable tap target */
+  .jump {
+    margin-bottom: var(--space-5);
+    font-size: var(--text-sm);
+  }
+  .jump ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-5);
+    margin: 0;
+    padding: 0;
+  }
+  .jump li {
+    margin: 0;
+  }
+  .jump a {
+    display: inline-block;
+    padding: 0.55rem 0;
+  }
+
+  /* Hairline summary boxes, in keeping with the site's cards */
+  .glance {
+    margin: var(--space-5) 0;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+  }
+  .glance ul:last-child,
+  .glance ul:last-child li:last-child {
+    margin-bottom: 0;
+  }
+  .glance--end {
+    margin-top: var(--space-7);
+  }
+
+  .more-links {
+    margin-top: var(--space-5);
+    font-size: var(--text-sm);
+  }
+
+  .sources {
+    font-size: var(--text-sm);
+  }
+  .sources li {
+    margin-bottom: var(--space-3);
+  }
+  .fine {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+</style>

@@ -1,0 +1,749 @@
+---
+/**
+ * Saratoga Springs basement finishing permit guide.
+ *
+ * Every fact here comes from a City of Saratoga Springs page or document,
+ * the Utah Code, or the residential code Utah has adopted, and is linked
+ * where it is used and again in the Sources list. Do not add fees,
+ * timelines, or rules that are not in one of those sources: where the city
+ * publishes nothing, the page says so. After re-checking the sources, update
+ * `lastChecked` below and the permit-guide note in HANDOFF.md.
+ */
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import CTASection from "@/components/CTASection.astro";
+import FAQAccordion from "@/components/FAQAccordion.astro";
+import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import type { FAQ } from "@/data/faqs";
+
+const lastChecked = { iso: "2026-11-25", display: "November 25, 2026" };
+
+const description =
+  "How to get a basement finishing permit in Saratoga Springs, Utah: what your plan must show, the city portal, fees, inspections, the code checklist, and IADU rules.";
+
+const breadcrumbs = [
+  { name: "Home", path: "/" },
+  { name: "Service Areas", path: "/utah-county-basement-finishing/" },
+  {
+    name: "Saratoga Springs",
+    path: "/saratoga-springs-basement-finishing/",
+  },
+  {
+    name: "Permit Guide",
+    path: "/saratoga-springs-basement-finishing-permit/",
+  },
+];
+
+/** Official sources. Document Center links change when the city replaces a
+ *  file, so each PDF is also reachable from the city page named beside it. */
+const src = {
+  basementPermit:
+    "https://www.saratogasprings-ut.gov/225/Obtaining-a-Basement-Permit",
+  building: "https://www.saratogasprings-ut.gov/201/Building",
+  portal: "https://cityworks.saratogasprings-ut.gov/publicaccess/login",
+  buildingPermit:
+    "https://www.saratogasprings-ut.gov/220/Obtaining-a-Building-Permit",
+  forms: "https://www.saratogasprings-ut.gov/209/Applications-Forms",
+  permitFeeTable:
+    "https://www.saratogasprings-ut.gov/DocumentCenter/View/19492/Building-Permit-Fee-Schedule-2026",
+  feeSchedule:
+    "https://www.saratogasprings-ut.gov/DocumentCenter/View/1707/Consolidated-Fee-Schedule",
+  iaduFaq:
+    "https://www.saratogasprings-ut.gov/1008/FAQs-for-Accessory-Units-Renting",
+  aduCode:
+    "https://www.saratogasprings-ut.gov/DocumentCenter/View/1389/1920-Internal-Accessory-Dwelling-Units-IADUs",
+  aduRegistration:
+    "https://www.saratogasprings-ut.gov/DocumentCenter/View/14038/IADU-Registration-Process",
+  utahAdopted: "https://le.utah.gov/xcode/Title15A/Chapter2/15A-2-S103.html",
+  utahAmendments: "https://le.utah.gov/xcode/Title15A/Chapter3/15A-3-S202.html",
+  ircCh1:
+    "https://codes.iccsafe.org/content/IRC2021P3/chapter-1-scope-and-administration",
+};
+
+/** The city's lines. Tagged so a tap is not counted as a call or email to us. */
+const cityPhone = { display: "801-766-6507", href: "tel:+18017666507" };
+const cityEmail = "BuildingApps@SaratogaSpringsCity.com";
+
+const permitFaqs: FAQ[] = [
+  {
+    question: "Do I need a permit to finish my basement in Saratoga Springs?",
+    answer:
+      "Yes. The city's Building Department reviews plans, issues permits, and inspects basement finishes, and its basement permit page sends applications through the online Public Portal. The requirement comes from the 2021 International Residential Code, which Utah has adopted statewide. Cosmetic work alone, such as paint, carpet, tile, cabinets, and countertops, is exempt.",
+  },
+  {
+    question: "What does Saratoga Springs want to see on a basement plan?",
+    answer:
+      "The city's basement permit page says the plan should show the type of each room, the dimensions of each room, the location and size of doors and windows, the location of lights, outlets, smoke detectors, and carbon monoxide detectors, the utility or mechanical room, and the electrical panel.",
+  },
+  {
+    question: "How much does a basement permit cost in Saratoga Springs?",
+    answer:
+      "The city does not publish a flat basement fee. Its fee schedule sets the permit fee from the project's valuation using the International Residential Code fee table, lists plan review at 65% of the permit fee (25% for permits that do not need a complete plan review), and adds a 1% state charge. The schedule also has a footnote about a fee that prepays a future basement permit and inspections, so ask the Building Department whether that applies to your home.",
+  },
+  {
+    question: "How tall does a basement ceiling have to be in Saratoga Springs?",
+    answer:
+      "The city's basement permit page lists a minimum of 7 feet from the finished floor to the finished ceiling. Under beams, girders, ducts, and other obstructions, the minimum is 6 feet 4 inches.",
+  },
+  {
+    question: "How do I request a basement inspection in Saratoga Springs?",
+    answer:
+      "The city lists an inspection request line at 801-766-6507, extension 120. The Building Department is open Monday through Thursday, 7 AM to 6 PM, and Friday, 8 AM to 5 PM, with a limited number of inspections on Fridays. Approved plans and permit documents must be on site.",
+  },
+  {
+    question: "Can I put an apartment in my Saratoga Springs basement?",
+    answer:
+      "Only where the city allows internal accessory dwelling units. Saratoga Springs maps each neighborhood as IADU Allowed, Prohibited, or Potential, and its registration packet says most plats recorded before October 1, 2021 are not eligible. Where allowed, the lot must be larger than 6,000 square feet, the owner must live in the home, and the unit needs a separate exterior entrance, one extra off-street parking stall, a building permit, and a $50 registration with the city.",
+  },
+];
+
+const schemas = [breadcrumbSchema(breadcrumbs), faqSchema(permitFaqs)];
+---
+
+<BaseLayout
+  title="Saratoga Springs Basement Permit Guide | Utah County Basement Pros"
+  description={description}
+  path="/saratoga-springs-basement-finishing-permit/"
+  schemas={schemas}
+>
+  <PageIntro
+    eyebrow="Permit Guide"
+    heading="Saratoga Springs Basement Finishing Permit Guide"
+    lede="Saratoga Springs publishes a basement permit page, an online portal, and its own code checklist. This guide puts them in order for a homeowner, with every fact linked to its source: the city, the Utah Code, or the building code Utah has adopted."
+    breadcrumbs={breadcrumbs}
+  >
+    <p class="checked">
+      Last checked against city and state sources:
+      <time datetime={lastChecked.iso}>{lastChecked.display}</time>
+    </p>
+  </PageIntro>
+
+  <section class="section">
+    <div class="container container--narrow prose guide">
+      <nav class="jump" aria-label="On this page">
+        <ul>
+          <li><a href="#plan">The plan</a></li>
+          <li><a href="#who">Who needs one</a></li>
+          <li><a href="#apply">How to apply</a></li>
+          <li><a href="#checklist">Code checklist</a></li>
+          <li><a href="#fee">What it costs</a></li>
+          <li><a href="#inspections">Inspections</a></li>
+          <li><a href="#iadu">Basement apartments</a></li>
+          <li><a href="#sources">Sources</a></li>
+        </ul>
+      </nav>
+
+      <div class="glance">
+        <span class="eyebrow">At a glance</span>
+        <ul>
+          <li>
+            <strong>Permit:</strong> required. The city's Building
+            Department reviews the plan, issues the permit, and inspects
+            the work.
+          </li>
+          <li>
+            <strong>Where to apply:</strong> the city's online Public
+            Portal. The department is paperless.
+          </li>
+          <li>
+            <strong>What to send:</strong> a basement plan showing rooms,
+            dimensions, doors, windows, lights, outlets, alarms, the
+            mechanical room, and the electrical panel.
+          </li>
+          <li>
+            <strong>Fee:</strong> based on the project's valuation, plus
+            plan review and a 1% state charge. No flat fee is published.
+          </li>
+          <li>
+            <strong>Inspections:</strong> requested through the Building
+            Department's inspection line.
+          </li>
+          <li>
+            <strong>Review time:</strong> not published for basement
+            permits.
+          </li>
+        </ul>
+      </div>
+
+      <h2 id="plan">Start with the plan</h2>
+      <p>
+        The drawing Saratoga Springs asks for is a basement plan. The
+        city's
+        <a href={src.basementPermit} rel="noopener">basement permit
+        page</a>
+        says it should show:
+      </p>
+      <ul>
+        <li>the type of each room (bedroom, family room, and so on)</li>
+        <li>the dimensions of each room</li>
+        <li>the location and size of doors and windows</li>
+        <li>the location of lights and outlets</li>
+        <li>
+          the location of smoke detectors and carbon monoxide detectors
+        </li>
+        <li>the utility or mechanical room</li>
+        <li>the electrical panel</li>
+      </ul>
+      <p>
+        The same page asks you to read its list of minimum code
+        requirements before you draw. The parts that shape a layout are in
+        the <a href="#checklist">code checklist</a> below. If the homeowner
+        will be doing the work, the city also asks for its Owner Builder
+        Certification, found on its
+        <a href={src.forms} rel="noopener">Applications and Forms
+        page</a>.
+      </p>
+
+      <h2 id="who">Who needs a permit</h2>
+      <p>
+        Anyone finishing a basement in the city. The
+        <a href={src.building} rel="noopener">Building Department</a>
+        is responsible for plan reviews, permits, and inspections on
+        basement finishes. The requirement itself comes from the code the
+        city enforces, the 2021 International Residential Code with Utah's
+        amendments
+        (<a href={src.utahAdopted} rel="noopener">Utah Code 15A-2-103</a>).
+        It requires a permit to alter a building or to install or change
+        electrical, gas, mechanical, or plumbing systems
+        (<a href={src.ircCh1} rel="noopener">IRC R105.1</a>).
+      </p>
+      <p>
+        Cosmetic work is exempt. Paint, wallpaper, tile, carpet, cabinets,
+        countertops, and similar finish work do not need a permit on their
+        own (<a href={src.ircCh1} rel="noopener">IRC R105.2</a>).
+      </p>
+
+      <h2 id="apply">How to apply</h2>
+      <ol>
+        <li>
+          <strong>Go to the Public Portal.</strong> The Building
+          Department is paperless. Permit submittals, resubmittals, and
+          payments go through the city's
+          <a href={src.portal} rel="noopener">Cityworks Public Portal</a>,
+          which the basement permit page links as its Basement Permit
+          Application.
+        </li>
+        <li>
+          <strong>Complete it in full.</strong> The city asks you to
+          finish the portal application and provide all necessary
+          documents to avoid delay.
+        </li>
+        <li>
+          <strong>Wait for the approved set.</strong> After the permit is
+          issued, the city sends a digital copy of the approved plans and
+          permit documents for you to print and keep on site.
+        </li>
+        <li>
+          <strong>Resubmit any changes.</strong> The city's
+          <a href={src.buildingPermit} rel="noopener">building permit
+          page</a>
+          says changes from the approved plans must be resubmitted to the
+          Building Department before you make them.
+        </li>
+      </ol>
+      <p>
+        For application questions, the basement permit page gives
+        <a
+          href={`mailto:${cityEmail}`}
+          data-event="city_contact_click"
+          data-event-label="saratoga-building-email"
+        >{cityEmail}</a>. The Building Department's phone is
+        <a
+          href={cityPhone.href}
+          data-event="city_contact_click"
+          data-event-label="saratoga-building-phone"
+        >{cityPhone.display}</a>, and its posted hours are Monday through
+        Thursday, 7 AM to 6 PM, and Friday, 8 AM to 5 PM.
+      </p>
+      <p>
+        <strong>Review time:</strong> the city does not publish one for
+        basement permits. Its building permit page says plans for
+        single-family homes can be processed in approximately 10 working
+        days and that more complex plans may take longer. That figure is
+        for new homes, not basement finishes.
+      </p>
+
+      <h2 id="checklist">The city's code checklist, room by room</h2>
+      <p>
+        Saratoga Springs publishes its own list of minimum requirements
+        for basements on the
+        <a href={src.basementPermit} rel="noopener">basement permit
+        page</a>, drawn from the 2021 International Residential Code. The
+        city notes that the list is not all inclusive. These are the items
+        that shape most layouts.
+      </p>
+
+      <h3>Bedrooms and windows</h3>
+      <ul>
+        <li>
+          Bedrooms: at least 70 square feet, with no dimension under 7
+          feet.
+        </li>
+        <li>
+          Each bedroom window needs a net opening of at least 5.7 square
+          feet, at least 24 inches high and 20 inches wide, with the sill
+          no more than 44 inches off the floor.
+        </li>
+        <li>
+          Bedroom window wells must extend at least 36 inches out from the
+          building. A well deeper than 44 inches needs a permanently
+          attached ladder.
+        </li>
+        <li>
+          Windows must provide natural light equal to 8% of the room's
+          area, unless specifically approved otherwise.
+        </li>
+      </ul>
+
+      <h3>Ceilings and hallways</h3>
+      <ul>
+        <li>
+          Ceilings at least 7 feet from finished floor to finished
+          ceiling.
+        </li>
+        <li>
+          Under beams, girders, ducts, and other obstructions: at least 6
+          feet 4 inches.
+        </li>
+        <li>Hallways at least 36 inches wide, finished.</li>
+      </ul>
+
+      <h3>Bathrooms</h3>
+      <ul>
+        <li>
+          Toilet: 21 inches of clear space in front and 15 inches from its
+          center to each side.
+        </li>
+        <li>
+          Shower: 900 square inches of floor with no dimension under 30
+          inches, a 22 inch finished opening, a door that swings out, and
+          6 feet 8 inches of headroom.
+        </li>
+        <li>
+          Ventilation: a window of at least 3 square feet with 1.5 square
+          feet that opens, or an exhaust fan rated at 50 cfm that vents
+          directly outside.
+        </li>
+        <li>GFCI protection for bathroom outlets.</li>
+      </ul>
+
+      <h3>Smoke and carbon monoxide detectors</h3>
+      <ul>
+        <li>
+          A smoke detector in each bedroom, in the area leading to the
+          bedrooms, and at least one on each floor.
+        </li>
+        <li>Carbon monoxide detectors on each level of the home.</li>
+        <li>
+          Detectors also go in the existing bedrooms when the remodel
+          needs a permit. Where wiring them would mean removing finished
+          walls or ceilings, the city allows a battery detector.
+        </li>
+        <li>
+          Wireless interconnection is allowed. Hardwired power is still
+          required.
+        </li>
+      </ul>
+
+      <h3>Furnace and water heater</h3>
+      <ul>
+        <li>
+          Not located in a bedroom, bathroom, or similar confined room,
+          and not reached through a bedroom or bathroom.
+        </li>
+        <li>Each one removable without moving the other.</li>
+        <li>30 inches of clear working space in front of the furnace.</li>
+        <li>Outside combustion air for mechanical equipment.</li>
+      </ul>
+
+      <h3>Electrical</h3>
+      <ul>
+        <li>
+          Outlets no more than 12 feet apart along a wall and within 6
+          feet of door openings. Any wall section 2 feet or wider gets
+          one.
+        </li>
+        <li>
+          Tamper-resistant outlets, unless more than 5.5 feet above the
+          floor.
+        </li>
+        <li>
+          A switched light at hallways, stairways, exits, and in each
+          room.
+        </li>
+        <li>
+          Clear working space 36 inches deep and 30 inches wide in front
+          of the electrical panel, which can't sit in a clothes closet.
+        </li>
+      </ul>
+
+      <h3>Stairs</h3>
+      <ul>
+        <li>
+          At least 36 inches wide, finished, with 6 feet 8 inches of
+          headroom.
+        </li>
+        <li>Risers no taller than 8 inches. Treads at least 9 inches.</li>
+        <li>
+          A handrail on at least one side when there are more than three
+          risers, 34 to 38 inches high.
+        </li>
+        <li>
+          Enclosed usable space under the stairs: 1/2 inch drywall on the
+          walls and ceiling.
+        </li>
+      </ul>
+      <p>
+        The city's page also covers framing, plumbing, insulation,
+        drywall, and wood stoves and fireplaces. Read the full list
+        before you finalize a plan.
+      </p>
+
+      <h2 id="fee">What it costs</h2>
+      <p>
+        Saratoga Springs does not publish a flat basement permit fee. Here
+        is what its
+        <a href={src.feeSchedule} rel="noopener">Consolidated Fee
+        Schedule</a>
+        does say:
+      </p>
+      <ul>
+        <li>
+          <strong>Permit fee.</strong> Set by the fee table in the
+          International Residential Code, which the city posts as its
+          <a href={src.permitFeeTable} rel="noopener">Building Permit Fee
+          Schedule</a>. The fee rises with the project's valuation: $69
+          for the first $2,000 plus $11 for each additional $1,000 up to
+          $40,000, then $487 for the first $40,000 plus $9 for each
+          additional $1,000 up to $100,000.
+        </li>
+        <li>
+          <strong>Valuation.</strong> Set at 75% of the Building Valuation
+          Data published by the International Code Council. The schedule
+          does not list a per-square-foot figure for finishing a basement.
+        </li>
+        <li>
+          <strong>Plan review.</strong> 65% of the permit fee, or 25% for
+          permits that do not require a complete plan review. The schedule
+          does not say which one a basement finish falls under.
+        </li>
+        <li>
+          <strong>State charge.</strong> 1% of the permit fee.
+        </li>
+        <li>
+          <strong>Deposit.</strong> The city's
+          <a href={src.buildingPermit} rel="noopener">building permit
+          page</a>
+          says a non-refundable deposit is due with building permit
+          applications, $200 for single family, and is applied toward the
+          cost of the permit. The basement permit page does not mention
+          the deposit, so check what the portal shows as due.
+        </li>
+        <li>
+          <strong>Reinspection.</strong> $47 per hour, with a one hour
+          minimum.
+        </li>
+      </ul>
+      <div class="glance">
+        <span class="eyebrow">Worth a question before you pay</span>
+        <p>
+          The Consolidated Fee Schedule carries a footnote about a fee
+          that covers the cost of a future basement permit and its
+          inspections, so that a homeowner who later finishes the basement
+          gets the permit and inspections at no charge. The current
+          schedule does not show which fee that footnote belongs to or
+          which homes it covers. Ask the Building Department whether it
+          applies to yours.
+        </p>
+      </div>
+
+      <h2 id="inspections">Inspections</h2>
+      <p>
+        Saratoga Springs does not currently publish a basement-specific
+        inspection list on its website. The order comes from the
+        residential code
+        (<a href={src.ircCh1} rel="noopener">IRC R109</a>, as amended by
+        <a href={src.utahAmendments} rel="noopener">Utah Code
+        15A-3-202</a>): rough plumbing, mechanical, gas, and electrical
+        before anything is covered, then framing once the rough-ins have
+        passed, then insulation, which Utah's amendments let the building
+        official inspect, and a final inspection when the work is complete
+        and before the space is used. Work can't continue past a stage
+        until its inspection is approved.
+      </p>
+      <ul>
+        <li>
+          <strong>Requesting one.</strong> The city lists an inspection
+          request line:
+          <a
+            href={cityPhone.href}
+            data-event="city_contact_click"
+            data-event-label="saratoga-inspection-phone"
+          >{cityPhone.display}</a>, extension 120.
+        </li>
+        <li>
+          <strong>Days.</strong> The Building Department is open Monday
+          through Friday, with a limited number of inspections on Fridays.
+        </li>
+        <li>
+          <strong>On site.</strong> All permit documents must be on site
+          for inspections. The Building Department's page asks for the
+          approved plans printed at 18 by 24 inches or larger.
+        </li>
+        <li>
+          <strong>Reinspections.</strong> Billed at $47 per hour, with a
+          one hour minimum.
+        </li>
+        <li>
+          <strong>Expiration.</strong> Under the code, a permit lapses if
+          work does not start within 180 days, or if more than 180 days
+          pass between inspections, unless the building official extends
+          it in writing
+          (<a href={src.ircCh1} rel="noopener">IRC R105.5</a>).
+        </li>
+      </ul>
+
+      <h2 id="iadu">Basement apartments (IADUs)</h2>
+      <p>
+        Saratoga Springs calls a basement apartment an internal accessory
+        dwelling unit, or IADU. Whether you can have one depends first on
+        where you live. The rules are in
+        <a href={src.aduCode} rel="noopener">Chapter 19.20 of the city's
+        Land Development Code</a>
+        and the
+        <a href={src.aduRegistration} rel="noopener">ADU registration
+        packet</a>.
+      </p>
+      <ul>
+        <li>
+          <strong>Check the map first.</strong> The city sorts
+          neighborhoods into IADU Allowed, IADU Prohibited, and IADU
+          Potential, and posts an interactive map on its
+          <a href={src.iaduFaq} rel="noopener">accessory unit FAQ
+          page</a>. The registration packet says most plats recorded
+          before October 1, 2021 are not eligible. An HOA can still
+          prohibit one where the city allows it.
+        </li>
+        <li>
+          <strong>Lot size.</strong> Greater than 6,000 square feet.
+        </li>
+        <li>
+          <strong>Owner occupied.</strong> The owner must live in the
+          home, in either unit. The code allows a temporary absence of
+          three years or less for a job assignment, sabbatical, military
+          service, or voluntary service.
+        </li>
+        <li>
+          <strong>What the unit needs.</strong> Its own sleeping area,
+          kitchen, and bathroom, and a separate exterior entrance.
+        </li>
+        <li>
+          <strong>Parking.</strong> One paved off-street stall for the
+          IADU, at least 9 by 18 feet, on top of the home's required
+          parking. Street parking does not count.
+        </li>
+        <li>
+          <strong>Registration.</strong> Register the unit with the city
+          (a $50 review fee) in addition to the building permit, and get
+          an occupancy permit before anyone moves in. The packet says most
+          applications get a response within 10 to 12 business days after
+          they are routed to staff.
+        </li>
+        <li>
+          <strong>No short-term rentals.</strong> The city does not allow
+          rentals of less than 30 days.
+        </li>
+        <li>
+          <strong>A second kitchen is not an IADU.</strong> The city's FAQ
+          says adding one does not let you split the house into two units
+          without the permit and the other IADU requirements.
+        </li>
+      </ul>
+      <p>
+        If registration is not completed, the code says the unit is not
+        considered legal or approved, and it allows fines and a lien on
+        the property.
+      </p>
+
+      <div class="glance glance--end">
+        <span class="eyebrow">What Saratoga Springs does not publish</span>
+        <ul>
+          <li>A basement-specific inspection list.</li>
+          <li>
+            A flat fee, or the per-square-foot value it uses for a
+            basement finish.
+          </li>
+          <li>Which plan review percentage applies to a basement finish.</li>
+          <li>A review time for basement permits.</li>
+        </ul>
+        <p>
+          For those, the Building Department is the source. Building in
+          Lehi instead? See the
+          <a href="/lehi-basement-finishing-permit/">Lehi permit
+          guide</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container container--narrow">
+      <span class="eyebrow">Quick Answers</span>
+      <h2>Saratoga Springs basement permit FAQs</h2>
+      <FAQAccordion faqs={permitFaqs} />
+      <p class="more-links">
+        More about the work itself:
+        <a href="/saratoga-springs-basement-finishing/">basement finishing
+        in Saratoga Springs</a>,
+        <a href="/process/">our six-step process</a>, and
+        <a href="/faq/">general FAQs</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 id="sources">Sources</h2>
+      <p>
+        Checked on
+        <time datetime={lastChecked.iso}>{lastChecked.display}</time>.
+        Cities replace documents, so if a PDF link breaks, the city page
+        named beside it has the current copy.
+      </p>
+      <ol class="sources">
+        <li>
+          City of Saratoga Springs,
+          <a href={src.basementPermit} rel="noopener">Obtaining a Basement
+          Permit</a>: plan requirements, the portal, the code checklist,
+          the inspection request line.
+        </li>
+        <li>
+          City of Saratoga Springs,
+          <a href={src.building} rel="noopener">Building Department</a>:
+          responsibilities, hours, paperless submittals, codes in use.
+        </li>
+        <li>
+          City of Saratoga Springs,
+          <a href={src.buildingPermit} rel="noopener">Obtaining a Building
+          Permit</a>: the deposit, plan changes, the processing time for
+          single-family homes.
+        </li>
+        <li>
+          City of Saratoga Springs,
+          <a href={src.forms} rel="noopener">Applications and Forms</a>:
+          the Owner Builder Certificate.
+        </li>
+        <li>
+          City of Saratoga Springs,
+          <a href={src.feeSchedule} rel="noopener">Consolidated Fee
+          Schedule</a>
+          (PDF), Building section, and the
+          <a href={src.permitFeeTable} rel="noopener">Building Permit Fee
+          Schedule</a>
+          (PDF, linked from the Building Department page).
+        </li>
+        <li>
+          City of Saratoga Springs,
+          <a href={src.aduCode} rel="noopener">Land Development Code
+          Chapter 19.20, Accessory Dwelling Units</a>
+          (PDF), the
+          <a href={src.aduRegistration} rel="noopener">ADU registration
+          packet</a>
+          (PDF), and the
+          <a href={src.iaduFaq} rel="noopener">FAQs for Accessory Units
+          and Renting</a>
+          page with the IADU map.
+        </li>
+        <li>
+          State of Utah,
+          <a href={src.utahAdopted} rel="noopener">Utah Code
+          15A-2-103</a>: the construction codes adopted statewide.
+        </li>
+        <li>
+          State of Utah,
+          <a href={src.utahAmendments} rel="noopener">Utah Code
+          15A-3-202</a>: Utah's amendments to the residential code.
+        </li>
+        <li>
+          International Code Council, 2021 International Residential Code,
+          <a href={src.ircCh1} rel="noopener">Chapter 1</a>
+          (permits, inspections).
+        </li>
+      </ol>
+      <p class="fine">
+        This guide is a plain-language summary for homeowners. It is not
+        legal advice and does not replace the city's plan review. Fees and
+        procedures change. If anything here differs from what the City of
+        Saratoga Springs tells you, go with the city.
+      </p>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Rather not manage the permit yourself?"
+    text="Permits and inspections are coordinated as part of every project we build. Tell us about your Saratoga Springs basement and we'll walk the space with you."
+    withForm
+    formId="saratoga-springs-permit-form"
+    defaultCity="Saratoga Springs"
+  />
+</BaseLayout>
+
+<style>
+  .checked {
+    margin: var(--space-4) 0 0;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  /* Jump links: padded so each one is a comfortable tap target */
+  .jump {
+    margin-bottom: var(--space-5);
+    font-size: var(--text-sm);
+  }
+  .jump ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-5);
+    margin: 0;
+    padding: 0;
+  }
+  .jump li {
+    margin: 0;
+  }
+  .jump a {
+    display: inline-block;
+    padding: 0.55rem 0;
+  }
+
+  /* Hairline summary boxes, in keeping with the site's cards */
+  .glance {
+    margin: var(--space-5) 0;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+  }
+  .glance ul:last-child,
+  .glance ul:last-child li:last-child {
+    margin-bottom: 0;
+  }
+  .glance--end {
+    margin-top: var(--space-7);
+  }
+
+  .more-links {
+    margin-top: var(--space-5);
+    font-size: var(--text-sm);
+  }
+
+  .sources {
+    font-size: var(--text-sm);
+  }
+  .sources li {
+    margin-bottom: var(--space-3);
+  }
+  .fine {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+</style>
