@@ -1,0 +1,540 @@
+---
+/**
+ * Cost guide: what it costs to finish a basement in Utah County.
+ *
+ * Two kinds of facts live here, and they have different owners:
+ *  - `range` is Hunting's own planning range per finished square foot. He set
+ *    it on November 25, 2026. Only he changes it. Every dollar total on the
+ *    page is plain multiplication from it, so change the two numbers here and
+ *    the table, the estimator, and the FAQ answers follow.
+ *  - Permit fees and code items come from city and state sources, linked
+ *    where they are used and again under Sources. Do not add a fee, a price
+ *    for a single item (a bathroom, a window), or a past-job cost that is not
+ *    from one of those sources or from Hunting.
+ * After re-checking, update `lastChecked` and the guides note in HANDOFF.md.
+ */
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import CTASection from "@/components/CTASection.astro";
+import FAQAccordion from "@/components/FAQAccordion.astro";
+import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import type { FAQ } from "@/data/faqs";
+
+const lastChecked = { iso: "2026-11-25", display: "November 25, 2026" };
+
+/** Planning range, dollars per finished square foot. Hunting's numbers. */
+const range = { low: 35, high: 70 };
+
+const usd = (n: number) => `$${Math.round(n).toLocaleString("en-US")}`;
+const span = (sqft: number) =>
+  `${usd(sqft * range.low)} to ${usd(sqft * range.high)}`;
+const perFoot = `${usd(range.low)} to ${usd(range.high)}`;
+
+const sizes = [600, 800, 1000, 1200, 1500];
+
+const description = `Our planning range for a full basement finish in Utah County is ${perFoot} per finished square foot. See what that means for your size, what moves the price, and permit fees.`;
+
+const breadcrumbs = [
+  { name: "Home", path: "/" },
+  { name: "Guides", path: "/guides/" },
+  { name: "Basement Finishing Cost", path: "/basement-finishing-cost-utah-county/" },
+];
+
+/** Official sources for permit fees and code items. */
+const src = {
+  lehiFinance: "https://www.lehi-ut.gov/departments/finance/",
+  lehiFees:
+    "https://www.lehi-ut.gov/media/ggnjvx0d/2027-fee-schedule-approved-with-new-power-rates.pdf",
+  ssPermitFees:
+    "https://www.saratogasprings-ut.gov/DocumentCenter/View/19492/Building-Permit-Fee-Schedule-2026",
+  ssFeeSchedule:
+    "https://www.saratogasprings-ut.gov/DocumentCenter/View/1707/Consolidated-Fee-Schedule",
+  ircCh3:
+    "https://codes.iccsafe.org/content/IRC2021P3/chapter-3-building-planning",
+  utahAdopted: "https://le.utah.gov/xcode/Title15A/Chapter2/15A-2-S103.html",
+};
+
+const costFaqs: FAQ[] = [
+  {
+    question: "How much does it cost to finish a basement in Utah County?",
+    answer: `Our planning range for a full basement finish is ${perFoot} per finished square foot, as of ${lastChecked.display}. For 1,000 finished square feet that works out to about ${span(1000)}. It is a range for planning, not a quote. Your price comes from a written, itemized bid after we walk the space.`,
+  },
+  {
+    question: "How much does it cost to finish a 1,000 square foot basement?",
+    answer: `At ${perFoot} per finished square foot, 1,000 square feet works out to about ${span(1000)}. By the same math, 500 square feet is about ${span(500)} and 2,000 square feet is about ${span(2000)}. Smaller basements tend to sit toward the top of the range, because a bathroom or a new window costs about the same no matter how big the basement is.`,
+  },
+  {
+    question: "What is the most expensive part of finishing a basement?",
+    answer:
+      "The items that move a bid the most are bathrooms, especially when there is no usable plumbing rough-in, bedrooms that need a new escape window cut into the foundation, wet bars and kitchenettes, and the level of finish you choose for flooring, tile, and cabinetry.",
+  },
+  {
+    question: "How much does a basement finishing permit cost?",
+    answer:
+      "Cities base the fee on the project's valuation. Under Lehi's FY 2027 fee schedule, a project the city values at $60,000 comes to $1,006.39: a $713.75 permit fee, a plan review fee of 40% of that, and a 1% state charge. Under the Saratoga Springs fee table, the permit fee on the same valuation is $667 before plan review and the state charge.",
+  },
+  {
+    question: "Why is the range so wide?",
+    answer:
+      "Because a few items cost about the same in a small basement as in a large one. A bathroom, a new escape window, and a wet bar are examples. A basement without them sits low in the range. A basement with all of them, plus upgraded finishes, sits high.",
+  },
+  {
+    question: "Is the bid free?",
+    answer:
+      "Yes. The consultation and the walkthrough at your home are free, and you get a detailed written bid within 48 hours of the walkthrough. The proposal lists the work room by room, the allowances, the payment schedule, an estimated timeline, and what is excluded.",
+  },
+];
+
+const schemas = [breadcrumbSchema(breadcrumbs), faqSchema(costFaqs)];
+---
+
+<BaseLayout
+  title="Basement Finishing Cost in Utah County | Utah County Basement Pros"
+  description={description}
+  path="/basement-finishing-cost-utah-county/"
+  schemas={schemas}
+>
+  <PageIntro
+    eyebrow="Cost Guide"
+    heading="What It Costs to Finish a Basement in Utah County"
+    lede={`Our planning range for a full basement finish is ${perFoot} per finished square foot. Here is what that works out to for your size of basement, what moves you up or down inside the range, and what the city charges for the permit.`}
+    breadcrumbs={breadcrumbs}
+  >
+    <p class="checked">
+      Prices are our own planning range, set
+      <time datetime={lastChecked.iso}>{lastChecked.display}</time>. Permit
+      fees were checked against city sources the same day.
+    </p>
+  </PageIntro>
+
+  <section class="section">
+    <div class="container container--narrow prose guide">
+      <nav class="jump" aria-label="On this page">
+        <ul>
+          <li><a href="#range">The range</a></li>
+          <li><a href="#size">By size</a></li>
+          <li><a href="#moves">What moves it</a></li>
+          <li><a href="#permit">Permit fees</a></li>
+          <li><a href="#bid">Your real number</a></li>
+          <li><a href="#sources">Sources</a></li>
+        </ul>
+      </nav>
+
+      <div class="glance">
+        <span class="eyebrow">At a glance</span>
+        <ul>
+          <li>
+            <strong>Planning range:</strong>
+            {perFoot} per finished square foot for a full basement finish.
+          </li>
+          <li>
+            <strong>1,000 finished square feet:</strong> about {span(1000)}.
+          </li>
+          <li>
+            <strong>What moves it most:</strong> bathrooms, bedrooms that
+            need a new window, wet bars, and finish level.
+          </li>
+          <li>
+            <strong>The permit:</strong> about $1,000 in Lehi for a project
+            the city values at $60,000.
+          </li>
+          <li>
+            <strong>Your real number:</strong> a written, itemized bid within
+            48 hours of a free walkthrough.
+          </li>
+        </ul>
+      </div>
+
+      <h2 id="range">The range, and how to read it</h2>
+      <p>
+        A full basement finish means the whole job: framing, electrical,
+        plumbing, heating and cooling, insulation, drywall, paint, doors,
+        trim, and flooring, with the permit and inspections handled along
+        the way. For that, our planning range is
+        <strong>{perFoot} per finished square foot</strong>.
+      </p>
+      <p>
+        One number per square foot misleads, which is why our bids are priced
+        line by line and not by the foot. A range is still useful for
+        planning, as long as you know what moves you inside it. That is what
+        the rest of this page is for.
+      </p>
+      <p>
+        "Finished square foot" means the floor area you are actually
+        finishing. A storage room or mechanical room left unfinished does not
+        count.
+      </p>
+
+      <h2 id="size">What that works out to by size</h2>
+      <p>This is plain multiplication from the range above.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Finished area</th>
+              <th scope="col">Low end</th>
+              <th scope="col">High end</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              sizes.map((s) => (
+                <tr>
+                  <th scope="row">{s.toLocaleString("en-US")} sq ft</th>
+                  <td>{usd(s * range.low)}</td>
+                  <td>{usd(s * range.high)}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div
+        class="estimator"
+        data-low={range.low}
+        data-high={range.high}
+      >
+        <div class="field">
+          <label for="est-sqft">Your finished square feet</label>
+          <input
+            id="est-sqft"
+            type="number"
+            inputmode="numeric"
+            min="200"
+            max="5000"
+            step="50"
+            value="1000"
+          />
+        </div>
+        <p id="est-result" class="estimator__result" aria-live="polite">
+          1,000 finished square feet works out to about {span(1000)}.
+        </p>
+      </div>
+
+      <p>
+        Smaller basements tend to sit toward the top of the range. A
+        bathroom or a new window costs about the same whether the basement is
+        700 square feet or 1,400, so in a small space each of those items
+        weighs more per foot.
+      </p>
+
+      <h2 id="moves">What moves you up or down</h2>
+      <h3>Bathrooms</h3>
+      <p>
+        A bathroom is one of the biggest swings in a basement bid. Many newer
+        Utah County homes come with plumbing for a future bathroom already
+        roughed in under the slab. When that rough-in is there and it fits
+        the layout you want, the bathroom is far simpler. When it is missing,
+        or in the wrong place, the plumbing scope grows.
+      </p>
+      <h3>Bedrooms and windows</h3>
+      <p>
+        Every basement bedroom needs its own emergency escape opening. The
+        code Utah has adopted sets the size: at least 5.7 square feet of
+        clear opening, at least 24 inches high and 20 inches wide, with the
+        bottom edge no more than 44 inches above the floor
+        (<a href={src.ircCh3} rel="noopener">2021 International Residential
+        Code, R310</a>). If the builder's window already meets that, the
+        bedroom mostly adds walls, a door, and a closet. If it does not, a
+        larger opening has to be cut into the foundation, with a window
+        well at least 9 square feet in area.
+      </p>
+      <h3>Wet bars and kitchenettes</h3>
+      <p>
+        A sink means supply and drain lines, and a bar or kitchenette means
+        cabinetry and counters. Both add to the plumbing and finish scope.
+      </p>
+      <h3>Finish level</h3>
+      <p>
+        Carpet or tile, a fiberglass shower or a tiled one, stock or custom
+        cabinetry, built-ins or none. These choices are priced as allowances
+        in your proposal, so you can see what each one does to the total.
+      </p>
+      <h3>What is already there</h3>
+      <p>
+        Ceiling height, where the ducts and beams run, and any sign of
+        moisture all shape the work. The code asks for at least 7 feet of
+        ceiling in living space and lets beams and ducts drop to 6 feet 4
+        inches (<a href={src.ircCh3} rel="noopener">R305</a>), which is why
+        some ducts get boxed in and others get moved.
+      </p>
+      <h3>A basement apartment</h3>
+      <p>
+        A rental unit adds a kitchen and its own city rules on top of the
+        building permit, such as parking and a separate entrance. Our
+        <a href="/lehi-basement-finishing-permit/#adu">Lehi</a>
+        and
+        <a href="/saratoga-springs-basement-finishing-permit/#iadu">Saratoga
+        Springs</a>
+        guides list them.
+      </p>
+
+      <h2 id="permit">What the city charges for the permit</h2>
+      <p>
+        The permit is a small part of the total, and it is the one cost that
+        is published. Cities do not charge a flat fee. They base it on the
+        project's valuation, which the building department sets.
+      </p>
+      <h3>Lehi</h3>
+      <p>
+        Under
+        <a href={src.lehiFees} rel="noopener">Lehi's FY 2027 fee schedule</a>,
+        a project valued between $50,000 and $100,000 pays $643.75 for the
+        first $50,000 plus $7 for each additional $1,000. The city then adds
+        a plan review fee of 40% of the permit fee and a state charge of 1%.
+        For a project the city values at $60,000:
+      </p>
+      <ul>
+        <li>Permit fee: $713.75</li>
+        <li>Plan review, 40%: $285.50</li>
+        <li>State charge, 1%: $7.14</li>
+        <li><strong>Total: $1,006.39</strong></li>
+      </ul>
+      <p>
+        Our
+        <a href="/lehi-basement-finishing-permit/#fee">Lehi permit guide</a>
+        has the full table and the one thing the schedule does not say.
+      </p>
+      <h3>Saratoga Springs</h3>
+      <p>
+        The
+        <a href={src.ssPermitFees} rel="noopener">Saratoga Springs permit fee
+        table</a>
+        charges $487 for the first $40,000 of valuation plus $9 for each
+        additional $1,000 up to $100,000. On a $60,000 valuation that is a
+        $667 permit fee. The city's
+        <a href={src.ssFeeSchedule} rel="noopener">fee schedule</a>
+        then adds a plan review fee of 65% or 25% of the permit fee and a
+        1% state charge. It does not say which rate applies to a basement
+        finish. Details are in our
+        <a href="/saratoga-springs-basement-finishing-permit/#fee">Saratoga
+        Springs permit guide</a>.
+      </p>
+      <p>
+        One way to keep the permit cost down: be ready for each inspection.
+        Lehi charges $100 for a reinspection, and Saratoga Springs charges
+        $47 an hour with a one hour minimum.
+      </p>
+
+      <h2 id="bid">How you get your real number</h2>
+      <ol>
+        <li>
+          <strong>A free walkthrough at your home.</strong> We look at the
+          windows, the plumbing rough-ins, the ducts, and the ceiling
+          height, and talk through what you want the space to do.
+        </li>
+        <li>
+          <strong>A written bid within 48 hours.</strong> The proposal lists
+          the work room by room, the allowances for things like flooring and
+          fixtures, the payment schedule, an estimated timeline, and what is
+          excluded.
+        </li>
+        <li>
+          <strong>You adjust before anything is built.</strong> If you share
+          a target budget early, we plan the scope around it. Changes after
+          signing are priced and approved in writing before that work
+          starts.
+        </li>
+      </ol>
+      <p>
+        Most projects take 6 to 10 weeks of construction, depending on size
+        and scope. See
+        <a href="/process/">our six-step process</a>
+        for what happens at each stage.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container container--narrow">
+      <span class="eyebrow">Quick Answers</span>
+      <h2>Basement finishing cost FAQs</h2>
+      <FAQAccordion faqs={costFaqs} />
+      <p class="more-links">
+        Related guides:
+        <a href="/utah-basement-finishing-permit/">do you need a permit to
+        finish a basement in Utah?</a>
+        and
+        <a href="/services/#whats-included">what a basement finish
+        includes</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow prose">
+      <h2 id="sources">Sources</h2>
+      <ol class="sources">
+        <li>
+          <strong>Prices:</strong> Utah County Basement Pros' own planning
+          range, set {lastChecked.display}. The dollar totals on this page
+          are that range multiplied by the square footage shown.
+        </li>
+        <li>
+          <a href={src.lehiFees} rel="noopener">Lehi City FY 2027 fee
+          schedule</a>, linked from the city's
+          <a href={src.lehiFinance} rel="noopener">Finance page</a>:
+          building permit fee table, 40% residential plan review, 1% state
+          charge, $100 reinspection fee.
+        </li>
+        <li>
+          <a href={src.ssPermitFees} rel="noopener">City of Saratoga Springs,
+          Building Permit Fee Schedule</a>
+          and
+          <a href={src.ssFeeSchedule} rel="noopener">Consolidated Fee
+          Schedule</a>: permit fee table, plan review at 65% or 25%, 1% state
+          charge, reinspection at $47 an hour.
+        </li>
+        <li>
+          <a href={src.ircCh3} rel="noopener">2021 International Residential
+          Code, Chapter 3</a>: emergency escape openings (R310) and ceiling
+          height (R305), adopted statewide by
+          <a href={src.utahAdopted} rel="noopener">Utah Code 15A-2-103</a>.
+        </li>
+      </ol>
+      <p class="fine">
+        This page is a planning guide, not a quote or an offer. Prices change
+        with materials, labor, and the details of each home. City fees change
+        when a city adopts a new fee schedule. Confirm current fees with your
+        city's building department.
+      </p>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Want the real number for your basement?"
+    text="Start with a free walkthrough at your home. You'll have a detailed written bid within 48 hours, priced line by line."
+    withForm
+    formId="cost-guide-form"
+  />
+</BaseLayout>
+
+<script>
+  const box = document.querySelector<HTMLElement>(".estimator");
+  const input = document.querySelector<HTMLInputElement>("#est-sqft");
+  const out = document.querySelector<HTMLElement>("#est-result");
+
+  if (box && input && out) {
+    const low = Number(box.dataset.low);
+    const high = Number(box.dataset.high);
+    const usd = (n: number) => "$" + Math.round(n).toLocaleString("en-US");
+
+    const update = () => {
+      const sqft = Number(input.value);
+      if (!Number.isFinite(sqft) || sqft < 200 || sqft > 5000) {
+        out.textContent = "Enter a size between 200 and 5,000 square feet.";
+        return;
+      }
+      out.textContent = `${sqft.toLocaleString("en-US")} finished square feet works out to about ${usd(sqft * low)} to ${usd(sqft * high)}.`;
+    };
+
+    input.addEventListener("input", update);
+  }
+</script>
+
+<style>
+  .checked {
+    margin: var(--space-4) 0 0;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .jump {
+    margin-bottom: var(--space-5);
+    font-size: var(--text-sm);
+  }
+
+  .jump ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-5);
+    margin: 0;
+    padding: 0;
+  }
+
+  .jump li {
+    margin: 0;
+  }
+
+  .jump a {
+    display: inline-block;
+    padding: 0.55rem 0;
+  }
+
+  .glance {
+    margin: var(--space-5) 0;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+  }
+
+  .glance ul:last-child,
+  .glance ul:last-child li:last-child {
+    margin-bottom: 0;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    margin: var(--space-4) 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+  }
+
+  th,
+  td {
+    padding: var(--space-3) var(--space-4) var(--space-3) 0;
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+  }
+
+  thead th {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    font-weight: 600;
+    border-bottom-color: var(--color-border-strong);
+  }
+
+  tbody th {
+    font-weight: 600;
+  }
+
+  .estimator {
+    margin: var(--space-5) 0;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+  }
+
+  .estimator .field {
+    max-width: 16rem;
+  }
+
+  .estimator__result {
+    margin: var(--space-4) 0 0;
+    font-weight: 600;
+  }
+
+  .more-links {
+    margin-top: var(--space-5);
+    font-size: var(--text-sm);
+  }
+
+  .sources {
+    font-size: var(--text-sm);
+  }
+
+  .sources li {
+    margin-bottom: var(--space-3);
+  }
+
+  .fine {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+</style>

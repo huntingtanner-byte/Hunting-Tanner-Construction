@@ -1,8 +1,8 @@
 ---
 /**
  * Guides index. Lists every homeowner guide on the site. When a guide page
- * is added, add it to `guides` below and to the "Permit guides" section of
- * src/pages/llms.txt.ts.
+ * is added, add it to `costGuides` or `guides` below and to the "Guides"
+ * section of src/pages/llms.txt.ts.
  */
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import PageIntro from "@/components/PageIntro.astro";
@@ -10,11 +10,19 @@ import CTASection from "@/components/CTASection.astro";
 import { breadcrumbSchema } from "@/lib/schema";
 
 const description =
-  "Plain-language guides to finishing a basement in Utah County: the statewide permit rule and city permit guides, each checked against official sources.";
+  "Plain-language guides to finishing a basement in Utah County: what it costs, the statewide permit rule, and city permit guides checked against official sources.";
 
 const breadcrumbs = [
   { name: "Home", path: "/" },
   { name: "Guides", path: "/guides/" },
+];
+
+const costGuides = [
+  {
+    href: "/basement-finishing-cost-utah-county/",
+    title: "What it costs to finish a basement in Utah County",
+    text: "Our planning range per finished square foot, what it works out to by size, what moves the price, and what the city charges for the permit.",
+  },
 ];
 
 const guides = [
@@ -47,12 +55,24 @@ const schemas = [breadcrumbSchema(breadcrumbs)];
   <PageIntro
     eyebrow="Guides"
     heading="Basement Finishing Guides for Utah County Homeowners"
-    lede="Straight answers about permits and planning. Every fact is linked to its source: the city, the Utah Code, or the building code Utah has adopted."
+    lede="Straight answers about cost, permits, and planning. City and code facts are linked to their sources: the city, the Utah Code, or the building code Utah has adopted."
     breadcrumbs={breadcrumbs}
   />
 
   <section class="section">
     <div class="container container--narrow prose">
+      <h2>Cost</h2>
+      <ul class="guide-list">
+        {
+          costGuides.map((g) => (
+            <li>
+              <a href={g.href}>{g.title}</a>
+              <span>{g.text}</span>
+            </li>
+          ))
+        }
+      </ul>
+
       <h2>Permits</h2>
       <ul class="guide-list">
         {
